@@ -2,7 +2,7 @@
 
 import { createContext, useCallback, useContext, useMemo, useState, type ReactNode } from "react";
 import { shopifyVariantIds } from "@/config/shopify";
-import { purchasables, type Purchasable, type Variant } from "@/data/products";
+import { bundle, purchasables, type Purchasable, type Variant } from "@/data/products";
 import { createPersistentStore } from "@/lib/persistent-store";
 import { createShopifyCheckout, shopifyEnabled } from "./shopify";
 
@@ -43,6 +43,8 @@ type StoreContext = {
   addItem: (productId: string, variantId: string, quantity?: number) => void;
   setQuantity: (variantId: string, quantity: number) => void;
   removeItem: (variantId: string) => void;
+  /** Swaps one of each included piece in the cart for the complete system. */
+  upgradeToBundle: () => void;
   checkout: () => Promise<CheckoutResult>;
   checkoutConnected: boolean;
 
@@ -94,6 +96,22 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     cartStore.set((prev) => prev.filter((l) => l.variantId !== variantId));
   }, []);
 
+  const upgradeToBundle = useCallback(() => {
+    cartStore.set((prev) => {
+      const seen = new Set<string>();
+      const next = prev.flatMap((l) => {
+        if (!bundle.includes.includes(l.productId) || seen.has(l.productId)) return [l];
+        seen.add(l.productId);
+        return l.quantity > 1 ? [{ ...l, quantity: l.quantity - 1 }] : [];
+      });
+      const variantId = bundle.variants[0].id;
+      const existing = next.find((l) => l.variantId === variantId);
+      return existing
+        ? next.map((l) => (l === existing ? { ...l, quantity: Math.min(MAX_QUANTITY, l.quantity + 1) } : l))
+        : [...next, { productId: bundle.id, variantId, quantity: 1 }];
+    });
+  }, []);
+
   const checkout = useCallback(async (): Promise<CheckoutResult> => {
     if (!shopifyEnabled) {
       // Mock mode: no payment is taken and no order is created.
@@ -130,6 +148,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
       addItem,
       setQuantity,
       removeItem,
+      upgradeToBundle,
       checkout,
       checkoutConnected: shopifyEnabled,
       isCartOpen,
@@ -140,7 +159,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
       wishlist,
       toggleWishlist,
     }),
-    [lines, count, subtotal, addItem, setQuantity, removeItem, checkout, isCartOpen, isSearchOpen, wishlist, toggleWishlist],
+    [lines, count, subtotal, addItem, setQuantity, removeItem, upgradeToBundle, checkout, isCartOpen, isSearchOpen, wishlist, toggleWishlist],
   );
 
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;

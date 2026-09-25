@@ -29,13 +29,13 @@ export function ProductShowcase() {
           </Reveal>
         </div>
 
-        <Reveal className="mt-14 md:mt-20">
-          <div className="group relative aspect-[4/3] overflow-hidden rounded-[1.75rem] bg-linen md:aspect-[16/9]">
+        <Reveal className="mx-auto mt-14 max-w-6xl md:mt-20">
+          <div className="group relative aspect-[4/3] overflow-hidden rounded-[1.75rem] bg-linen md:aspect-[3/2]">
             <Image
-              src={images.travelSystem.src}
-              alt={images.travelSystem.alt}
+              src={images.whatsIncluded.src}
+              alt={images.whatsIncluded.alt}
               fill
-              sizes="(min-width: 1440px) 1340px, 100vw"
+              sizes="(min-width: 1200px) 1152px, 100vw"
               className="object-cover transition-transform duration-[1600ms] ease-out-soft group-hover:scale-[1.02]"
             />
           </div>
@@ -57,7 +57,7 @@ export function ProductShowcase() {
           ))}
           <li className="w-[72vw] shrink-0 snap-start sm:w-[44vw] md:w-[32vw] xl:w-auto">
             <Reveal delay={270} className="h-full">
-              <div className="flex aspect-[4/5] flex-col justify-between rounded-[1.25rem] bg-charcoal p-7 text-ivory on-dark">
+              <div className="flex aspect-square flex-col justify-between rounded-[1.25rem] bg-charcoal p-7 text-ivory on-dark">
                 <p className="eyebrow text-sand">All seven, together</p>
                 <div>
                   <p className="text-3xl font-medium uppercase leading-[1.05] tracking-tight">

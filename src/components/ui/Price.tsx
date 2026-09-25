@@ -6,11 +6,14 @@ export function Price({
   compareAt = null,
   savings = "none",
   size = "md",
+  compareLabel,
 }: {
   price: number;
   compareAt?: number | null;
   savings?: SavingsDisplay;
   size?: "sm" | "md" | "lg";
+  /** Says what the crossed-out price is, e.g. "if bought separately". */
+  compareLabel?: string;
 }) {
   const showCompare = compareAt != null && compareAt > price;
   const label = savingsLabel(price, compareAt, savings);
@@ -23,10 +26,13 @@ export function Price({
         {formatMoney(price)}
       </span>
       {showCompare && (
-        <s className={`${size === "lg" ? "text-lg" : "text-sm"} text-stone`}>
-          <span className="sr-only">Regular price: </span>
-          {formatMoney(compareAt)}
-        </s>
+        <span className={`${size === "lg" ? "text-lg" : "text-sm"} text-stone`}>
+          <s>
+            <span className="sr-only">{compareLabel ? "Price" : "Regular price"}: </span>
+            {formatMoney(compareAt)}
+          </s>
+          {compareLabel && <span className="ml-1.5 text-xs">{compareLabel}</span>}
+        </span>
       )}
       {label && (
         <span className="eyebrow rounded-full bg-sand/25 px-3 py-1 text-[0.625rem] text-sand-deep">{label}</span>

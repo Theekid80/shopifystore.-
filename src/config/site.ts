@@ -32,7 +32,7 @@ export const site = {
   ],
 
   /** The one place every "shop" CTA points to. */
-  primaryCta: { label: "Shop the Collection", href: "/#system" },
+  primaryCta: { label: "Shop the System", href: "/#system" },
 
   /** TODO: point to your Shopify customer account URL once connected,
    *  e.g. "https://your-store.myshopify.com/account". */

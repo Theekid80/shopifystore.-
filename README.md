@@ -12,8 +12,8 @@ Built with **Next.js 16 (App Router) · React 19 · TypeScript · Tailwind CSS v
 
 | Area | Details |
 |---|---|
-| **Sections** | Sticky nav · Hero · Product showcase · Featured mask · Rest Anywhere · Pack Smart (before/after slider) · Bundle / buy box · Why Velara · Testimonials (placeholders) · FAQ · Newsletter · Footer |
-| **Commerce** | Product cards · Add to cart · Quantity selector · Cart drawer (update, remove, subtotal) · Checkout button · Wishlist hearts · Image gallery · Colorway selector · Cart that survives page reloads |
+| **Sections** | Sticky nav · Hero · Product showcase · Featured mask · Rest Anywhere · Pack Smart · Bundle / buy box · Why Velara · Testimonials (placeholders) · FAQ · Newsletter · Footer |
+| **Commerce** | Product cards · Add to cart · Mobile sticky buy bar · Cart upgrade offer (swaps pieces for the system) · Quantity selector · Cart drawer (update, remove, subtotal) · Checkout button · Wishlist hearts · Image gallery · Colorway selector · Cart that survives page reloads |
 | **Mobile** | Hamburger menu · Horizontally scrolling product cards · Large tap targets · Support for the iPhone notch and home-bar areas |
 | **Accessibility** | Semantic landmarks · Skip link · Visible focus states · Keyboard-operable dialogs (native `<dialog>`: focus stays inside, Escape closes) · Standard accessible accordion (WAI-ARIA) · Labelled icon buttons · Alt text · Respects "reduce motion" settings |
 | **SEO** | Title, description, Open Graph and Twitter cards · Product and Organization structured data (JSON-LD, no fake ratings) · `robots.txt` · `sitemap.xml` · Canonical URL |
@@ -25,7 +25,8 @@ Built with **Next.js 16 (App Router) · React 19 · TypeScript · Tailwind CSS v
 ```
 ├── public/images/            ← all photography (replace these files)
 ├── scripts/
-│   └── generate-placeholders.mjs   ← regenerates placeholder images
+│   └── crop-photos.mjs    ← cuts site images out of the boards in /design
+├── design/                ← source boards (product + brand)
 ├── src/
 │   ├── app/
 │   │   ├── layout.tsx         ← fonts, SEO metadata, nav/footer/cart shell
@@ -63,7 +64,7 @@ Built with **Next.js 16 (App Router) · React 19 · TypeScript · Tailwind CSS v
 
 | I want to change… | Edit |
 |---|---|
-| Bundle price, crossed-out price, "Save 33%" badge | `src/data/products.ts` → `bundle.pricing` (`savingsDisplay`: `"percent"`, `"amount"` or `"none"`; `compareAtPrice: null` hides it) |
+| Bundle price, crossed-out price, "Save 45%" badge | `src/data/products.ts` → `bundle.pricing`. `compareAtPrice: "items"` (the default) shows the real total of the pieces bought separately, so the saving is always true. `savingsDisplay`: `"percent"`, `"amount"` or `"none"`. |
 | Product names, benefits, individual prices, colorways | `src/data/products.ts` |
 | Free Shipping / 30-Day Returns / Secure Checkout | `src/config/site.ts` → `storePromises` (set `enabled: false` to hide one) |
 | FAQ answers, testimonials, feature cards | `src/data/content.ts` |
@@ -91,7 +92,7 @@ npm run build      # production build (run this before deploying)
 npm start          # serve the production build locally
 npm run lint       # ESLint
 npm run typecheck  # TypeScript
-npm run placeholders   # re-create any missing placeholder images
+npm run photos     # re-cut site images from the boards in /design
 ```
 
 To try it on your phone, run `npm run dev -- -H 0.0.0.0` and open `http://<your-computer's-IP>:3000` on a phone connected to the same Wi-Fi.
@@ -113,37 +114,33 @@ Any other host that runs Node.js also works (Netlify, Railway, Render, your own 
 
 ### Images (`public/images/`)
 
-Keep the same filename, or update the path in `src/config/images.ts`. Every placeholder has "PLACEHOLDER · filename" printed on it, so a missed one is easy to spot.
+Every image slot is now filled with your photos. `npm run photos` (`scripts/crop-photos.mjs`) cuts them out of the two boards in `/design`:
 
-| File | Used for | Recommended size |
-|---|---|---|
-| `hero-travel.jpg` | Hero background: product in a premium airport/travel setting. Keep the left side calm and dark for the text. | 2400×1500+, landscape |
-| `travel-system.jpg` | Full-system flat lay (showcase, bundle gallery, cart, search) | 2000×1400 |
-| `sleep-mask.jpg` | Featured mask, Midnight colorway | 1600×1600 |
-| `sleep-mask-stone.jpg` | Mask, Stone colorway | 1600×1600 |
-| `sleep-mask-sand.jpg` | Mask, Sand colorway | 1600×1600 |
-| `sleep-mask-detail.jpg` | Close-up inset on the featured mask | 1600×1600 |
-| `travel-pouch.jpg` | Product card | 1200×1500 (4:5) |
-| `earplugs.jpg` | Product card | 1200×1500 |
-| `tech-organizer.jpg` | Product card + gallery | 1200×1500 |
-| `packing-cubes.jpg` | Product card + gallery | 1200×1500 |
-| `toiletry-bag.jpg` | Product card + gallery | 1200×1500 |
-| `luggage-tag.jpg` | Product card | 1200×1500 |
-| `airplane-lifestyle.jpg` | "Rest Anywhere" banner: someone wearing the mask in flight | 2400×1350 |
-| `flights-lifestyle.jpg` | Travel tile: Flights | 1000×1250 |
-| `hotel-lifestyle.jpg` | Travel tile: Hotels | 1000×1250 |
-| `road-trip-lifestyle.jpg` | Travel tile: Road Trips | 1000×1250 |
-| `business-lifestyle.jpg` | Travel tile: Business Travel | 1000×1250 |
-| `suitcase-before.jpg` | Before/after slider: messy suitcase | 2000×1400 |
-| `suitcase-after.jpg` | Before/after slider: the **same framing**, organized with Velara | 2000×1400 |
-| `og-image.jpg` | Link preview on social media and messaging apps | exactly 1200×630 |
+| File | Used for | Source | Size now |
+|---|---|---|---|
+| `hero-travel.jpg` | Hero background | Brand board: system at airport window | 560px, enlarged 3× |
+| `travel-system.jpg` | Bundle gallery, cart, search, buy bar | Product board: system + box | 542px, enlarged 2× |
+| `whats-included.jpg` | Showcase flat lay, bundle gallery | Brand board: numbered flat lay | 505px, enlarged 2× |
+| `sleep-mask.jpg` | Mask card + featured mask | Product board | 444px |
+| `sleep-mask-detail.jpg` | Mask close-up inset | Brand board | 288px |
+| `travel-pouch.jpg` · `earplugs.jpg` · `tech-organizer.jpg` · `packing-cubes.jpg` · `toiletry-bag.jpg` · `luggage-tag.jpg` | Product cards, gallery, cart | Product board | 300–380px |
+| `airplane-lifestyle.jpg` | "Rest Anywhere" banner | Brand board: traveler in mask | 325px, enlarged 3× |
+| `flights-lifestyle.jpg` | Travel tile: Flights | Brand board: mask on lie-flat seat | 266px, enlarged 2× |
+| `hotel-lifestyle.jpg` | Travel tile: Hotels | Product board: toiletry bag | enlarged 2× |
+| `road-trip-lifestyle.jpg` | Travel tile: Road Trips | Product board: pouch by window | enlarged 2× |
+| `business-lifestyle.jpg` | Travel tile: Business Travel | Brand board: traveler with backpack | 221px, enlarged 2× |
+| `suitcase-organized.jpg` | "Pack Smart" section | Brand board: packed suitcase | 331px, enlarged 2× |
+| `og-image.jpg` | Link previews (1200×630) | Hero scene | 1200×630 |
 
-Also update each image's `alt` text in `src/config/images.ts` so it describes the real photo. Compress photos before uploading (e.g. [squoosh.app](https://squoosh.app), quality ~80).
+**Before launch, get full-resolution versions.** The boards are small composites, so each shot is only a few hundred pixels wide. Enlarging keeps them smooth but can't add detail. They look soft on large screens, especially the hero and "Rest Anywhere" banner. Ideal sizes: 2400px+ wide for the hero and banner, 1500×1500 for product shots. Drop them into `public/images/` with the same filenames and stop running `npm run photos`. Keep each image's `alt` text in `src/config/images.ts` accurate.
+
+Also make sure the photos match what customers receive. For example, `travel-system.jpg` shows a Velara gift box; only use it if the set ships in one.
 
 ### Text and settings
 
 - [ ] `NEXT_PUBLIC_SITE_URL`: your real domain
-- [ ] `src/data/products.ts`: final prices, compare-at price, colorways. The compare-at price must be a genuine reference price (for example, the real combined price of the items sold separately). Showing an inflated "was" price can breach consumer-protection law.
+- [ ] `src/data/products.ts`: final prices. With `compareAtPrice: "items"`, the crossed-out price is the real total of the pieces, so a lower piece price shrinks the saving automatically. If you type a number instead, it must be a genuine reference price; an inflated "was" price can breach consumer-protection law.
+- [ ] **Brand name:** before you spend money on inventory, a domain or a trademark filing, see the name check in the handoff notes. "Velara" is already in use by several companies.
 - [ ] `src/config/site.ts` → `storePromises`: keep only promises your store actually honors
 - [ ] `src/data/content.ts` → FAQ: replace every `[bracketed]` answer (care instructions, dimensions, shipping, returns)
 - [ ] `src/data/content.ts` → testimonials: replace them with **real** reviews (with permission) and set `isPlaceholder: false`, or remove the section from `src/app/page.tsx` until you have some
@@ -160,7 +157,7 @@ Until you connect Shopify, the site runs in **preview mode**. The cart works, bu
 
 In **Shopify admin → Products**, create:
 
-- **The Velara Travel Sleep System** with a *Color* option: Midnight, Stone, Sand. Set the price to match `bundle.pricing.price`, and the compare-at price if you use one.
+- **The Velara Travel Sleep System** (one variant, Black). Set the price to match `bundle.pricing.price`, and the compare-at price if you use one.
 - Optionally, each individual piece you also want to sell separately.
 
 ### 2. Get a Storefront API token
@@ -176,7 +173,7 @@ In **Shopify admin → Products**, create:
 For each variant, open the product in Shopify admin and click the variant. The URL ends in `/variants/44781234567890`. Paste it into `src/config/shopify.ts`:
 
 ```ts
-"system-midnight": "gid://shopify/ProductVariant/44781234567890",
+"system-black": "gid://shopify/ProductVariant/44781234567890",
 ```
 
 ### 4. Add environment variables

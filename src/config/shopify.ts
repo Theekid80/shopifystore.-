@@ -11,28 +11,14 @@
  */
 export const shopifyVariantIds: Record<string, string> = {
   // The Velara Travel Sleep System (bundle)
-  "system-midnight": "",
-  "system-stone": "",
-  "system-sand": "",
+  "system-black": "",
 
   // Individual pieces
-  "mask-midnight": "",
-  "mask-stone": "",
-  "mask-sand": "",
-  "pouch-midnight": "",
-  "pouch-stone": "",
-  "pouch-sand": "",
-  "earplugs-default": "",
-  "tech-midnight": "",
-  "tech-stone": "",
-  "tech-sand": "",
-  "cube-midnight": "",
-  "cube-stone": "",
-  "cube-sand": "",
-  "toiletry-midnight": "",
-  "toiletry-stone": "",
-  "toiletry-sand": "",
-  "tag-midnight": "",
-  "tag-stone": "",
-  "tag-sand": "",
+  "mask-black": "",
+  "pouch-black": "",
+  "earplugs-black": "",
+  "tech-black": "",
+  "cube-black": "",
+  "toiletry-black": "",
+  "tag-black": "",
 };

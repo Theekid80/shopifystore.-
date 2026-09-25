@@ -11,6 +11,7 @@ import { WhyVelara } from "@/components/sections/WhyVelara";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { FAQ } from "@/components/sections/FAQ";
 import { Newsletter } from "@/components/sections/Newsletter";
+import { StickyBuyBar } from "@/components/cart/StickyBuyBar";
 
 /** Product structured data — deliberately no ratings/reviews until real ones exist. */
 const jsonLd = {
@@ -59,6 +60,7 @@ export default function Home() {
       <Testimonials />
       <FAQ />
       <Newsletter />
+      <StickyBuyBar />
     </>
   );
 }

@@ -1,67 +1,10 @@
-"use client";
-
 import Image from "next/image";
-import { useState } from "react";
 import { images } from "@/config/images";
 import { organizationItems } from "@/data/content";
 import { ButtonLink } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { CheckIcon } from "@/components/ui/Icons";
-
-/** Before/after comparison: drag (or use arrow keys on) the handle. */
-function BeforeAfter() {
-  const [pos, setPos] = useState(50);
-  return (
-    <div className="relative aspect-[4/3] select-none overflow-hidden rounded-[1.75rem] bg-linen md:aspect-[10/7]">
-      <Image
-        src={images.suitcaseAfter.src}
-        alt={images.suitcaseAfter.alt}
-        fill
-        sizes="(min-width: 1024px) 55vw, 100vw"
-        className="object-cover"
-      />
-      <div className="absolute inset-0" style={{ clipPath: `inset(0 ${100 - pos}% 0 0)` }}>
-        <Image
-          src={images.suitcaseBefore.src}
-          alt={images.suitcaseBefore.alt}
-          fill
-          sizes="(min-width: 1024px) 55vw, 100vw"
-          className="object-cover"
-        />
-      </div>
-
-      <span className="eyebrow pointer-events-none absolute left-4 top-4 rounded-full bg-ivory/85 px-3 py-1.5 text-charcoal backdrop-blur">
-        Before
-      </span>
-      <span className="eyebrow pointer-events-none absolute right-4 top-4 rounded-full bg-charcoal/85 px-3 py-1.5 text-ivory backdrop-blur">
-        With Velara
-      </span>
-
-      <div aria-hidden="true" className="pointer-events-none absolute inset-y-0 w-px bg-ivory" style={{ left: `${pos}%` }}>
-        <div className="absolute top-1/2 left-1/2 grid size-12 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-ivory text-charcoal shadow-lg">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
-            <path d="m9 7-5 5 5 5M15 7l5 5-5 5" />
-          </svg>
-        </div>
-      </div>
-
-      <label htmlFor="before-after" className="sr-only">
-        Compare packing before and after Velara organizers
-      </label>
-      <input
-        id="before-after"
-        type="range"
-        min={0}
-        max={100}
-        value={pos}
-        onChange={(e) => setPos(Number(e.target.value))}
-        aria-valuetext={`${pos}% before`}
-        className="absolute inset-0 size-full cursor-ew-resize opacity-0"
-      />
-    </div>
-  );
-}
 
 export function OrganizationSection() {
   return (
@@ -96,9 +39,26 @@ export function OrganizationSection() {
             </ButtonLink>
           </Reveal>
         </div>
-        <Reveal delay={80} className="lg:col-span-7">
-          <BeforeAfter />
-          <p className="mt-4 text-center text-xs text-stone">Drag to compare</p>
+
+        <Reveal delay={80} className="relative lg:col-span-7">
+          <div className="group relative aspect-[3/2] overflow-hidden rounded-[1.75rem] bg-linen">
+            <Image
+              src={images.suitcaseOrganized.src}
+              alt={images.suitcaseOrganized.alt}
+              fill
+              sizes="(min-width: 1024px) 55vw, 100vw"
+              className="object-cover transition-transform duration-[1600ms] ease-out-soft group-hover:scale-[1.03]"
+            />
+          </div>
+          <div className="absolute -bottom-8 -left-2 hidden aspect-square w-44 overflow-hidden rounded-2xl border-4 border-ivory bg-linen shadow-xl md:block lg:-left-8">
+            <Image
+              src={images.techOrganizer.src}
+              alt={images.techOrganizer.alt}
+              fill
+              sizes="176px"
+              className="object-cover"
+            />
+          </div>
         </Reveal>
       </div>
     </section>

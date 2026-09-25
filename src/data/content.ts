@@ -51,7 +51,7 @@ export const testimonials = {
 export const faq = [
   {
     q: "What comes with the Travel Sleep System?",
-    a: "The system includes seven pieces: a weighted blackout sleep mask, a travel sleep pouch, a pair of reusable noise-reducing earplugs, a tech organizer, a packing organizer cube, a toiletry and overnight pouch, and a luggage tag.",
+    a: "The system includes seven pieces: a weighted blackout sleep mask, a travel sleep pouch, reusable noise-reducing earplugs in a compact carry case, a tech organizer, a packing organizer cube, a toiletry and overnight pouch, and a luggage tag.",
   },
   {
     q: "How does the weighted sleep mask work?",

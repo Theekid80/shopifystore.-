@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { images } from "@/config/images";
 import { maskFeatures } from "@/data/content";
-import { bundle, getProduct } from "@/data/products";
+import { bundle, bundleItems, getProduct } from "@/data/products";
 import { useStore } from "@/lib/commerce/cart";
 import { formatMoney } from "@/lib/commerce/money";
 import { Button } from "@/components/ui/Button";
@@ -68,10 +68,10 @@ export function FeaturedProduct() {
             <VariantSelector variants={mask.variants} value={variantId} onChange={setVariantId} name="mask-colorway" />
             <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
               <Button size="lg" arrow onClick={() => addItem(mask.id, variant.id)}>
-                Shop the Mask · {formatMoney(mask.price)}
+                Add Mask to Cart · {formatMoney(mask.price)}
               </Button>
               <Link href="/#system" className="text-sm text-stone underline-offset-4 hover:text-charcoal hover:underline">
-                Or get it in the complete system for {formatMoney(bundle.pricing.price)}
+                Or get all {bundleItems.length} pieces for {formatMoney(bundle.pricing.price)} →
               </Link>
             </div>
           </Reveal>

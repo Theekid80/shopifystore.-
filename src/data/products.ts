@@ -34,14 +34,13 @@ export type Product = {
   variants: Variant[];
 };
 
-const colorways = (prefix: string, overrides: Partial<Record<string, ImageAsset>> = {}): Variant[] => [
-  { id: `${prefix}-midnight`, title: "Midnight", swatch: "#1C1C1B", available: true, image: overrides.midnight },
-  { id: `${prefix}-stone`, title: "Stone", swatch: "#8A8680", available: true, image: overrides.stone },
-  { id: `${prefix}-sand`, title: "Sand", swatch: "#C9B89F", available: true, image: overrides.sand },
-];
-
-const single = (prefix: string): Variant[] => [
-  { id: `${prefix}-default`, title: "Default", swatch: "#1C1C1B", available: true },
+/**
+ * Every piece currently ships in black. To add a colorway later, append a
+ * variant (e.g. { id: "mask-stone", title: "Stone", swatch: "#8A8680", ... })
+ * and the colorway picker appears automatically once there are two or more.
+ */
+const black = (prefix: string, image?: ImageAsset): Variant[] => [
+  { id: `${prefix}-black`, title: "Black", swatch: "#1C1C1B", available: true, image },
 ];
 
 export const products: Product[] = [
@@ -53,31 +52,27 @@ export const products: Product[] = [
     benefit: "Total blackout. Gentle pressure. Travel-ready comfort.",
     price: 39.99,
     image: images.sleepMask,
-    variants: colorways("mask", {
-      midnight: images.sleepMask,
-      stone: images.sleepMaskStone,
-      sand: images.sleepMaskSand,
-    }),
+    variants: black("mask"),
   },
   {
     id: "travel-pouch",
     handle: "travel-sleep-pouch",
     index: "02",
     name: "Travel Pouch",
-    benefit: "A dedicated home for your mask and earplugs, ready in any carry-on.",
+    benefit: "Keep your sleep essentials organized and within reach.",
     price: 14.99,
     image: images.travelPouch,
-    variants: colorways("pouch"),
+    variants: black("pouch"),
   },
   {
     id: "earplugs",
     handle: "noise-reducing-earplugs",
     index: "03",
-    name: "Earplugs",
-    benefit: "Soft, reusable earplugs that quiet cabin and hallway noise.",
+    name: "Noise-Reducing Earplugs",
+    benefit: "Peace and quiet, wherever you are. Stored in a compact carry case.",
     price: 12.99,
     image: images.earplugs,
-    variants: single("earplugs"),
+    variants: black("earplugs"),
   },
   {
     id: "tech-organizer",
@@ -87,7 +82,7 @@ export const products: Product[] = [
     benefit: "Keep chargers, cables and essentials exactly where you need them.",
     price: 24.99,
     image: images.techOrganizer,
-    variants: colorways("tech"),
+    variants: black("tech"),
   },
   {
     id: "packing-cube",
@@ -97,27 +92,27 @@ export const products: Product[] = [
     benefit: "Make every inch of your luggage count.",
     price: 19.99,
     image: images.packingCubes,
-    variants: colorways("cube"),
+    variants: black("cube"),
   },
   {
     id: "toiletry-bag",
     handle: "toiletry-pouch",
     index: "06",
     name: "Toiletry Bag",
-    benefit: "Overnight essentials, contained and easy to reach.",
+    benefit: "Keep your essentials fresh, clean and easy to find.",
     price: 22.99,
     image: images.toiletryBag,
-    variants: colorways("toiletry"),
+    variants: black("toiletry"),
   },
   {
     id: "luggage-tag",
     handle: "luggage-tag",
     index: "07",
     name: "Luggage Tag",
-    benefit: "A quiet, understated finish to every bag you carry.",
+    benefit: "Travel with style. Always easy to spot.",
     price: 9.99,
     image: images.luggageTag,
-    variants: colorways("tag"),
+    variants: black("tag"),
   },
 ];
 
@@ -133,20 +128,24 @@ export const bundle = {
   eyebrow: "The Complete System",
   name: "The Velara Travel Sleep System",
   description:
-    "Everything you need to build your personal travel sleep routine — a weighted blackout mask, earplugs and five organizers — in one considered set.",
+    "Everything you need to build your personal travel sleep routine — a weighted blackout mask, earplugs in a carry case and five organizers — in one considered set.",
 
   /**
    * PRICING — edit freely.
-   *  price:              what the customer pays.
-   *  compareAtPrice:     the crossed-out price. Set to null to hide it.
-   *  savingsDisplay:     "percent" → "Save 33%", "amount" → "Save $40", "none" → hidden.
+   *  price:           what the customer pays.
+   *  compareAtPrice:  the crossed-out price.
+   *                   "items" (recommended) → the real total of the included
+   *                   pieces at their individual prices above, so the saving
+   *                   shown is always true. Or a number, or null to hide it.
+   *  savingsDisplay:  "percent" → "Save 45%", "amount" → "Save $65.94", "none" → hidden.
    *
-   *  ⚠️  A compare-at price should reflect a real reference price (e.g. the
-   *      combined price of the items sold separately). Keep it honest.
+   *  ⚠️  If you type a number, it must be a genuine reference price (e.g. a
+   *      price the set has actually sold at). Inflated "was" prices can break
+   *      consumer-protection law.
    */
   pricing: {
     price: 79.99,
-    compareAtPrice: 119.99 as number | null,
+    compareAtPrice: "items" as number | "items" | null,
     savingsDisplay: "percent" as SavingsDisplay,
   },
 
@@ -162,16 +161,30 @@ export const bundle = {
   ],
 
   /** Gallery on the bundle section (first image is the default). */
-  gallery: [images.travelSystem, images.sleepMask, images.packingCubes, images.techOrganizer, images.toiletryBag] as ImageAsset[],
+  gallery: [
+    images.travelSystem,
+    images.whatsIncluded,
+    images.sleepMask,
+    images.earplugs,
+    images.techOrganizer,
+    images.packingCubes,
+    images.toiletryBag,
+  ] as ImageAsset[],
 
-  variants: colorways("system", {
-    midnight: images.travelSystem,
-    stone: images.sleepMaskStone,
-    sand: images.sleepMaskSand,
-  }),
+  variants: black("system"),
 };
 
 export type Bundle = typeof bundle;
+
+/** The included pieces, in display order. */
+export const bundleItems: Product[] = bundle.includes.map((id) => getProduct(id)).filter((p): p is Product => Boolean(p));
+
+/** Combined price of the included pieces bought separately. */
+export const bundleItemsTotal = Math.round(bundleItems.reduce((sum, p) => sum + p.price, 0) * 100) / 100;
+
+/** The crossed-out price actually shown for the bundle (null = hidden). */
+export const bundleCompareAtPrice: number | null =
+  bundle.pricing.compareAtPrice === "items" ? bundleItemsTotal : bundle.pricing.compareAtPrice;
 
 /** Everything purchasable, keyed by id, for the cart and search. */
 export type Purchasable = {

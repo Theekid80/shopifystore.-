@@ -12,12 +12,19 @@ import { QuantitySelector } from "@/components/ui/QuantitySelector";
 import { CloseIcon } from "@/components/ui/Icons";
 
 export function CartDrawer() {
-  const { lines, count, subtotal, isCartOpen, closeCart, setQuantity, removeItem, checkout, checkoutConnected, addItem } =
+  const { lines, count, subtotal, isCartOpen, closeCart, setQuantity, removeItem, checkout, checkoutConnected, upgradeToBundle } =
     useStore();
   const [notice, setNotice] = useState<string | null>(null);
   const [pending, setPending] = useState(false);
 
   const hasBundle = lines.some((l) => l.productId === bundle.id);
+
+  // Upgrade offer: one of each included piece already in the cart vs. the system.
+  const piecesInCart = [...new Map(lines.filter((l) => bundle.includes.includes(l.productId)).map((l) => [l.productId, l])).values()];
+  const piecesValue = piecesInCart.reduce((sum, l) => sum + l.product.price, 0);
+  const missingCount = bundle.includes.length - piecesInCart.length;
+  const upgradeDelta = Math.round((bundle.pricing.price - piecesValue) * 100) / 100;
+  const showUpgrade = !hasBundle && piecesInCart.length > 0;
   const promises = site.storePromises.filter((p) => p.enabled);
 
   const onCheckout = async () => {
@@ -104,18 +111,20 @@ export function CartDrawer() {
             ))}
           </ul>
 
-          {!hasBundle && (
-            <div className="mx-6 mb-2 flex items-center justify-between gap-4 rounded-2xl bg-linen p-4">
-              <p className="text-xs leading-relaxed text-stone">
-                <span className="block font-semibold text-charcoal">Complete the system</span>
-                All seven pieces for {formatMoney(bundle.pricing.price)}.
+          {showUpgrade && (
+            <div className="mx-6 mb-3 rounded-2xl bg-linen p-4">
+              <p className="text-sm font-semibold text-charcoal">Upgrade to the complete system</p>
+              <p className="mt-1 text-xs leading-relaxed text-stone">
+                {upgradeDelta > 0
+                  ? `Get the other ${missingCount} ${missingCount === 1 ? "piece" : "pieces"} for just ${formatMoney(upgradeDelta)} more — all seven for ${formatMoney(bundle.pricing.price)}.`
+                  : `All seven pieces for ${formatMoney(bundle.pricing.price)} — ${formatMoney(-upgradeDelta)} less than the ${piecesInCart.length} in your cart.`}
               </p>
               <Button
-                variant="secondary"
-                className="h-9! shrink-0 px-4!"
-                onClick={() => addItem(bundle.id, bundle.variants[0].id)}
+                className="mt-3 h-10! w-full"
+                onClick={upgradeToBundle}
+                aria-label={`Upgrade: replace ${piecesInCart.length === 1 ? "this piece" : "these pieces"} with ${bundle.name} for ${formatMoney(bundle.pricing.price)}`}
               >
-                Add
+                Upgrade · {upgradeDelta > 0 ? `+${formatMoney(upgradeDelta)}` : `Save ${formatMoney(-upgradeDelta)}`}
               </Button>
             </div>
           )}

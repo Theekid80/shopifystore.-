@@ -13,7 +13,7 @@ export function ProductCard({ product }: { product: Product }) {
 
   return (
     <article id={`product-${product.handle}`} className="group relative flex h-full flex-col">
-      <div className="relative aspect-[4/5] overflow-hidden rounded-[1.25rem] bg-linen">
+      <div className="relative aspect-square overflow-hidden rounded-[1.25rem] bg-linen">
         <Image
           src={product.image.src}
           alt={product.image.alt}
@@ -21,7 +21,7 @@ export function ProductCard({ product }: { product: Product }) {
           sizes="(min-width: 1280px) 22vw, (min-width: 768px) 30vw, 72vw"
           className="object-cover transition-transform duration-[1200ms] ease-out-soft group-hover:scale-[1.04]"
         />
-        <span className="eyebrow absolute left-4 top-4 text-charcoal/60">{product.index}</span>
+        <span className="eyebrow absolute left-3 top-3 rounded-full bg-ivory/85 px-3 py-1.5 text-charcoal backdrop-blur">{product.index}</span>
         <WishlistButton productId={product.id} name={product.name} className="absolute right-3 top-3" />
         <button
           type="button"

@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { site } from "@/config/site";
 import type { ImageAsset } from "@/config/images";
-import { bundle, getProduct } from "@/data/products";
+import { bundle, bundleCompareAtPrice, bundleItems, bundleItemsTotal } from "@/data/products";
 import { useStore } from "@/lib/commerce/cart";
 import { Button } from "@/components/ui/Button";
 import { Price } from "@/components/ui/Price";
@@ -14,7 +14,6 @@ import { VariantSelector } from "@/components/ui/VariantSelector";
 import { WishlistButton } from "@/components/ui/WishlistButton";
 import { CheckIcon } from "@/components/ui/Icons";
 
-const included = bundle.includes.map((id) => getProduct(id)!).filter(Boolean);
 
 function Gallery({ activeVariantImage }: { activeVariantImage?: ImageAsset }) {
   const gallery = activeVariantImage
@@ -79,9 +78,10 @@ export function BundleSection() {
           <div className="mt-6">
             <Price
               price={bundle.pricing.price}
-              compareAt={bundle.pricing.compareAtPrice}
+              compareAt={bundleCompareAtPrice}
               savings={bundle.pricing.savingsDisplay}
               size="lg"
+              compareLabel={bundleCompareAtPrice === bundleItemsTotal ? "if bought separately" : undefined}
             />
           </div>
           <p className="mt-6 text-base leading-relaxed text-stone">{bundle.description}</p>
@@ -121,7 +121,7 @@ export function BundleSection() {
           <div className="mt-10">
             <h3 className="eyebrow text-stone">What&apos;s included</h3>
             <ul className="mt-4 divide-y divide-charcoal/10">
-              {included.map((p) => (
+              {bundleItems.map((p) => (
                 <li key={p.id} className="flex items-center gap-4 py-3">
                   <span className="relative size-12 shrink-0 overflow-hidden rounded-lg bg-linen">
                     <Image src={p.image.src} alt="" fill sizes="48px" className="object-cover" />
