@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { site } from "@/config/site";
+import { newsletter } from "@/config/content";
 import { Logo } from "@/components/ui/Logo";
+import { NewsletterForm } from "@/components/newsletter/NewsletterForm";
 import { InstagramIcon, PinterestIcon, TikTokIcon } from "@/components/ui/Icons";
 
 const socialIcons = { instagram: InstagramIcon, tiktok: TikTokIcon, pinterest: PinterestIcon };
@@ -12,8 +14,12 @@ export function Footer() {
         <div className="grid grid-cols-1 gap-14 lg:grid-cols-12">
           <div className="lg:col-span-5">
             <Logo />
-            <p className="mt-6 max-w-xs text-2xl font-medium leading-tight tracking-tight text-ivory/90">{site.tagline}</p>
-            <ul className="mt-8 flex gap-2" aria-label="Social media">
+            <p className="font-display mt-6 max-w-xs text-3xl leading-tight text-ivory/90">{site.tagline}</p>
+            <div className="mt-8 max-w-sm">
+              <p className="mb-3 text-sm text-fog">{newsletter.body}</p>
+              <NewsletterForm cta={newsletter.cta} tone="dark" />
+            </div>
+            <ul className="mt-4 flex gap-2" aria-label="Social media">
               {site.social.map((s) => {
                 const Icon = socialIcons[s.icon];
                 return (
@@ -33,7 +39,7 @@ export function Footer() {
             </ul>
           </div>
 
-          <div className="grid grid-cols-2 gap-10 sm:grid-cols-3 lg:col-span-7">
+          <div className="grid grid-cols-2 gap-10 sm:grid-cols-3 lg:col-span-6 lg:col-start-7">
             {site.footer.map((col) => (
               <nav key={col.title} aria-label={col.title}>
                 <h2 className="eyebrow text-fog">{col.title}</h2>
@@ -56,7 +62,7 @@ export function Footer() {
             © {new Date().getFullYear()} {site.name}. All rights reserved.
           </p>
           <p className="max-w-xl md:text-right">
-            Velara products are designed for comfort and organization while traveling. They are not medical devices and are not
+            VELARA travel essentials are designed for comfort and organization. They are not medical devices and are not
             intended to diagnose, treat or prevent any condition.
           </p>
         </div>

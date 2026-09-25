@@ -1,42 +1,60 @@
 "use client";
 
-import Image from "next/image";
 import { useEffect, useState } from "react";
-import { images } from "@/config/images";
-import { bundle, bundleCompareAtPrice } from "@/data/products";
+import { compareAt, isPurchasable, type Product } from "@/config/products";
 import { useStore } from "@/lib/commerce/cart";
 import { formatMoney } from "@/lib/commerce/money";
+import { SiteImage } from "@/components/ui/SiteImage";
 
 /**
- * Mobile/tablet buy bar for the system. Appears once the hero is scrolled
- * past, and hides while the buy box or footer is on screen, or the cart is open.
+ * Mobile/tablet sticky Add to Cart. Appears once the shopper scrolls past
+ * `showAfterId` (or one screen), and hides while the main buy box
+ * (`buyBoxId`) or the footer is visible, or the cart is open.
  */
-export function StickyBuyBar() {
+export function StickyBuyBar({
+  product,
+  buyBoxId,
+  showAfterId,
+  immediate = false,
+  label,
+}: {
+  product: Product;
+  buyBoxId: string;
+  showAfterId?: string;
+  /** Show from the top of the page (product pages), hiding only while the buy box is visible. */
+  immediate?: boolean;
+  label?: string;
+}) {
   const { addItem, isCartOpen } = useStore();
-  const [pastHero, setPastHero] = useState(false);
+  const [past, setPast] = useState(false);
   const [blocked, setBlocked] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setPastHero(window.scrollY > window.innerHeight * 0.85);
+    const marker = showAfterId ? document.getElementById(showAfterId) : null;
+    const onScroll = () => {
+      if (immediate) return setPast(true);
+      const limit = marker ? marker.offsetTop + marker.offsetHeight : window.innerHeight * 0.85;
+      setPast(window.scrollY > limit - window.innerHeight * 0.3);
+    };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
 
-    const targets = [document.getElementById("system"), document.querySelector("footer")].filter(Boolean) as Element[];
+    const targets = [document.getElementById(buyBoxId), document.querySelector("footer")].filter(Boolean) as Element[];
     const visible = new Set<Element>();
     const io = new IntersectionObserver((entries) => {
       entries.forEach((e) => (e.isIntersecting ? visible.add(e.target) : visible.delete(e.target)));
       setBlocked(visible.size > 0);
     });
     targets.forEach((t) => io.observe(t));
-
     return () => {
       window.removeEventListener("scroll", onScroll);
       io.disconnect();
     };
-  }, []);
+  }, [buyBoxId, showAfterId, immediate]);
 
-  const show = pastHero && !blocked && !isCartOpen;
-  const compare = bundleCompareAtPrice != null && bundleCompareAtPrice > bundle.pricing.price ? bundleCompareAtPrice : null;
+  if (!isPurchasable(product)) return null;
+  const show = past && !blocked && !isCartOpen;
+  const compare = compareAt(product);
 
   return (
     <div
@@ -48,27 +66,27 @@ export function StickyBuyBar() {
     >
       <div className="mx-auto flex max-w-xl items-center gap-3">
         <span className="relative size-12 shrink-0 overflow-hidden rounded-xl bg-linen">
-          <Image src={images.travelSystem.src} alt="" fill sizes="48px" className="object-cover" />
+          <SiteImage image={product.images[0]} alt="" fill sizes="48px" className="object-cover" />
         </span>
         <div className="min-w-0 flex-1">
-          <p className="truncate text-sm font-semibold">Travel Sleep System</p>
+          <p className="truncate text-sm font-semibold">{label ?? product.name}</p>
           <p className="text-sm">
-            {formatMoney(bundle.pricing.price)}
+            {formatMoney(product.price)}
             {compare && (
               <s className="ml-2 text-xs text-stone">
                 <span className="sr-only">Price if bought separately: </span>
-                {formatMoney(compare)}
+                {formatMoney(compare.amount)}
               </s>
             )}
           </p>
         </div>
         <button
           type="button"
-          onClick={() => addItem(bundle.id, bundle.variants[0].id)}
-          aria-label={`Add ${bundle.name} to cart`}
-          className="eyebrow h-12 shrink-0 rounded-full bg-charcoal px-6 text-ivory transition-colors active:scale-[0.98] hover:bg-ink"
+          onClick={() => addItem(product)}
+          aria-label={`Add ${product.name} to cart`}
+          className="eyebrow h-12 shrink-0 rounded-full bg-charcoal px-6 text-ivory transition-colors hover:bg-ink active:scale-[0.98]"
         >
-          Add to Cart
+          {product.cta.addToCart}
         </button>
       </div>
     </div>

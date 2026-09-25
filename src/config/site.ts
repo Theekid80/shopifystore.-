@@ -1,68 +1,74 @@
 /**
  * ─────────────────────────────────────────────────────────────────────────
- *  SITE CONFIGURATION — brand, navigation, links, policies and SEO.
+ *  SITE CONFIGURATION — brand, navigation, shipping, payments, SEO, links.
  * ─────────────────────────────────────────────────────────────────────────
- *  Every placeholder link is "#…" or a local placeholder page so nothing
- *  404s. Search this file for "TODO" before launch.
+ *  Search this file for "TODO" and "VERIFY" before launch.
  */
 
 export const site = {
   name: "VELARA",
   tagline: "Better Sleep. Smoother Journeys.",
-  positioning: "Sleep better. Travel better.",
 
   /** Used for canonical URLs, Open Graph and structured data. TODO: set your domain. */
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.example.com",
 
   seo: {
-    title: "VELARA — Better Sleep. Smoother Journeys.",
+    title: "VELARA | Premium Travel Sleep System",
     description:
-      "Discover the Velara Travel Sleep System — premium sleep and organization essentials designed for better rest wherever your journey takes you.",
+      "Meet the VELARA Travel Sleep System — premium sleep and travel essentials designed to help you rest, reset and stay organized wherever you go.",
   },
 
   currency: "USD",
   locale: "en-US",
 
-  /** Primary navigation. Anchors point to sections on the home page. */
+  /** Thin bar above the navigation. Set `enabled: false` to hide it. */
+  announcement: {
+    enabled: true,
+    text: "Free U.S. shipping on orders $75+",
+    href: "/pages/shipping",
+  },
+
+  /**
+   * SHIPPING — VERIFY these match your real shipping settings (in Shopify:
+   * Settings → Shipping and delivery).
+   */
+  shipping: {
+    /** Orders at or above this subtotal ship free. null = no free-shipping offer. */
+    freeThreshold: 75 as number | null,
+    region: "U.S.",
+    /** Short line shown under the Add to Cart button. */
+    summary: "Free U.S. shipping on orders $75+. Ships in [X–Y] business days.",
+  },
+
+  /**
+   * Store promises shown under Add to Cart. VERIFY: keep only promises your
+   * store actually honors; set `enabled: false` to hide one.
+   */
+  storePromises: [
+    { id: "shipping", label: "Free U.S. shipping $75+", enabled: true },
+    { id: "returns", label: "30-day returns", enabled: true },
+    { id: "checkout", label: "Secure checkout", enabled: true },
+  ],
+
+  /**
+   * Payment methods listed near the buy button. VERIFY: list only methods
+   * enabled in your payment settings. Shopify's checkout shows the real
+   * card and wallet logos itself.
+   */
+  paymentMethods: ["Visa", "Mastercard", "Amex", "Apple Pay", "Google Pay", "Shop Pay"],
+
   nav: [
-    { label: "Shop", href: "/#system" },
-    { label: "Travel", href: "/#travel" },
-    { label: "Our Story", href: "/#story" },
+    { label: "Shop", href: "/shop" },
+    { label: "The System", href: "/products/velara-travel-sleep-system" },
+    { label: "Why VELARA", href: "/#why" },
     { label: "FAQ", href: "/#faq" },
   ],
 
-  /** The one place every "shop" CTA points to. */
-  primaryCta: { label: "Shop the System", href: "/#system" },
+  /** Every "shop the system" call to action points here. */
+  primaryCta: { label: "Shop the System", href: "/#offer" },
 
-  /** TODO: point to your Shopify customer account URL once connected,
-   *  e.g. "https://your-store.myshopify.com/account". */
+  /** TODO: your Shopify customer account URL once connected. */
   accountHref: "/pages/account",
-
-  /**
-   * Store promises shown under the Add to Cart button and in the cart.
-   *
-   * ⚠️  VERIFY BEFORE LAUNCH. Only keep `enabled: true` for promises your store
-   *     actually honors (shipping settings, return policy, payment provider).
-   *     Set `enabled: false` to hide any of them.
-   */
-  storePromises: [
-    { id: "shipping", label: "Free Shipping", enabled: true },
-    { id: "returns", label: "30-Day Returns", enabled: true },
-    { id: "checkout", label: "Secure Checkout", enabled: true },
-  ],
-
-  /** Short lifestyle benefits shown along the bottom of the hero. */
-  heroBenefits: ["Premium Comfort", "Travel Ready", "Smart Organization", "Designed for Rest"],
-
-  newsletter: {
-    /**
-     * TODO: connect your email platform. Set NEXT_PUBLIC_NEWSLETTER_ENDPOINT
-     * to a URL that accepts a JSON POST of { email } (e.g. a Klaviyo/Shopify
-     * Forms proxy or your own API route). Until then the form validates the
-     * address and tells the visitor sign-ups are not live yet — nothing is sent.
-     */
-    endpoint: process.env.NEXT_PUBLIC_NEWSLETTER_ENDPOINT ?? "",
-  },
 
   /** TODO: replace with your real profiles. */
   social: [
@@ -75,25 +81,23 @@ export const site = {
     {
       title: "Shop",
       links: [
-        { label: "Travel Sleep System", href: "/#system" },
-        { label: "Sleep Masks", href: "/#mask" },
-        { label: "Travel Organizers", href: "/#organize" },
-        { label: "Accessories", href: "/#collection" },
+        { label: "Shop", href: "/shop" },
+        { label: "The System", href: "/products/velara-travel-sleep-system" },
+        { label: "About", href: "/pages/about" },
+        { label: "FAQ", href: "/#faq" },
       ],
     },
     {
       title: "Help",
       links: [
-        { label: "FAQ", href: "/#faq" },
+        { label: "Contact", href: "/pages/contact" },
         { label: "Shipping", href: "/pages/shipping" },
         { label: "Returns", href: "/pages/returns" },
-        { label: "Contact", href: "/pages/contact" },
       ],
     },
     {
-      title: "Company",
+      title: "Legal",
       links: [
-        { label: "Our Story", href: "/#story" },
         { label: "Privacy", href: "/pages/privacy" },
         { label: "Terms", href: "/pages/terms" },
       ],

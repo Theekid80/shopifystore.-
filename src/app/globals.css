@@ -3,6 +3,7 @@
 /* ─────────────────────────── Velara design tokens ─────────────────────────── */
 @theme {
   --font-sans: var(--font-manrope), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-serif: var(--font-cormorant), "Cormorant Garamond", ui-serif, Georgia, serif;
 
   --color-ink: #0e0e0e;
   --color-charcoal: #1c1c1b;
@@ -14,15 +15,19 @@
   --color-ivory: #faf8f4;
   --color-sand: #c9b89f; /* tan accent */
   --color-sand-deep: #8c775d; /* tan accent for text on light — AA */
+  --color-taupe: #a39687; /* warm taupe */
 
   --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
 
-  --text-display: clamp(2.75rem, 7.2vw, 6.5rem);
+  /* Serif headline scale. Kept moderate on phones so products stay above the fold. */
+  --text-display: clamp(2.75rem, 7vw, 6.75rem);
   --text-display--line-height: 0.98;
-  --text-display--letter-spacing: -0.035em;
-  --text-headline: clamp(2rem, 4.4vw, 3.75rem);
-  --text-headline--line-height: 1.04;
-  --text-headline--letter-spacing: -0.03em;
+  --text-display--letter-spacing: -0.015em;
+  --text-headline: clamp(2.125rem, 4.6vw, 4.25rem);
+  --text-headline--line-height: 1.02;
+  --text-headline--letter-spacing: -0.01em;
+  --text-title: clamp(1.625rem, 2.6vw, 2.25rem);
+  --text-title--line-height: 1.1;
 }
 
 :root {
@@ -58,6 +63,14 @@ body {
 .on-dark :focus-visible,
 .on-dark:focus-visible {
   outline-color: var(--color-sand);
+}
+
+/* Editorial serif headlines. */
+@utility font-display {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-feature-settings: "liga", "kern", "lnum";
+  font-variant-numeric: lining-nums;
 }
 
 /* Small uppercase labels. */

@@ -1,30 +1,26 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { bundle, products } from "@/data/products";
-import { images } from "@/config/images";
+import { productHref, products } from "@/config/products";
 import { useStore } from "@/lib/commerce/cart";
 import { formatMoney } from "@/lib/commerce/money";
 import { Sheet } from "@/components/ui/Sheet";
+import { SiteImage } from "@/components/ui/SiteImage";
 import { CloseIcon, SearchIcon } from "@/components/ui/Icons";
 
 /**
- * Lightweight client-side search over the local catalog.
+ * Lightweight client-side search over the catalog.
  * TODO (Shopify): swap for the Storefront API `predictiveSearch` query.
  */
-const index = [
-  { id: bundle.id, name: bundle.name, text: bundle.description, price: bundle.pricing.price, image: images.travelSystem, href: "/#system" },
-  ...products.map((p) => ({
-    id: p.id,
-    name: p.name,
-    text: p.benefit,
-    price: p.price,
-    image: p.image,
-    href: `/#product-${p.handle}`,
-  })),
-];
+const index = products.map((p) => ({
+  id: p.id,
+  name: p.name,
+  text: `${p.tagline} ${p.description}`,
+  price: p.price,
+  image: p.images[0],
+  href: productHref(p),
+}));
 
 export function SearchDialog() {
   const { isSearchOpen, setSearchOpen } = useStore();
@@ -51,7 +47,7 @@ export function SearchDialog() {
             autoFocus
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search Velara"
+            placeholder="Search VELARA"
             autoComplete="off"
             className="h-12 flex-1 bg-transparent text-xl font-medium tracking-tight outline-none placeholder:text-stone/70 md:text-2xl"
           />
@@ -73,7 +69,7 @@ export function SearchDialog() {
             <li key={r.id}>
               <Link href={r.href} onClick={close} className="flex items-center gap-4 rounded-2xl p-2 transition-colors hover:bg-linen">
                 <span className="relative size-16 shrink-0 overflow-hidden rounded-xl bg-linen">
-                  <Image src={r.image.src} alt="" fill sizes="64px" className="object-cover" />
+                  <SiteImage image={r.image} alt="" fill sizes="64px" className="object-cover" />
                 </span>
                 <span className="min-w-0">
                   <span className="block truncate text-sm font-semibold">{r.name}</span>

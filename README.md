@@ -1,208 +1,289 @@
 # VELARA — Better Sleep. Smoother Journeys.
 
-The storefront for **Velara**, a premium travel sleep brand. It's a single-page site built to guide every visitor to one product: **The Velara Travel Sleep System**.
+The storefront for **VELARA**, a premium travel brand built around one hero product: the **VELARA Travel Sleep System**.
 
-Built with **Next.js 16 (App Router) · React 19 · TypeScript · Tailwind CSS v4**. No UI libraries and no animation libraries. The only runtime dependencies are Next and React.
+**Stack:** Next.js 16 (App Router) · React 19 · TypeScript · Tailwind CSS v4. There are no UI or animation libraries; the only runtime dependencies are Next and React.
 
-> **Important: this is not a Shopify theme.** You can't upload it as a `.zip` under *Online Store → Themes*. It's a separate website (a "headless" storefront) that you host yourself, for example on Vercel. Shopify still handles products, checkout, payments and orders behind it. See [Connecting to Shopify](#f-connecting-to-shopify).
+> **This is not a Shopify theme.** It's a standalone ("headless") storefront that you host (e.g. on Vercel). Shopify connects behind it for products, checkout, payments and orders. See [Connecting to Shopify](#connecting-to-shopify).
 
 ---
 
-## A. What's included
+## What's in the site
 
-| Area | Details |
+| Page | Purpose |
 |---|---|
-| **Sections** | Sticky nav · Hero · Product showcase · Featured mask · Rest Anywhere · Pack Smart · Bundle / buy box · Why Velara · Testimonials (placeholders) · FAQ · Newsletter · Footer |
-| **Commerce** | Product cards · Add to cart · Mobile sticky buy bar · Cart upgrade offer (swaps pieces for the system) · Quantity selector · Cart drawer (update, remove, subtotal) · Checkout button · Wishlist hearts · Image gallery · Colorway selector · Cart that survives page reloads |
-| **Mobile** | Hamburger menu · Horizontally scrolling product cards · Large tap targets · Support for the iPhone notch and home-bar areas |
-| **Accessibility** | Semantic landmarks · Skip link · Visible focus states · Keyboard-operable dialogs (native `<dialog>`: focus stays inside, Escape closes) · Standard accessible accordion (WAI-ARIA) · Labelled icon buttons · Alt text · Respects "reduce motion" settings |
-| **SEO** | Title, description, Open Graph and Twitter cards · Product and Organization structured data (JSON-LD, no fake ratings) · `robots.txt` · `sitemap.xml` · Canonical URL |
-| **Performance** | Statically generated · `next/image` (AVIF/WebP, responsive `srcset`, lazy-loaded below the fold, hero preloaded) · Self-hosted font via `next/font` |
-| **Honesty guardrails** | Checkout clearly says "preview mode" until Shopify is connected · Newsletter doesn't pretend to save emails until connected · Testimonials are visibly labelled as placeholders · No medical claims, plus a footer disclaimer · Store promises (free shipping, returns) can be switched off in config |
+| `/` | Landing page built for ad traffic: hero → benefits → the six pieces → why a system → airplane → hotel → what's inside → **offer** → comparison → lifestyle → details → reviews → email → FAQ |
+| `/products/<handle>` | A page for every product: gallery, price, Add to Cart, Buy Now, shipping and returns, details, lifestyle images, FAQ, related products, and a mobile sticky Add to Cart |
+| `/shop` | The system first, then the sets, then each piece sold individually |
+| `/checkout` | Order review, then hand-off to Shopify or Stripe hosted checkout |
+| `/checkout/success` | Stripe order confirmation (verified server-side) |
+| `/pages/about · shipping · returns · contact · privacy · terms · account` | Policy and brand pages |
 
-## B. Folder structure
+### Offers (edit in `src/config/products.ts`)
+
+| Offer | Price | Contents |
+|---|---|---|
+| **VELARA Travel Sleep System** (hero) | $79.99 | Mask, earplugs, travel pouch, toiletry organizer, tech pouch, packing cube |
+| **Sleep + Travel Kit** | $59.99 | Mask, earplugs, travel pouch, toiletry organizer |
+| **The Sleep Mask** | $39.99 | Mask |
+| Each piece individually | $9.99–$39.99 | Plus the Luggage Tag as an extra accessory |
+
+### Commerce
+- Bag drawer with quantity, remove, subtotal and a free-shipping progress bar ("You're $X away from free U.S. shipping").
+- **Complete the system:** an upgrade offer that swaps pieces already in the bag for the system and states the true price difference.
+- **Buy Now:** skips the bag and goes straight to checkout.
+- Mobile sticky Add to Cart, and a desktop sticky gallery.
+- The bag persists in the browser.
+
+### Honesty guardrails
+- **Crossed-out price:** by default it's the *real* total of the pieces sold separately ($119.94), labelled "if bought separately".
+- **Reviews:** none are invented. Development builds show "Your customer review here" slots; the live site hides the section until you add real reviews.
+- **Checkout and email:** both say plainly when they're not connected yet, instead of pretending.
+- **No suppliers named:** supplier data lives in a server-only file the browser can never load.
+- **No fake claims:** no medical claims, fake urgency, fake badges, fake press or fake customer numbers. Automated checks enforce this.
+
+### Quality checks run before handoff
+There are 106 automated browser checks across desktop, tablet, iPhone and Android:
+- every page loads with no sideways scroll, one H1 each, and no broken images;
+- all internal links resolve;
+- nav, mobile menu, tier selector, bag, quantity, remove, upgrade, Buy Now, checkout, FAQ and newsletter all work;
+- analytics events fire;
+- no console errors;
+- a banned-words scan (medical claims, supplier and urgency language) passes on every page;
+- no supplier data appears in browser JavaScript.
+
+Changing a price in config updated every page, and a broken catalog entry failed the build.
+
+---
+
+## Folder structure
 
 ```
-├── public/images/            ← all photography (replace these files)
-├── scripts/
-│   └── crop-photos.mjs    ← cuts site images out of the boards in /design
-├── design/                ← source boards (product + brand)
-├── src/
-│   ├── app/
-│   │   ├── layout.tsx         ← fonts, SEO metadata, nav/footer/cart shell
-│   │   ├── page.tsx           ← home page: section order + product JSON-LD
-│   │   ├── pages/[slug]/      ← shipping, returns, contact, privacy, terms, account
-│   │   ├── globals.css        ← design tokens (colors, type, motion)
-│   │   ├── icon.svg           ← favicon
-│   │   ├── not-found.tsx · robots.ts · sitemap.ts
-│   ├── config/                ← ★ EDIT THESE ★
-│   │   ├── images.ts          ← every image path + alt text
-│   │   ├── site.ts            ← brand, nav, links, store promises, SEO, socials
-│   │   └── shopify.ts         ← Shopify variant IDs
-│   ├── data/                  ← ★ EDIT THESE ★
-│   │   ├── products.ts        ← products, prices, variants, bundle pricing
-│   │   ├── content.ts         ← features, testimonials, FAQ
-│   │   └── pages.ts           ← policy page text
-│   ├── lib/
-│   │   ├── commerce/cart.tsx  ← cart + wishlist state, checkout
-│   │   ├── commerce/shopify.ts← Shopify Storefront API adapter
-│   │   ├── commerce/money.ts  ← currency + "Save X%" formatting
-│   │   └── persistent-store.ts
-│   └── components/
-│       ├── layout/  Navbar · Footer · SearchDialog
-│       ├── cart/    CartDrawer
-│       ├── sections/ Hero · ProductShowcase · FeaturedProduct · LifestyleSection ·
-│       │            OrganizationSection · BundleSection · WhyVelara ·
-│       │            Testimonials · FAQ · Newsletter
-│       └── ui/      Button · ProductCard · Price · QuantitySelector ·
-│                    VariantSelector · WishlistButton · Sheet · Reveal ·
-│                    SectionHeading · Logo · Icons
-└── .env.example
+design/                      Source boards the current photos are cropped from
+public/images/               All photography (replace these files)
+scripts/crop-photos.mjs      Re-cuts images from /design (npm run photos)
+src/
+  config/                    ★ Everything you edit ★
+    products.ts              Catalog: names, prices, compare-at, SKUs, images, contents, stock, CTA text
+    images.ts                Every image path + alt text (productImages.hero, .sleepMask, …)
+    site.ts                  Brand, announcement bar, nav, free-shipping threshold, payment methods, footer, SEO
+    content.ts               All home-page copy, FAQ, product details, reviews
+    policies.ts              Shipping / returns / care text + /pages content
+    shopify.ts               Shopify variant IDs
+    fulfillment.server.ts    PRIVATE supplier data (server-only, never shipped to browsers)
+  app/                       Routes (pages, product pages, checkout, API routes, sitemap, robots)
+    api/checkout/stripe/     Stripe Checkout integration point
+    api/newsletter/          Klaviyo / Mailchimp / webhook integration point
+  lib/
+    commerce/cart.tsx        Bag state, Buy Now, upgrade, free-shipping math
+    commerce/checkout.ts     Provider switch: shopify | stripe | none
+    commerce/shopify.ts      Shopify Storefront API (cartCreate → checkoutUrl)
+    analytics.ts             track() → GA4, Google Ads, Meta Pixel, TikTok Pixel
+    seo.tsx                  Product + Organization structured data
+  components/
+    sections/                One file per home-page section
+    product/                 PurchasePanel (buy box), ProductGallery, ProductCard, Assurances
+    cart/                    CartDrawer, StickyBuyBar
+    checkout/ layout/ newsletter/ analytics/ ui/
 ```
 
 ### Common edits
 
-| I want to change… | Edit |
+| I want to… | Edit |
 |---|---|
-| Bundle price, crossed-out price, "Save 45%" badge | `src/data/products.ts` → `bundle.pricing`. `compareAtPrice: "items"` (the default) shows the real total of the pieces bought separately, so the saving is always true. `savingsDisplay`: `"percent"`, `"amount"` or `"none"`. |
-| Product names, benefits, individual prices, colorways | `src/data/products.ts` |
-| Free Shipping / 30-Day Returns / Secure Checkout | `src/config/site.ts` → `storePromises` (set `enabled: false` to hide one) |
-| FAQ answers, testimonials, feature cards | `src/data/content.ts` |
-| Nav links, footer links, social links | `src/config/site.ts` |
-| Any image | Replace the file in `public/images/`, or change the path in `src/config/images.ts` |
-| Colors / fonts | `src/app/globals.css` (`@theme`) and `src/app/layout.tsx` |
+| Change a price | `src/config/products.ts` → `price` |
+| Change the crossed-out price | `compareAtPrice`: `"items"` (real separate total, recommended), a number, or `null` to hide it |
+| Show "Save $X" instead of "Save X%" | `savingsDisplay: "amount"` (or `"none"`) |
+| Change what's in the system or kit | `includes: [...]` (the page copy counts update automatically) |
+| Mark something sold out / pre-order | `stock: "out_of_stock"` / `"preorder"` |
+| Change button text | `cta: { addToCart, buyNow }` |
+| Change the free-shipping threshold | `src/config/site.ts` → `shipping.freeThreshold` (and `announcement.text`) |
+| Edit headlines and copy | `src/config/content.ts` |
+| Add real reviews | `src/config/content.ts` → `reviews.items` |
+| Change fonts or colors | `src/app/layout.tsx` (fonts), `src/app/globals.css` (`@theme` colors) |
 
-## C. Running it locally
+If the catalog is misconfigured (unknown piece, duplicate SKU, compare-at below price), `npm run build` stops with a clear error instead of shipping a broken store.
 
-You need **Node.js 20.9 or newer** ([nodejs.org](https://nodejs.org), choose "LTS").
+---
+
+## Running locally
+
+You need **Node.js 20.9+** ([nodejs.org](https://nodejs.org), "LTS").
 
 ```bash
 git clone https://github.com/theekid80/shopifystore.-.git velara
 cd velara
 npm install
-npm run dev
+npm run dev          # http://localhost:3000
 ```
 
-Open **http://localhost:3000**. Edits reload instantly.
-
-Other commands:
+In `npm run dev`, every image not yet marked `final: true` shows a small **"Replace: filename"** tag, and the reviews section shows placeholder slots. Neither appears in production builds.
 
 ```bash
-npm run build      # production build (run this before deploying)
-npm start          # serve the production build locally
-npm run lint       # ESLint
-npm run typecheck  # TypeScript
-npm run photos     # re-cut site images from the boards in /design
+npm run build && npm start   # production build, locally
+npm run lint                 # ESLint
+npm run typecheck            # TypeScript
+npm run photos               # re-cut images from the boards in /design
 ```
 
-To try it on your phone, run `npm run dev -- -H 0.0.0.0` and open `http://<your-computer's-IP>:3000` on a phone connected to the same Wi-Fi.
+To test on your phone: run `npm run dev -- -H 0.0.0.0`, then open `http://<your-computer-IP>:3000` on the same Wi-Fi.
 
-## D. Deploying (Vercel, recommended)
+## Deploying (Vercel)
 
-1. Push this repo to GitHub (it's already there).
-2. Go to **[vercel.com/new](https://vercel.com/new)**, sign in with GitHub and **Import** `shopifystore.-`.
-3. Framework preset: **Next.js** (detected automatically). Leave the build settings as they are.
-4. Under **Environment Variables**, add `NEXT_PUBLIC_SITE_URL` with your final URL (e.g. `https://www.velara.com`). Add the Shopify variables later.
-5. Click **Deploy**. Every push to `main` then redeploys automatically, and every branch gets its own preview URL.
-6. Custom domain: in Vercel go to **Project → Settings → Domains**, add your domain and follow the DNS instructions.
+1. Go to [vercel.com/new](https://vercel.com/new) → sign in with GitHub → **Import** `shopifystore.-`.
+2. Framework: **Next.js** (auto-detected). Keep the default build settings.
+3. **Environment Variables:** add `NEXT_PUBLIC_SITE_URL` = your domain. Everything else in `.env.example` is optional until you connect services.
+4. Click **Deploy**. Every push to `main` then redeploys, and each branch gets a preview URL.
+5. Add a domain under **Project → Settings → Domains** and follow the DNS instructions.
 
-Any other host that runs Node.js also works (Netlify, Railway, Render, your own server running `npm run build && npm start`).
+After changing any `NEXT_PUBLIC_…` variable, **redeploy**; those values are baked in at build time.
 
-> After changing any `NEXT_PUBLIC_…` variable, **redeploy**. Those values are baked in at build time.
+---
 
-## E. Everything you need to replace before launch
+## Connecting to Shopify
 
-### Images (`public/images/`)
+Until you do this, the site runs in **preview mode**: the bag works, but checkout says it isn't connected, and nothing is charged.
 
-Every image slot is now filled with your photos. `npm run photos` (`scripts/crop-photos.mjs`) cuts them out of the two boards in `/design`:
+### 1. Set up the Shopify store
+1. Create a store at [shopify.com](https://www.shopify.com) and pick a plan.
+2. **Settings → Payments:** activate Shopify Payments. This gives you cards, **Shop Pay**, **Apple Pay** and **Google Pay** on Shopify's checkout.
+3. **Settings → Shipping and delivery:** create a free-shipping rate for orders over **$75** (U.S.) and a flat rate below it. Match `src/config/site.ts`.
+4. **Settings → Policies:** add refund, privacy, terms and shipping policies. Copy the same text into `src/config/policies.ts`.
+5. **Settings → Checkout:** upload your logo and colors so checkout matches the site.
 
-| File | Used for | Source | Size now |
-|---|---|---|---|
-| `hero-travel.jpg` | Hero background | Brand board: system at airport window | 560px, enlarged 3× |
-| `travel-system.jpg` | Bundle gallery, cart, search, buy bar | Product board: system + box | 542px, enlarged 2× |
-| `whats-included.jpg` | Showcase flat lay, bundle gallery | Brand board: numbered flat lay | 505px, enlarged 2× |
-| `sleep-mask.jpg` | Mask card + featured mask | Product board | 444px |
-| `sleep-mask-detail.jpg` | Mask close-up inset | Brand board | 288px |
-| `travel-pouch.jpg` · `earplugs.jpg` · `tech-organizer.jpg` · `packing-cubes.jpg` · `toiletry-bag.jpg` · `luggage-tag.jpg` | Product cards, gallery, cart | Product board | 300–380px |
-| `airplane-lifestyle.jpg` | "Rest Anywhere" banner | Brand board: traveler in mask | 325px, enlarged 3× |
-| `flights-lifestyle.jpg` | Travel tile: Flights | Brand board: mask on lie-flat seat | 266px, enlarged 2× |
-| `hotel-lifestyle.jpg` | Travel tile: Hotels | Product board: toiletry bag | enlarged 2× |
-| `road-trip-lifestyle.jpg` | Travel tile: Road Trips | Product board: pouch by window | enlarged 2× |
-| `business-lifestyle.jpg` | Travel tile: Business Travel | Brand board: traveler with backpack | 221px, enlarged 2× |
-| `suitcase-organized.jpg` | "Pack Smart" section | Brand board: packed suitcase | 331px, enlarged 2× |
-| `og-image.jpg` | Link previews (1200×630) | Hero scene | 1200×630 |
+### 2. Create the products
+Under **Products → Add product**, create one product per catalog entry. Use the same names, prices and SKUs as `src/config/products.ts`:
 
-**Before launch, get full-resolution versions.** The boards are small composites, so each shot is only a few hundred pixels wide. Enlarging keeps them smooth but can't add detail. They look soft on large screens, especially the hero and "Rest Anywhere" banner. Ideal sizes: 2400px+ wide for the hero and banner, 1500×1500 for product shots. Drop them into `public/images/` with the same filenames and stop running `npm run photos`. Keep each image's `alt` text in `src/config/images.ts` accurate.
+| Shopify product | Price | SKU |
+|---|---|---|
+| VELARA Travel Sleep System | 79.99 (compare-at 119.94) | VEL-SYSTEM-BLK |
+| Sleep + Travel Kit | 59.99 (compare-at 84.96) | VEL-KIT-BLK |
+| The Sleep Mask | 39.99 | VEL-MASK-BLK |
+| The Travel Pouch | 14.99 | VEL-POUCH-BLK |
+| The Organizer | 19.99 | VEL-TOIL-BLK |
+| The Tech Pouch | 16.99 | VEL-TECH-BLK |
+| The Packing Cube | 17.99 | VEL-CUBE-BLK |
+| The Earplugs | 9.99 | VEL-PLUG-BLK |
+| The Luggage Tag | 9.99 | VEL-TAG-BLK |
 
-Also make sure the photos match what customers receive. For example, `travel-system.jpg` shows a Velara gift box; only use it if the set ships in one.
+For each product:
+- Track inventory, or let your fulfillment app manage it.
+- Enter the weight so shipping rates calculate correctly.
+- Set the status to **Active**.
 
-### Text and settings
+Connect your fulfillment app in Shopify so orders route automatically. It's handled entirely in the Shopify admin, and nothing about it appears on the site.
 
-- [ ] `NEXT_PUBLIC_SITE_URL`: your real domain
-- [ ] `src/data/products.ts`: final prices. With `compareAtPrice: "items"`, the crossed-out price is the real total of the pieces, so a lower piece price shrinks the saving automatically. If you type a number instead, it must be a genuine reference price; an inflated "was" price can breach consumer-protection law.
-- [ ] **Brand name:** before you spend money on inventory, a domain or a trademark filing, see the name check in the handoff notes. "Velara" is already in use by several companies.
-- [ ] `src/config/site.ts` → `storePromises`: keep only promises your store actually honors
-- [ ] `src/data/content.ts` → FAQ: replace every `[bracketed]` answer (care instructions, dimensions, shipping, returns)
-- [ ] `src/data/content.ts` → testimonials: replace them with **real** reviews (with permission) and set `isPlaceholder: false`, or remove the section from `src/app/page.tsx` until you have some
-- [ ] `src/data/pages.ts`: shipping, returns, contact, privacy and terms text
-- [ ] `src/config/site.ts`: social profile URLs, `accountHref`
-- [ ] `src/components/sections/WhyVelara.tsx`: your brand/founder story paragraph
-- [ ] Product copy stays lifestyle-only. Don't claim the products treat insomnia, anxiety or any condition.
+### 3. Get a Storefront API token
+1. Install the free **Headless** sales channel: Shopify admin → **Sales channels → + → search "Headless" → Install**.
+2. Headless → **Create storefront**.
+3. In that storefront, open **Storefront API**. Under permissions, make sure *product listings* and *checkouts* are enabled.
+4. Copy the **Public access token**. Never use the private token or an Admin API token here.
+5. **Products:** open each product → **Publishing** → make it available on the **Headless** channel.
 
-## F. Connecting to Shopify
-
-Until you connect Shopify, the site runs in **preview mode**. The cart works, but checkout shows *"Checkout isn't connected yet"* and no order or payment happens. Here's how to switch on real checkout.
-
-### 1. Create the products in Shopify
-
-In **Shopify admin → Products**, create:
-
-- **The Velara Travel Sleep System** (one variant, Black). Set the price to match `bundle.pricing.price`, and the compare-at price if you use one.
-- Optionally, each individual piece you also want to sell separately.
-
-### 2. Get a Storefront API token
-
-1. Install the free **Headless** sales channel from the Shopify App Store (Shopify admin → *Sales channels → +*, search "Headless").
-2. Open Headless → **Create storefront**.
-3. Under **Storefront API**, copy the **public access token**. Don't use the private token or an Admin API token in this site.
-4. Under the same storefront's permissions, make sure product listings and checkouts are enabled.
-5. In **Products**, make the products available to the **Headless** sales channel ("Publishing" / "Sales channels" on each product).
-
-### 3. Link the variants
-
-For each variant, open the product in Shopify admin and click the variant. The URL ends in `/variants/44781234567890`. Paste it into `src/config/shopify.ts`:
+### 4. Link the products
+For each product, open it in Shopify admin and click its variant. The URL ends in `/variants/44781234567890`. Paste each one into `src/config/shopify.ts`:
 
 ```ts
-"system-black": "gid://shopify/ProductVariant/44781234567890",
+"system-black":    "gid://shopify/ProductVariant/44781234567890",
+"kit-black":       "gid://shopify/ProductVariant/…",
+"mask-black":      "gid://shopify/ProductVariant/…",
+// …one line per product
 ```
 
-### 4. Add environment variables
+Commit and push.
 
-Locally, copy `.env.example` to `.env.local`. In production, add these under **Vercel → Settings → Environment Variables**:
+### 5. Turn it on
+In Vercel → **Settings → Environment Variables**, add:
 
 ```bash
-NEXT_PUBLIC_COMMERCE_PROVIDER=shopify
+NEXT_PUBLIC_CHECKOUT_PROVIDER=shopify
 NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN=your-store.myshopify.com
-NEXT_PUBLIC_SHOPIFY_STOREFRONT_TOKEN=<public token from step 2>
+NEXT_PUBLIC_SHOPIFY_STOREFRONT_TOKEN=<public token from step 3>
 ```
 
-Redeploy.
+Redeploy. Now **Checkout** and **Buy Now** send shoppers to Shopify's secure checkout with their bag pre-filled.
 
-### 5. Test
+### 6. Test before launch
+1. Shopify → **Settings → Payments** → enable **test mode** (or use a development store's Bogus Gateway).
+2. On the live site, add the system to the bag and check out. Confirm the order appears in **Orders** and reaches your fulfillment app.
+3. Turn test mode off.
 
-1. In Shopify: **Settings → Payments**, turn on **test mode** (or use the "Bogus Gateway" on a development store).
-2. On your site, add the system to the cart and press **Checkout**. You're sent to Shopify's hosted checkout with the items already in the cart.
-3. Place a test order and confirm it appears under **Orders**. Then turn test mode off.
+> I haven't been able to test the Shopify connection against a real store from here. Step 6 is essential.
 
-**How it works:** the cart lives on the site. At checkout, `src/lib/commerce/shopify.ts` calls the Storefront API `cartCreate` mutation with every line and sends the shopper to the returned `checkoutUrl`. Shopify's checkout is the source of truth for price, tax, shipping, discounts and payment, so keep the prices in `products.ts` in sync with Shopify. I haven't tested this path against a live store from here. Do the test order above before launch.
+**How it works:** the bag lives on the site. At checkout, `src/lib/commerce/shopify.ts` calls the Storefront API `cartCreate` mutation with every line and redirects to the returned `checkoutUrl`. Shopify's checkout is the source of truth for price, tax, shipping and payment, so keep prices in `products.ts` in sync with Shopify.
 
-### Other things to connect
+### Alternative: Stripe
+If you'd rather not use Shopify, set `NEXT_PUBLIC_CHECKOUT_PROVIDER=stripe` and `STRIPE_SECRET_KEY`. You can also set `STRIPE_SHIPPING_RATE_CENTS`.
+- `/api/checkout/stripe` creates a Stripe Checkout Session, looking prices up on the server.
+- Apple Pay and Google Pay appear once enabled in Stripe → Settings → Payment methods.
+- Stripe has no Shop Pay, and you'd handle order routing yourself.
+- Test with Stripe test keys first.
 
-- **Newsletter:** set `NEXT_PUBLIC_NEWSLETTER_ENDPOINT` to a URL that accepts `POST {"email": "..."}` as JSON. For example, a small API route or serverless function that forwards to Klaviyo, Mailchimp or Shopify Email.
-- **Customer accounts:** point `accountHref` in `src/config/site.ts` to `https://<your-store>.myshopify.com/account` (or your Shopify customer accounts URL).
-- **Search:** the built-in search runs over the local catalog. To search Shopify directly, swap the index in `src/components/layout/SearchDialog.tsx` for the Storefront API `predictiveSearch` query.
-- **Product images from Shopify's CDN:** `cdn.shopify.com` is already allowed in `next.config.ts`.
+---
 
-### Simpler alternative: Shopify Buy Button
+## Email list
 
-If you'd rather not use the Storefront API, create a Buy Button in the Shopify **Buy Button** sales channel. Then replace the **Add to Cart** button in `src/components/sections/BundleSection.tsx` with a link to the product's checkout link. You lose the on-site cart drawer, but you have no tokens to manage.
+Set `NEWSLETTER_PROVIDER` (server-side) to one of:
+- `klaviyo`: `KLAVIYO_PUBLIC_KEY` (6-character site ID) + `KLAVIYO_LIST_ID`. Recommended with Shopify; Klaviyo's Shopify app also syncs customers.
+- `mailchimp`: `MAILCHIMP_API_KEY` + `MAILCHIMP_LIST_ID`. Sends double opt-in.
+- `webhook`: `NEWSLETTER_WEBHOOK_URL`. Receives `{ email, source }`; use Zapier or Make to reach Shopify Email or anything else.
+
+Until one is set, the form thanks visitors and says sign-ups open soon; no email is stored. Send yourself a test sign-up after connecting.
+
+## Analytics
+
+Each platform loads only when its ID is set:
+
+| Variable | Platform |
+|---|---|
+| `NEXT_PUBLIC_GA_ID` | Google Analytics 4 (`G-…`) |
+| `NEXT_PUBLIC_GOOGLE_ADS_ID` + `NEXT_PUBLIC_GOOGLE_ADS_PURCHASE_LABEL` | Google Ads (`AW-…`) |
+| `NEXT_PUBLIC_META_PIXEL_ID` | Meta (Facebook/Instagram) Pixel |
+| `NEXT_PUBLIC_TIKTOK_PIXEL_ID` | TikTok Pixel |
+
+Events tracked on the site:
+- **PageView** on every page.
+- **ViewContent** when the buy box is seen.
+- **AddToCart**.
+- **InitiateCheckout**.
+- **Lead**, only after a successful email sign-up.
+- **Purchase** on the Stripe success page.
+
+**With Shopify checkout, the purchase happens on Shopify's domain**, so connect the same pixels in Shopify too. Install the **Google & YouTube**, **Facebook & Instagram** and **TikTok** sales channels (or add them under **Settings → Customer events**). That's what records Purchase and gives ad platforms their conversion data.
+
+---
+
+## Images
+
+All images are defined in `src/config/images.ts` (`productImages.hero`, `.bundle`, `.sleepMask`, `.travelPouch`, `.organizer`, `.packingCube`, `.techOrganizer`, `.airplane`, `.hotel`, …). They're currently cropped from the two design boards in `/design`.
+
+**Replace them with full-resolution photos before launch.** Each shot on the boards is only 250–560px wide, so they look soft on large screens.
+
+| Image | Recommended |
+|---|---|
+| Hero (`hero-travel.jpg`), airplane banner | 2400px+ wide |
+| Product shots | 1500×1500 |
+| The six-piece flat lay (`whats-included.jpg`) | 2000px+ |
+| Lifestyle tiles | 1200×1600 |
+| `og-image.jpg` (social share) | exactly 1200×630 |
+
+To replace one: put the file in `public/images/`, update `width`/`height`/`alt` in `images.ts`, and set `final: true`. Compress photos first (e.g. [squoosh.app](https://squoosh.app), quality ~80).
+
+Make sure photos match what customers receive:
+- `travel-system.jpg` (used in the hotel section) shows a Velara box and a luggage tag. The system doesn't include the tag, and use the box shot only if you ship in one.
+- The main flat lay was cropped to show exactly the six system pieces.
+
+---
+
+## Launch checklist
+
+- [ ] `NEXT_PUBLIC_SITE_URL` set to your domain
+- [ ] Prices and compare-at confirmed in `products.ts` (and matching Shopify)
+- [ ] Every `[bracketed]` value replaced: `products.ts` details, `policies.ts`, `content.ts` FAQ
+- [ ] Shipping threshold, returns window and payment methods in `site.ts` match your real settings
+- [ ] Real photos in, each marked `final: true`
+- [ ] Shopify connected and a test order placed
+- [ ] Email provider connected and a test sign-up received
+- [ ] Pixels added on the site **and** in Shopify
+- [ ] Social links and support email updated
+- [ ] Product copy stays lifestyle-only: no medical or sleep-outcome claims, no unconfirmed material claims

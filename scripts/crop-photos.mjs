@@ -40,7 +40,8 @@ const crops = [
   ["business-lifestyle.jpg", BRAND, 205, 792, 426, 1058, 2],
   ["suitcase-organized.jpg", BRAND, 436, 792, 767, 995, 2],
   ["sleep-mask-detail.jpg", BRAND, 776, 525, 1064, 786, 1],
-  ["whats-included.jpg", BRAND, 262, 413, 767, 786, 2],
+  // Numbered flat lay, cropped before item 7 (luggage tag) so it shows the six system pieces.
+  ["whats-included.jpg", BRAND, 256, 413, 679, 786, 2],
 
   // Reused product shots in scene tiles
   ["hotel-lifestyle.jpg", PRODUCT, 352, 530, 661, 847, 2],

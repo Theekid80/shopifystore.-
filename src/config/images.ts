@@ -1,19 +1,22 @@
 /**
  * ─────────────────────────────────────────────────────────────────────────
- *  IMAGE CONFIGURATION — every image on the site is defined here.
+ *  PRODUCT & LIFESTYLE IMAGES — every image on the site is defined here.
  * ─────────────────────────────────────────────────────────────────────────
  *
- *  All files currently come from the Velara design boards in /design,
- *  cut out by `npm run photos` (scripts/crop-photos.mjs).
+ *  To replace an image:
+ *    1. Put the new photo in /public/images (keep the filename, or change
+ *       `src` below). Remote URLs work too — add the host to
+ *       `images.remotePatterns` in next.config.ts (cdn.shopify.com already is).
+ *    2. Update `width`/`height` to the new photo's pixel size.
+ *    3. Rewrite `alt` so it describes the new photo.
+ *    4. Set `final: true`.
  *
- *  To replace an image, either:
- *   1. Drop a new file with the SAME filename into /public/images, or
- *   2. Change `src` below (a local path like "/images/my-photo.jpg", or a
- *      remote URL — remote hosts must also be added to `images.remotePatterns`
- *      in next.config.ts, e.g. cdn.shopify.com).
+ *  While `final` is false, development builds (`npm run dev`) show a small
+ *  "Replace: filename" tag on the image so nothing is forgotten. Production
+ *  builds never show the tag.
  *
- *  Keep `width`/`height` in line with the real photo's pixel size, and
- *  always write a descriptive `alt` for accessibility and SEO.
+ *  Current files are cropped from the Velara design boards in /design by
+ *  `npm run photos`. They're low resolution — see README → "Images".
  */
 
 export type ImageAsset = {
@@ -21,131 +24,81 @@ export type ImageAsset = {
   alt: string;
   width: number;
   height: number;
+  /** true once this is the final, full-resolution photograph. */
+  final?: boolean;
 };
 
-export const images = {
-  /* Hero — the full system at an airport window at sunset. */
-  hero: {
-    src: "/images/hero-travel.jpg",
-    alt: "The black Velara travel system — sleep mask, organizers, earplug case and a carry-on — at an airport window at sunset",
-    width: 1680,
-    height: 1224,
-  },
+const img = (src: string, alt: string, width: number, height: number, final = false): ImageAsset => ({
+  src,
+  alt,
+  width,
+  height,
+  final,
+});
 
-  /* The complete system in front of its box. */
-  travelSystem: {
-    src: "/images/travel-system.jpg",
-    alt: "The complete Velara Travel Sleep System in black, arranged in front of a Velara box on a hotel bed",
-    width: 1084,
-    height: 702,
-  },
-  /* Numbered flat lay of all seven pieces. */
-  whatsIncluded: {
-    src: "/images/whats-included.jpg",
-    alt: "Flat lay of all seven Velara pieces, numbered: sleep mask, earplugs and case, travel pouch, toiletry bag, tech organizer, packing cube and luggage tag",
-    width: 1010,
-    height: 746,
-  },
+export const productImages = {
+  /* ── Campaign ─────────────────────────────────────────────────────────── */
+  hero: img(
+    "/images/hero-travel.jpg",
+    "The black Velara travel sleep system with a carry-on at an airport window at sunset",
+    1680,
+    1224,
+  ),
+  /** The six system pieces laid out and numbered. */
+  bundle: img(
+    "/images/whats-included.jpg",
+    "The six pieces of the Velara Travel Sleep System laid out and numbered: sleep mask, earplugs with case, travel pouch, toiletry organizer, tech organizer and packing cube",
+    846,
+    746,
+  ),
+  /** The system in front of its box on a hotel bed. Also shows a luggage tag. */
+  bundleBoxed: img(
+    "/images/travel-system.jpg",
+    "Velara travel pieces arranged in front of a Velara box on a hotel bed",
+    1084,
+    702,
+  ),
 
-  /* Featured sleep mask. */
-  sleepMask: {
-    src: "/images/sleep-mask.jpg",
-    alt: "Velara premium weighted sleep mask in black with an adjustable strap",
-    width: 444,
-    height: 402,
-  },
-  sleepMaskDetail: {
-    src: "/images/sleep-mask-detail.jpg",
-    alt: "Close-up of the Velara logo on the soft black sleep mask",
-    width: 288,
-    height: 261,
-  },
+  /* ── Individual pieces ───────────────────────────────────────────────── */
+  sleepMask: img("/images/sleep-mask.jpg", "Velara weighted blackout sleep mask in black with an adjustable strap", 444, 402),
+  sleepMaskDetail: img("/images/sleep-mask-detail.jpg", "Close-up of the Velara logo on the soft black sleep mask", 288, 261),
+  travelPouch: img("/images/travel-pouch.jpg", "Black Velara travel pouch with a carry handle", 360, 402),
+  earplugs: img("/images/earplugs.jpg", "Velara earplugs in their round black carry case", 318, 402),
+  organizer: img("/images/toiletry-bag.jpg", "Black Velara toiletry organizer with a carry handle", 309, 317),
+  packingCube: img("/images/packing-cubes.jpg", "Black Velara packing cube with a mesh top panel", 337, 317),
+  techOrganizer: img("/images/tech-organizer.jpg", "Open Velara tech organizer holding earbuds, cables and a charger", 377, 402),
+  luggageTag: img("/images/luggage-tag.jpg", "Black Velara luggage tag with a buckle strap", 303, 317),
 
-  /* Individual products — shown in square frames. */
-  travelPouch: {
-    src: "/images/travel-pouch.jpg",
-    alt: "Black Velara travel pouch with a carry handle beside a window",
-    width: 360,
-    height: 402,
-  },
-  earplugs: {
-    src: "/images/earplugs.jpg",
-    alt: "Velara noise-reducing earplugs in their round black carry case by an airplane window",
-    width: 318,
-    height: 402,
-  },
-  techOrganizer: {
-    src: "/images/tech-organizer.jpg",
-    alt: "Open Velara tech organizer holding earbuds, cables and a charger",
-    width: 377,
-    height: 402,
-  },
-  packingCubes: {
-    src: "/images/packing-cubes.jpg",
-    alt: "Black Velara packing cube with a mesh top panel on a bed",
-    width: 337,
-    height: 317,
-  },
-  toiletryBag: {
-    src: "/images/toiletry-bag.jpg",
-    alt: "Black Velara toiletry bag with a carry handle on a bathroom counter",
-    width: 309,
-    height: 317,
-  },
-  luggageTag: {
-    src: "/images/luggage-tag.jpg",
-    alt: "Black Velara luggage tag with buckle strap on a leather bag",
-    width: 303,
-    height: 317,
-  },
+  /* ── Lifestyle ───────────────────────────────────────────────────────── */
+  lifestyle: img(
+    "/images/suitcase-organized.jpg",
+    "An open suitcase packed with Velara organizers beside a passport",
+    662,
+    406,
+  ),
+  airplane: img(
+    "/images/airplane-lifestyle.jpg",
+    "A traveler resting in an airplane seat wearing the Velara sleep mask",
+    975,
+    636,
+  ),
+  airplaneSeat: img(
+    "/images/flights-lifestyle.jpg",
+    "Velara sleep mask and earplug case on a lie-flat airplane seat",
+    532,
+    386,
+  ),
+  hotel: img("/images/hotel-lifestyle.jpg", "Velara toiletry organizer on a hotel bathroom counter", 618, 634),
+  road: img("/images/road-trip-lifestyle.jpg", "Velara travel pouch by a window overlooking the mountains", 720, 804),
+  weekend: img(
+    "/images/business-lifestyle.jpg",
+    "A traveler with a backpack and Velara luggage tag walking toward a plane",
+    442,
+    532,
+  ),
 
-  /* Lifestyle. */
-  airplaneLifestyle: {
-    src: "/images/airplane-lifestyle.jpg",
-    alt: "A traveler resting in an airplane seat wearing the Velara sleep mask",
-    width: 975,
-    height: 636,
-  },
-  flightsLifestyle: {
-    src: "/images/flights-lifestyle.jpg",
-    alt: "Velara sleep mask and earplug case on a lie-flat airplane seat",
-    width: 532,
-    height: 386,
-  },
-  hotelLifestyle: {
-    src: "/images/hotel-lifestyle.jpg",
-    alt: "Velara toiletry bag on a hotel bathroom counter",
-    width: 618,
-    height: 634,
-  },
-  roadTripLifestyle: {
-    src: "/images/road-trip-lifestyle.jpg",
-    alt: "Velara travel pouch by a window overlooking the mountains",
-    width: 720,
-    height: 804,
-  },
-  businessLifestyle: {
-    src: "/images/business-lifestyle.jpg",
-    alt: "A business traveler with a backpack and Velara luggage tag walking toward a plane",
-    width: 442,
-    height: 532,
-  },
+  /* ── Social share — exactly 1200×630 ─────────────────────────────────── */
+  ogImage: img("/images/og-image.jpg", "VELARA — Better Sleep. Smoother Journeys.", 1200, 630),
+} satisfies Record<string, ImageAsset>;
 
-  /* Organization — an open suitcase packed with Velara organizers. */
-  suitcaseOrganized: {
-    src: "/images/suitcase-organized.jpg",
-    alt: "An open suitcase neatly packed with Velara packing cubes, tech organizer, toiletry bag and travel pouch, beside a passport",
-    width: 662,
-    height: 406,
-  },
-
-  /* Social share image — exactly 1200×630. */
-  ogImage: {
-    src: "/images/og-image.jpg",
-    alt: "Velara — Better Sleep. Smoother Journeys.",
-    width: 1200,
-    height: 630,
-  },
-} as const satisfies Record<string, ImageAsset>;
-
-export type ImageKey = keyof typeof images;
+export type ImageKey = keyof typeof productImages;

@@ -4,7 +4,7 @@
  * ─────────────────────────────────────────────────────────────────────────
  *  Inactive until these environment variables are set (see .env.example):
  *
- *    NEXT_PUBLIC_COMMERCE_PROVIDER=shopify
+ *    NEXT_PUBLIC_CHECKOUT_PROVIDER=shopify
  *    NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN=your-store.myshopify.com
  *    NEXT_PUBLIC_SHOPIFY_STOREFRONT_TOKEN=<public Storefront API access token>
  *    NEXT_PUBLIC_SHOPIFY_API_VERSION=2025-10   (optional)
@@ -21,8 +21,7 @@ const domain = process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN ?? "";
 const token = process.env.NEXT_PUBLIC_SHOPIFY_STOREFRONT_TOKEN ?? "";
 const apiVersion = process.env.NEXT_PUBLIC_SHOPIFY_API_VERSION ?? "2025-10";
 
-export const shopifyEnabled =
-  process.env.NEXT_PUBLIC_COMMERCE_PROVIDER === "shopify" && Boolean(domain && token);
+export const shopifyConfigured = Boolean(domain && token);
 
 const CART_CREATE = /* GraphQL */ `
   mutation cartCreate($input: CartInput!) {

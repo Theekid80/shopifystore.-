@@ -1,23 +1,28 @@
 import type { Metadata, Viewport } from "next";
-import { Manrope } from "next/font/google";
-import { images } from "@/config/images";
+import { Cormorant_Garamond, Manrope } from "next/font/google";
+import { productImages } from "@/config/images";
 import { site } from "@/config/site";
 import { StoreProvider } from "@/lib/commerce/cart";
+import { Analytics } from "@/components/analytics/Analytics";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { SearchDialog } from "@/components/layout/SearchDialog";
 import { CartDrawer } from "@/components/cart/CartDrawer";
 import "./globals.css";
 
-const manrope = Manrope({
-  variable: "--font-manrope",
+const manrope = Manrope({ variable: "--font-manrope", subsets: ["latin"], display: "swap" });
+const cormorant = Cormorant_Garamond({
+  variable: "--font-cormorant",
   subsets: ["latin"],
+  weight: ["500", "600"],
   display: "swap",
 });
 
+const og = productImages.ogImage;
+
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
-  title: { default: site.seo.title, template: `%s — ${site.name}` },
+  title: { default: site.seo.title, template: `%s | ${site.name}` },
   description: site.seo.description,
   applicationName: site.name,
   alternates: { canonical: "/" },
@@ -27,14 +32,9 @@ export const metadata: Metadata = {
     title: site.seo.title,
     description: site.seo.description,
     url: "/",
-    images: [{ url: images.ogImage.src, width: images.ogImage.width, height: images.ogImage.height, alt: images.ogImage.alt }],
+    images: [{ url: og.src, width: og.width, height: og.height, alt: og.alt }],
   },
-  twitter: {
-    card: "summary_large_image",
-    title: site.seo.title,
-    description: site.seo.description,
-    images: [images.ogImage.src],
-  },
+  twitter: { card: "summary_large_image", title: site.seo.title, description: site.seo.description, images: [og.src] },
 };
 
 export const viewport: Viewport = {
@@ -46,7 +46,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={manrope.variable}>
+    <html lang="en" className={`${manrope.variable} ${cormorant.variable}`}>
       <body>
         <StoreProvider>
           <a
@@ -60,6 +60,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <Footer />
           <CartDrawer />
           <SearchDialog />
+          <Analytics />
         </StoreProvider>
       </body>
     </html>

@@ -46,6 +46,19 @@ export function Navbar() {
             : "bg-ivory/85 text-charcoal shadow-[0_1px_0_rgba(28,28,27,0.08)] backdrop-blur-xl"
         }`}
       >
+        {site.announcement.enabled && (
+          <div
+            className={`overflow-hidden bg-ink text-ivory transition-[max-height] duration-500 ease-out-soft ${scrolled ? "max-h-0" : "max-h-9"}`}
+            inert={scrolled}
+          >
+            <Link
+              href={site.announcement.href}
+              className="eyebrow flex h-9 items-center justify-center px-4 text-center text-[0.625rem] text-ivory/85 hover:text-ivory"
+            >
+              {site.announcement.text}
+            </Link>
+          </div>
+        )}
         <nav aria-label="Main" className="mx-auto flex h-16 max-w-[1440px] items-center gap-6 px-4 md:h-20 md:px-8 lg:px-12">
           <button
             type="button"

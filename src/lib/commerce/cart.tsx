@@ -1,87 +1,90 @@
 "use client";
 
 import { createContext, useCallback, useContext, useMemo, useState, type ReactNode } from "react";
-import { shopifyVariantIds } from "@/config/shopify";
-import { bundle, purchasables, type Purchasable, type Variant } from "@/data/products";
+import { site } from "@/config/site";
+import { getProduct, VELARA_TRAVEL_SLEEP_SYSTEM as SYSTEM, type Product, type Variant } from "@/config/products";
+import { track, type AnalyticsItem } from "@/lib/analytics";
 import { createPersistentStore } from "@/lib/persistent-store";
-import { createShopifyCheckout, shopifyEnabled } from "./shopify";
+import { checkoutConnected, startCheckout, type CheckoutResult } from "./checkout";
 
 /* ─────────────────────────── persisted state ─────────────────────────── */
 
 type StoredLine = { productId: string; variantId: string; quantity: number };
 
-const cartStore = createPersistentStore<StoredLine[]>("velara:cart:v1", []);
-const wishlistStore = createPersistentStore<string[]>("velara:wishlist:v1", []);
+const cartStore = createPersistentStore<StoredLine[]>("velara:cart:v2", []);
 
 export const MAX_QUANTITY = 10;
 
-export type CartLine = StoredLine & {
-  key: string;
-  product: Purchasable;
-  variant: Variant;
-  lineTotal: number;
-};
+export type CartLine = StoredLine & { key: string; product: Product; variant: Variant; lineTotal: number };
 
 /** Joins stored lines with the live catalog so price/name edits apply instantly. */
 function resolveLines(stored: StoredLine[]): CartLine[] {
   return stored.flatMap((line) => {
-    const product = purchasables.find((p) => p.id === line.productId);
+    const product = getProduct(line.productId);
     const variant = product?.variants.find((v) => v.id === line.variantId);
     if (!product || !variant) return [];
     return [{ ...line, key: line.variantId, product, variant, lineTotal: product.price * line.quantity }];
   });
 }
 
-/* ─────────────────────────────── context ─────────────────────────────── */
+export const toAnalyticsItem = (p: Product, quantity = 1): AnalyticsItem => ({
+  id: p.sku,
+  name: p.name,
+  price: p.price,
+  quantity,
+});
 
-export type CheckoutResult = { ok: true } | { ok: false; message: string };
+/* ─────────────────────────────── context ─────────────────────────────── */
 
 type StoreContext = {
   lines: CartLine[];
   count: number;
   subtotal: number;
-  addItem: (productId: string, variantId: string, quantity?: number) => void;
+  /** Dollars left to free shipping (0 once reached; null if no free-shipping offer). */
+  freeShippingRemaining: number | null;
+
+  addItem: (product: Product, opts?: { variantId?: string; quantity?: number; openCart?: boolean }) => void;
   setQuantity: (variantId: string, quantity: number) => void;
   removeItem: (variantId: string) => void;
-  /** Swaps one of each included piece in the cart for the complete system. */
-  upgradeToBundle: () => void;
+  /** Swaps one of each system piece already in the bag for the complete system. */
+  upgradeToSystem: () => void;
+  clear: () => void;
+
   checkout: () => Promise<CheckoutResult>;
   checkoutConnected: boolean;
 
   isCartOpen: boolean;
   openCart: () => void;
   closeCart: () => void;
-
   isSearchOpen: boolean;
   setSearchOpen: (open: boolean) => void;
-
-  wishlist: string[];
-  toggleWishlist: (productId: string) => void;
 };
 
 const Ctx = createContext<StoreContext | null>(null);
 
 export function StoreProvider({ children }: { children: ReactNode }) {
   const stored = cartStore.useStore();
-  const wishlist = wishlistStore.useStore();
   const [isCartOpen, setCartOpen] = useState(false);
   const [isSearchOpen, setSearchOpen] = useState(false);
 
   const lines = useMemo(() => resolveLines(stored), [stored]);
   const count = lines.reduce((n, l) => n + l.quantity, 0);
-  const subtotal = lines.reduce((n, l) => n + l.lineTotal, 0);
+  const subtotal = Math.round(lines.reduce((n, l) => n + l.lineTotal, 0) * 100) / 100;
+  const threshold = site.shipping.freeThreshold;
+  const freeShippingRemaining = threshold == null ? null : Math.max(0, Math.round((threshold - subtotal) * 100) / 100);
 
-  const addItem = useCallback((productId: string, variantId: string, quantity = 1) => {
+  const addItem = useCallback<StoreContext["addItem"]>((product, { variantId, quantity = 1, openCart = true } = {}) => {
+    if (product.stock === "out_of_stock") return;
+    const vid = variantId ?? product.variants[0].id;
     cartStore.set((prev) => {
-      const existing = prev.find((l) => l.variantId === variantId);
+      const existing = prev.find((l) => l.variantId === vid);
       if (existing) {
-        return prev.map((l) =>
-          l.variantId === variantId ? { ...l, quantity: Math.min(MAX_QUANTITY, l.quantity + quantity) } : l,
-        );
+        return prev.map((l) => (l.variantId === vid ? { ...l, quantity: Math.min(MAX_QUANTITY, l.quantity + quantity) } : l));
       }
-      return [...prev, { productId, variantId, quantity: Math.min(MAX_QUANTITY, quantity) }];
+      return [...prev, { productId: product.id, variantId: vid, quantity: Math.min(MAX_QUANTITY, quantity) }];
     });
-    setCartOpen(true);
+    track({ name: "AddToCart", item: toAnalyticsItem(product, quantity) });
+    if (openCart) setCartOpen(true);
   }, []);
 
   const setQuantity = useCallback((variantId: string, quantity: number) => {
@@ -96,70 +99,54 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     cartStore.set((prev) => prev.filter((l) => l.variantId !== variantId));
   }, []);
 
-  const upgradeToBundle = useCallback(() => {
+  const upgradeToSystem = useCallback(() => {
     cartStore.set((prev) => {
       const seen = new Set<string>();
       const next = prev.flatMap((l) => {
-        if (!bundle.includes.includes(l.productId) || seen.has(l.productId)) return [l];
+        if (!SYSTEM.includes?.includes(l.productId) || seen.has(l.productId)) return [l];
         seen.add(l.productId);
         return l.quantity > 1 ? [{ ...l, quantity: l.quantity - 1 }] : [];
       });
-      const variantId = bundle.variants[0].id;
-      const existing = next.find((l) => l.variantId === variantId);
+      const vid = SYSTEM.variants[0].id;
+      const existing = next.find((l) => l.variantId === vid);
       return existing
         ? next.map((l) => (l === existing ? { ...l, quantity: Math.min(MAX_QUANTITY, l.quantity + 1) } : l))
-        : [...next, { productId: bundle.id, variantId, quantity: 1 }];
+        : [...next, { productId: SYSTEM.id, variantId: vid, quantity: 1 }];
     });
+    track({ name: "AddToCart", item: toAnalyticsItem(SYSTEM) });
   }, []);
 
-  const checkout = useCallback(async (): Promise<CheckoutResult> => {
-    if (!shopifyEnabled) {
-      // Mock mode: no payment is taken and no order is created.
-      return {
-        ok: false,
-        message: "Checkout isn't connected yet. This store is in preview mode — no order has been placed.",
-      };
-    }
-    const missing = lines.filter((l) => !shopifyVariantIds[l.variant.id]);
-    if (missing.length) {
-      return { ok: false, message: `Some items aren't linked to Shopify yet: ${missing.map((l) => l.product.name).join(", ")}.` };
-    }
-    try {
-      const url = await createShopifyCheckout(
-        lines.map((l) => ({ merchandiseId: shopifyVariantIds[l.variant.id], quantity: l.quantity })),
-      );
-      window.location.assign(url);
-      return { ok: true };
-    } catch (err) {
-      console.error(err);
-      return { ok: false, message: "We couldn't start checkout. Please try again in a moment." };
-    }
-  }, [lines]);
+  const clear = useCallback(() => cartStore.set([]), []);
 
-  const toggleWishlist = useCallback((productId: string) => {
-    wishlistStore.set((prev) => (prev.includes(productId) ? prev.filter((id) => id !== productId) : [...prev, productId]));
-  }, []);
+  const checkout = useCallback(async () => {
+    track({ name: "InitiateCheckout", items: lines.map((l) => toAnalyticsItem(l.product, l.quantity)), value: subtotal });
+    const result = await startCheckout(
+      lines.map((l) => ({ productId: l.productId, variantId: l.variantId, quantity: l.quantity, name: l.product.name })),
+    );
+    if (result.ok) window.location.assign(result.url);
+    return result;
+  }, [lines, subtotal]);
 
   const value = useMemo<StoreContext>(
     () => ({
       lines,
       count,
       subtotal,
+      freeShippingRemaining,
       addItem,
       setQuantity,
       removeItem,
-      upgradeToBundle,
+      upgradeToSystem,
+      clear,
       checkout,
-      checkoutConnected: shopifyEnabled,
+      checkoutConnected,
       isCartOpen,
       openCart: () => setCartOpen(true),
       closeCart: () => setCartOpen(false),
       isSearchOpen,
       setSearchOpen,
-      wishlist,
-      toggleWishlist,
     }),
-    [lines, count, subtotal, addItem, setQuantity, removeItem, upgradeToBundle, checkout, isCartOpen, isSearchOpen, wishlist, toggleWishlist],
+    [lines, count, subtotal, freeShippingRemaining, addItem, setQuantity, removeItem, upgradeToSystem, clear, checkout, isCartOpen, isSearchOpen],
   );
 
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;

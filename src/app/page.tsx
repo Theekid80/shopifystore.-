@@ -1,66 +1,45 @@
-import { images } from "@/config/images";
 import { site } from "@/config/site";
-import { bundle } from "@/data/products";
+import { faq, productDetails } from "@/config/content";
+import { VELARA_TRAVEL_SLEEP_SYSTEM as SYSTEM } from "@/config/products";
+import { organizationJsonLd, productJsonLd, JsonLd } from "@/lib/seo";
 import { Hero } from "@/components/sections/Hero";
-import { ProductShowcase } from "@/components/sections/ProductShowcase";
-import { FeaturedProduct } from "@/components/sections/FeaturedProduct";
-import { LifestyleSection } from "@/components/sections/LifestyleSection";
-import { OrganizationSection } from "@/components/sections/OrganizationSection";
-import { BundleSection } from "@/components/sections/BundleSection";
-import { WhyVelara } from "@/components/sections/WhyVelara";
-import { Testimonials } from "@/components/sections/Testimonials";
+import { BenefitStrip } from "@/components/sections/BenefitStrip";
+import { SystemShowcase } from "@/components/sections/SystemShowcase";
+import { WhySystem } from "@/components/sections/WhySystem";
+import { AirplaneSection } from "@/components/sections/AirplaneSection";
+import { HotelSection } from "@/components/sections/HotelSection";
+import { WhatsInside } from "@/components/sections/WhatsInside";
+import { OfferSection } from "@/components/sections/OfferSection";
+import { Comparison } from "@/components/sections/Comparison";
+import { LifestyleGrid } from "@/components/sections/LifestyleGrid";
 import { FAQ } from "@/components/sections/FAQ";
+import { Reviews } from "@/components/sections/Reviews";
 import { Newsletter } from "@/components/sections/Newsletter";
 import { StickyBuyBar } from "@/components/cart/StickyBuyBar";
 
-/** Product structured data — deliberately no ratings/reviews until real ones exist. */
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "Organization",
-      name: site.name,
-      url: site.url,
-      slogan: site.tagline,
-      logo: new URL(images.ogImage.src, site.url).toString(),
-    },
-    {
-      "@type": "Product",
-      name: bundle.name,
-      description: bundle.description,
-      brand: { "@type": "Brand", name: site.name },
-      image: bundle.gallery.map((g) => new URL(g.src, site.url).toString()),
-      sku: bundle.handle,
-      offers: {
-        "@type": "Offer",
-        url: `${site.url}/#system`,
-        priceCurrency: site.currency,
-        price: bundle.pricing.price.toFixed(2),
-        availability: "https://schema.org/InStock",
-        itemCondition: "https://schema.org/NewCondition",
-      },
-    },
-  ],
-};
-
+/**
+ * Home page, ordered for the ad → purchase journey:
+ * what is it → why want it → what's included → why different → proof → FAQ → buy.
+ */
 export default function Home() {
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }}
-      />
+      <JsonLd data={[organizationJsonLd(), productJsonLd(SYSTEM)]} />
       <Hero />
-      <ProductShowcase />
-      <FeaturedProduct />
-      <LifestyleSection />
-      <OrganizationSection />
-      <BundleSection />
-      <WhyVelara />
-      <Testimonials />
-      <FAQ />
+      <BenefitStrip />
+      <SystemShowcase />
+      <WhySystem />
+      <AirplaneSection />
+      <HotelSection />
+      <WhatsInside />
+      <OfferSection />
+      <Comparison />
+      <LifestyleGrid />
+      <FAQ id="details" eyebrow="Product details" title="The details." items={productDetails} tone="ivory" />
+      <Reviews />
       <Newsletter />
-      <StickyBuyBar />
+      <FAQ id="faq" eyebrow="FAQ" title="Questions, answered." items={faq} />
+      <StickyBuyBar product={SYSTEM} buyBoxId="offer" label={`${site.name} Travel Sleep System`} />
     </>
   );
 }
