@@ -14,7 +14,9 @@
         "button_2_label": "Explore brands",
         "button_2_link": "/pages/brands",
         "show_foot": true,
-        "scroll_label": "Scroll"
+        "scroll_label": "Scroll",
+        "image": "shopify://shop_images/wedra-home-travel-suitcase.jpg",
+        "image_mobile": "shopify://shop_images/wedra-home-travel-rolling.jpg"
       }
     },
     "experience": {
@@ -26,7 +28,8 @@
             "title": "Travel",
             "text": "Pack smarter. Move easier.",
             "collection_handle": "travel",
-            "link": "/collections/the-wedra-travel-edit"
+            "link": "/collections/the-wedra-travel-edit",
+            "image": "shopify://shop_images/wedra-home-travel-cubes.jpg"
           }
         },
         "sleep": {
@@ -35,7 +38,8 @@
             "title": "Sleep",
             "text": "Rest wherever you are.",
             "collection_handle": "sleep",
-            "link": "/products/sleep-eye-mask"
+            "link": "/products/sleep-eye-mask",
+            "image": "shopify://shop_images/wedra-home-sleep-mask.jpg"
           }
         },
         "comfort": {
@@ -44,7 +48,8 @@
             "title": "Comfort",
             "text": "Make every journey more comfortable.",
             "collection_handle": "comfort",
-            "link": "/products/memory-foam-travel-neck-pillow"
+            "link": "/products/memory-foam-travel-neck-pillow",
+            "image": "shopify://shop_images/wedra-home-comfort-pillow.jpg"
           }
         },
         "leisure": {
@@ -119,7 +124,8 @@
         "eyebrow": "Rest",
         "heading": "Arrive rested.",
         "text": "Sleep and comfort essentials for the time between here and there.",
-        "link_label": "Shop the collection"
+        "link_label": "Shop the collection",
+        "image": "shopify://shop_images/wedra-home-rest.jpg"
       }
     },
     "spotlight": {
