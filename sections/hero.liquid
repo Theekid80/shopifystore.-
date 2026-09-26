@@ -3,13 +3,11 @@
   crop is art-directed for phones. Without an image the hero is a quiet
   charcoal field with the typography carrying the page.
 {%- endcomment -%}
+{%- comment -%} A button that points at a Shopify page (/pages/…) that doesn't exist yet is hidden. {%- endcomment -%}
 {%- liquid
   assign image = section.settings.image
   assign image_mobile = section.settings.image_mobile | default: image
   assign overlay = section.settings.overlay | divided_by: 100.0
-  comment
-    A button that points at a Shopify page (/pages/…) that doesn't exist yet is hidden.
-  endcomment
   assign show_b1 = false
   assign show_b2 = false
   if section.settings.button_1_label != blank
@@ -145,7 +143,7 @@
     { "type": "text", "id": "button_1_label", "label": "Primary button", "default": "Shop the collection" },
     { "type": "url", "id": "button_1_link", "label": "Primary button link", "info": "Defaults to all products." },
     { "type": "text", "id": "button_2_label", "label": "Secondary button", "default": "Explore brands" },
-    { "type": "url", "id": "button_2_link", "label": "Secondary button link", "default": "/pages/brands", "info": "Defaults to the collections page." },
+    { "type": "url", "id": "button_2_link", "label": "Secondary button link", "info": "Defaults to the collections page." },
     { "type": "checkbox", "id": "show_foot", "label": "Show tagline and scroll cue (desktop)", "default": true },
     { "type": "text", "id": "scroll_label", "label": "Scroll cue label", "default": "Scroll" }
   ],
