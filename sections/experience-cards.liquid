@@ -1,8 +1,10 @@
 {%- comment -%}
   "Shop by experience": up to four editorial cards (Travel, Sleep, Comfort,
   Leisure …). Each card links to a Shopify collection — picked, or found by
-  handle — and is shown only when that collection has products. The section
-  is hidden on the live store when no card has a collection with products.
+  handle — and is shown when that collection has products. Until then, a
+  card with its own link (e.g. a product or another collection) is shown
+  with that link instead. The section is hidden on the live store when no
+  card has anywhere to go.
 {%- endcomment -%}
 {%- capture cards -%}
   {%- assign n = 0 -%}
@@ -17,15 +19,21 @@
       if img == blank
         assign img = c.image | default: c.featured_image
       endif
+      assign card_url = nil
+      if c.products_count > 0
+        assign card_url = c.url
+      elsif block.settings.link != blank
+        assign card_url = block.settings.link
+      endif
     -%}
-    {%- if c.products_count > 0 -%}
+    {%- if card_url != blank -%}
       {%- assign n = n | plus: 1 -%}
       <li class="reveal" style="--delay: {{ n | minus: 1 | times: 100 }}ms;" {{ block.shopify_attributes }}>
         <div class="tile tile--experience">
           <div class="tile__media">
             {%- if img != blank -%}{% render 'responsive-image', image: img, alt: '', sizes: '(min-width: 990px) 25vw, (min-width: 750px) 50vw, 100vw' %}{%- endif -%}
           </div>
-          <h3 class="tile__title"><a class="tile__link" href="{{ c.url }}">{{ block.settings.title | default: c.title | escape }}</a></h3>
+          <h3 class="tile__title"><a class="tile__link" href="{{ card_url }}">{{ block.settings.title | default: c.title | escape }}</a></h3>
           {%- if block.settings.text != blank -%}<p class="tile__text">{{ block.settings.text | escape }}</p>{%- endif -%}
           <p class="tile__cta"><span class="link-line" aria-hidden="true">{{ section.settings.cta_label | escape }}</span></p>
         </div>
@@ -34,7 +42,7 @@
       <li {{ block.shopify_attributes }}>
         <div class="tile tile--experience media-empty--dark">
           <h3 class="tile__title">{{ block.settings.title | escape }}</h3>
-          <p class="tile__text">Hidden on the live store until the "{{ block.settings.collection_handle | default: block.settings.collection.title }}" collection has products.</p>
+          <p class="tile__text">Hidden on the live store until the "{{ block.settings.collection_handle | default: block.settings.collection.title }}" collection has products, or a link is added.</p>
         </div>
       </li>
     {%- endif -%}
@@ -83,6 +91,7 @@
         { "type": "textarea", "id": "text", "label": "Text" },
         { "type": "collection", "id": "collection", "label": "Collection" },
         { "type": "text", "id": "collection_handle", "label": "…or collection handle", "info": "Used when no collection is picked." },
+        { "type": "url", "id": "link", "label": "Link while the collection is empty", "info": "Optional. Used until the collection has products." },
         { "type": "image_picker", "id": "image", "label": "Image", "info": "Defaults to the collection image, then its first product." }
       ]
     }

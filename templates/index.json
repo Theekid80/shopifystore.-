@@ -25,7 +25,8 @@
           "settings": {
             "title": "Travel",
             "text": "Pack smarter. Move easier.",
-            "collection_handle": "travel"
+            "collection_handle": "travel",
+            "link": "/collections/the-wedra-travel-edit"
           }
         },
         "sleep": {
@@ -33,7 +34,8 @@
           "settings": {
             "title": "Sleep",
             "text": "Rest wherever you are.",
-            "collection_handle": "sleep"
+            "collection_handle": "sleep",
+            "link": "/products/sleep-eye-mask"
           }
         },
         "comfort": {
@@ -41,7 +43,8 @@
           "settings": {
             "title": "Comfort",
             "text": "Make every journey more comfortable.",
-            "collection_handle": "comfort"
+            "collection_handle": "comfort",
+            "link": "/products/memory-foam-travel-neck-pillow"
           }
         },
         "leisure": {
@@ -175,12 +178,28 @@
         "anchor": "newsletter",
         "color_scheme": "bg-base"
       }
+    },
+    "video": {
+      "type": "featured-video",
+      "settings": {
+        "product": "travel-compression-packing-cube-set-3-piece",
+        "autoplay": true,
+        "eyebrow": "In motion",
+        "heading": "Pack flat. Travel light.",
+        "text": "<p>Three compression cubes that keep clothing and travel essentials organized with less bulk.</p>",
+        "show_price": true,
+        "link_label": "View product",
+        "layout": "even",
+        "anchor": "",
+        "color_scheme": "bg-surface"
+      }
     }
   },
   "order": [
     "hero",
     "experience",
     "edit",
+    "video",
     "statement",
     "brands",
     "editorial",

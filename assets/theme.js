@@ -263,6 +263,18 @@
 
   /* ---------- Gallery: swipe (phones), thumbnails (desktop), lightbox ---------- */
   const desktop = window.matchMedia("(min-width: 990px)");
+  // Stop any product video that is no longer on screen.
+  function pauseInactive(gallery) {
+    $$(".gallery__slide:not(.is-active)", gallery).forEach((s) => {
+      $$("video", s).forEach((v) => v.pause());
+      $$("iframe", s).forEach((f) => {
+        try {
+          f.contentWindow.postMessage(JSON.stringify({ event: "command", func: "pauseVideo", args: "" }), "*");
+          f.contentWindow.postMessage(JSON.stringify({ method: "pause" }), "*");
+        } catch (_) {}
+      });
+    });
+  }
   function showSlide(gallery, mediaId) {
     if (!gallery) return;
     const slides = $$(".gallery__slide", gallery);
@@ -274,6 +286,7 @@
     if (track && !desktop.matches) track.scrollTo({ left: target.offsetLeft - track.offsetLeft, behavior: "smooth" });
     const idx = $("[data-gallery-index]", gallery);
     if (idx) idx.textContent = Number(target.dataset.index) + 1;
+    pauseInactive(gallery);
   }
   document.addEventListener("click", (e) => {
     const thumb = e.target.closest(".gallery__thumb");
@@ -317,6 +330,7 @@
           if (idx) idx.textContent = i + 1;
           $$(".gallery__slide", track).forEach((s) => s.classList.toggle("is-active", s === slide));
           $$(".gallery__thumb", gallery).forEach((th) => th.setAttribute("aria-current", String(th.dataset.target === slide.dataset.mediaId)));
+          pauseInactive(gallery);
         }, 80);
       }, { passive: true });
       // Start the phone track on the selected variant's image.
@@ -324,6 +338,31 @@
       if (active && !desktop.matches && active.dataset.index !== "0") track.scrollLeft = active.offsetLeft - track.offsetLeft;
     });
   }
+
+  /* ---------- Silent video previews: muted, looped, only while on screen ---------- */
+  function initSilentPreviews(root = document) {
+    const vids = $$("video[data-silent-preview]", root);
+    if (!vids.length) return;
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce || !("IntersectionObserver" in window)) return;
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(({ target: v, isIntersecting }) => {
+        if (isIntersecting && !v._userPaused) { v.muted = v.muted || !v._userUnmuted; v.play().catch(() => {}); }
+        else if (!isIntersecting) v.pause();
+      });
+    }, { threshold: 0.35 });
+    vids.forEach((v) => {
+      if (v._init) return;
+      v._init = true;
+      // Respect the customer's own pause/unmute from the native controls.
+      v.addEventListener("pause", () => { if (document.visibilityState === "visible" && v.getBoundingClientRect().top < innerHeight && v.getBoundingClientRect().bottom > 0) v._userPaused = true; });
+      v.addEventListener("play", () => { v._userPaused = false; });
+      v.addEventListener("volumechange", () => { if (!v.muted) v._userUnmuted = true; });
+      io.observe(v);
+    });
+  }
+  initSilentPreviews();
+  document.addEventListener("shopify:section:load", (e) => initSilentPreviews(e.target));
 
   /* ---------- Variant picker ---------- */
   function initVariantPickers(root = document) {
