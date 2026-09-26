@@ -1,0 +1,20 @@
+{%- comment -%} Editorial collection tile. Params: collection, image (optional), text (optional), cta {%- endcomment -%}
+{%- liquid
+  assign img = image
+  if img == blank
+    assign img = collection.image | default: collection.featured_image
+  endif
+  assign tile_text = text
+  if tile_text == blank
+    assign tile_text = collection.description | strip_html | truncatewords: 18
+  endif
+-%}
+<div class="tile">
+  <div class="tile__media">
+    {%- if img != blank -%}{% render 'responsive-image', image: img, alt: '', sizes: '(min-width: 990px) 33vw, (min-width: 750px) 50vw, 100vw' %}{%- endif -%}
+  </div>
+  <p class="tile__count">{{ 'collections.filter.results' | t: count: collection.products_count }}</p>
+  <h3 class="tile__title"><a class="tile__link" href="{{ collection.url }}">{{ collection.title | escape }}</a></h3>
+  {%- if tile_text != blank -%}<p class="tile__text">{{ tile_text | escape }}</p>{%- endif -%}
+  {%- if cta != blank -%}<p class="tile__cta"><span class="link-line" aria-hidden="true">{{ cta | escape }}</span></p>{%- endif -%}
+</div>

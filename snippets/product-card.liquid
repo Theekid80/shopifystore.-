@@ -1,0 +1,105 @@
+{%- comment -%}
+  Product card — all data comes from the Shopify product.
+
+  Params:
+    product      product object
+    placeholder  true → layout placeholder (theme editor only)
+    index        placeholder number
+    sizes        image sizes attribute
+    priority     true for above-the-fold cards
+    quick_add    override settings.card_show_quick_add
+
+  Image (+ second image on hover), optional product type, name, price,
+  color swatches. Quick add appears on hover for single-variant products
+  that can be bought; products with options open their product page.
+{%- endcomment -%}
+{%- liquid
+  assign sizes = sizes | default: '(min-width: 990px) 24vw, (min-width: 750px) 42vw, 74vw'
+  assign ratio = settings.card_image_ratio | default: 'portrait'
+  if quick_add == nil
+    assign quick_add = settings.card_show_quick_add
+  endif
+-%}
+
+{%- if placeholder or product == blank or product.title == blank -%}
+  <article class="card card--placeholder" aria-hidden="true">
+    <div class="media media--{{ ratio }}">{{ 'product-' | append: index | default: 1 | placeholder_svg_tag: 'placeholder-svg' }}</div>
+    <div class="card__info">
+      <p class="card__type">{{ 'general.coming_soon' | t }}</p>
+      <p class="card__title">—</p>
+    </div>
+  </article>
+{%- else -%}
+  {%- liquid
+    assign coming_soon = false
+    if product.metafields.custom.coming_soon.value == true or product.tags contains 'coming-soon'
+      assign coming_soon = true
+    endif
+    assign can_quick_add = false
+    if quick_add and settings.prelaunch_mode == false and coming_soon == false and product.available and product.has_only_default_variant
+      assign can_quick_add = true
+    endif
+    assign color_option = nil
+    for option in product.options_with_values
+      assign opt = option.name | downcase
+      if opt == 'color' or opt == 'colour'
+        assign color_option = option
+      endif
+    endfor
+    assign form_id = 'QuickAdd-' | append: section.id | append: '-' | append: product.id
+  -%}
+  <article class="card" data-product-id="{{ product.id }}">
+    <div style="position: relative;">
+      <div class="card__media" aria-hidden="true">
+        <div class="media media--{{ ratio }} media--zoom">
+          {%- if product.featured_media -%}
+            {%- render 'responsive-image', image: product.featured_media.preview_image, alt: '', sizes: sizes, priority: priority, widths: '360, 540, 720, 900, 1080, 1296' -%}
+            {%- if settings.card_show_secondary_image and product.media[1] -%}
+              {%- render 'responsive-image', image: product.media[1].preview_image, alt: '', sizes: sizes, widths: '360, 540, 720, 900, 1080, 1296' -%}
+            {%- endif -%}
+          {%- else -%}
+            {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+          {%- endif -%}
+        </div>
+      </div>
+      <div class="card__badges">{% render 'product-badge', product: product %}</div>
+      {%- if can_quick_add -%}
+        <div class="card__quick-add">
+          <button type="submit" form="{{ form_id }}" class="btn" aria-label="{{ 'products.product.add_to_cart' | t }}: {{ product.title | escape }}">
+            <span data-button-label>{{ 'products.product.add_to_cart' | t }}</span>
+          </button>
+        </div>
+      {%- endif -%}
+    </div>
+
+    <div class="card__info">
+      {%- if settings.card_show_type and product.type != blank -%}<p class="card__type">{{ product.type | escape }}</p>{%- endif -%}
+      <h3 class="card__title"><a href="{{ product.url }}">{{ product.title | escape }}</a></h3>
+      <div class="card__price">{% render 'price', product: product, show_from: true %}</div>
+      {%- if settings.card_show_swatches and color_option and color_option.values.size > 1 -%}
+        <div class="card__footer">
+          <ul class="swatches" role="list" aria-label="{{ color_option.name | escape }}: {{ color_option.values | join: ', ' | escape }}">
+            {%- for value in color_option.values limit: 6 -%}
+              {%- liquid
+                if value.swatch.color
+                  assign swatch = value.swatch.color
+                else
+                  assign swatch = value | handleize | replace: '-', ''
+                endif
+              -%}
+              <li class="swatch" style="--swatch: {{ swatch }};" title="{{ value | escape }}"></li>
+            {%- endfor -%}
+          </ul>
+        </div>
+      {%- endif -%}
+      <p class="product-form__error xsmall" role="alert" data-form-error hidden></p>
+    </div>
+
+    {%- if can_quick_add -%}
+      {%- form 'product', product, id: form_id, data-product-form: '', class: 'visually-hidden', novalidate: 'novalidate' -%}
+        <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+        <input type="hidden" name="quantity" value="1">
+      {%- endform -%}
+    {%- endif -%}
+  </article>
+{%- endif -%}

@@ -1,0 +1,28 @@
+{%- comment -%}
+  Reviews area. Install a review app (Judge.me, Loox, Yotpo, …) and add its
+  app block here in the theme editor. Nothing is shown to shoppers until an
+  app block is added — no placeholder or invented reviews ever appear live.
+{%- endcomment -%}
+{%- if section.blocks.size > 0 or request.design_mode -%}
+  <section id="reviews" class="section section--tight" aria-labelledby="Reviews-{{ section.id }}">
+    <div class="page-width">
+      <h2 id="Reviews-{{ section.id }}" class="h-title" style="margin-bottom: 2rem;">{{ section.settings.heading | escape }}</h2>
+      {%- for block in section.blocks -%}
+        {% render block %}
+      {%- endfor -%}
+      {%- if section.blocks.size == 0 -%}
+        <p class="editor-hint">Reviews placeholder (theme editor only): install a review app, then add its block to this section. Only genuine customer reviews should appear here.</p>
+      {%- endif -%}
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Reviews",
+  "class": "section-reviews",
+  "settings": [{ "type": "text", "id": "heading", "label": "Heading", "default": "Reviews" }],
+  "blocks": [{ "type": "@app" }],
+  "presets": [{ "name": "Reviews" }]
+}
+{% endschema %}

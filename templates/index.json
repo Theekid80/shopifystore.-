@@ -1,0 +1,103 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "height": "full",
+        "align": "left",
+        "overlay": 30,
+        "heading": "Curated for the way you live.",
+        "subheading": "Distinctive pieces, thoughtfully selected for modern living.",
+        "button_1_label": "Explore WEDRA",
+        "button_2_label": "Shop collection",
+        "show_foot": true,
+        "scroll_label": "Scroll"
+      }
+    },
+    "statement": {
+      "type": "statement",
+      "settings": {
+        "index": "01",
+        "eyebrow": "The philosophy",
+        "heading": "Less noise. Better things.",
+        "text": "WEDRA brings together distinctive products chosen for design, function, and the way they fit into modern life.",
+        "layout": "split",
+        "color_scheme": "bg-base"
+      }
+    },
+    "edit": {
+      "type": "featured-collection",
+      "settings": {
+        "eyebrow": "02 — Selected",
+        "heading": "The WEDRA Edit",
+        "collection_handle": "all",
+        "limit": 8,
+        "columns": 4,
+        "view_all_label": "View all",
+        "empty_text": "The first edit is being assembled. Leave your email to see it first.",
+        "anchor": "edit",
+        "color_scheme": "bg-base"
+      }
+    },
+    "editorial": {
+      "type": "image-banner",
+      "settings": {
+        "height": "full",
+        "align": "left",
+        "overlay": 30,
+        "eyebrow": "03 — Editorial",
+        "heading": "Designed to stand out.",
+        "text": "Objects with presence. Essentials with intention.",
+        "link_label": "Discover the edit"
+      }
+    },
+    "collections": {
+      "type": "collection-list",
+      "settings": {
+        "eyebrow": "04 — Collections",
+        "heading": "Explore by collection.",
+        "limit": 3,
+        "cta_label": "Explore",
+        "feature_first": true,
+        "show_all_link": true,
+        "color_scheme": "bg-base"
+      }
+    },
+    "spotlight": {
+      "type": "featured-product",
+      "settings": {
+        "eyebrow": "In focus",
+        "show_detail": true,
+        "show_buy": true,
+        "link_label": "View details",
+        "layout": "reverse",
+        "color_scheme": "bg-surface"
+      }
+    },
+    "principles": {
+      "type": "principles",
+      "blocks": {
+        "design": { "type": "principle", "settings": { "title": "Design", "text": "Pieces with presence — considered form, honest materials, nothing added for show." } },
+        "function": { "type": "principle", "settings": { "title": "Function", "text": "Everything earns its place by being genuinely useful, day after day." } },
+        "fit": { "type": "principle", "settings": { "title": "Fit", "text": "Chosen for the way they sit in a modern life — at home, at work, in motion." } }
+      },
+      "block_order": ["design", "function", "fit"],
+      "settings": {
+        "eyebrow": "How we choose",
+        "heading": "Chosen with intention.",
+        "color_scheme": "bg-surface"
+      }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "eyebrow": "The WEDRA letter",
+        "heading": "Considered, occasionally.",
+        "text": "New arrivals and the thinking behind them. Nothing more.",
+        "anchor": "newsletter",
+        "color_scheme": "bg-base"
+      }
+    }
+  },
+  "order": ["hero", "statement", "edit", "editorial", "collections", "spotlight", "principles", "newsletter"]
+}

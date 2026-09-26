@@ -1,0 +1,21 @@
+{%- comment -%}
+  Email sign-up through Shopify's customer form (Customers → Subscribed).
+  Compatible with Shopify Email, Klaviyo and Mailchimp (via their Shopify sync).
+  Params: id (unique form id), tags (comma list), dark (bool)
+{%- endcomment -%}
+{%- assign form_id = id | default: 'Signup' -%}
+{%- form 'customer', id: form_id -%}
+  <input type="hidden" name="contact[tags]" value="{{ tags | default: 'newsletter' }}">
+  <input type="hidden" name="contact[accepts_marketing]" value="true">
+  {%- if form.posted_successfully? -%}
+    <p class="form-message" role="status" data-newsletter-success>{{ 'general.newsletter.success' | t }}</p>
+  {%- else -%}
+    <div class="field-inline">
+      <label class="visually-hidden" for="{{ form_id }}-email">{{ 'general.newsletter.label' | t }}</label>
+      <input id="{{ form_id }}-email" type="email" name="contact[email]" autocomplete="email" placeholder="{{ 'general.newsletter.placeholder' | t }}" required>
+      <button type="submit">{{ 'general.newsletter.submit' | t }}</button>
+    </div>
+    {%- if form.errors -%}<p class="form-message form-message--error" role="alert">{{ form.errors | default_errors }}</p>{%- endif -%}
+    <p class="form-consent">{{ 'general.newsletter.no_spam' | t }}</p>
+  {%- endif -%}
+{%- endform -%}

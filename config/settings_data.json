@@ -1,0 +1,12 @@
+{
+  "current": "Default",
+  "presets": {
+    "Default": {
+      "brand_name": "WEDRA",
+      "brand_tagline": "Less noise. Better things.",
+      "prelaunch_mode": false,
+      "use_brand_fonts": true,
+      "cart_type": "drawer"
+    }
+  }
+}

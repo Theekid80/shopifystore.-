@@ -1,0 +1,71 @@
+{%- comment -%}
+  Product gallery from product.media (uploaded in Shopify Admin).
+  Phones: swipeable track with a counter. Desktop: one large image with
+  thumbnails. Any image opens a full-screen, swipeable lightbox.
+  Params: product, priority, section_id
+{%- endcomment -%}
+{%- liquid
+  assign current_media = product.selected_or_first_available_variant.featured_media | default: product.featured_media
+  assign lightbox_id = 'Lightbox-' | append: section_id
+-%}
+<div class="gallery" data-gallery data-lightbox="{{ lightbox_id }}">
+  {%- if product.media.size == 0 -%}
+    <div class="media gallery__empty">{{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}</div>
+  {%- else -%}
+    <ul class="gallery__track" role="list" aria-label="{{ 'products.product.gallery' | t }}" data-gallery-track>
+      {%- for media in product.media -%}
+        <li class="gallery__slide{% if media.id == current_media.id %} is-active{% endif %}" data-media-id="{{ media.id }}" data-index="{{ forloop.index0 }}">
+          {%- case media.media_type -%}
+            {%- when 'image' -%}
+              <button type="button" class="gallery__zoom media media--gallery" data-zoom="{{ forloop.index0 }}" aria-label="{{ 'products.product.zoom' | t: index: forloop.index }}">
+                {%- if media.id == current_media.id and priority -%}
+                  {%- render 'responsive-image', image: media, sizes: '(min-width: 990px) 56vw, 100vw', priority: true -%}
+                {%- else -%}
+                  {%- render 'responsive-image', image: media, sizes: '(min-width: 990px) 56vw, 100vw' -%}
+                {%- endif -%}
+              </button>
+            {%- when 'video' -%}
+              <div class="media media--gallery">{{ media | video_tag: controls: true, image_size: '1600x', playsinline: true, muted: true }}</div>
+            {%- when 'external_video' -%}
+              <div class="media media--gallery">{{ media | external_video_tag: loading: 'lazy' }}</div>
+            {%- else -%}
+              <div class="media media--gallery">{{ media.preview_image | image_url: width: 1600 | image_tag: loading: 'lazy' }}</div>
+          {%- endcase -%}
+        </li>
+      {%- endfor -%}
+    </ul>
+    {%- if product.media.size > 1 -%}
+      <p class="gallery__counter" aria-hidden="true"><span data-gallery-index>1</span> / {{ product.media.size }}</p>
+      <ul class="gallery__thumbs" role="list" aria-label="{{ 'products.product.gallery' | t }}">
+        {%- for media in product.media -%}
+          <li>
+            <button type="button" class="gallery__thumb" data-target="{{ media.id }}" aria-current="{% if media.id == current_media.id %}true{% else %}false{% endif %}" aria-label="{{ 'accessibility.image_of' | t: index: forloop.index, count: product.media.size }}">
+              {{ media.preview_image | image_url: width: 240 | image_tag: loading: 'lazy', alt: '', widths: '120, 240', sizes: '80px' }}
+            </button>
+          </li>
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+  {%- endif -%}
+</div>
+
+{%- if product.media.size > 0 -%}
+  <dialog id="{{ lightbox_id }}" class="drawer lightbox" aria-label="{{ 'products.product.gallery' | t }}">
+    <div class="drawer__panel">
+      <button type="button" class="drawer__close lightbox__close" data-drawer-close aria-label="{{ 'accessibility.close' | t }}">{% render 'icon', name: 'close' %}</button>
+      <ul class="lightbox__track" role="list" data-lightbox-track>
+        {%- for media in product.media -%}
+          {%- if media.media_type == 'image' -%}
+            <li class="lightbox__slide" data-index="{{ forloop.index0 }}">
+              {{ media | image_url: width: 2400 | image_tag: loading: 'lazy', widths: '900, 1400, 2000, 2400', sizes: '100vw', alt: media.alt | default: product.title }}
+            </li>
+          {%- endif -%}
+        {%- endfor -%}
+      </ul>
+      {%- if product.media.size > 1 -%}
+        <button type="button" class="lightbox__nav lightbox__nav--prev" data-lightbox-step="-1" aria-label="{{ 'products.product.previous_image' | t }}">{% render 'icon', name: 'arrow', class: 'icon-arrow' %}</button>
+        <button type="button" class="lightbox__nav lightbox__nav--next" data-lightbox-step="1" aria-label="{{ 'products.product.next_image' | t }}">{% render 'icon', name: 'arrow', class: 'icon-arrow' %}</button>
+      {%- endif -%}
+    </div>
+  </dialog>
+{%- endif -%}

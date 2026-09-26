@@ -1,0 +1,83 @@
+{%- comment -%}
+  Product spotlight: one product told editorially — a large image, a short
+  story, real price and a direct add to cart. Hidden on the live store until
+  a product is picked.
+{%- endcomment -%}
+{%- assign product = section.settings.product -%}
+{%- if product != blank and product.title != blank -%}
+  <section class="section {{ section.settings.color_scheme }}" data-product-section aria-labelledby="Spotlight-{{ section.id }}">
+    <div class="page-width">
+      {% render 'product-json', product: product %}
+      <div class="split split--{{ section.settings.layout }}">
+        <div class="split__media">
+          <a href="{{ product.url }}" class="media media--portrait media--zoom reveal-image reveal" tabindex="-1" aria-hidden="true">
+            {%- assign spot_image = section.settings.image | default: product.featured_media.preview_image -%}
+            {% render 'responsive-image', image: spot_image, alt: '', sizes: '(min-width: 990px) 58vw, 100vw', placeholder: 'product-1' %}
+          </a>
+          {%- if section.settings.show_detail and product.media[1] -%}
+            <div class="split__inset media media--portrait reveal" style="--delay: 250ms;">
+              {% render 'responsive-image', image: product.media[1].preview_image, alt: '', sizes: '22vw' %}
+            </div>
+          {%- endif -%}
+        </div>
+        <div class="split__text reveal" style="--delay: 150ms;">
+          {%- if section.settings.eyebrow != blank -%}<p class="eyebrow muted">{{ section.settings.eyebrow | escape }}</p>{%- endif -%}
+          <h2 id="Spotlight-{{ section.id }}" class="h-headline">{{ section.settings.heading | default: product.title | escape }}</h2>
+          {%- liquid
+            if section.settings.text != blank
+              assign spot_text = section.settings.text
+            elsif product.metafields.custom.short_description != blank
+              assign spot_text = product.metafields.custom.short_description.value | escape
+            else
+              assign spot_text = product.description | strip_html | truncatewords: 40 | escape
+            endif
+          -%}
+          {%- if spot_text != blank -%}<div class="rte">{{ spot_text }}</div>{%- endif -%}
+          {%- if section.settings.heading != blank -%}<p class="label">{{ product.title | escape }}</p>{%- endif -%}
+          {% render 'price', product: product %}
+          {%- if section.settings.show_buy -%}
+            {% render 'product-form', product: product, section_id: section.id, show_quantity: false, show_buy_now: false %}
+          {%- endif -%}
+          <p><a class="link-line" href="{{ product.url }}">{{ section.settings.link_label | escape }}</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+{%- elsif request.design_mode -%}
+  <section class="section"><div class="page-width"><p class="editor-hint">Product spotlight: pick a product in this section's settings. The section stays hidden on the live store until then.</p></div></section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Product spotlight",
+  "class": "section-featured-product",
+  "settings": [
+    { "type": "product", "id": "product", "label": "Product" },
+    { "type": "image_picker", "id": "image", "label": "Editorial image", "info": "Defaults to the product's first image." },
+    { "type": "checkbox", "id": "show_detail", "label": "Show second product image as inset", "default": true },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "In focus" },
+    { "type": "textarea", "id": "heading", "label": "Headline", "info": "Optional. Defaults to the product name." },
+    { "type": "richtext", "id": "text", "label": "Story", "info": "Defaults to the product's short description." },
+    { "type": "checkbox", "id": "show_buy", "label": "Show add to cart", "default": true },
+    { "type": "text", "id": "link_label", "label": "Link label", "default": "View details" },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "options": [{ "value": "default", "label": "Image left" }, { "value": "reverse", "label": "Image right" }],
+      "default": "reverse"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Background",
+      "options": [
+        { "value": "bg-base", "label": "Ivory" },
+        { "value": "bg-surface", "label": "Stone" }
+      ],
+      "default": "bg-surface"
+    }
+  ],
+  "presets": [{ "name": "Product spotlight" }]
+}
+{% endschema %}

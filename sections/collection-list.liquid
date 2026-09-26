@@ -1,0 +1,105 @@
+{%- comment -%}
+  Editorial collection tiles. With no blocks, the real Shopify collections
+  that contain products are shown automatically — no invented categories.
+  A collection without products is never shown on the live store.
+{%- endcomment -%}
+{%- liquid
+  assign shown = 0
+  if section.blocks.size > 0
+    for block in section.blocks
+      if block.settings.collection.products_count > 0
+        assign shown = shown | plus: 1
+      endif
+    endfor
+  else
+    for c in collections
+      if c.products_count > 0 and c.handle != 'frontpage' and c.handle != 'all'
+        assign shown = shown | plus: 1
+      endif
+    endfor
+  endif
+  if shown > section.settings.limit
+    assign shown = section.settings.limit
+  endif
+-%}
+{%- if shown > 0 or request.design_mode -%}
+<section class="section {{ section.settings.color_scheme }}" aria-labelledby="CollectionList-{{ section.id }}">
+  <div class="page-width">
+    <div class="section-heading__row" style="margin-bottom: clamp(2.5rem, 5vw, 4rem);">
+      <div class="section-heading reveal">
+        {%- if section.settings.eyebrow != blank -%}<p class="eyebrow muted">{{ section.settings.eyebrow | escape }}</p>{%- endif -%}
+        <h2 id="CollectionList-{{ section.id }}" class="h-headline">{{ section.settings.heading | escape }}</h2>
+      </div>
+      {%- if section.settings.show_all_link -%}
+        <a href="{{ routes.collections_url }}" class="link-line reveal">{{ 'general.view_all' | t }}</a>
+      {%- endif -%}
+    </div>
+
+    {%- if shown == 0 -%}
+      <p class="editor-hint">Collections appear here automatically once they contain products (Products → Collections), or add Collection blocks to choose them. Nothing is shown on the live store until then.</p>
+    {%- else -%}
+      <ul class="tiles{% if shown > 2 %} tiles--3{% endif %}{% if shown == 3 and section.settings.feature_first %} tiles--feature{% endif %}" role="list">
+        {%- assign count = 0 -%}
+        {%- if section.blocks.size > 0 -%}
+          {%- for block in section.blocks -%}
+            {%- assign c = block.settings.collection -%}
+            {%- if c.products_count > 0 and count < shown -%}
+              {%- assign count = count | plus: 1 -%}
+              <li class="reveal" style="--delay: {{ forloop.index0 | times: 100 }}ms;" {{ block.shopify_attributes }}>
+                {% render 'collection-tile', collection: c, image: block.settings.image, text: block.settings.text, cta: section.settings.cta_label %}
+              </li>
+            {%- endif -%}
+          {%- endfor -%}
+        {%- else -%}
+          {%- for c in collections -%}
+            {%- if c.products_count > 0 and c.handle != 'frontpage' and c.handle != 'all' and count < shown -%}
+              {%- assign count = count | plus: 1 -%}
+              <li class="reveal" style="--delay: {{ count | minus: 1 | times: 100 }}ms;">
+                {% render 'collection-tile', collection: c, cta: section.settings.cta_label %}
+              </li>
+            {%- endif -%}
+          {%- endfor -%}
+        {%- endif -%}
+      </ul>
+    {%- endif -%}
+  </div>
+</section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Collections",
+  "class": "section-collection-list",
+  "max_blocks": 6,
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Collections" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Explore by collection." },
+    { "type": "range", "id": "limit", "label": "Maximum collections", "min": 1, "max": 6, "step": 1, "default": 3 },
+    { "type": "text", "id": "cta_label", "label": "Tile link label", "default": "Explore" },
+    { "type": "checkbox", "id": "feature_first", "label": "Make the first tile larger (3 collections)", "default": true },
+    { "type": "checkbox", "id": "show_all_link", "label": "Show link to all collections", "default": true },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Background",
+      "options": [
+        { "value": "bg-base", "label": "Ivory" },
+        { "value": "bg-surface", "label": "Stone" }
+      ],
+      "default": "bg-base"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection",
+      "name": "Collection",
+      "settings": [
+        { "type": "collection", "id": "collection", "label": "Collection" },
+        { "type": "image_picker", "id": "image", "label": "Image", "info": "Defaults to the collection image, then its first product." },
+        { "type": "textarea", "id": "text", "label": "Short description", "info": "Defaults to the collection description." }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Collections" }]
+}
+{% endschema %}

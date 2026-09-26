@@ -1,0 +1,130 @@
+{%- comment -%}
+  Cinematic full-bleed hero. Separate desktop and mobile images so the
+  crop is art-directed for phones. Without an image the hero is a quiet
+  charcoal field with the typography carrying the page.
+{%- endcomment -%}
+{%- liquid
+  assign image = section.settings.image
+  assign image_mobile = section.settings.image_mobile | default: image
+  assign overlay = section.settings.overlay | divided_by: 100.0
+-%}
+<section
+  class="hero hero--{{ section.settings.height }}{% if section.settings.align == 'center' %} hero--center{% endif %}{% if image == blank %} hero--empty{% endif %}"
+  style="--focal: {{ section.settings.focal }}; --focal-mobile: {{ section.settings.focal_mobile }}; --overlay: {{ overlay }};"
+  aria-labelledby="Hero-{{ section.id }}"
+>
+  {%- if image != blank -%}
+    <div class="hero__media" data-parallax>
+      {%- if section.settings.image_mobile != blank -%}
+        <picture>
+          <source media="(max-width: 749px)" srcset="{{ image_mobile | image_url: width: 750 }} 750w, {{ image_mobile | image_url: width: 1100 }} 1100w, {{ image_mobile | image_url: width: 1500 }} 1500w" sizes="100vw">
+          {% render 'responsive-image', image: image, sizes: '100vw', priority: true %}
+        </picture>
+      {%- else -%}
+        {% render 'responsive-image', image: image, sizes: '100vw', priority: true %}
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+
+  <div class="page-width hero__content">
+    <div class="hero__text">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="eyebrow rise" style="--delay: 150ms;">{{ section.settings.eyebrow | escape }}</p>
+      {%- endif -%}
+      <h1 id="Hero-{{ section.id }}" class="display rise" style="--delay: 250ms;">{{ section.settings.heading | escape }}</h1>
+      {%- if section.settings.subheading != blank -%}
+        <p class="hero__subtitle rise" style="--delay: 450ms;">{{ section.settings.subheading | escape }}</p>
+      {%- endif -%}
+      {%- if section.settings.button_1_label != blank or section.settings.button_2_label != blank -%}
+        <div class="btn-row rise" style="--delay: 600ms;">
+          {%- if section.settings.button_1_label != blank -%}
+            <a href="{{ section.settings.button_1_link | default: routes.all_products_collection_url }}" class="btn btn--light btn--lg">
+              {{ section.settings.button_1_label | escape }}
+            </a>
+          {%- endif -%}
+          {%- if section.settings.button_2_label != blank -%}
+            <a href="{{ section.settings.button_2_link | default: routes.collections_url }}" class="btn btn--ghost-light btn--lg">
+              {{ section.settings.button_2_label | escape }}
+            </a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    {%- if section.settings.show_foot -%}
+      <div class="hero__foot rise" style="--delay: 900ms;" aria-hidden="true">
+        <span>{{ settings.brand_tagline | escape }}</span>
+        <span class="scroll-cue">{{ section.settings.scroll_label | escape }}</span>
+      </div>
+    {%- endif -%}
+
+    {%- if image == blank and request.design_mode -%}
+      <p class="editor-hint" style="margin-top: 2rem; max-width: 28rem;">Add a hero image in this section's settings. Wide and quiet works best — an interior, an object in light, architecture.</p>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero",
+  "class": "section-hero",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Image", "info": "At least 2400 × 1500px. Leave room for the headline." },
+    { "type": "image_picker", "id": "image_mobile", "label": "Mobile image", "info": "Optional portrait crop for phones (1200 × 1800px)." },
+    {
+      "type": "select",
+      "id": "focal",
+      "label": "Image focus (desktop)",
+      "options": [
+        { "value": "25% 50%", "label": "Left" },
+        { "value": "50% 50%", "label": "Center" },
+        { "value": "75% 50%", "label": "Right" }
+      ],
+      "default": "50% 50%"
+    },
+    {
+      "type": "select",
+      "id": "focal_mobile",
+      "label": "Image focus (phones)",
+      "options": [
+        { "value": "25% 50%", "label": "Left" },
+        { "value": "50% 50%", "label": "Center" },
+        { "value": "75% 50%", "label": "Right" }
+      ],
+      "default": "50% 50%"
+    },
+    { "type": "range", "id": "overlay", "label": "Image darkening", "min": 0, "max": 70, "step": 5, "unit": "%", "default": 30 },
+    {
+      "type": "select",
+      "id": "height",
+      "label": "Height",
+      "options": [
+        { "value": "full", "label": "Full screen" },
+        { "value": "medium", "label": "Medium" },
+        { "value": "short", "label": "Short" }
+      ],
+      "default": "full"
+    },
+    {
+      "type": "select",
+      "id": "align",
+      "label": "Text position",
+      "options": [
+        { "value": "left", "label": "Bottom left" },
+        { "value": "center", "label": "Center" }
+      ],
+      "default": "left"
+    },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
+    { "type": "text", "id": "heading", "label": "Headline", "default": "Curated for the way you live." },
+    { "type": "textarea", "id": "subheading", "label": "Supporting text", "default": "Distinctive pieces, thoughtfully selected for modern living." },
+    { "type": "text", "id": "button_1_label", "label": "Primary button", "default": "Explore WEDRA" },
+    { "type": "url", "id": "button_1_link", "label": "Primary button link", "info": "Defaults to all products." },
+    { "type": "text", "id": "button_2_label", "label": "Secondary button", "default": "Shop collection" },
+    { "type": "url", "id": "button_2_link", "label": "Secondary button link", "info": "Defaults to the collections page." },
+    { "type": "checkbox", "id": "show_foot", "label": "Show tagline and scroll cue (desktop)", "default": true },
+    { "type": "text", "id": "scroll_label", "label": "Scroll cue label", "default": "Scroll" }
+  ],
+  "presets": [{ "name": "Hero" }]
+}
+{% endschema %}

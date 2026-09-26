@@ -1,0 +1,133 @@
+{%- liquid
+  assign brand = settings.brand_name | default: shop.name
+  assign socials = 'instagram,tiktok,pinterest,facebook,youtube' | split: ','
+-%}
+{%- comment -%}
+  Three link columns. Each uses the Shopify menu picked in the theme editor;
+  when no menu is picked, sensible defaults are used and a link is only shown
+  if its page or policy actually exists (no broken links before setup).
+{%- endcomment -%}
+{%- capture col_nav -%}
+  {{ routes.all_products_collection_url }}|{{ 'general.shop' | t }}^{{ routes.collections_url }}|{{ 'general.collections' | t }}
+  {%- if pages.about.url != blank -%}^{{ pages.about.url }}|{{ 'general.about' | t }}{%- endif -%}
+  {%- if pages.contact.url != blank -%}^{{ pages.contact.url }}|{{ 'general.contact' | t }}{%- endif -%}
+{%- endcapture -%}
+{%- capture col_customer -%}
+  {%- if shop.shipping_policy.body != blank -%}{{ shop.shipping_policy.url }}|{{ 'general.shipping' | t }}^{%- endif -%}
+  {%- if shop.refund_policy.body != blank -%}{{ shop.refund_policy.url }}|{{ 'general.returns' | t }}^{%- endif -%}
+  {%- if pages.faq.url != blank -%}{{ pages.faq.url }}|{{ 'general.faq' | t }}^{%- endif -%}
+  {%- if shop.customer_accounts_enabled -%}{{ routes.account_url }}|{{ 'general.account' | t }}{%- endif -%}
+{%- endcapture -%}
+{%- capture col_legal -%}
+  {%- if shop.privacy_policy.body != blank -%}{{ shop.privacy_policy.url }}|{{ 'general.privacy' | t }}^{%- endif -%}
+  {%- if shop.terms_of_service.body != blank -%}{{ shop.terms_of_service.url }}|{{ 'general.terms' | t }}^{%- endif -%}
+  {%- if shop.contact_information.body != blank -%}{{ shop.contact_information.url }}|{{ shop.contact_information.title }}{%- endif -%}
+{%- endcapture -%}
+
+<footer class="footer color-dark" {{ section.shopify_attributes }}>
+  <div class="page-width">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <a href="{{ routes.root_url }}" aria-label="{{ brand | escape }}">{% render 'logo', context: 'dark' %}</a>
+        {%- if settings.brand_tagline != blank -%}<p class="footer__tagline">{{ settings.brand_tagline | escape }}</p>{%- endif -%}
+
+        {%- if section.settings.show_signup -%}
+          <div class="footer__signup">
+            {%- if section.settings.signup_text != blank -%}<p>{{ section.settings.signup_text | escape }}</p>{%- endif -%}
+            {%- form 'customer', id: 'FooterNewsletter' -%}
+              <input type="hidden" name="contact[tags]" value="newsletter">
+              <input type="hidden" name="contact[accepts_marketing]" value="true">
+              {%- if form.posted_successfully? -%}
+                <p class="form-message" role="status" data-newsletter-success>{{ 'general.newsletter.success' | t }}</p>
+              {%- else -%}
+                <div class="field-inline">
+                  <label class="visually-hidden" for="FooterNewsletterEmail">{{ 'general.newsletter.label' | t }}</label>
+                  <input id="FooterNewsletterEmail" type="email" name="contact[email]" autocomplete="email" placeholder="{{ 'general.newsletter.placeholder' | t }}" required>
+                  <button type="submit">{{ 'general.newsletter.submit' | t }}</button>
+                </div>
+                {%- if form.errors -%}<p class="form-message form-message--error" role="alert">{{ form.errors | default_errors }}</p>{%- endif -%}
+              {%- endif -%}
+            {%- endform -%}
+          </div>
+        {%- endif -%}
+
+        {%- capture social_items -%}
+          {%- for network in socials -%}
+            {%- assign key = 'social_' | append: network | append: '_link' -%}
+            {%- if settings[key] != blank -%}
+              {%- assign network_name = network | capitalize -%}
+              <li><a href="{{ settings[key] }}" target="_blank" rel="noopener" aria-label="{{ 'general.social.link' | t: brand: brand, network: network_name }}">{% render 'icon', name: network %}</a></li>
+            {%- endif -%}
+          {%- endfor -%}
+        {%- endcapture -%}
+        {%- if social_items != blank -%}
+          <ul class="social" role="list" aria-label="{{ 'general.social.label' | t }}">{{ social_items }}</ul>
+        {%- endif -%}
+      </div>
+
+      <div class="footer__menus">
+        {%- for i in (1..3) -%}
+          {%- liquid
+            assign heading_key = 'heading_' | append: i
+            assign menu_key = 'menu_' | append: i
+            assign menu = linklists[section.settings[menu_key]]
+            case i
+              when 1
+                assign defaults = col_nav
+              when 2
+                assign defaults = col_customer
+              else
+                assign defaults = col_legal
+            endcase
+            assign defaults = defaults | strip | split: '^'
+          -%}
+          {%- if menu.links.size > 0 or defaults.size > 0 -%}
+            <nav aria-label="{{ section.settings[heading_key] | escape }}">
+              <h2 class="eyebrow">{{ section.settings[heading_key] | escape }}</h2>
+              <ul role="list">
+                {%- if menu.links.size > 0 -%}
+                  {%- for link in menu.links -%}<li><a href="{{ link.url }}">{{ link.title | escape }}</a></li>{%- endfor -%}
+                {%- else -%}
+                  {%- for item in defaults -%}
+                    {%- assign parts = item | strip | split: '|' -%}
+                    {%- if parts[0] != blank -%}<li><a href="{{ parts[0] }}">{{ parts[1] | escape }}</a></li>{%- endif -%}
+                  {%- endfor -%}
+                {%- endif -%}
+              </ul>
+            </nav>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <p>&copy; {{ 'now' | date: '%Y' }} {{ brand | escape }}</p>
+      {%- if section.settings.show_payment_icons and shop.enabled_payment_types.size > 0 -%}
+        <ul class="footer__payment" role="list" aria-label="Payment methods">
+          {%- for type in shop.enabled_payment_types -%}<li>{{ type | payment_type_svg_tag }}</li>{%- endfor -%}
+        </ul>
+      {%- endif -%}
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "class": "section-footer",
+  "enabled_on": { "groups": ["footer"] },
+  "settings": [
+    { "type": "checkbox", "id": "show_signup", "label": "Show email sign-up", "default": true },
+    { "type": "text", "id": "signup_text", "label": "Sign-up text", "default": "New arrivals and considered notes, occasionally." },
+    { "type": "header", "content": "Columns" },
+    { "type": "paragraph", "content": "Pick a menu for each column (Online Store → Navigation). Without a menu, a column shows default links — only for pages and policies that exist." },
+    { "type": "text", "id": "heading_1", "label": "Column 1 heading", "default": "Navigation" },
+    { "type": "link_list", "id": "menu_1", "label": "Column 1 menu" },
+    { "type": "text", "id": "heading_2", "label": "Column 2 heading", "default": "Customer" },
+    { "type": "link_list", "id": "menu_2", "label": "Column 2 menu" },
+    { "type": "text", "id": "heading_3", "label": "Column 3 heading", "default": "Legal" },
+    { "type": "link_list", "id": "menu_3", "label": "Column 3 menu" },
+    { "type": "checkbox", "id": "show_payment_icons", "label": "Show payment icons", "default": true }
+  ]
+}
+{% endschema %}

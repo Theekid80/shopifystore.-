@@ -1,0 +1,25 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "badge": { "type": "badge", "settings": {} },
+        "type": { "type": "type", "settings": {} },
+        "title": { "type": "title", "settings": {} },
+        "price": { "type": "price", "settings": {} },
+        "short": { "type": "short_description", "settings": {} },
+        "buy": { "type": "buy_buttons", "settings": { "show_dynamic_checkout": true } },
+        "note": { "type": "note", "settings": { "text": "Shipping options and costs are shown at checkout.", "icon": "box", "link_to": "shipping", "link_label": "Shipping policy" } },
+        "description": { "type": "collapsible", "settings": { "heading": "Description", "source": "description", "open": true } },
+        "details": { "type": "collapsible", "settings": { "heading": "Details", "source": "details", "open": false } },
+        "shipping": { "type": "collapsible", "settings": { "heading": "Shipping", "source": "shipping", "open": false } },
+        "returns": { "type": "collapsible", "settings": { "heading": "Returns", "source": "returns", "open": false } }
+      },
+      "block_order": ["badge", "type", "title", "price", "short", "buy", "note", "description", "details", "shipping", "returns"],
+      "settings": { "sticky_atc": true }
+    },
+    "reviews": { "type": "product-reviews", "settings": {} },
+    "related": { "type": "related-products", "settings": { "heading": "You may also like", "limit": 4, "color_scheme": "bg-base" } }
+  },
+  "order": ["main", "reviews", "related"]
+}
