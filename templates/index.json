@@ -1,5 +1,21 @@
 {
   "sections": {
+    "hero_carousel": {
+      "type": "hero-carousel",
+      "settings": {
+        "limit": 12,
+        "interval": 1.7,
+        "overlay": 0,
+        "height": "full",
+        "eyebrow": "The WEDRA Catalogue",
+        "heading": "Travel better. Rest better.",
+        "subheading": "Thoughtfully selected essentials for travel, leisure, comfort and sleep.",
+        "button_1_label": "Shop the catalogue",
+        "button_1_link": "/collections/all",
+        "button_2_label": "Explore brands",
+        "button_2_link": "/pages/brands"
+      }
+    },
     "hero": {
       "type": "hero",
       "settings": {
@@ -17,7 +33,8 @@
         "scroll_label": "Scroll",
         "image": "shopify://shop_images/wedra-home-travel-suitcase.jpg",
         "image_mobile": "shopify://shop_images/wedra-home-travel-rolling.jpg"
-      }
+      },
+      "disabled": true
     },
     "experience": {
       "type": "experience-cards",
@@ -202,6 +219,7 @@
     }
   },
   "order": [
+    "hero_carousel",
     "hero",
     "experience",
     "edit",

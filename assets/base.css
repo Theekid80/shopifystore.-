@@ -765,3 +765,30 @@ body:not(:has(#MainContent > .shopify-section:first-child .hero)) .header--overl
 .feature-video .split__text { margin-inline: auto; }
 .feature-video__product { margin-top: 1.25rem; font-size: .875rem; letter-spacing: .04em; }
 .feature-video .price { margin: .25rem 0 1.5rem; }
+
+/* ---------- Hero carousel: headline beside a looping row of product ads ---------- */
+.hero--carousel { background: var(--color-dark); }
+.hero--carousel::before { background: rgba(12,12,12,var(--overlay, 0)); }
+.hero-carousel__layout { display: grid; gap: 2rem; align-content: start; padding-top: calc(var(--header-height) + 1.25rem); }
+.hero-carousel__layout .hero-carousel { order: -1; }
+.hero--carousel .display { font-size: clamp(2.5rem, 4.6vw, 5rem); }
+@media (min-width: 990px) {
+  .hero-carousel__layout { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); align-content: center; align-items: center; gap: 4rem; padding-top: calc(var(--header-height) + 3rem); }
+  .hero-carousel__layout .hero-carousel { order: 0; }
+}
+.hero-carousel { position: relative; min-width: 0; margin-right: calc(-1 * var(--gutter)); overflow: hidden; }
+@media (min-width: 990px) { .hero-carousel { margin-right: calc(-1 * (var(--gutter) + max(0px, (100vw - 100rem) / 2))); } }
+.hero-carousel__track { --card: min(56vw, 20rem); --gap: 1rem; display: flex; gap: var(--gap); margin: 0; padding: 0; list-style: none; will-change: transform; }
+@media (min-width: 990px) { .hero-carousel__track { --card: clamp(15rem, 22vw, 24rem); --gap: 1.25rem; } }
+.hero-carousel__card { flex: 0 0 var(--card); transition: opacity .6s var(--ease), transform .6s var(--ease); opacity: .55; transform: scale(.94); transform-origin: left bottom; }
+.hero-carousel__card.is-active { opacity: 1; transform: none; }
+.hero-carousel__link { display: block; color: #fff; text-decoration: none; }
+.hero-carousel__media { display: block; aspect-ratio: 4 / 5; overflow: hidden; background: #f7f5f0; }
+.hero-carousel__media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.hero-carousel__title { display: block; margin-top: .9rem; font-size: .6875rem; letter-spacing: .24em; text-transform: uppercase; color: rgba(255,255,255,.75); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.hero-carousel__link:hover .hero-carousel__title, .hero-carousel__link:focus-visible .hero-carousel__title { color: #fff; }
+.hero-carousel__toggle { position: absolute; left: .75rem; top: .75rem; display: grid; place-items: center; width: 2.25rem; height: 2.25rem; border: 0; border-radius: 50%; background: rgba(17,17,17,.55); color: #fff; cursor: pointer; }
+.hero-carousel__toggle:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+.hero-carousel__icon-play, .hero-carousel__toggle[aria-pressed="true"] .hero-carousel__icon-pause { display: none; }
+.hero-carousel__toggle[aria-pressed="true"] .hero-carousel__icon-play { display: block; }
+@media (prefers-reduced-motion: reduce) { .hero-carousel__card { transition: none; } .hero-carousel { overflow-x: auto; } }

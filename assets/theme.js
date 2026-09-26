@@ -364,6 +364,61 @@
   initSilentPreviews();
   document.addEventListener("shopify:section:load", (e) => initSilentPreviews(e.target));
 
+  /* ---------- Hero carousel: endless loop, one card per interval ---------- */
+  function initHeroCarousels(root = document) {
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    $$("[data-hero-carousel]", root).forEach((el) => {
+      if (el._init) return;
+      el._init = true;
+      const track = $("[data-track]", el);
+      const toggle = $("[data-toggle]", el);
+      const mark = () => [...track.children].forEach((c, i) => c.classList.toggle("is-active", i === 0));
+      mark();
+      if (reduce || track.children.length < 2) { if (toggle) toggle.hidden = true; return; }
+
+      const interval = Math.max(1000, Number(el.dataset.interval) || 1700);
+      const slide = Math.min(700, interval * 0.45);
+      let timer = null, hovered = false, userPaused = false, visible = true, busy = false;
+
+      const step = () => {
+        if (busy) return;
+        const first = track.firstElementChild;
+        const by = first.getBoundingClientRect().width + parseFloat(getComputedStyle(track).columnGap || 0);
+        busy = true;
+        track.children[1].classList.add("is-active");
+        first.classList.remove("is-active");
+        track.style.transition = `transform ${slide}ms cubic-bezier(.2,.7,.2,1)`;
+        track.style.transform = `translateX(${-by}px)`;
+        setTimeout(() => {
+          track.style.transition = "none";
+          track.appendChild(first);
+          track.style.transform = "none";
+          busy = false;
+        }, slide + 20);
+      };
+      const run = () => {
+        clearInterval(timer); timer = null;
+        if (!hovered && !userPaused && visible && document.visibilityState === "visible") timer = setInterval(step, interval);
+      };
+
+      el.addEventListener("mouseenter", () => { hovered = true; run(); });
+      el.addEventListener("mouseleave", () => { hovered = false; run(); });
+      el.addEventListener("focusin", () => { hovered = true; run(); });
+      el.addEventListener("focusout", () => { hovered = false; run(); });
+      document.addEventListener("visibilitychange", run);
+      if ("IntersectionObserver" in window) new IntersectionObserver(([e]) => { visible = e.isIntersecting; run(); }).observe(el);
+      if (toggle) toggle.addEventListener("click", () => {
+        userPaused = !userPaused;
+        toggle.setAttribute("aria-pressed", String(userPaused));
+        $("[data-toggle-label]", toggle).textContent = userPaused ? "Play carousel" : "Pause carousel";
+        run();
+      });
+      run();
+    });
+  }
+  initHeroCarousels();
+  document.addEventListener("shopify:section:load", (e) => initHeroCarousels(e.target));
+
   /* ---------- Variant picker ---------- */
   function initVariantPickers(root = document) {
     $$("[data-variant-picker]", root).forEach((picker) => {

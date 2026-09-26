@@ -1,0 +1,130 @@
+{%- comment -%}
+  Homepage hero with a looping product carousel. Each card is the product's
+  featured media (its WEDRA ad) and links to the product. Products come from
+  the chosen collection, or every product when none is chosen.
+  theme.js advances the carousel every "interval" seconds.
+{%- endcomment -%}
+{%- liquid
+  assign source = section.settings.collection | default: collections.all
+  assign overlay = section.settings.overlay | divided_by: 100.0
+  assign show_b1 = false
+  assign show_b2 = false
+  if section.settings.button_1_label != blank
+    assign show_b1 = true
+  endif
+  if section.settings.button_2_label != blank
+    assign show_b2 = true
+    if section.settings.button_2_link contains '/pages/'
+      assign h = section.settings.button_2_link | split: '/pages/' | last | split: '?' | first
+      if pages[h].url == blank
+        assign show_b2 = false
+      endif
+    endif
+  endif
+  assign count = 0
+  for product in source.products limit: section.settings.limit
+    if product.featured_media != blank
+      assign count = count | plus: 1
+    endif
+  endfor
+-%}
+<section
+  class="hero hero--{{ section.settings.height }} hero--carousel"
+  style="--overlay: {{ overlay }};"
+  aria-labelledby="Hero-{{ section.id }}"
+>
+  <div class="page-width hero__content hero-carousel__layout">
+    <div class="hero__text">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="eyebrow rise" style="--delay: 150ms;">{{ section.settings.eyebrow | escape }}</p>
+      {%- endif -%}
+      <h1 id="Hero-{{ section.id }}" class="display rise" style="--delay: 250ms;">{{ section.settings.heading | escape }}</h1>
+      {%- if section.settings.subheading != blank -%}
+        <p class="hero__subtitle rise" style="--delay: 450ms;">{{ section.settings.subheading | escape }}</p>
+      {%- endif -%}
+      {%- if show_b1 or show_b2 -%}
+        <div class="btn-row rise" style="--delay: 600ms;">
+          {%- if show_b1 -%}
+            <a href="{{ section.settings.button_1_link | default: source.url }}" class="btn btn--light btn--lg">{{ section.settings.button_1_label | escape }}</a>
+          {%- endif -%}
+          {%- if show_b2 -%}
+            <a href="{{ section.settings.button_2_link | default: routes.collections_url }}" class="btn btn--ghost-light btn--lg">{{ section.settings.button_2_label | escape }}</a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    {%- if count > 0 -%}
+      <div
+        class="hero-carousel rise"
+        style="--delay: 350ms;"
+        role="region"
+        aria-roledescription="carousel"
+        aria-label="{{ source.title | default: 'Products' | escape }}"
+        data-hero-carousel
+        data-interval="{{ section.settings.interval | times: 1000 }}"
+      >
+        <ul class="hero-carousel__track" data-track aria-live="off">
+          {%- for product in source.products limit: section.settings.limit -%}
+            {%- if product.featured_media == blank -%}{%- continue -%}{%- endif -%}
+            {%- assign card_alt = product.featured_media.alt | default: product.title -%}
+            <li class="hero-carousel__card" aria-roledescription="slide" aria-label="{{ product.title | escape }}">
+              <a href="{{ product.url }}" class="hero-carousel__link">
+                <span class="hero-carousel__media">
+                  {%- render 'responsive-image',
+                    image: product.featured_media.preview_image,
+                    alt: card_alt,
+                    sizes: '(min-width: 990px) 30vw, 70vw',
+                    widths: '360, 540, 720, 900, 1080',
+                    priority: forloop.first
+                  -%}
+                </span>
+                <span class="hero-carousel__title">{{ product.title | escape }}</span>
+              </a>
+            </li>
+          {%- endfor -%}
+        </ul>
+        {%- if count > 1 -%}
+          <button type="button" class="hero-carousel__toggle" data-toggle aria-pressed="false">
+            <span class="visually-hidden" data-toggle-label>Pause carousel</span>
+            <svg class="hero-carousel__icon-pause" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 1h2v10H3zM7 1h2v10H7z" fill="currentColor"/></svg>
+            <svg class="hero-carousel__icon-play" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 1l7 5-7 5z" fill="currentColor"/></svg>
+          </button>
+        {%- endif -%}
+      </div>
+    {%- elsif request.design_mode -%}
+      <p class="editor-hint">Choose a collection with products that have images.</p>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero carousel",
+  "class": "section-hero",
+  "settings": [
+    { "type": "collection", "id": "collection", "label": "Products from", "info": "Leave empty to show every product. Each card shows the product's first image." },
+    { "type": "range", "id": "limit", "label": "Products shown", "min": 2, "max": 24, "step": 1, "default": 12 },
+    { "type": "range", "id": "interval", "label": "Seconds per slide", "min": 1, "max": 8, "step": 0.1, "unit": "s", "default": 1.7 },
+    { "type": "range", "id": "overlay", "label": "Background darkening", "min": 0, "max": 70, "step": 5, "unit": "%", "default": 0 },
+    {
+      "type": "select",
+      "id": "height",
+      "label": "Height",
+      "options": [
+        { "value": "full", "label": "Full screen" },
+        { "value": "medium", "label": "Medium" }
+      ],
+      "default": "full"
+    },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
+    { "type": "text", "id": "heading", "label": "Headline", "default": "Travel better. Rest better." },
+    { "type": "textarea", "id": "subheading", "label": "Supporting text" },
+    { "type": "text", "id": "button_1_label", "label": "Primary button", "default": "Shop the collection" },
+    { "type": "url", "id": "button_1_link", "label": "Primary button link", "info": "Defaults to the chosen collection." },
+    { "type": "text", "id": "button_2_label", "label": "Secondary button" },
+    { "type": "url", "id": "button_2_link", "label": "Secondary button link" }
+  ],
+  "presets": [{ "name": "Hero carousel" }]
+}
+{% endschema %}
