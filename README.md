@@ -108,7 +108,7 @@ Stars appear only when a review app (Judge.me, Yotpo, Okendo, Shopify Product Re
 ### 3. Collections (Products → Collections)
 - `/collections/all` (Shop) lists every product automatically.
 - The homepage **Shop by experience** cards link to collections with the handles `travel`, `sleep`, `comfort` and `leisure`. Create them (automated collections by product type or tag work well); each card appears only once its collection has products.
-- **The WEDRA Edit** on the homepage shows the `the-wedra-travel-edit` collection (change it in the theme editor). It's hidden if that collection is empty.
+- **The WEDRA Catalogue** on the homepage shows the `the-wedra-travel-edit` collection (change it in the theme editor). It's hidden if that collection is empty.
 - Collections with products appear automatically in the Shop dropdown, on `/collections` and in the collection page's sub-navigation. Empty collections are never shown.
 - Give each collection an image and a one-line description.
 
@@ -181,7 +181,7 @@ Shopify's CDN resizes images and serves modern formats (such as WebP) automatica
 
 ## What the theme includes
 
-- **Homepage**: cinematic hero, Shop by experience (Travel / Sleep / Comfort / Leisure collections), The WEDRA Edit (live products), brand statement, featured brands, editorial banner, optional product spotlight, how-we-choose principles, email sign-up. Every section is editable, reorderable and removable, and sections with no real content are hidden.
+- **Homepage**: cinematic hero, Shop by experience (Travel / Sleep / Comfort / Leisure collections), The WEDRA Catalogue (live products), brand statement, featured brands, editorial banner, optional product spotlight, how-we-choose principles, email sign-up. Every section is editable, reorderable and removable, and sections with no real content are hidden.
 - **Product page**: brand (from Vendor or Brand metafield), genuine star ratings only, brand & "Sold by WEDRA" panel, swipeable gallery on phones, thumbnails on desktop, full-screen zoom, variant picker with sold-out handling, quantity, add to cart, Shopify's dynamic checkout, a shipping note, description / details / shipping / returns tabs, recommendations, sticky add to cart on phones.
 - **Collections**: Shopify filtering and sorting (configure filters in the Search & Discovery app), pagination, graceful empty states.
 - **Search**: predictive results as you type (Shopify Predictive Search API) and a full results page.
