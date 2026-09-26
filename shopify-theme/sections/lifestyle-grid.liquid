@@ -1,0 +1,69 @@
+<section class="section color-dark" aria-labelledby="Lifestyle-{{ section.id }}">
+  <div class="page-width">
+    <div class="section-heading reveal">
+      {%- if section.settings.eyebrow != blank -%}<p class="eyebrow accent">{{ section.settings.eyebrow | escape }}</p>{%- endif -%}
+      <h2 id="Lifestyle-{{ section.id }}" class="h-headline">{{ section.settings.heading | escape }}</h2>
+    </div>
+    <ul class="lifestyle mt-lg" role="list">
+      {%- for block in section.blocks -%}
+        <li class="reveal" style="--delay: {{ forloop.index0 | times: 90 }}ms;" {{ block.shopify_attributes }}>
+          {%- if block.settings.link != blank -%}<a href="{{ block.settings.link }}" class="lifestyle__tile" style="display:block;">{%- else -%}<div class="lifestyle__tile">{%- endif -%}
+            {%- render 'responsive-image', image: block.settings.image, fallback_asset: block.settings.fallback_image, fallback_alt: '', alt: '', sizes: '(min-width: 990px) 25vw, 50vw' -%}
+            <div class="lifestyle__text">
+              <h3>{{ block.settings.title | escape }}</h3>
+              {%- if block.settings.text != blank -%}<p>{{ block.settings.text | escape }}</p>{%- endif -%}
+            </div>
+          {%- if block.settings.link != blank -%}</a>{%- else -%}</div>{%- endif -%}
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Lifestyle grid",
+  "class": "section-lifestyle",
+  "max_blocks": 4,
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Made for the journey" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Wherever you're headed." }
+  ],
+  "blocks": [
+    {
+      "type": "tile",
+      "name": "Tile",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        {
+          "type": "select",
+          "id": "fallback_image",
+          "label": "Concept image (until you pick one)",
+          "options": [
+            { "value": "concept-flights-lifestyle.jpg", "label": "Lie-flat seat" },
+            { "value": "concept-sleep-mask.jpg", "label": "Sleep mask" },
+            { "value": "concept-road-trip-lifestyle.jpg", "label": "Pouch by window" },
+            { "value": "concept-business-lifestyle.jpg", "label": "Traveler" },
+            { "value": "concept-travel-system.jpg", "label": "Hotel" }
+          ],
+          "default": "concept-flights-lifestyle.jpg"
+        },
+        { "type": "text", "id": "title", "label": "Title" },
+        { "type": "textarea", "id": "text", "label": "Text" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Lifestyle grid",
+      "blocks": [
+        { "type": "tile", "settings": { "title": "Air", "text": "For long-haul flights and early departures.", "fallback_image": "concept-flights-lifestyle.jpg" } },
+        { "type": "tile", "settings": { "title": "Hotel", "text": "For a familiar nighttime routine away from home.", "fallback_image": "concept-sleep-mask.jpg" } },
+        { "type": "tile", "settings": { "title": "Road", "text": "For road trips and overnight stops.", "fallback_image": "concept-road-trip-lifestyle.jpg" } },
+        { "type": "tile", "settings": { "title": "Weekend", "text": "For short trips when you want to pack lighter.", "fallback_image": "concept-business-lifestyle.jpg" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

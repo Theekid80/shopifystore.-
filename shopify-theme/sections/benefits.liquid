@@ -1,0 +1,68 @@
+<section class="benefits {{ section.settings.color_scheme }}" aria-label="{{ section.settings.label | escape }}">
+  <ul class="page-width benefits__list" role="list">
+    {%- for block in section.blocks -%}
+      <li class="benefits__item reveal" style="--delay: {{ forloop.index0 | times: 80 }}ms;" {{ block.shopify_attributes }}>
+        {% render 'icon', name: block.settings.icon %}
+        <h3 class="eyebrow">{{ block.settings.title | escape }}</h3>
+        <p>{{ block.settings.text | escape }}</p>
+      </li>
+    {%- endfor -%}
+  </ul>
+</section>
+
+{% schema %}
+{
+  "name": "Benefits",
+  "class": "section-benefits",
+  "max_blocks": 4,
+  "settings": [
+    { "type": "text", "id": "label", "label": "Accessible label", "default": "Why travelers choose VELARA" },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Background",
+      "options": [
+        { "value": "bg-base", "label": "Ivory" },
+        { "value": "bg-surface", "label": "Off-white" }
+      ],
+      "default": "bg-base"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "Benefit",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "moon", "label": "Moon" },
+            { "value": "layers", "label": "Layers" },
+            { "value": "spark", "label": "Spark" },
+            { "value": "plane", "label": "Plane" },
+            { "value": "bed", "label": "Bed" },
+            { "value": "box", "label": "Box" },
+            { "value": "briefcase", "label": "Briefcase" }
+          ],
+          "default": "moon"
+        },
+        { "type": "text", "id": "title", "label": "Title" },
+        { "type": "textarea", "id": "text", "label": "Text" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Benefits",
+      "blocks": [
+        { "type": "benefit", "settings": { "icon": "moon", "title": "Blackout comfort", "text": "Designed to help create a darker, more comfortable place to rest." } },
+        { "type": "benefit", "settings": { "icon": "layers", "title": "Travel ready", "text": "Everything organized, from carry-on to hotel room." } },
+        { "type": "benefit", "settings": { "icon": "spark", "title": "Considered design", "text": "Thoughtfully selected travel essentials." } },
+        { "type": "benefit", "settings": { "icon": "plane", "title": "Made for the journey", "text": "Airplanes, hotels, road trips and weekends away." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

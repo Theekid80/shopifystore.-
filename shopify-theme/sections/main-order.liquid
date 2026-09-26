@@ -1,0 +1,30 @@
+<div class="page-width page-width--narrow section section--tight">
+  <a class="link small" href="{{ routes.account_url }}">{{ 'customer.back' | t }}</a>
+  <h1 class="h-headline" style="margin-top:1rem;">{{ 'customer.order' | t }} {{ order.name }}</h1>
+  <p class="muted" style="margin-top:.75rem;">{{ order.created_at | time_tag: format: 'date' }} · {{ order.financial_status_label }} · {{ order.fulfillment_status_label }}</p>
+  <div class="table-wrap mt-lg">
+    <table class="table">
+      <thead><tr><th scope="col">{{ 'customer.product' | t }}</th><th scope="col">{{ 'customer.quantity' | t }}</th><th scope="col">{{ 'customer.total' | t }}</th></tr></thead>
+      <tbody>
+        {%- for item in order.line_items -%}
+          <tr>
+            <td>{{ item.title | escape }}{%- if item.fulfillment -%}<br><span class="xsmall muted">{{ item.fulfillment.tracking_company }} {{ item.fulfillment.tracking_number }}</span>{%- endif -%}</td>
+            <td>{{ item.quantity }}</td>
+            <td>{{ item.final_line_price | money }}</td>
+          </tr>
+        {%- endfor -%}
+      </tbody>
+      <tfoot>
+        <tr><th scope="row" colspan="2">{{ 'customer.subtotal' | t }}</th><td>{{ order.line_items_subtotal_price | money }}</td></tr>
+        {%- for line in order.shipping_methods -%}<tr><th scope="row" colspan="2">{{ 'customer.shipping' | t }} ({{ line.title | escape }})</th><td>{{ line.price | money }}</td></tr>{%- endfor -%}
+        {%- for tax in order.tax_lines -%}<tr><th scope="row" colspan="2">{{ 'customer.tax' | t }} ({{ tax.title | escape }})</th><td>{{ tax.price | money }}</td></tr>{%- endfor -%}
+        <tr><th scope="row" colspan="2">{{ 'customer.total' | t }}</th><td>{{ order.total_net_amount | money_with_currency }}</td></tr>
+      </tfoot>
+    </table>
+  </div>
+  {%- if order.shipping_address -%}<p class="muted mt-lg">{{ order.shipping_address | format_address }}</p>{%- endif -%}
+</div>
+
+{% schema %}
+{"name": "Customer order", "class": "section-main-order", "settings": []}
+{% endschema %}

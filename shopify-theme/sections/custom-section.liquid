@@ -1,0 +1,41 @@
+{%- comment -%} Flexible section built from theme blocks (blocks/*.liquid). {%- endcomment -%}
+<section class="section {{ section.settings.color_scheme }}">
+  <div class="page-width{% if section.settings.narrow %} page-width--narrow{% endif %}">
+    <div style="display:grid; gap:1.5rem; justify-items: {% if section.settings.center %}center{% else %}start{% endif %};" class="{% if section.settings.center %}center{% endif %}">
+      {% content_for 'blocks' %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Custom content",
+  "class": "section-custom",
+  "settings": [
+    { "type": "checkbox", "id": "center", "label": "Center content", "default": true },
+    { "type": "checkbox", "id": "narrow", "label": "Narrow width", "default": true },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Background",
+      "options": [
+        { "value": "bg-base", "label": "Ivory" },
+        { "value": "bg-surface", "label": "Off-white" },
+        { "value": "color-dark", "label": "Dark" }
+      ],
+      "default": "bg-base"
+    }
+  ],
+  "blocks": [{ "type": "@theme" }, { "type": "@app" }],
+  "presets": [
+    {
+      "name": "Custom content",
+      "blocks": [
+        { "type": "heading" },
+        { "type": "text" },
+        { "type": "button" }
+      ]
+    }
+  ]
+}
+{% endschema %}

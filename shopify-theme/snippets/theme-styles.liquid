@@ -1,0 +1,40 @@
+{%- comment -%}
+  Design tokens from Theme settings → Colors / Typography.
+  Bundled fonts: Cormorant Garamond and Manrope, both SIL Open Font License 1.1.
+{%- endcomment -%}
+{%- liquid
+  if settings.use_brand_fonts
+    assign heading_family = '"Cormorant Garamond", ui-serif, Georgia, serif'
+    assign body_family = 'Manrope, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif'
+  else
+    assign heading_family = settings.type_heading_font.family | append: ', ' | append: settings.type_heading_font.fallback_families
+    assign body_family = settings.type_body_font.family | append: ', ' | append: settings.type_body_font.fallback_families
+  endif
+-%}
+{% style %}
+  {%- if settings.use_brand_fonts -%}
+    @font-face { font-family: "Cormorant Garamond"; font-style: normal; font-weight: 500; font-display: swap; src: url({{ 'cormorant-garamond-latin-500-normal.woff2' | asset_url }}) format("woff2"); }
+    @font-face { font-family: "Cormorant Garamond"; font-style: normal; font-weight: 600; font-display: swap; src: url({{ 'cormorant-garamond-latin-600-normal.woff2' | asset_url }}) format("woff2"); }
+    @font-face { font-family: Manrope; font-style: normal; font-weight: 400; font-display: swap; src: url({{ 'manrope-latin-400-normal.woff2' | asset_url }}) format("woff2"); }
+    @font-face { font-family: Manrope; font-style: normal; font-weight: 500; font-display: swap; src: url({{ 'manrope-latin-500-normal.woff2' | asset_url }}) format("woff2"); }
+    @font-face { font-family: Manrope; font-style: normal; font-weight: 600; font-display: swap; src: url({{ 'manrope-latin-600-normal.woff2' | asset_url }}) format("woff2"); }
+  {%- else -%}
+    {{ settings.type_heading_font | font_face: font_display: 'swap' }}
+    {{ settings.type_body_font | font_face: font_display: 'swap' }}
+  {%- endif -%}
+
+  :root {
+    --color-bg: {{ settings.color_background }};
+    --color-surface: {{ settings.color_surface }};
+    --color-text: {{ settings.color_text }};
+    --color-muted: {{ settings.color_muted }};
+    --color-dark: {{ settings.color_dark }};
+    --color-accent: {{ settings.color_accent }};
+    --color-accent-light: {{ settings.color_accent_light }};
+    --color-border: {{ settings.color_border }};
+    --font-heading: {{ heading_family }};
+    --font-body: {{ body_family }};
+    --heading-scale: {{ settings.heading_scale | divided_by: 100.0 }};
+    --logo-width: {{ settings.logo_width }}px;
+  }
+{% endstyle %}

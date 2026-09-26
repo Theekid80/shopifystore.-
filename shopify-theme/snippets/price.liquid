@@ -1,0 +1,48 @@
+{%- comment -%}
+  Price from Shopify product/variant data.
+
+  Params:
+    product     product object (required)
+    variant     optional variant (product pages); defaults to first available
+    size        'lg' for product pages
+    show_from   true → "From $X" when variant prices differ (cards)
+    compare     optional number (cents) to show as crossed-out price instead
+                of the variant's compare-at price (bundles: separate total)
+    compare_label optional text after the crossed-out price
+
+  While pre-launch mode + "Hide prices until launch" are on, shows
+  "Price coming soon" instead of any price.
+{%- endcomment -%}
+{%- liquid
+  assign v = variant | default: product.selected_or_first_available_variant
+  assign hide = false
+  if settings.prelaunch_mode and settings.prelaunch_hide_prices
+    assign hide = true
+  endif
+  if compare
+    assign compare_amount = compare
+  else
+    assign compare_amount = v.compare_at_price
+  endif
+-%}
+<div class="price{% if size == 'lg' %} price--lg{% endif %}" data-price>
+  {%- if hide -%}
+    <span class="price__pending">{{ 'products.product.price.pending' | t }}</span>
+  {%- else -%}
+    <span class="price__current">
+      <span class="visually-hidden">{{ 'products.product.price.regular' | t }}</span>
+      <span data-price-current>
+        {%- if show_from and product.price_varies -%}
+          {%- assign from_price = product.price_min | money -%}
+          {{ 'products.product.price.from' | t: price: from_price }}
+        {%- else -%}
+          {{ v.price | money }}
+        {%- endif -%}
+      </span>
+    </span>
+    <span class="price__compare" data-price-compare {% unless compare_amount > v.price %}hidden{% endunless %}>
+      <s>{{ compare_amount | money }}</s>
+      {%- if compare_label != blank %} <span class="xsmall">{{ compare_label }}</span>{% endif -%}
+    </span>
+  {%- endif -%}
+</div>

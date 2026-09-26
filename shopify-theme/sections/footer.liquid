@@ -1,0 +1,108 @@
+{%- liquid
+  assign brand = settings.brand_name | default: shop.name
+  assign socials = 'instagram,tiktok,pinterest,facebook,youtube' | split: ','
+-%}
+<footer class="footer color-dark" {{ section.shopify_attributes }}>
+  <div class="page-width">
+    <div class="footer__top">
+      <div>
+        <a href="{{ routes.root_url }}" class="header__logo" style="position:static; transform:none;">
+          {%- if settings.show_logo_mark -%}{% render 'icon', name: 'logo-mark', class: 'logo-mark' %}{%- endif -%}
+          <span class="wordmark">{{ brand | escape }}</span>
+        </a>
+        {%- if settings.brand_tagline != blank -%}<p class="footer__tagline">{{ settings.brand_tagline | escape }}</p>{%- endif -%}
+
+        {%- if section.settings.show_signup -%}
+          <div class="footer__signup">
+            {%- if section.settings.signup_text != blank -%}<p>{{ section.settings.signup_text | escape }}</p>{%- endif -%}
+            {%- form 'customer', id: 'FooterNewsletter' -%}
+              <input type="hidden" name="contact[tags]" value="newsletter">
+              <input type="hidden" name="contact[accepts_marketing]" value="true">
+              {%- if form.posted_successfully? -%}
+                <p class="form-message" role="status" data-newsletter-success>{{ 'general.newsletter.success' | t }}</p>
+              {%- else -%}
+                <div class="field-inline">
+                  <label class="visually-hidden" for="FooterNewsletterEmail">{{ 'general.newsletter.label' | t }}</label>
+                  <input id="FooterNewsletterEmail" type="email" name="contact[email]" autocomplete="email" placeholder="{{ 'general.newsletter.placeholder' | t }}" required>
+                  <button type="submit" class="btn btn--light">{{ 'general.newsletter.submit' | t }}</button>
+                </div>
+                {%- if form.errors -%}<p class="form-message form-message--error" role="alert">{{ form.errors | default_errors }}</p>{%- endif -%}
+              {%- endif -%}
+            {%- endform -%}
+          </div>
+        {%- endif -%}
+
+        <ul class="social" role="list" aria-label="{{ 'general.social.label' | t }}">
+          {%- for network in socials -%}
+            {%- assign key = 'social_' | append: network | append: '_link' -%}
+            {%- if settings[key] != blank -%}
+              <li>
+                {%- assign network_name = network | capitalize -%}
+                <a href="{{ settings[key] }}" target="_blank" rel="noopener" aria-label="{{ 'general.social.link' | t: brand: brand, network: network_name }}">
+                  {% render 'icon', name: network %}
+                </a>
+              </li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ul>
+      </div>
+
+      <div class="footer__menus">
+        {%- for block in section.blocks -%}
+          {%- assign menu = linklists[block.settings.menu] -%}
+          {%- if menu.links.size > 0 -%}
+            <nav aria-label="{{ block.settings.heading | default: menu.title | escape }}" {{ block.shopify_attributes }}>
+              <h2 class="eyebrow">{{ block.settings.heading | default: menu.title | escape }}</h2>
+              <ul role="list">
+                {%- for link in menu.links -%}<li><a href="{{ link.url }}">{{ link.title | escape }}</a></li>{%- endfor -%}
+              </ul>
+            </nav>
+          {%- endif -%}
+        {%- endfor -%}
+        {%- if shop.policies.size > 0 -%}
+          <nav aria-label="Legal">
+            <h2 class="eyebrow">{{ section.settings.policies_heading | escape }}</h2>
+            <ul role="list">
+              {%- for policy in shop.policies -%}<li><a href="{{ policy.url }}">{{ policy.title | escape }}</a></li>{%- endfor -%}
+            </ul>
+          </nav>
+        {%- endif -%}
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <p>&copy; {{ 'now' | date: '%Y' }} {{ brand | escape }}</p>
+      {%- if section.settings.disclaimer != blank -%}<p>{{ section.settings.disclaimer | escape }}</p>{%- endif -%}
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "class": "section-footer",
+  "max_blocks": 3,
+  "enabled_on": { "groups": ["footer"] },
+  "settings": [
+    { "type": "checkbox", "id": "show_signup", "label": "Show email sign-up", "default": true },
+    { "type": "text", "id": "signup_text", "label": "Sign-up text", "default": "Travel inspiration, product updates and early access." },
+    { "type": "text", "id": "policies_heading", "label": "Policies heading", "default": "Legal", "info": "Lists the policies from Settings → Policies." },
+    {
+      "type": "textarea",
+      "id": "disclaimer",
+      "label": "Disclaimer",
+      "default": "Designed for comfort and organization while traveling. Not a medical device and not intended to diagnose, treat or prevent any condition."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "menu",
+      "name": "Menu",
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading" },
+        { "type": "link_list", "id": "menu", "label": "Menu", "default": "footer" }
+      ]
+    }
+  ]
+}
+{% endschema %}

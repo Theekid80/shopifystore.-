@@ -1,0 +1,98 @@
+{
+  "sections": {
+    "faq": {
+      "type": "faq",
+      "blocks": {
+        "q1": {
+          "type": "question",
+          "settings": {
+            "question": "What will VELARA offer?",
+            "answer": "<p>Premium travel essentials for rest and organization — individual pieces, curated bundles and the complete Travel Sleep System.</p>"
+          }
+        },
+        "q2": {
+          "type": "question",
+          "settings": {
+            "question": "Can I buy pieces individually?",
+            "answer": "<p>Yes. Every piece will be available on its own, in curated bundles, or as the complete system.</p>"
+          }
+        },
+        "q3": {
+          "type": "question",
+          "settings": {
+            "question": "What comes in the Travel Sleep System?",
+            "answer": "<p>[Add the final contents once confirmed.]</p>"
+          }
+        },
+        "q4": {
+          "type": "question",
+          "settings": {
+            "question": "How does shipping work?",
+            "answer": "<p>[Add shipping regions, costs and delivery times once confirmed.]</p>"
+          }
+        },
+        "q5": {
+          "type": "question",
+          "settings": {
+            "question": "Do you ship internationally?",
+            "answer": "<p>[Add international shipping details once confirmed.]</p>"
+          }
+        },
+        "q6": {
+          "type": "question",
+          "settings": {
+            "question": "What is your return policy?",
+            "answer": "<p>[Add your return policy once finalized. It should match Settings → Policies in Shopify.]</p>"
+          }
+        },
+        "q7": {
+          "type": "question",
+          "settings": {
+            "question": "How should I care for the sleep mask?",
+            "answer": "<p>[Add care instructions once materials are confirmed.]</p>"
+          }
+        },
+        "q8": {
+          "type": "question",
+          "settings": {
+            "question": "How compact are the organizers?",
+            "answer": "<p>[Add final dimensions once confirmed.]</p>"
+          }
+        }
+      },
+      "block_order": [
+        "q1",
+        "q2",
+        "q3",
+        "q4",
+        "q5",
+        "q6",
+        "q7",
+        "q8"
+      ],
+      "settings": {
+        "eyebrow": "FAQ",
+        "heading": "Questions, answered.",
+        "open_first": true,
+        "anchor": "faq",
+        "color_scheme": "bg-base",
+        "heading_tag": "h1"
+      }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "eyebrow": "The VELARA list",
+        "heading": "Travel better.",
+        "text": "Join the list for travel inspiration, product updates and early access.",
+        "button_label": "Join VELARA",
+        "anchor": "newsletter",
+        "color_scheme": "bg-surface"
+      }
+    }
+  },
+  "order": [
+    "faq",
+    "newsletter"
+  ]
+}

@@ -1,0 +1,27 @@
+{%- layout none -%}
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex">
+    <title>{{ 'gift_card.title' | t }} — {{ settings.brand_name | default: shop.name }}</title>
+    {% render 'theme-styles' %}
+    {{ 'base.css' | asset_url | stylesheet_tag }}
+    {{ content_for_header }}
+  </head>
+  <body>
+    <main class="page-width page-width--narrow section center">
+      <p class="eyebrow accent">{{ settings.brand_name | default: shop.name }}</p>
+      <h1 class="h-headline" style="margin-top:1rem;">{{ 'gift_card.title' | t }}</h1>
+      <p class="h-title" style="margin-top:2rem;">{{ gift_card.balance | money }}</p>
+      <p class="muted" style="margin-top:1.5rem;">{{ 'gift_card.code' | t }}</p>
+      <p style="font-size:1.25rem; letter-spacing:.1em; margin-top:.5rem;">{{ gift_card.code | format_code }}</p>
+      {%- if gift_card.pass_url -%}<p style="margin-top:1.5rem;"><a class="link" href="{{ gift_card.pass_url }}">Apple Wallet</a></p>{%- endif -%}
+      <div class="btn-row" style="justify-content:center; margin-top:2rem;">
+        <a href="{{ shop.url }}" class="btn btn--primary">{{ 'gift_card.use' | t }}</a>
+        <button type="button" class="btn btn--secondary" onclick="window.print()">{{ 'gift_card.print' | t }}</button>
+      </div>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,45 @@
+<div class="page-width page-width--narrow section section--tight">
+  <a class="link small" href="{{ routes.account_url }}">{{ 'customer.back' | t }}</a>
+  <h1 class="h-headline" style="margin-top:1rem;">{{ 'customer.addresses' | t }}</h1>
+  <ul class="list-unstyled mt-lg" style="display:grid; gap:1.5rem;">
+    {%- for address in customer.addresses -%}
+      <li class="prelaunch-note">
+        {{ address | format_address }}
+        {%- form 'customer_address', address -%}
+          <input type="hidden" name="_method" value="delete">
+          <button type="submit" class="link small" style="margin-top:.75rem;">{{ 'customer.delete' | t }}</button>
+        {%- endform -%}
+      </li>
+    {%- endfor -%}
+  </ul>
+  <details class="mt-lg">
+    <summary class="btn btn--secondary">{{ 'customer.add_address' | t }}</summary>
+    {%- form 'customer_address', customer.new_address, class: 'form-grid' -%}
+    {%- if form.errors -%}<p class="form-message form-message--error" role="alert">{{ form.errors | default_errors }}</p>{%- endif -%}
+      <div class="form-grid form-grid--2" style="margin-top:1.5rem;">
+    <div class="form-field">
+      <label for="AddrFirst">{{ 'customer.first_name' | t }}</label>
+      <input id="AddrFirst" type="text" name="address[first_name]" autocomplete="given-name" >
+    </div>
+    <div class="form-field">
+      <label for="AddrLast">{{ 'customer.last_name' | t }}</label>
+      <input id="AddrLast" type="text" name="address[last_name]" autocomplete="family-name" >
+    </div>
+      </div>
+      <div class="form-field"><label for="AddrAddress1">Address</label><input id="AddrAddress1" type="text" name="address[address1]" autocomplete="address-line1"></div>
+      <div class="form-grid form-grid--2">
+        <div class="form-field"><label for="AddrCity">City</label><input id="AddrCity" type="text" name="address[city]" autocomplete="address-level2"></div>
+        <div class="form-field"><label for="AddrZip">Postal code</label><input id="AddrZip" type="text" name="address[zip]" autocomplete="postal-code"></div>
+      </div>
+      <div class="form-grid form-grid--2">
+        <div class="form-field"><label for="AddrCountry">Country</label><select id="AddrCountry" name="address[country]" autocomplete="country">{{ all_country_option_tags }}</select></div>
+        <div class="form-field"><label for="AddrProvince">Province/State</label><input id="AddrProvince" type="text" name="address[province]" autocomplete="address-level1"></div>
+      </div>
+      <div><button type="submit" class="btn btn--primary">{{ 'customer.add_address' | t }}</button></div>
+    {%- endform -%}
+  </details>
+</div>
+
+{% schema %}
+{"name": "Customer addresses", "class": "section-main-addresses", "settings": []}
+{% endschema %}

@@ -1,0 +1,57 @@
+{%- comment -%} Cart page — Shopify's native cart. Checkout is always Shopify's. {%- endcomment -%}
+<div class="page-width section section--tight" data-cart-page>
+  <header class="page-header" style="padding-top:0;">
+    <h1 class="h-headline">{{ 'cart.title' | t }}</h1>
+  </header>
+
+  {%- if cart.item_count == 0 -%}
+    <div class="empty-state">
+      <p class="h-title">{{ 'cart.empty' | t }}</p>
+      <p class="muted">{{ 'cart.empty_text' | t }}</p>
+      <a href="{{ routes.all_products_collection_url }}" class="btn btn--primary">{{ 'general.continue_shopping' | t }} {% render 'icon', name: 'arrow', class: 'icon-arrow' %}</a>
+    </div>
+  {%- else -%}
+    <form action="{{ routes.cart_url }}" method="post" id="CartForm" class="cart-page">
+      <div>
+        {% render 'free-shipping-bar' %}
+        <ul class="cart-items" role="list" aria-label="{{ 'cart.title' | t }}">
+          {%- for item in cart.items -%}
+            {% render 'cart-line', item: item, index: forloop.index %}
+          {%- endfor -%}
+        </ul>
+        <p class="product-form__error" role="alert" data-cart-error hidden></p>
+        {%- if settings.cart_show_note -%}
+          <div class="cart-note form-field" style="margin-top: 2rem;">
+            <label for="CartNote">{{ 'cart.note' | t }}</label>
+            <textarea id="CartNote" name="note">{{ cart.note }}</textarea>
+          </div>
+        {%- endif -%}
+      </div>
+      <aside class="cart-page__summary" aria-label="{{ 'cart.subtotal' | t }}">
+        {%- for discount in cart.cart_level_discount_applications -%}
+          <div class="cart-summary__row small"><span>{{ discount.title | escape }}</span><span>−{{ discount.total_allocated_amount | money }}</span></div>
+        {%- endfor -%}
+        <div class="cart-summary__row">
+          <span class="eyebrow muted">{{ 'cart.subtotal' | t }}</span>
+          <span class="cart-summary__total">{{ cart.total_price | money_with_currency }}</span>
+        </div>
+        <p class="xsmall muted">{{ 'cart.taxes_shipping' | t }}</p>
+        <button type="submit" name="checkout" class="btn btn--primary btn--lg btn--block">{{ 'cart.checkout' | t }}</button>
+        {%- if additional_checkout_buttons -%}
+          <div class="additional-checkout-buttons">{{ content_for_additional_checkout_buttons }}</div>
+        {%- endif -%}
+        {%- if settings.cart_show_note -%}
+          <button type="submit" name="update" class="btn btn--secondary btn--block">{{ 'cart.update' | t }}</button>
+        {%- endif -%}
+      </aside>
+    </form>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Cart",
+  "class": "section-main-cart",
+  "settings": []
+}
+{% endschema %}

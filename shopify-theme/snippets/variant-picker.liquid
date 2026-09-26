@@ -1,0 +1,45 @@
+{%- comment -%}
+  Variant picker driven by the product's real options (Color, Size, …).
+  Color options render as swatches (Shopify swatch data if set), others as pills.
+  theme.js keeps the form's variant id, price, availability and image in sync.
+{%- endcomment -%}
+<div class="variant-picker-wrap" data-variant-picker>
+  {%- for option in product.options_with_values -%}
+    {%- assign opt = option.name | downcase -%}
+    {%- assign is_color = false -%}
+    {%- if opt == 'color' or opt == 'colour' -%}{%- assign is_color = true -%}{%- endif -%}
+    <fieldset class="variant-picker" style="margin-bottom: 1.25rem;">
+      <legend class="eyebrow muted">
+        {{ option.name | escape }}
+        <span class="small" style="text-transform:none; letter-spacing:0; color: var(--color-text); margin-left:.5rem;" data-selected-value>{{ option.selected_value | escape }}</span>
+      </legend>
+      <div class="variant-picker__values">
+        {%- for value in option.values -%}
+          {%- liquid
+            assign input_id = section_id | append: '-' | append: option.position | append: '-' | append: forloop.index
+            if value.swatch.color
+              assign swatch = value.swatch.color
+            else
+              assign swatch = value | handleize | replace: '-', ''
+            endif
+          -%}
+          <label class="{% if is_color %}variant-swatch{% else %}variant-pill{% endif %}" for="{{ input_id }}">
+            <input
+              type="radio"
+              id="{{ input_id }}"
+              name="{{ section_id }}-{{ option.name | handle }}"
+              value="{{ value | escape }}"
+              {% if option.selected_value == value %}checked{% endif %}
+              {% unless value.available %}class="is-unavailable"{% endunless %}
+            >
+            {%- if is_color -%}
+              <span style="--swatch: {{ swatch }};" title="{{ value | escape }}"><span class="visually-hidden">{{ value | escape }}</span></span>
+            {%- else -%}
+              <span>{{ value | escape }}</span>
+            {%- endif -%}
+          </label>
+        {%- endfor -%}
+      </div>
+    </fieldset>
+  {%- endfor -%}
+</div>

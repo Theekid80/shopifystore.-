@@ -1,0 +1,25 @@
+{%- comment -%} Theme block: image. {%- endcomment -%}
+<div class="media media--lg media--{{ block.settings.ratio }}" {{ block.shopify_attributes }}>
+  {%- render 'responsive-image', image: block.settings.image, sizes: '(min-width: 990px) 50vw, 100vw' -%}
+</div>
+
+{% schema %}
+{
+  "name": "Image",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    {
+      "type": "select",
+      "id": "ratio",
+      "label": "Shape",
+      "options": [
+        { "value": "landscape", "label": "Landscape" },
+        { "value": "square", "label": "Square" },
+        { "value": "portrait", "label": "Portrait" }
+      ],
+      "default": "landscape"
+    }
+  ],
+  "presets": [{ "name": "Image" }]
+}
+{% endschema %}

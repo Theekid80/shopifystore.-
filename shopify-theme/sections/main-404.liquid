@@ -1,0 +1,10 @@
+<div class="page-width section empty-state">
+  <p class="eyebrow accent">404</p>
+  <h1 class="h-headline">{{ 'templates.404.title' | t }}</h1>
+  <p class="muted">{{ 'templates.404.text' | t }}</p>
+  <a href="{{ routes.root_url }}" class="btn btn--primary">{{ 'general.home' | t }} {% render 'icon', name: 'arrow', class: 'icon-arrow' %}</a>
+</div>
+
+{% schema %}
+{ "name": "404", "class": "section-main-404", "settings": [] }
+{% endschema %}

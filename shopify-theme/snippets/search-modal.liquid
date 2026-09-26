@@ -1,0 +1,13 @@
+{%- comment -%} Search panel — submits to Shopify's native search. {%- endcomment -%}
+<dialog id="SearchModal" class="drawer drawer--top" aria-label="{{ 'general.search.label' | t }}">
+  <div class="drawer__overlay" data-drawer-close></div>
+  <div class="drawer__panel">
+    <form action="{{ routes.search_url }}" method="get" role="search" class="search-modal__form">
+      {% render 'icon', name: 'search' %}
+      <label class="visually-hidden" for="SearchModalInput">{{ 'general.search.label' | t }}</label>
+      <input id="SearchModalInput" class="search-modal__input" type="search" name="q" placeholder="{{ 'general.search.placeholder' | t }}" autocomplete="off" autofocus>
+      <input type="hidden" name="type" value="product">
+      <button type="button" class="drawer__close" data-drawer-close aria-label="{{ 'general.search.close' | t }}">{% render 'icon', name: 'close' %}</button>
+    </form>
+  </div>
+</dialog>

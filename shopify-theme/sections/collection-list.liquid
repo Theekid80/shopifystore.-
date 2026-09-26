@@ -1,0 +1,116 @@
+{%- comment -%}
+  "Shop the collection" — category cards (Sleep / Organize / Bundles).
+  Each card links to a Shopify collection (picked, or found by handle).
+{%- endcomment -%}
+<section class="section {{ section.settings.color_scheme }}" aria-labelledby="CollectionListTitle-{{ section.id }}">
+  <div class="page-width">
+    <div class="section-heading__row">
+      <div class="section-heading reveal">
+        {%- if section.settings.eyebrow != blank -%}<p class="eyebrow accent">{{ section.settings.eyebrow | escape }}</p>{%- endif -%}
+        <h2 id="CollectionListTitle-{{ section.id }}" class="h-headline">{{ section.settings.heading | escape }}</h2>
+      </div>
+      {%- if section.settings.promise_1 != blank -%}
+        <p class="promise-row reveal" style="--delay: 120ms;">
+          <span>{{ section.settings.promise_1 | escape }}</span>
+          <span>{{ section.settings.promise_2 | escape }}</span>
+          <span>{{ section.settings.promise_3 | escape }}</span>
+        </p>
+      {%- endif -%}
+    </div>
+
+    <ul class="grid mt-lg" role="list" style="--cols-desktop: {{ section.blocks.size | at_most: 3 }};">
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign c = block.settings.collection
+          if c == blank and block.settings.collection_handle != blank
+            assign c = collections[block.settings.collection_handle]
+          endif
+          if c != blank and c.url != blank
+            assign href = c.url
+          else
+            assign href = '/collections/' | append: block.settings.collection_handle
+          endif
+          assign img = block.settings.image
+          if img == blank and c.image
+            assign img = c.image
+          endif
+        -%}
+        <li class="reveal" style="--delay: {{ forloop.index0 | times: 90 }}ms;" {{ block.shopify_attributes }}>
+          <a href="{{ href }}" class="category-card">
+            <div class="category-card__media">
+              {%- render 'responsive-image', image: img, fallback_asset: block.settings.fallback_image, fallback_alt: '', alt: '', sizes: '(min-width: 990px) 33vw, 100vw' -%}
+            </div>
+            <span class="category-card__index">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>
+            <h3 class="h-title category-card__title">{{ block.settings.title | default: c.title | escape }}</h3>
+            {%- if block.settings.text != blank -%}<p class="category-card__text">{{ block.settings.text | escape }}</p>{%- endif -%}
+            <span class="link-arrow category-card__link">{{ block.settings.link_label | escape }} {% render 'icon', name: 'arrow', class: 'icon-arrow' %}</span>
+          </a>
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Collection list",
+  "class": "section-collection-list",
+  "max_blocks": 4,
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Shop the collection" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Travel essentials, your way." },
+    { "type": "text", "id": "promise_1", "label": "Line 1", "default": "Buy one." },
+    { "type": "text", "id": "promise_2", "label": "Line 2", "default": "Build your own system." },
+    { "type": "text", "id": "promise_3", "label": "Line 3", "default": "Or get the complete set." },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Background",
+      "options": [
+        { "value": "bg-base", "label": "Ivory" },
+        { "value": "bg-surface", "label": "Off-white" }
+      ],
+      "default": "bg-base"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Category",
+      "settings": [
+        { "type": "collection", "id": "collection", "label": "Collection" },
+        { "type": "text", "id": "collection_handle", "label": "…or collection handle", "info": "Used when no collection is picked." },
+        { "type": "text", "id": "title", "label": "Title" },
+        { "type": "textarea", "id": "text", "label": "Text" },
+        { "type": "text", "id": "link_label", "label": "Link label", "default": "Shop" },
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        {
+          "type": "select",
+          "id": "fallback_image",
+          "label": "Concept image (until you pick one)",
+          "options": [
+            { "value": "concept-airplane-lifestyle.jpg", "label": "In flight" },
+            { "value": "concept-sleep-mask.jpg", "label": "Sleep mask" },
+            { "value": "concept-suitcase-organized.jpg", "label": "Packed suitcase" },
+            { "value": "concept-whats-included.jpg", "label": "Flat lay" },
+            { "value": "concept-travel-system.jpg", "label": "Hotel" },
+            { "value": "concept-road-trip-lifestyle.jpg", "label": "Pouch by window" },
+            { "value": "concept-business-lifestyle.jpg", "label": "Traveler" }
+          ],
+          "default": "concept-sleep-mask.jpg"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collection list",
+      "blocks": [
+        { "type": "category", "settings": { "collection_handle": "sleep", "title": "Sleep", "text": "Blackout comfort and quiet, wherever you rest.", "link_label": "Shop sleep", "fallback_image": "concept-airplane-lifestyle.jpg" } },
+        { "type": "category", "settings": { "collection_handle": "travel-organization", "title": "Organize", "text": "Everything in its place, from carry-on to hotel.", "link_label": "Shop organization", "fallback_image": "concept-suitcase-organized.jpg" } },
+        { "type": "category", "settings": { "collection_handle": "bundles", "title": "Bundles", "text": "Curated sets — or the complete travel sleep system.", "link_label": "Shop bundles", "fallback_image": "concept-whats-included.jpg" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,12 @@
+{
+  "current": "Default",
+  "presets": {
+    "Default": {
+      "brand_name": "VELARA",
+      "brand_tagline": "Better Sleep. Smoother Journeys.",
+      "prelaunch_mode": true,
+      "use_brand_fonts": true,
+      "cart_type": "drawer"
+    }
+  }
+}

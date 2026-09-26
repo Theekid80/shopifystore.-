@@ -1,0 +1,79 @@
+{
+  "sections": {
+    "hero": {
+      "type": "image-banner",
+      "settings": {
+        "fallback_image": "concept-hero-travel.jpg",
+        "focal": "65% 50%",
+        "eyebrow": "About",
+        "heading": "Travel, refined.",
+        "text": "VELARA brings together premium travel essentials around one idea: traveling should feel more comfortable, organized and restorative.",
+        "button_label": "Shop the collection",
+        "button_link": "/collections/all"
+      }
+    },
+    "story": {
+      "type": "image-with-text",
+      "blocks": {
+        "p1": {
+          "type": "point",
+          "settings": {
+            "title": "Comfort",
+            "text": "Thoughtful essentials designed around rest."
+          }
+        },
+        "p2": {
+          "type": "point",
+          "settings": {
+            "title": "Order",
+            "text": "Everything you need, exactly where you expect it."
+          }
+        },
+        "p3": {
+          "type": "point",
+          "settings": {
+            "title": "Simplicity",
+            "text": "One system instead of a bag full of loose accessories."
+          }
+        }
+      },
+      "block_order": [
+        "p1",
+        "p2",
+        "p3"
+      ],
+      "settings": {
+        "fallback_image": "concept-travel-system.jpg",
+        "image_alt": "Travel essentials arranged on a hotel bed",
+        "ratio": "landscape",
+        "layout": "image_left",
+        "eyebrow": "Our story",
+        "heading": "Comfort for the journey.",
+        "lead": "The hours you spend in transit and away from home deserve the same comfort and order as the ones you spend at home.",
+        "text": "<p>[Add your founder story here.]</p>",
+        "color_scheme": "bg-surface"
+      }
+    },
+    "main": {
+      "type": "main-page",
+      "settings": {}
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "eyebrow": "The VELARA list",
+        "heading": "Travel better.",
+        "text": "Join the list for travel inspiration, product updates and early access.",
+        "button_label": "Join VELARA",
+        "anchor": "newsletter",
+        "color_scheme": "bg-surface"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "story",
+    "main",
+    "newsletter"
+  ]
+}

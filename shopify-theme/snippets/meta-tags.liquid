@@ -1,0 +1,41 @@
+{%- comment -%} Open Graph + Twitter/X card metadata. {%- endcomment -%}
+{%- liquid
+  assign og_title = page_title | default: shop.name
+  assign og_url = canonical_url | default: request.origin
+  assign og_type = 'website'
+  assign og_description = page_description | default: shop.description | default: settings.brand_tagline
+  if request.page_type == 'product'
+    assign og_type = 'product'
+  elsif request.page_type == 'article'
+    assign og_type = 'article'
+  elsif request.page_type == 'password'
+    assign og_url = request.origin
+  endif
+  assign og_image = page_image | default: settings.share_image
+-%}
+<meta property="og:site_name" content="{{ settings.brand_name | default: shop.name | escape }}">
+<meta property="og:url" content="{{ og_url }}">
+<meta property="og:title" content="{{ og_title | escape }}">
+<meta property="og:type" content="{{ og_type }}">
+<meta property="og:description" content="{{ og_description | escape }}">
+{%- if og_image -%}
+  <meta property="og:image" content="https:{{ og_image | image_url: width: 1200 }}">
+  <meta property="og:image:secure_url" content="https:{{ og_image | image_url: width: 1200 }}">
+  <meta property="og:image:width" content="{{ og_image.width }}">
+  <meta property="og:image:height" content="{{ og_image.height }}">
+{%- else -%}
+  <meta property="og:image" content="https:{{ 'concept-hero-travel.jpg' | asset_url }}">
+{%- endif -%}
+{%- liquid
+  assign show_price_meta = true
+  if settings.prelaunch_mode and settings.prelaunch_hide_prices
+    assign show_price_meta = false
+  endif
+-%}
+{%- if request.page_type == 'product' and show_price_meta -%}
+  <meta property="og:price:amount" content="{{ product.price | money_without_currency | strip_html }}">
+  <meta property="og:price:currency" content="{{ cart.currency.iso_code }}">
+{%- endif -%}
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ og_title | escape }}">
+<meta name="twitter:description" content="{{ og_description | escape }}">

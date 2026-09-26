@@ -1,0 +1,46 @@
+{%- comment -%}
+  Related products from Shopify's Product Recommendations API
+  (loaded after the page with theme.js). Manual picks can be set per
+  product in the Search & Discovery app.
+{%- endcomment -%}
+<section class="section {{ section.settings.color_scheme }}" aria-labelledby="Related-{{ section.id }}">
+  <div class="page-width">
+    <div
+      data-recommendations
+      data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&limit={{ section.settings.limit }}&intent=related"
+    >
+      {%- if recommendations.performed? and recommendations.products_count > 0 -%}
+        <div class="section-heading">
+          <h2 id="Related-{{ section.id }}" class="h-headline">{{ section.settings.heading | escape }}</h2>
+        </div>
+        <ul class="slider-mobile mt-lg" role="list" style="--cols-desktop: {{ section.settings.limit | at_most: 4 }};">
+          {%- for product in recommendations.products -%}
+            <li class="reveal">{% render 'product-card', product: product, section: section %}</li>
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Related products",
+  "class": "section-related-products",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Complete your system." },
+    { "type": "range", "id": "limit", "label": "Products", "min": 2, "max": 8, "step": 1, "default": 4 },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Background",
+      "options": [
+        { "value": "bg-base", "label": "Ivory" },
+        { "value": "bg-surface", "label": "Off-white" }
+      ],
+      "default": "bg-surface"
+    }
+  ],
+  "presets": [{ "name": "Related products" }]
+}
+{% endschema %}

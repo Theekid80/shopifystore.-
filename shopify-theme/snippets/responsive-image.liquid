@@ -1,0 +1,57 @@
+{%- comment -%}
+  Responsive image with srcset from Shopify's CDN, or a bundled concept
+  image when nothing has been picked yet.
+
+  Params:
+    image           Shopify image object (from image_picker / product media)
+    fallback_asset  optional theme asset filename used when `image` is blank
+    fallback_alt    alt text for the fallback asset
+    alt             optional alt override ("" for decorative)
+    sizes           sizes attribute (default 100vw)
+    widths          comma list of widths
+    class           class on <img>
+    loading         'lazy' (default) or 'eager'
+    priority        true → fetchpriority=high + eager
+
+  Concept images (bundled assets) carry a small "Concept image" label while
+  Theme settings → Product imagery → "Label bundled concept images" is on,
+  so they're never presented as final product photography.
+{%- endcomment -%}
+{%- liquid
+  assign sizes = sizes | default: '100vw'
+  assign widths = widths | default: '360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048'
+  assign loading = loading | default: 'lazy'
+  if priority
+    assign loading = 'eager'
+  endif
+-%}
+{%- if image != blank -%}
+  {%- liquid
+    if alt != nil
+      assign img_alt = alt
+    else
+      assign img_alt = image.alt | default: fallback_alt
+    endif
+  -%}
+  {%- if priority -%}
+    {{ image | image_url: width: 2400 | image_tag: widths: widths, sizes: sizes, loading: loading, fetchpriority: 'high', class: class, alt: img_alt }}
+  {%- else -%}
+    {{ image | image_url: width: 2400 | image_tag: widths: widths, sizes: sizes, loading: loading, class: class, alt: img_alt }}
+  {%- endif -%}
+{%- elsif fallback_asset != blank -%}
+  {%- if alt != nil -%}{%- assign img_alt = alt -%}{%- else -%}{%- assign img_alt = fallback_alt -%}{%- endif -%}
+  <img
+    src="{{ fallback_asset | asset_url }}"
+    alt="{{ img_alt | escape }}"
+    loading="{{ loading }}"
+    {% if priority %}fetchpriority="high"{% endif %}
+    {% if class %}class="{{ class }}"{% endif %}
+    width="1600"
+    height="1200"
+  >
+  {%- if request.design_mode or settings.show_concept_labels -%}
+    <span class="concept-label">{{ 'general.concept_image' | t }}</span>
+  {%- endif -%}
+{%- else -%}
+  {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+{%- endif -%}

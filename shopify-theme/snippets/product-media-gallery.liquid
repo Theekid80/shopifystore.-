@@ -1,0 +1,45 @@
+{%- comment -%}
+  Product gallery: product.media (images uploaded in Shopify Admin).
+  Params: product, priority, section_id
+  If metafield custom.concept_imagery is true, shows the concept notice
+  from Theme settings → Product imagery.
+{%- endcomment -%}
+{%- assign current_media = product.selected_or_first_available_variant.featured_media | default: product.featured_media -%}
+<div data-gallery>
+  {%- if product.media.size == 0 -%}
+    <div class="media media--lg media--gallery">{{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}</div>
+  {%- else -%}
+    {%- for media in product.media -%}
+      <div class="gallery__slide media media--lg media--gallery" data-media-id="{{ media.id }}" {% unless media.id == current_media.id %}hidden{% endunless %}>
+        {%- case media.media_type -%}
+          {%- when 'image' -%}
+            {%- if media.id == current_media.id and priority -%}
+              {%- render 'responsive-image', image: media, sizes: '(min-width: 990px) 55vw, 100vw', priority: true -%}
+            {%- else -%}
+              {%- render 'responsive-image', image: media, sizes: '(min-width: 990px) 55vw, 100vw' -%}
+            {%- endif -%}
+          {%- when 'video' -%}
+            {{ media | video_tag: controls: true, image_size: '1600x', playsinline: true }}
+          {%- when 'external_video' -%}
+            {{ media | external_video_tag: loading: 'lazy' }}
+          {%- else -%}
+            {{ media.preview_image | image_url: width: 1600 | image_tag: loading: 'lazy' }}
+        {%- endcase -%}
+      </div>
+    {%- endfor -%}
+    {%- if product.media.size > 1 -%}
+      <ul class="gallery__thumbs" role="list" aria-label="{{ product.title | escape }}">
+        {%- for media in product.media -%}
+          <li>
+            <button type="button" class="gallery__thumb" data-target="{{ media.id }}" aria-current="{% if media.id == current_media.id %}true{% else %}false{% endif %}" aria-label="{{ 'accessibility.image_of' | t: index: forloop.index, count: product.media.size }}">
+              {{ media.preview_image | image_url: width: 200 | image_tag: loading: 'lazy', alt: '', widths: '100, 200' }}
+            </button>
+          </li>
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+  {%- endif -%}
+  {%- if product.metafields.custom.concept_imagery.value == true and settings.concept_image_notice != blank -%}
+    <p class="concept-notice">{{ settings.concept_image_notice | escape }}</p>
+  {%- endif -%}
+</div>

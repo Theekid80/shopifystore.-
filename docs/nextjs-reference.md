@@ -1,4 +1,6 @@
-# VELARA — Better Sleep. Smoother Journeys.
+# VELARA — Next.js design reference (legacy)
+
+> This was the original headless prototype. It is kept **only as a design reference**. The production storefront is the Shopify theme in `shopify-theme/` — see the root README. Do not deploy this app for commerce.
 
 The storefront for **VELARA**, a premium travel brand built around one hero product: the **VELARA Travel Sleep System**.
 

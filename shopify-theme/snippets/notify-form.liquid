@@ -1,0 +1,23 @@
+{%- comment -%}
+  "Notify me" sign-up using Shopify's native customer form. The email is
+  saved as a Shopify customer with marketing consent and tagged
+  "notify" + "notify-<product-handle>", so you can email them at launch
+  with Shopify Email or Klaviyo.
+{%- endcomment -%}
+{%- assign notify_id = 'Notify-' | append: product.id -%}
+{%- form 'customer', id: notify_id, class: 'notify-form' -%}
+  <input type="hidden" name="contact[tags]" value="notify,notify-{{ product.handle }}">
+  <input type="hidden" name="contact[accepts_marketing]" value="true">
+  {%- if form.posted_successfully? -%}
+    <p class="form-message" role="status" data-newsletter-success>{{ 'general.newsletter.success' | t }}</p>
+  {%- else -%}
+    <div class="field-inline">
+      <label class="visually-hidden" for="{{ notify_id }}-email">{{ 'general.newsletter.label' | t }}</label>
+      <input id="{{ notify_id }}-email" type="email" name="contact[email]" autocomplete="email" placeholder="{{ 'general.newsletter.placeholder' | t }}" required>
+      <button type="submit" class="btn btn--primary">{{ 'products.product.notify_me' | t }}</button>
+    </div>
+    {%- if form.errors -%}
+      <p class="form-message form-message--error" role="alert">{{ form.errors | default_errors }}</p>
+    {%- endif -%}
+  {%- endif -%}
+{%- endform -%}

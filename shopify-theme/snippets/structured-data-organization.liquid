@@ -1,0 +1,36 @@
+{%- comment -%} Organization + WebSite structured data (home page). {%- endcomment -%}
+{%- liquid
+  assign brand = settings.brand_name | default: shop.name
+  assign same_as = ''
+  assign social_keys = 'social_instagram_link,social_tiktok_link,social_pinterest_link,social_facebook_link,social_youtube_link' | split: ','
+  for key in social_keys
+    if settings[key] != blank
+      assign same_as = same_as | append: settings[key] | append: '|'
+    endif
+  endfor
+  assign same_as = same_as | split: '|'
+-%}
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "name": {{ brand | json }},
+        "url": {{ request.origin | append: routes.root_url | json }},
+        {%- if settings.logo -%}"logo": {{ settings.logo | image_url: width: 600 | prepend: 'https:' | json }},{%- endif -%}
+        "sameAs": {{ same_as | json }}
+      },
+      {
+        "@type": "WebSite",
+        "name": {{ brand | json }},
+        "url": {{ request.origin | append: routes.root_url | json }},
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": {{ request.origin | append: routes.search_url | append: '?q={search_term_string}' | json }},
+          "query-input": "required name=search_term_string"
+        }
+      }
+    ]
+  }
+</script>

@@ -1,0 +1,25 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "badge": { "type": "badge", "settings": {} },
+        "title": { "type": "title", "settings": {} },
+        "price": { "type": "price", "settings": { "show_separate_total": true } },
+        "short": { "type": "short_description", "settings": {} },
+        "buy": { "type": "buy_buttons", "settings": { "show_dynamic_checkout": true } },
+        "system": { "type": "part_of_system", "settings": {} },
+        "description": { "type": "description", "settings": {} },
+        "details": { "type": "collapsible", "settings": { "heading": "Details", "source": "details", "show_sku": false, "open": false } },
+        "care": { "type": "collapsible", "settings": { "heading": "Care", "source": "care", "open": false } },
+        "shipping": { "type": "collapsible", "settings": { "heading": "Shipping", "source": "shipping", "open": false } },
+        "returns": { "type": "collapsible", "settings": { "heading": "Returns", "source": "returns", "open": false } }
+      },
+      "block_order": ["badge", "title", "price", "short", "buy", "system", "description", "details", "care", "shipping", "returns"],
+      "settings": { "sticky_atc": true, "system_handle": "velara-travel-sleep-system" }
+    },
+    "reviews": { "type": "product-reviews", "settings": { "heading": "Reviews" } },
+    "related": { "type": "related-products", "settings": { "heading": "Complete your system.", "limit": 4, "color_scheme": "bg-surface" } }
+  },
+  "order": ["main", "reviews", "related"]
+}
