@@ -20,7 +20,19 @@
             if value.swatch.color
               assign swatch = value.swatch.color
             else
-              assign swatch = value | handleize | replace: '-', ''
+              # Colour from the name's base, so "Black (Small)" or "Dark Gray + Eye Mask" still get a dot.
+              assign base = value | split: ' (' | first | split: ' +' | first | split: ',' | first | strip
+              assign swatch = base | handleize | replace: '-', ''
+              case swatch
+                when 'navyblue'
+                  assign swatch = 'navy'
+                when 'rosered'
+                  assign swatch = '#c2185b'
+                when 'claret'
+                  assign swatch = '#7f1734'
+                when 'silvery'
+                  assign swatch = 'silver'
+              endcase
             endif
           -%}
           <label class="{% if is_color %}variant-swatch{% else %}variant-pill{% endif %}" for="{{ input_id }}">
