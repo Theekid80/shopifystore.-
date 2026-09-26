@@ -1,0 +1,21 @@
+@font-face { font-family: "Cormorant Garamond"; src: url(../../assets/cormorant-garamond-latin-500-normal.woff2); font-weight: 500; }
+@font-face { font-family: Manrope; src: url(../../assets/manrope-latin-400-normal.woff2); font-weight: 400; }
+@font-face { font-family: Manrope; src: url(../../assets/manrope-latin-500-normal.woff2); font-weight: 500; }
+:root { --ivory: #F7F5F0; --ink: #111; --muted: #67645E; --charcoal: #161615; }
+* { box-sizing: border-box; margin: 0; }
+html, body { width: var(--w); height: var(--h); overflow: hidden; }
+body { font-family: Manrope, sans-serif; -webkit-font-smoothing: antialiased; }
+.ad { position: relative; width: var(--w); height: var(--h); overflow: hidden; background: var(--ivory); color: var(--ink); }
+.ad--dark { background: var(--charcoal); color: #fff; }
+.wordmark { font-family: Manrope; font-weight: 500; letter-spacing: .52em; font-size: calc(var(--u) * 1.9); }
+.eyebrow { font-weight: 500; letter-spacing: .28em; text-transform: uppercase; font-size: calc(var(--u) * 1.25); }
+.display { font-family: "Cormorant Garamond"; font-weight: 500; letter-spacing: -.02em; line-height: .95; }
+.copy { font-size: calc(var(--u) * 1.9); line-height: 1.5; color: var(--muted); }
+.ad--dark .copy { color: rgba(255,255,255,.8); }
+.cta { display: inline-block; padding: calc(var(--u)*1.5) calc(var(--u)*3); border: 2px solid currentColor; font-weight: 500; letter-spacing: .24em; text-transform: uppercase; font-size: calc(var(--u)*1.3); }
+.cta--solid { background: var(--ink); color: var(--ivory); border-color: var(--ink); }
+.product { mix-blend-mode: multiply; filter: brightness(1.08) contrast(1.08); }
+.rule { height: 1px; background: currentColor; opacity: .2; }
+.top { position: absolute; left: var(--pad); right: var(--pad); top: var(--pad); display: flex; justify-content: space-between; align-items: center; }
+.bottom { position: absolute; left: var(--pad); right: var(--pad); bottom: var(--pad); }
+.fact { font-size: calc(var(--u)*1.3); letter-spacing: .2em; text-transform: uppercase; color: var(--muted); }
