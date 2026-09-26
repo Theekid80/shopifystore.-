@@ -1,0 +1,23 @@
+{%- comment -%}
+  Star rating from a review app's standard metafields (reviews.rating,
+  reviews.rating_count). Renders nothing unless genuine ratings exist.
+  Params: product, show_count (default true)
+{%- endcomment -%}
+{%- liquid
+  assign rating = product.metafields.reviews.rating.value
+  assign count = product.metafields.reviews.rating_count.value | default: 0
+-%}
+{%- if settings.show_ratings and rating != blank and count > 0 -%}
+  {%- liquid
+    assign scale = rating.scale_max | default: 5
+    assign value = rating.rating | round: 1
+    assign pct = rating.rating | times: 100 | divided_by: scale
+  -%}
+  <p class="rating">
+    <span class="rating__stars" style="--pct: {{ pct }}%;" aria-hidden="true">★★★★★</span>
+    <span class="visually-hidden">{{ 'products.product.rating' | t: value: value, max: scale }}</span>
+    {%- unless show_count == false -%}
+      <a href="#reviews" class="rating__count">{{ 'products.product.rating_count' | t: count: count }}</a>
+    {%- endunless -%}
+  </p>
+{%- endif -%}

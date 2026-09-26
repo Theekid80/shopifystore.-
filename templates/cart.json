@@ -1,20 +1,25 @@
 {
   "sections": {
-    "main": { "type": "main-cart", "settings": {} },
+    "main": {
+      "type": "main-cart",
+      "settings": {}
+    },
     "related": {
       "type": "featured-collection",
       "settings": {
-        "collection_handle": "all",
-        "eyebrow": "Selected",
+        "collection_handle": "the-wedra-travel-edit",
+        "eyebrow": "Complete your journey",
         "heading": "You may also like",
         "limit": 4,
         "columns": 4,
         "view_all_label": "View all",
-        "empty_text": "New pieces are on their way.",
         "anchor": "more",
         "color_scheme": "bg-surface"
       }
     }
   },
-  "order": ["main", "related"]
+  "order": [
+    "main",
+    "related"
+  ]
 }

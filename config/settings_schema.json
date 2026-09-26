@@ -12,10 +12,20 @@
     "settings": [
       {
         "type": "paragraph",
-        "content": "The brand name is used across the theme: header wordmark, footer, page titles, social sharing and structured data."
+        "content": "WEDRA is the retailer and curator. This name is used for the header wordmark, footer, page titles, sharing and store structured data — never as the brand of a product."
       },
-      { "type": "text", "id": "brand_name", "label": "Brand name", "default": "WEDRA" },
-      { "type": "text", "id": "brand_tagline", "label": "Tagline", "default": "Less noise. Better things." },
+      {
+        "type": "text",
+        "id": "brand_name",
+        "label": "Brand name",
+        "default": "WEDRA"
+      },
+      {
+        "type": "text",
+        "id": "brand_tagline",
+        "label": "Tagline",
+        "default": "Premium travel, leisure & sleep essentials."
+      },
       {
         "type": "image_picker",
         "id": "logo",
@@ -28,8 +38,57 @@
         "label": "Logo image on dark backgrounds",
         "info": "Optional light version, used over the homepage hero and in the footer."
       },
-      { "type": "range", "id": "logo_width", "label": "Logo width", "min": 60, "max": 240, "step": 4, "unit": "px", "default": 112 },
-      { "type": "image_picker", "id": "favicon", "label": "Favicon", "info": "Square PNG, at least 64 × 64px." }
+      {
+        "type": "range",
+        "id": "logo_width",
+        "label": "Logo width",
+        "min": 60,
+        "max": 240,
+        "step": 4,
+        "unit": "px",
+        "default": 112
+      },
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon",
+        "info": "Square PNG, at least 64 × 64px."
+      }
+    ]
+  },
+  {
+    "name": "Product brands",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Each product's brand comes from its Brand metafield (custom.brand) if set, otherwise from the Vendor field in Shopify. Products without a real brand are shown as unbranded — the theme never invents a brand or labels a product with the store name."
+      },
+      {
+        "type": "textarea",
+        "id": "unbranded_vendors",
+        "label": "Vendor values that are not brands",
+        "default": "My Store, Wedra.co, WEDRA, Unbranded, Generic, No brand, Default",
+        "info": "Comma-separated. Products whose vendor matches one of these are treated as unbranded. WEDRA is listed so supplier products are never shown as WEDRA-made; for a genuine WEDRA product, set its Brand metafield to WEDRA (the metafield always wins)."
+      },
+      {
+        "type": "checkbox",
+        "id": "card_show_brand",
+        "label": "Show brand on product cards",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_sold_by",
+        "label": "Show \"Sold by\" line on product pages",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_ratings",
+        "label": "Show star ratings from a review app",
+        "default": true,
+        "info": "Stars appear only when a review app has written genuine ratings to the product (reviews.rating metafields)."
+      }
     ]
   },
   {
@@ -39,14 +98,24 @@
         "type": "paragraph",
         "content": "Pre-launch mode replaces Add to cart and Buy now with a sign-up form, so the store cannot take orders. To hide the whole store before launch, use Online Store → Preferences → Password protection instead."
       },
-      { "type": "checkbox", "id": "prelaunch_mode", "label": "Pre-launch mode (no purchases)", "default": false },
+      {
+        "type": "checkbox",
+        "id": "prelaunch_mode",
+        "label": "Pre-launch mode (no purchases)",
+        "default": false
+      },
       {
         "type": "checkbox",
         "id": "prelaunch_hide_prices",
         "label": "Hide prices during pre-launch",
         "default": true
       },
-      { "type": "text", "id": "prelaunch_button_label", "label": "Pre-launch button label", "default": "Coming soon" },
+      {
+        "type": "text",
+        "id": "prelaunch_button_label",
+        "label": "Pre-launch button label",
+        "default": "Coming soon"
+      },
       {
         "type": "text",
         "id": "prelaunch_message",
@@ -58,13 +127,48 @@
   {
     "name": "Colors",
     "settings": [
-      { "type": "color", "id": "color_background", "label": "Background (ivory)", "default": "#F7F5F0" },
-      { "type": "color", "id": "color_surface", "label": "Surface (stone)", "default": "#EDEAE3" },
-      { "type": "color", "id": "color_text", "label": "Text (black)", "default": "#111111" },
-      { "type": "color", "id": "color_muted", "label": "Secondary text (soft gray)", "default": "#67645E" },
-      { "type": "color", "id": "color_dark", "label": "Dark sections (charcoal)", "default": "#161615" },
-      { "type": "color", "id": "color_accent", "label": "Accent (neutral)", "default": "#8B867D" },
-      { "type": "color", "id": "color_border", "label": "Lines", "default": "#DCD8D0" }
+      {
+        "type": "color",
+        "id": "color_background",
+        "label": "Background (ivory)",
+        "default": "#F7F5F0"
+      },
+      {
+        "type": "color",
+        "id": "color_surface",
+        "label": "Surface (stone)",
+        "default": "#EDEAE3"
+      },
+      {
+        "type": "color",
+        "id": "color_text",
+        "label": "Text (black)",
+        "default": "#111111"
+      },
+      {
+        "type": "color",
+        "id": "color_muted",
+        "label": "Secondary text (soft gray)",
+        "default": "#67645E"
+      },
+      {
+        "type": "color",
+        "id": "color_dark",
+        "label": "Dark sections (charcoal)",
+        "default": "#161615"
+      },
+      {
+        "type": "color",
+        "id": "color_accent",
+        "label": "Accent (neutral)",
+        "default": "#8B867D"
+      },
+      {
+        "type": "color",
+        "id": "color_border",
+        "label": "Lines",
+        "default": "#DCD8D0"
+      }
     ]
   },
   {
@@ -77,9 +181,28 @@
         "info": "Bundled with the theme. Turn off to use the fonts picked below.",
         "default": true
       },
-      { "type": "font_picker", "id": "type_heading_font", "label": "Display font", "default": "assistant_n4" },
-      { "type": "font_picker", "id": "type_body_font", "label": "Text font", "default": "assistant_n4" },
-      { "type": "range", "id": "heading_scale", "label": "Display size", "min": 80, "max": 130, "step": 5, "unit": "%", "default": 100 }
+      {
+        "type": "font_picker",
+        "id": "type_heading_font",
+        "label": "Display font",
+        "default": "assistant_n4"
+      },
+      {
+        "type": "font_picker",
+        "id": "type_body_font",
+        "label": "Text font",
+        "default": "assistant_n4"
+      },
+      {
+        "type": "range",
+        "id": "heading_scale",
+        "label": "Display size",
+        "min": 80,
+        "max": 130,
+        "step": 5,
+        "unit": "%",
+        "default": 100
+      }
     ]
   },
   {
@@ -90,8 +213,14 @@
         "id": "cart_type",
         "label": "Cart type",
         "options": [
-          { "value": "drawer", "label": "Drawer" },
-          { "value": "page", "label": "Page" }
+          {
+            "value": "drawer",
+            "label": "Drawer"
+          },
+          {
+            "value": "page",
+            "label": "Page"
+          }
         ],
         "default": "drawer"
       },
@@ -107,7 +236,12 @@
         "label": "Note under the checkout button",
         "default": "Shipping and taxes are calculated at checkout."
       },
-      { "type": "checkbox", "id": "cart_show_note", "label": "Show order note on cart page", "default": false }
+      {
+        "type": "checkbox",
+        "id": "cart_show_note",
+        "label": "Show order note on cart page",
+        "default": false
+      }
     ]
   },
   {
@@ -118,26 +252,75 @@
         "id": "card_image_ratio",
         "label": "Image shape",
         "options": [
-          { "value": "portrait", "label": "Portrait" },
-          { "value": "square", "label": "Square" }
+          {
+            "value": "portrait",
+            "label": "Portrait"
+          },
+          {
+            "value": "square",
+            "label": "Square"
+          }
         ],
         "default": "portrait"
       },
-      { "type": "checkbox", "id": "card_show_secondary_image", "label": "Show second image on hover", "default": true },
-      { "type": "checkbox", "id": "card_show_type", "label": "Show product type above the name", "default": true },
-      { "type": "checkbox", "id": "card_show_quick_add", "label": "Show quick add", "default": true },
-      { "type": "checkbox", "id": "card_show_swatches", "label": "Show color swatches", "default": true }
+      {
+        "type": "checkbox",
+        "id": "card_show_secondary_image",
+        "label": "Show second image on hover",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "card_show_type",
+        "label": "Show product type above the name",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "card_show_quick_add",
+        "label": "Show quick add",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "card_show_swatches",
+        "label": "Show color swatches",
+        "default": true
+      }
     ]
   },
   {
     "name": "Social media",
     "settings": [
-      { "type": "paragraph", "content": "Add only accounts that exist. Empty fields are hidden." },
-      { "type": "url", "id": "social_instagram_link", "label": "Instagram" },
-      { "type": "url", "id": "social_tiktok_link", "label": "TikTok" },
-      { "type": "url", "id": "social_pinterest_link", "label": "Pinterest" },
-      { "type": "url", "id": "social_facebook_link", "label": "Facebook" },
-      { "type": "url", "id": "social_youtube_link", "label": "YouTube" }
+      {
+        "type": "paragraph",
+        "content": "Add only accounts that exist. Empty fields are hidden."
+      },
+      {
+        "type": "url",
+        "id": "social_instagram_link",
+        "label": "Instagram"
+      },
+      {
+        "type": "url",
+        "id": "social_tiktok_link",
+        "label": "TikTok"
+      },
+      {
+        "type": "url",
+        "id": "social_pinterest_link",
+        "label": "Pinterest"
+      },
+      {
+        "type": "url",
+        "id": "social_facebook_link",
+        "label": "Facebook"
+      },
+      {
+        "type": "url",
+        "id": "social_youtube_link",
+        "label": "YouTube"
+      }
     ]
   },
   {

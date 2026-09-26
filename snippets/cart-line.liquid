@@ -10,6 +10,8 @@
   <div class="cart-item__details">
     <div class="cart-item__top">
       <div>
+        {%- capture line_brand -%}{% render 'brand-name', product: item.product %}{%- endcapture -%}
+        {%- if line_brand != blank -%}<p class="card__type">{{ line_brand }}</p>{%- endif -%}
         <a href="{{ item.url }}" class="cart-item__title">{{ item.product.title | escape }}</a>
         <p class="cart-item__meta">
           {%- unless item.product.has_only_default_variant -%}{{ item.variant.title | escape }} · {% endunless -%}

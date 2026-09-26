@@ -9,7 +9,8 @@
     priority     true for above-the-fold cards
     quick_add    override settings.card_show_quick_add
 
-  Image (+ second image on hover), optional product type, name, price,
+  Image (+ second image on hover), brand (or product type when the
+  product has no brand), name, star rating (review app data only), price,
   color swatches. Quick add appears on hover for single-variant products
   that can be bought; products with options open their product page.
 {%- endcomment -%}
@@ -73,8 +74,14 @@
     </div>
 
     <div class="card__info">
-      {%- if settings.card_show_type and product.type != blank -%}<p class="card__type">{{ product.type | escape }}</p>{%- endif -%}
+      {%- capture card_brand -%}{% render 'brand-name', product: product %}{%- endcapture -%}
+      {%- if settings.card_show_brand and card_brand != blank -%}
+        <p class="card__type card__brand">{{ card_brand }}</p>
+      {%- elsif settings.card_show_type and product.type != blank -%}
+        <p class="card__type">{{ product.type | escape }}</p>
+      {%- endif -%}
       <h3 class="card__title"><a href="{{ product.url }}">{{ product.title | escape }}</a></h3>
+      {% render 'rating', product: product, show_count: false %}
       <div class="card__price">{% render 'price', product: product, show_from: true %}</div>
       {%- if settings.card_show_swatches and color_option and color_option.values.size > 1 -%}
         <div class="card__footer">

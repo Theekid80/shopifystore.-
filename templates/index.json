@@ -6,36 +6,104 @@
         "height": "full",
         "align": "left",
         "overlay": 30,
-        "heading": "Curated for the way you live.",
-        "subheading": "Distinctive pieces, thoughtfully selected for modern living.",
-        "button_1_label": "Explore WEDRA",
-        "button_2_label": "Shop collection",
+        "eyebrow": "Travel · Leisure · Sleep",
+        "heading": "Travel better. Rest better.",
+        "subheading": "Thoughtfully selected essentials for travel, leisure, comfort and sleep.",
+        "button_1_label": "Shop the collection",
+        "button_1_link": "/collections/all",
+        "button_2_label": "Explore brands",
+        "button_2_link": "/pages/brands",
         "show_foot": true,
         "scroll_label": "Scroll"
       }
     },
-    "statement": {
-      "type": "statement",
+    "experience": {
+      "type": "experience-cards",
+      "blocks": {
+        "travel": {
+          "type": "experience",
+          "settings": {
+            "title": "Travel",
+            "text": "Pack smarter. Move easier.",
+            "collection_handle": "travel"
+          }
+        },
+        "sleep": {
+          "type": "experience",
+          "settings": {
+            "title": "Sleep",
+            "text": "Rest wherever you are.",
+            "collection_handle": "sleep"
+          }
+        },
+        "comfort": {
+          "type": "experience",
+          "settings": {
+            "title": "Comfort",
+            "text": "Make every journey more comfortable.",
+            "collection_handle": "comfort"
+          }
+        },
+        "leisure": {
+          "type": "experience",
+          "settings": {
+            "title": "Leisure",
+            "text": "Slow down and enjoy the journey.",
+            "collection_handle": "leisure"
+          }
+        }
+      },
+      "block_order": [
+        "travel",
+        "sleep",
+        "comfort",
+        "leisure"
+      ],
       "settings": {
-        "index": "01",
-        "eyebrow": "The philosophy",
-        "heading": "Less noise. Better things.",
-        "text": "WEDRA brings together distinctive products chosen for design, function, and the way they fit into modern life.",
-        "layout": "split",
+        "eyebrow": "Shop by experience",
+        "heading": "Wherever the journey takes you.",
+        "cta_label": "Explore",
         "color_scheme": "bg-base"
       }
     },
     "edit": {
       "type": "featured-collection",
       "settings": {
-        "eyebrow": "02 — Selected",
+        "eyebrow": "Curated",
         "heading": "The WEDRA Edit",
-        "collection_handle": "all",
+        "text": "A considered collection of essentials chosen for the way you travel.",
+        "collection_handle": "the-wedra-travel-edit",
         "limit": 8,
         "columns": 4,
         "view_all_label": "View all",
-        "empty_text": "The first edit is being assembled. Leave your email to see it first.",
         "anchor": "edit",
+        "color_scheme": "bg-base"
+      }
+    },
+    "statement": {
+      "type": "statement",
+      "settings": {
+        "index": "",
+        "eyebrow": "About WEDRA",
+        "heading": "Everything you need to travel better, rest better, and feel better wherever you go.",
+        "text": "WEDRA is a curated retailer of travel, leisure and sleep essentials — products from different brands and makers, chosen for how well they work on the road and at rest.",
+        "link_label": "About us",
+        "link": "/pages/about",
+        "layout": "split",
+        "color_scheme": "bg-surface",
+        "heading_size": "headline"
+      }
+    },
+    "brands": {
+      "type": "brand-list",
+      "settings": {
+        "eyebrow": "Featured brands",
+        "heading": "Discover the brands we carry.",
+        "limit": 8,
+        "show_link": true,
+        "link_label": "All brands",
+        "brands_page_handle": "brands",
+        "anchor": "brands",
         "color_scheme": "bg-base"
       }
     },
@@ -45,22 +113,10 @@
         "height": "full",
         "align": "left",
         "overlay": 30,
-        "eyebrow": "03 — Editorial",
-        "heading": "Designed to stand out.",
-        "text": "Objects with presence. Essentials with intention.",
-        "link_label": "Discover the edit"
-      }
-    },
-    "collections": {
-      "type": "collection-list",
-      "settings": {
-        "eyebrow": "04 — Collections",
-        "heading": "Explore by collection.",
-        "limit": 3,
-        "cta_label": "Explore",
-        "feature_first": true,
-        "show_all_link": true,
-        "color_scheme": "bg-base"
+        "eyebrow": "Rest",
+        "heading": "Arrive rested.",
+        "text": "Sleep and comfort essentials for the time between here and there.",
+        "link_label": "Shop the collection"
       }
     },
     "spotlight": {
@@ -77,14 +133,36 @@
     "principles": {
       "type": "principles",
       "blocks": {
-        "design": { "type": "principle", "settings": { "title": "Design", "text": "Pieces with presence — considered form, honest materials, nothing added for show." } },
-        "function": { "type": "principle", "settings": { "title": "Function", "text": "Everything earns its place by being genuinely useful, day after day." } },
-        "fit": { "type": "principle", "settings": { "title": "Fit", "text": "Chosen for the way they sit in a modern life — at home, at work, in motion." } }
+        "useful": {
+          "type": "principle",
+          "settings": {
+            "title": "Useful",
+            "text": "Every product has to earn its place in a bag or beside the bed."
+          }
+        },
+        "considered": {
+          "type": "principle",
+          "settings": {
+            "title": "Considered",
+            "text": "We look for thoughtful design and materials, whoever makes it."
+          }
+        },
+        "comfortable": {
+          "type": "principle",
+          "settings": {
+            "title": "Comfortable",
+            "text": "Chosen for how it feels at the end of a long day of travel."
+          }
+        }
       },
-      "block_order": ["design", "function", "fit"],
+      "block_order": [
+        "useful",
+        "considered",
+        "comfortable"
+      ],
       "settings": {
         "eyebrow": "How we choose",
-        "heading": "Chosen with intention.",
+        "heading": "Curated, not collected.",
         "color_scheme": "bg-surface"
       }
     },
@@ -92,12 +170,22 @@
       "type": "newsletter",
       "settings": {
         "eyebrow": "The WEDRA letter",
-        "heading": "Considered, occasionally.",
-        "text": "New arrivals and the thinking behind them. Nothing more.",
+        "heading": "New arrivals, occasionally.",
+        "text": "New products and brands as they join WEDRA. Nothing more.",
         "anchor": "newsletter",
         "color_scheme": "bg-base"
       }
     }
   },
-  "order": ["hero", "statement", "edit", "editorial", "collections", "spotlight", "principles", "newsletter"]
+  "order": [
+    "hero",
+    "experience",
+    "edit",
+    "statement",
+    "brands",
+    "editorial",
+    "spotlight",
+    "principles",
+    "newsletter"
+  ]
 }

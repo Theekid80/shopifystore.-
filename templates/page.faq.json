@@ -44,9 +44,17 @@
             "question": "Can I change or cancel my order?",
             "answer": "<p>Contact us as soon as possible through the <a href=\"/pages/contact\">contact page</a> and include your order number.</p>"
           }
+        },
+        "q0": {
+          "type": "question",
+          "settings": {
+            "question": "Who makes the products WEDRA sells?",
+            "answer": "<p>WEDRA is a retailer. We sell products from different brands and makers. When a product has a brand, it's shown on the product page; products without a brand are marked as unbranded. Every order is sold, shipped and supported by WEDRA.</p>"
+          }
         }
       },
       "block_order": [
+        "q0",
         "q1",
         "q2",
         "q3",

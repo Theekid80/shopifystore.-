@@ -1,0 +1,122 @@
+{%- comment -%}
+  Brands WEDRA carries. With no blocks, the list is built from the brand of
+  each product (Brand metafield, else a Vendor that is a real brand), so
+  unbranded products and supplier vendor values never appear. Add Brand blocks to feature specific brands with a logo.
+  Never lists a brand the store doesn't carry; hidden when there are none.
+{%- endcomment -%}
+{%- capture items -%}
+  {%- assign shown = 0 -%}
+  {%- if section.blocks.size > 0 -%}
+    {%- for block in section.blocks -%}
+      {%- if block.settings.name != blank and shown < section.settings.limit -%}
+        {%- assign shown = shown | plus: 1 -%}
+        {%- assign href = block.settings.link | default: block.settings.name | url_for_vendor -%}
+        <li class="brand-tile reveal" style="--delay: {{ forloop.index0 | modulo: 6 | times: 60 }}ms;" {{ block.shopify_attributes }}>
+          <a href="{{ href }}">
+            {%- if block.settings.logo != blank -%}
+              {{ block.settings.logo | image_url: width: 480 | image_tag: loading: 'lazy', alt: block.settings.name, widths: '240, 480', sizes: '240px', class: 'brand-tile__logo' }}
+            {%- else -%}
+              <span class="brand-tile__name">{{ block.settings.name | escape }}</span>
+            {%- endif -%}
+            {%- if block.settings.text != blank -%}<span class="brand-tile__text">{{ block.settings.text | escape }}</span>{%- endif -%}
+          </a>
+        </li>
+      {%- endif -%}
+    {%- endfor -%}
+  {%- else -%}
+    {%- comment -%}
+      Built from each product's resolved brand (Brand metafield, else a Vendor
+      that is a real brand), so supplier vendor values never appear here.
+    {%- endcomment -%}
+    {%- assign seen = '|' -%}
+    {%- for p in collections.all.products limit: 250 -%}
+      {%- capture b -%}{% render 'brand-name', product: p %}{%- endcapture -%}
+      {%- assign key = '|' | append: b | append: '|' -%}
+      {%- if b != blank and shown < section.settings.limit -%}
+        {%- unless seen contains key -%}
+          {%- assign seen = seen | append: b | append: '|' -%}
+          {%- assign shown = shown | plus: 1 -%}
+          {%- assign vendor_down = p.vendor | downcase | escape -%}
+          {%- assign b_down = b | downcase -%}
+          <li class="brand-tile reveal" style="--delay: {{ shown | minus: 1 | modulo: 6 | times: 60 }}ms;">
+            {%- if vendor_down == b_down -%}
+              <a href="{{ p.vendor | url_for_vendor }}"><span class="brand-tile__name">{{ b }}</span></a>
+            {%- else -%}
+              <a href="{{ routes.search_url }}?q={{ b | url_encode }}&options%5Bprefix%5D=last"><span class="brand-tile__name">{{ b }}</span></a>
+            {%- endif -%}
+          </li>
+        {%- endunless -%}
+      {%- endif -%}
+    {%- endfor -%}
+  {%- endif -%}
+{%- endcapture -%}
+
+{%- if items != blank -%}
+  <section id="{{ section.settings.anchor }}" class="section {{ section.settings.color_scheme }}" aria-labelledby="Brands-{{ section.id }}">
+    <div class="page-width">
+      <div class="section-heading__row" style="margin-bottom: clamp(2.5rem, 5vw, 4rem);">
+        <div class="section-heading reveal">
+          {%- if section.settings.eyebrow != blank -%}<p class="eyebrow muted">{{ section.settings.eyebrow | escape }}</p>{%- endif -%}
+          {%- assign tag = section.settings.heading_tag | default: 'h2' -%}
+          <{{ tag }} id="Brands-{{ section.id }}" class="h-headline">{{ section.settings.heading | escape }}</{{ tag }}>
+          {%- if section.settings.text != blank -%}<p class="lede">{{ section.settings.text | escape }}</p>{%- endif -%}
+        </div>
+        {%- if section.settings.show_link and pages[section.settings.brands_page_handle].url != blank -%}
+          <a href="{{ pages[section.settings.brands_page_handle].url }}" class="link-line reveal">{{ section.settings.link_label | escape }}</a>
+        {%- endif -%}
+      </div>
+      <ul class="brand-grid" role="list">{{ items }}</ul>
+    </div>
+  </section>
+{%- elsif request.design_mode -%}
+  <section class="section"><div class="page-width"><p class="editor-hint">Brands appear here automatically from products' Vendor field (vendors listed as "not brands" in Theme settings → Product brands are skipped), or add Brand blocks. Nothing shows on the live store until there is at least one real brand.</p></div></section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Brands",
+  "class": "section-brand-list",
+  "max_blocks": 24,
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Featured brands" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Discover the brands we carry." },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "label": "Heading level",
+      "options": [{ "value": "h1", "label": "H1" }, { "value": "h2", "label": "H2" }],
+      "default": "h2"
+    },
+    { "type": "textarea", "id": "text", "label": "Text" },
+    { "type": "range", "id": "limit", "label": "Maximum brands", "min": 2, "max": 48, "step": 1, "default": 8 },
+    { "type": "checkbox", "id": "show_link", "label": "Link to the Brands page", "default": true },
+    { "type": "text", "id": "link_label", "label": "Link label", "default": "All brands" },
+    { "type": "text", "id": "brands_page_handle", "label": "Brands page handle", "default": "brands" },
+    { "type": "text", "id": "anchor", "label": "Anchor id", "default": "brands" },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Background",
+      "options": [
+        { "value": "bg-base", "label": "Ivory" },
+        { "value": "bg-surface", "label": "Stone" },
+        { "value": "color-dark", "label": "Charcoal" }
+      ],
+      "default": "bg-surface"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "brand",
+      "name": "Brand",
+      "settings": [
+        { "type": "text", "id": "name", "label": "Brand name", "info": "Use the exact Vendor value from Shopify so the link shows that brand's products." },
+        { "type": "image_picker", "id": "logo", "label": "Logo", "info": "Only use a brand's logo where you have permission to." },
+        { "type": "text", "id": "text", "label": "Short line" },
+        { "type": "url", "id": "link", "label": "Link", "info": "Defaults to the brand's products." }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Brands" }]
+}
+{% endschema %}

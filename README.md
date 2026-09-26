@@ -1,6 +1,10 @@
 # WEDRA — Shopify theme
 
-**Less noise. Better things.**
+**Premium travel, leisure & sleep essentials.**
+
+WEDRA is a curated retailer: it sells products from other brands, unbranded
+products, and (later) WEDRA's own products. WEDRA is the store and curator —
+the theme never labels another company's or a supplier's product as WEDRA.
 
 This repository is the WEDRA storefront: a Shopify Online Store 2.0 theme.
 Shopify hosts the site and handles products, prices, inventory, cart,
@@ -59,9 +63,9 @@ Do these in Shopify Admin. The theme adapts automatically — nothing needs code
 
 ### 2. Products (Products → Add product)
 Everything shown on a product page comes from here: title, description, images, price, compare-at price, variants, inventory.
-- **Product type** is shown above the product name (for example "Objects").
-- **Vendor is never displayed.** Still set it to `WEDRA`: Shopify includes the vendor in its public product data (`/products/<handle>.js`), and some apps show it.
-- Replace imported product titles, descriptions and images with WEDRA's own.
+- **Brand** — see "How brands work" below. Set the **Vendor** to the product's real brand, or to `Unbranded`.
+- **Product type** (for example "Travel") is shown above the name when a product has no brand.
+- Write clear product titles without supplier keyword lists, and without putting "WEDRA" in the title of a product WEDRA doesn't make.
 - Use your own SKUs if you want them; SKUs are not shown on the storefront.
 - Remove supplier tags that come in with imports.
 
@@ -69,11 +73,15 @@ Optional product metafields (Settings → Custom data → Products → Add defin
 
 | Key | Type | Used for |
 | --- | --- | --- |
+| `brand` | Single line text | The product's brand. Overrides Vendor. Use `WEDRA` only for genuine WEDRA products, `Unbranded` to force unbranded |
 | `short_description` | Single line text | Line under the price, card and spotlight text |
-| `material` | Single line text | Details tab |
-| `dimensions` | Single line text | Details tab |
-| `weight` | Single line text | Details tab |
-| `care` | Multi-line text | Details tab |
+| `features` | Multi-line text | Features tab (one feature per line) |
+| `specifications` | Multi-line text | Specifications tab (one `Label: value` per line) |
+| `whats_included` | Multi-line text | What's included tab (one item per line) |
+| `material` | Single line text | Specifications tab |
+| `dimensions` | Single line text | Specifications tab |
+| `weight` | Single line text | Specifications tab |
+| `care` | Multi-line text | Specifications tab |
 | `shipping_note` | Multi-line text | Shipping tab (otherwise a neutral line) |
 | `product_badge` | Single line text | A small label on the card (use sparingly, factual only) |
 | `coming_soon` | True or false | Replaces Add to cart with a sign-up for that product (or add the tag `coming-soon`) |
@@ -81,20 +89,39 @@ Optional product metafields (Settings → Custom data → Products → Add defin
 
 Tabs with no content are hidden. The theme never invents specifications.
 
+#### How brands work
+
+The brand shown on cards, product pages, the cart, the Brands page and in Google's product data comes from:
+
+1. the product's **Brand metafield** (`custom.brand`), if set; otherwise
+2. the product's **Vendor** — unless that vendor is listed in **Theme settings → Product brands → Vendor values that are not brands** (default: `My Store, Wedra.co, WEDRA, Unbranded, Generic, No brand, Default`).
+
+Products with no brand show **Brand: Unbranded** and **Sold by: WEDRA** on the product page, and no brand anywhere else. `WEDRA` is in the "not brands" list so supplier products are never presented as WEDRA-made. For a genuine WEDRA product, set its Brand metafield to `WEDRA`.
+
+- **A branded product** (e.g. a pillow from "Example Travel Co."): set Vendor to `Example Travel Co.`. It appears on the product, links to all that brand's products (`/collections/vendors?q=…`), and joins the Brands page automatically.
+- **An unbranded supplier product**: set Vendor to `Unbranded` (or leave it as a value in the list).
+- Only show a brand's logo (Brands section blocks) where you have permission to use it, and don't describe WEDRA as an authorized retailer unless the brand has agreed.
+
+#### Star ratings
+Stars appear only when a review app (Judge.me, Yotpo, Okendo, Shopify Product Reviews, …) writes genuine ratings to the product's standard `reviews.rating` / `reviews.rating_count` metafields. Without that data, no stars are shown.
+
 ### 3. Collections (Products → Collections)
 - `/collections/all` (Shop) lists every product automatically.
-- Create only the collections the catalog supports. Collections with products appear automatically on the homepage "Explore by collection" section, on `/collections`, and in the collection page's sub-navigation. Empty collections are never shown.
+- The homepage **Shop by experience** cards link to collections with the handles `travel`, `sleep`, `comfort` and `leisure`. Create them (automated collections by product type or tag work well); each card appears only once its collection has products.
+- **The WEDRA Edit** on the homepage shows the `the-wedra-travel-edit` collection (change it in the theme editor). It's hidden if that collection is empty.
+- Collections with products appear automatically in the Shop dropdown, on `/collections` and in the collection page's sub-navigation. Empty collections are never shown.
 - Give each collection an image and a one-line description.
 
 ### 4. Navigation (Online Store → Navigation)
-- **Main menu**: Shop (`/collections/all`), Collections (`/collections`), About (`/pages/about`).
-  Until the menu has links, the header shows Shop and Collections, plus About once that page exists.
+- **Main menu**: Shop (with sub-links: All products, Travel Organization, Sleep & Rest, Travel Comfort, Tech & Accessories, Leisure, New Arrivals, Best Sellers — only collections that exist), Travel, Sleep, Leisure, Comfort, Brands (`/pages/brands`), About (`/pages/about`). Nested links become dropdowns on desktop and expandable groups on phones.
+  New stores start with a default main menu (Home, Catalog, Contact) — replace its links. If the menu is empty, the header builds one from collections with products and pages that exist.
 - Footer columns (Navigation / Customer / Legal) show sensible defaults, and only link to pages and policies that exist. To control them, create menus and pick them in the footer settings.
 
 ### 5. Pages (Online Store → Pages)
 | Page | Handle | Template |
 | --- | --- | --- |
 | About | `about` | `page.about` |
+| Brands | `brands` | `page.brands` |
 | FAQ | `faq` | `page.faq` |
 | Contact | `contact` | `page.contact` |
 
@@ -154,11 +181,12 @@ Shopify's CDN resizes images and serves modern formats (such as WebP) automatica
 
 ## What the theme includes
 
-- **Homepage**: cinematic hero, brand statement, The WEDRA Edit (live products), full-bleed editorial, collection tiles (from real collections), product spotlight, principles, email sign-up. Every section is editable, reorderable and removable.
-- **Product page**: swipeable gallery on phones, thumbnails on desktop, full-screen zoom, variant picker with sold-out handling, quantity, add to cart, Shopify's dynamic checkout, a shipping note, description / details / shipping / returns tabs, recommendations, sticky add to cart on phones.
+- **Homepage**: cinematic hero, Shop by experience (Travel / Sleep / Comfort / Leisure collections), The WEDRA Edit (live products), brand statement, featured brands, editorial banner, optional product spotlight, how-we-choose principles, email sign-up. Every section is editable, reorderable and removable, and sections with no real content are hidden.
+- **Product page**: brand (from Vendor or Brand metafield), genuine star ratings only, brand & "Sold by WEDRA" panel, swipeable gallery on phones, thumbnails on desktop, full-screen zoom, variant picker with sold-out handling, quantity, add to cart, Shopify's dynamic checkout, a shipping note, description / details / shipping / returns tabs, recommendations, sticky add to cart on phones.
 - **Collections**: Shopify filtering and sorting (configure filters in the Search & Discovery app), pagination, graceful empty states.
 - **Search**: predictive results as you type (Shopify Predictive Search API) and a full results page.
 - **Cart**: drawer with quantity, remove, free-shipping progress (optional), up to three optional suggestions, checkout to Shopify. Full cart page with Shopify's accelerated checkout buttons.
+- **Brands page** (`page.brands`), built automatically from the brands of the products you sell.
 - **Accounts, blog, 404, password page.**
 - **SEO**: unique titles and descriptions, canonical URLs, Open Graph / X cards, Organization, Product, Article and Breadcrumb structured data (no ratings unless a review app adds genuine ones), one H1 per page, alt text from Shopify.
 - **Accessibility**: skip link, keyboard-operable dialogs (native `<dialog>`), visible focus, labelled controls, native accordions, reduced-motion support.

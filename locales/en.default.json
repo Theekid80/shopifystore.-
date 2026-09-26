@@ -55,7 +55,10 @@
     "view_all_products": "View all products",
     "journal": "Journal",
     "read_more": "Read more",
-    "back_to_journal": "Back to the journal"
+    "back_to_journal": "Back to the journal",
+    "brands": "Brands",
+    "all_products": "All products",
+    "experiences": "Shop by experience"
   },
   "accessibility": {
     "skip_to_content": "Skip to content",
@@ -100,7 +103,23 @@
       "vendor": "Vendor",
       "sku": "SKU",
       "type": "Category",
-      "secure_checkout": "Secure checkout by Shopify"
+      "secure_checkout": "Secure checkout by Shopify",
+      "brand": "Brand",
+      "unbranded": "Unbranded",
+      "sold_by": "Sold by {{ retailer }}",
+      "sold_by_note": "{{ retailer }} is the retailer. Shipping, returns and support are handled by {{ retailer }}.",
+      "rating": "Rated {{ value }} out of {{ max }}",
+      "rating_count": {
+        "one": "{{ count }} review",
+        "other": "{{ count }} reviews"
+      },
+      "features": "Features",
+      "whats_included": "What's included",
+      "materials": "Materials",
+      "dimensions": "Dimensions",
+      "weight": "Weight",
+      "view_brand": "More from {{ brand }}",
+      "sold_by_label": "Sold by"
     }
   },
   "collections": {
@@ -137,7 +156,7 @@
     "free_shipping_reached": "Your order qualifies for free shipping.",
     "error": "Something went wrong. Please try again.",
     "view_cart": "View bag",
-    "you_may_like": "You may also like"
+    "you_may_like": "Complete your journey"
   },
   "customer": {
     "login": "Sign in",

@@ -108,7 +108,12 @@
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", setHeight);
-    if (header.classList.contains("header--overlay")) document.body.classList.add("has-overlay-header");
+    if (header.classList.contains("header--overlay")) {
+      // Only overlay the hero; if the first section isn't a hero, use the solid header.
+      const first = $("#MainContent > .shopify-section");
+      if (first && $(".hero", first)) document.body.classList.add("has-overlay-header");
+      else header.classList.remove("header--overlay");
+    }
   }
 
   /* ---------- Reveal on scroll ---------- */

@@ -5,11 +5,12 @@
       "settings": {
         "index": "",
         "eyebrow": "About WEDRA",
-        "heading": "A considered edit for modern life.",
+        "heading": "A curated store for travel, leisure and sleep.",
         "heading_tag": "h1",
-        "text": "WEDRA is a curated lifestyle brand. We look for distinctive products — well designed, genuinely useful, quietly confident — and bring them together in one place.",
+        "text": "WEDRA is an online retailer. We bring together essentials from different brands and makers — for packing, resting and slowing down — and present them in one considered place.",
         "layout": "split",
-        "color_scheme": "bg-base"
+        "color_scheme": "bg-base",
+        "heading_size": "display"
       }
     },
     "curation": {
@@ -17,46 +18,85 @@
       "settings": {
         "ratio": "portrait",
         "layout": "default",
-        "eyebrow": "Curation",
-        "heading": "Fewer things, chosen more carefully.",
-        "text": "<p>Most of what we own arrives by accident. WEDRA exists to make it intentional.</p><p>Every piece in the edit is selected for its design, its function, and how naturally it fits into the way people live now.</p>",
+        "eyebrow": "The retailer",
+        "heading": "We choose. The makers make.",
+        "text": "<p>WEDRA doesn't put its name on other companies' products. When a product has a brand, you'll see that brand on its page; when it doesn't, we say so.</p><p>What we add is the selection: fewer, better options for the way you travel and rest.</p>",
         "color_scheme": "bg-base"
       }
     },
     "principles": {
       "type": "principles",
       "blocks": {
-        "design": { "type": "principle", "settings": { "title": "Design", "text": "Pieces with presence — considered form, honest materials, nothing added for show." } },
-        "function": { "type": "principle", "settings": { "title": "Function", "text": "Everything earns its place by being genuinely useful, day after day." } },
-        "fit": { "type": "principle", "settings": { "title": "Fit", "text": "Chosen for the way they sit in a modern life — at home, at work, in motion." } }
+        "useful": {
+          "type": "principle",
+          "settings": {
+            "title": "Useful",
+            "text": "Every product has to earn its place in a bag or beside the bed."
+          }
+        },
+        "considered": {
+          "type": "principle",
+          "settings": {
+            "title": "Considered",
+            "text": "We look for thoughtful design and materials, whoever makes it."
+          }
+        },
+        "comfortable": {
+          "type": "principle",
+          "settings": {
+            "title": "Comfortable",
+            "text": "Chosen for how it feels at the end of a long day of travel."
+          }
+        }
       },
-      "block_order": ["design", "function", "fit"],
-      "settings": { "eyebrow": "How we choose", "heading": "Three questions for every piece.", "color_scheme": "bg-surface" }
+      "block_order": [
+        "useful",
+        "considered",
+        "comfortable"
+      ],
+      "settings": {
+        "eyebrow": "How we choose",
+        "heading": "How we choose.",
+        "color_scheme": "bg-surface"
+      }
     },
     "discovery": {
       "type": "image-with-text",
       "settings": {
         "ratio": "portrait",
         "layout": "reverse",
-        "eyebrow": "Discovery",
-        "heading": "An edit that grows with care.",
-        "text": "<p>New pieces join WEDRA when they meet the standard — not to fill a catalogue. Subscribe to hear when something new arrives.</p>",
-        "link_label": "Explore the edit",
+        "eyebrow": "Growing",
+        "heading": "A collection that grows with care.",
+        "text": "<p>New products and brands join WEDRA when they fit — not to fill a catalogue. Subscribe to hear when something new arrives.</p>",
+        "link_label": "Shop the collection",
         "link": "/collections/all",
         "color_scheme": "bg-base"
       }
     },
-    "content": { "type": "main-page", "settings": { "show_title": false, "show_breadcrumbs": false } },
+    "content": {
+      "type": "main-page",
+      "settings": {
+        "show_title": false,
+        "show_breadcrumbs": false
+      }
+    },
     "newsletter": {
       "type": "newsletter",
       "settings": {
         "eyebrow": "The WEDRA letter",
-        "heading": "Considered, occasionally.",
-        "text": "New arrivals and the thinking behind them. Nothing more.",
+        "heading": "New arrivals, occasionally.",
+        "text": "New products and brands as they join WEDRA. Nothing more.",
         "anchor": "newsletter",
         "color_scheme": "bg-surface"
       }
     }
   },
-  "order": ["intro", "curation", "principles", "discovery", "content", "newsletter"]
+  "order": [
+    "intro",
+    "curation",
+    "principles",
+    "discovery",
+    "content",
+    "newsletter"
+  ]
 }
