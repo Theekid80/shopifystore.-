@@ -50,9 +50,9 @@ html, body { width: 100vw; height: 100vh; overflow: hidden; background: var(--ch
    feed = 4:5 and 1:1; wide = 1.91:1 and 16:9. */
 .tall .product { top: 38%; height: min(var(--h, 40%), 40%); }
 .tall .pair { top: 17%; height: 40%; }
-.tall .label { bottom: 27%; right: 14%; left: 6%; }
+.tall .label { bottom: 27%; right: 12%; left: 12%; }
 .tall .ed { bottom: 28%; right: 14%; left: 6%; }
-.tall .cap { left: 6%; right: 14%; } .tall .cap.top { top: 14%; } .tall .cap.low { bottom: 29%; }
+.tall .cap { left: 12%; right: 12%; } .tall .cap.top { top: 14%; } .tall .cap.low { bottom: 29%; }
 .tall .wm { top: 12.5%; }
 .tall .end { padding-bottom: 14%; padding-right: 12%; padding-left: 6%; }
 .feed .product { top: 40%; height: min(var(--h, 54%), 54%); }
@@ -69,6 +69,9 @@ html, body { width: 100vw; height: 100vh; overflow: hidden; background: var(--ch
 .tall .scene:has(> .cap.top) .product { top: 54%; height: 42%; }
 .feed .scene:has(> .cap.top) .product { top: 60%; height: 56%; }
 .wide .scene:has(> .cap.top) .product { top: 60%; height: 70%; left: 50%; }
+.shade::after { background: linear-gradient(to top, rgba(12,12,12,.74) 0%, rgba(12,12,12,.5) 30%, rgba(12,12,12,0) 56%) !important; }
+.tall .shade::after { background: linear-gradient(to top, rgba(12,12,12,.8) 0%, rgba(12,12,12,.64) 36%, rgba(12,12,12,0) 62%), linear-gradient(to bottom, rgba(12,12,12,.32), rgba(12,12,12,0) 16%) !important; }
+.ed .display { text-shadow: 0 2px 22px rgba(0,0,0,.45); }
 </style>
 </head>
 <body>
