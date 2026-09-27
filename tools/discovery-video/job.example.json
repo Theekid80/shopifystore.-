@@ -1,0 +1,17 @@
+{
+  "slug": "wedra-discovery-01",
+  "discovery": "WEDRA Discovery #01",
+  "product": "Portable Electric Juicer Blender",
+  "hook": "We found something worth showing you.",
+  "productImage": "photos/studio.jpg",
+  "productImageOnWhite": true,
+  "lifestyle": [
+    { "image": "photos/morning.jpg", "caption": "350 ml, for one.", "focus": "50% 60%" },
+    { "image": "photos/desk.jpg", "caption": "Rechargeable.", "focus": "50% 50%" },
+    { "image": "photos/gym.jpg", "caption": "Small enough for the bag.", "focus": "50% 50%" }
+  ],
+  "endLine": "Products worth discovering.",
+  "url": "wedra.co",
+  "duration": 15,
+  "formats": ["9x16", "4x5", "1x1", "16x9"]
+}

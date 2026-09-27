@@ -1,9 +1,16 @@
-<!-- BEGIN:nextjs-agent-rules -->
+# WEDRA storefront — notes for coding agents
 
-# This is NOT the Next.js you know
+This repository is a **Shopify Online Store 2.0 theme** (Liquid, JSON
+templates, one CSS file, one dependency-free JS file). There is no Next.js
+app, build step or package manager; the old headless prototype was removed.
 
-This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
-
-This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
-
-<!-- END:nextjs-agent-rules -->
+- Shopify is the source of truth for products, prices, variants, inventory,
+  cart and checkout. Never hard-code product data, prices or claims in the
+  theme; read them from Shopify objects and product metafields.
+- Sections must hide themselves when they have no real content. Never add
+  placeholder or invented products, reviews, ratings, counts or scarcity.
+- WEDRA is the finder and curator, not the maker. Never label a product as
+  WEDRA-made, and never show a supplier's name.
+- Brand, voice and creative rules: `docs/brand-system.md`,
+  `docs/ai-creative-system.md`. Product facts: `docs/discovery-*.md`.
+- Lint with `shopify theme check`; preview with `shopify theme dev`.
