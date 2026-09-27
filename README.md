@@ -27,6 +27,8 @@ The theme never takes payment, stores orders or holds product data of its own.
 | [`docs/ai-creative-system.md`](docs/ai-creative-system.md) | The AI photo and video prompt engine: master template, 8 photo categories, 7 video concepts, formats, rules, QA |
 | [`docs/discovery-01-blender.md`](docs/discovery-01-blender.md) | Verified facts for the blender, allowed and forbidden claims, the Shopify fields to fill in, launch checklist |
 | [`docs/content-templates.md`](docs/content-templates.md) | Reusable Instagram, TikTok and website content templates |
+| [`docs/ad-testing-bank.md`](docs/ad-testing-bank.md) | 90 ad hooks, test variables, naming, test plan, metrics, footage and creator briefs |
+| [`tools/ad-bank/`](tools/ad-bank/) | Renders the hook-testing videos, statics and carousel from `bank.json` |
 | [`tools/discovery-video/`](tools/discovery-video/) | Renders the reusable "WEDRA Discovery" short video (9:16, 4:5, 1:1, 16:9) from product photos |
 
 ---

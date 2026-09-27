@@ -1,0 +1,1229 @@
+{
+ "discovery": "WEDRA Discovery #01",
+ "product": "Portable Electric Juicer Blender",
+ "ctas": [
+  "Discover it",
+  "See the find",
+  "Explore the discovery",
+  "Meet the latest WEDRA find",
+  "Shop the discovery",
+  "Discover WEDRA",
+  "See why we found it",
+  "Explore the product"
+ ],
+ "facts": [
+  "350 ml",
+  "Rechargeable",
+  "Dual stainless-steel blades",
+  "50 W motor",
+  "About 22 cm tall"
+ ],
+ "photos": {
+  "life": "photos/life.jpg",
+  "studio": "photos/studio.jpg",
+  "pink": "photos/pink.jpg",
+  "charge": "photos/charge.jpg",
+  "studio_tall": "photos/studio-tall.jpg"
+ },
+ "hooks": [
+  {
+   "id": "H01",
+   "angle": "CUR",
+   "text": "Okay… why did nobody show me this sooner?",
+   "status": "ready",
+   "note": ""
+  },
+  {
+   "id": "H02",
+   "angle": "CUR",
+   "text": "I just found something I actually want to use every day.",
+   "status": "creator",
+   "note": "First-person usage claim: only with a real creator who uses it."
+  },
+  {
+   "id": "H03",
+   "angle": "CUR",
+   "text": "This might be one of the most useful things I found this week.",
+   "status": "ready",
+   "note": ""
+  },
+  {
+   "id": "H04",
+   "angle": "CUR",
+   "text": "I wasn’t looking for a blender. Then I found this.",
+   "status": "ready",
+   "note": ""
+  },
+  {
+   "id": "H05",
+   "angle": "CUR",
+   "text": "Wait until you see what this little thing does.",
+   "status": "ready",
+   "note": "Needs the product shown doing its job; ready version shows the blended drink, a demo clip makes it stronger."
+  },
+  {
+   "id": "H06",
+   "angle": "CUR",
+   "text": "I didn’t expect this to be this convenient.",
+   "status": "creator",
+   "note": "Implies personal experience: creator-only."
+  },
+  {
+   "id": "H07",
+   "angle": "CUR",
+   "text": "Found something worth putting on your radar.",
+   "status": "ready",
+   "note": ""
+  },
+  {
+   "id": "H08",
+   "angle": "CUR",
+   "text": "This is exactly the kind of product WEDRA looks for.",
+   "status": "ready",
+   "note": ""
+  },
+  {
+   "id": "H09",
+   "angle": "CUR",
+   "text": "Here’s today’s WEDRA discovery.",
+   "status": "ready",
+   "note": ""
+  },
+  {
+   "id": "H10",
+   "angle": "CUR",
+   "text": "Another product we think is worth knowing about.",
+   "status": "ready",
+   "note": ""
+  },
+  {
+   "id": "H11",
+   "angle": "CONV",
+   "text": "Your blender doesn’t have to live on your countertop.",
+   "status": "ready",
+   "note": ""
+  },
+  {
+   "id": "H12",
+   "angle": "CONV",
+   "text": "Big blender. Small routine problem.",
+   "status": "footage",
+   "note": "Needs a shot of a full-size blender setup."
+  },
+  {
+   "id": "H13",
+   "angle": "CONV",
+   "text": "Why use a full-size blender for one drink?",
+   "status": "ready",
+   "note": ""
+  },
+  {
+   "id": "H14",
+   "angle": "CONV",
+   "text": "One drink. One compact blender.",
+   "status": "ready",
+   "note": ""
+  },
+  {
+   "id": "H15",
+   "angle": "CONV",
+   "text": "Your smoothie routine just got a lot simpler.",
+   "status": "ready",
+   "note": ""
+  },
+  {
+   "id": "H16",
+   "angle": "CONV",
+   "text": "Less setup. More smoothie.",
+   "status": "ready",
+   "note": ""
+  },
+  {
+   "id": "H17",
+   "angle": "CONV",
+   "text": "Small enough to take with you.",
+   "status": "ready",
+   "note": ""
+  },
+  {
+   "id": "H18",
+   "angle": "CONV",
+   "text": "Your morning routine doesn’t need more equipment.",
+   "status": "ready",
+   "note": ""
+  },
+  {
+   "id": "H19",
+   "angle": "CONV",
+   "text": "For the person who hates pulling out the big blender.",
+   "status": "ready",
+   "note": ""
+  },
+  {
+   "id": "H20",
+   "angle": "CONV",
+   "text": "Sometimes simpler is better.",
+   "status": "ready",
+   "note": ""
+  },
+  {
+   "id": "H21",
+   "angle": "PORT",
+   "text": "Your smoothie doesn’t have to stay home.",
+   "status": "ready",
+   "note": ""
+  },
+  {
+   "id": "H22",
+   "angle": "PORT",
+   "text": "Take your routine with you.",
+   "status": "ready",
+   "note": ""
+  },
+  {
+   "id": "H23",
+   "angle": "PORT",
+   "text": "From kitchen to office.",
+   "status": "footage",
+   "note": "Needs kitchen and office shots."
+  },
+  {
+   "id": "H24",
+   "angle": "PORT",
+   "text": "From desk to gym bag.",
+   "status": "footage",
+   "note": "Needs desk and gym-bag shots."
+  },
+  {
+   "id": "H25",
+   "angle": "PORT",
+   "text": "Made for routines that don’t stay in one place.",
+   "status": "footage",
+   "note": "Needs two or more locations."
+  },
+  {
+   "id": "H26",
+   "angle": "PORT",
+   "text": "Your routine moves. Your blender can too.",
+   "status": "footage",
+   "note": "Needs two or more locations."
+  },
+  {
+   "id": "H27",
+   "angle": "PORT",
+   "text": "Small enough to bring along.",
+   "status": "ready",
+   "note": ""
+  },
+  {
+   "id": "H28",
+   "angle": "PORT",
+   "text": "Why leave your smoothie routine at home?",
+   "status": "ready",
+   "note": ""
+  },
+  {
+   "id": "H29",
+   "angle": "PORT",
+   "text": "Morning kitchen → workday → wherever.",
+   "status": "footage",
+   "note": "Needs kitchen, office and outdoor shots."
+  },
+  {
+   "id": "H30",
+   "angle": "PORT",
+   "text": "Meet the little blender that travels with your routine.",
+   "status": "footage",
+   "note": "Needs a location change."
+  },
+  {
+   "id": "H31",
+   "angle": "MORN",
+   "text": "My morning starts with this.",
+   "status": "creator",
+   "note": "First-person routine claim: creator-only."
+  },
+  {
+   "id": "H32",
+   "angle": "MORN",
+   "text": "A simpler way to start the morning.",
+   "status": "ready",
+   "note": ""
+  },
+  {
+   "id": "H33",
+   "angle": "MORN",
+   "text": "POV: you finally simplified your morning smoothie.",
+   "status": "footage",
+   "note": "POV format needs hands-on footage."
+  },
+  {
+   "id": "H34",
+   "angle": "MORN",
+   "text": "Five minutes to make the morning feel easier.",
+   "status": "reworded",
+   "note": "Time claim not verified. Use: “A few quiet minutes to make the morning feel easier.”"
+  },
+  {
+   "id": "H35",
+   "angle": "MORN",
+   "text": "Your morning routine, but simpler.",
+   "status": "ready",
+   "note": ""
+  },
+  {
+   "id": "H36",
+   "angle": "MORN",
+   "text": "Coffee isn’t the only thing you can make part of your morning ritual.",
+   "status": "ready",
+   "note": ""
+  },
+  {
+   "id": "H37",
+   "angle": "MORN",
+   "text": "Here’s what my morning setup looks like now.",
+   "status": "creator",
+   "note": "First-person: creator-only."
+  },
+  {
+   "id": "H38",
+   "angle": "MORN",
+   "text": "Minimal kitchen. Simple routine.",
+   "status": "footage",
+   "note": "Needs a kitchen shot."
+  },
+  {
+   "id": "H39",
+   "angle": "WORK",
+   "text": "Working from home just got a little more convenient.",
+   "status": "footage",
+   "note": "Needs a desk or office shot."
+  },
+  {
+   "id": "H40",
+   "angle": "WORK",
+   "text": "Desk setup upgrade.",
+   "status": "footage",
+   "note": "Needs a desk or office shot."
+  },
+  {
+   "id": "H41",
+   "angle": "WORK",
+   "text": "My favorite thing sitting next to my laptop.",
+   "status": "creator",
+   "note": "First-person + desk footage: creator-only."
+  },
+  {
+   "id": "H42",
+   "angle": "WORK",
+   "text": "Because lunch isn’t the only thing you can make at your desk.",
+   "status": "footage",
+   "note": "Needs a desk or office shot."
+  },
+  {
+   "id": "H43",
+   "angle": "WORK",
+   "text": "For busy days when you still want your routine.",
+   "status": "footage",
+   "note": "Needs a desk or office shot."
+  },
+  {
+   "id": "H44",
+   "angle": "WORK",
+   "text": "Your workday doesn’t have to interrupt your routine.",
+   "status": "footage",
+   "note": "Needs a desk or office shot."
+  },
+  {
+   "id": "H45",
+   "angle": "GYM",
+   "text": "Gym bag essential?",
+   "status": "footage",
+   "note": "Needs gym or gym-bag footage. No body or health claims."
+  },
+  {
+   "id": "H46",
+   "angle": "GYM",
+   "text": "This takes up way less space than you think.",
+   "status": "ready",
+   "note": "Backed by size: approx. 82 × 82 × 218 mm."
+  },
+  {
+   "id": "H47",
+   "angle": "GYM",
+   "text": "For routines that start before you get home.",
+   "status": "footage",
+   "note": "Needs gym or gym-bag footage. No body or health claims."
+  },
+  {
+   "id": "H48",
+   "angle": "GYM",
+   "text": "Your post-workout routine just got more portable.",
+   "status": "footage",
+   "note": "Needs gym or gym-bag footage. No body or health claims."
+  },
+  {
+   "id": "H49",
+   "angle": "GYM",
+   "text": "Small enough for the gym bag.",
+   "status": "footage",
+   "note": "Needs gym or gym-bag footage. No body or health claims."
+  },
+  {
+   "id": "H50",
+   "angle": "GYM",
+   "text": "Keep your routine moving.",
+   "status": "footage",
+   "note": "Needs gym or gym-bag footage. No body or health claims."
+  },
+  {
+   "id": "H51",
+   "angle": "PS",
+   "text": "Don’t want to pull out the giant blender?",
+   "status": "ready",
+   "note": ""
+  },
+  {
+   "id": "H52",
+   "angle": "PS",
+   "text": "There’s an easier way to make one drink.",
+   "status": "ready",
+   "note": ""
+  },
+  {
+   "id": "H53",
+   "angle": "PS",
+   "text": "The problem with making one smoothie…",
+   "status": "ready",
+   "note": ""
+  },
+  {
+   "id": "H54",
+   "angle": "PS",
+   "text": "I wanted a smoothie. I didn’t want the cleanup.",
+   "status": "hold",
+   "note": "Cleaning claim not verified; hold until cleaning method is confirmed and shown."
+  },
+  {
+   "id": "H55",
+   "angle": "PS",
+   "text": "Sometimes the big blender is just too much.",
+   "status": "ready",
+   "note": ""
+  },
+  {
+   "id": "H56",
+   "angle": "PS",
+   "text": "Want the smoothie without turning the kitchen into a project?",
+   "status": "ready",
+   "note": ""
+  },
+  {
+   "id": "H57",
+   "angle": "PS",
+   "text": "There’s a reason compact products exist.",
+   "status": "ready",
+   "note": ""
+  },
+  {
+   "id": "H58",
+   "angle": "REVEAL",
+   "text": "Meet your new little smoothie maker.",
+   "status": "ready",
+   "note": ""
+  },
+  {
+   "id": "H59",
+   "angle": "REVEAL",
+   "text": "Small. Simple. Portable.",
+   "status": "ready",
+   "note": ""
+  },
+  {
+   "id": "H60",
+   "angle": "REVEAL",
+   "text": "Say hello to the WEDRA discovery.",
+   "status": "ready",
+   "note": ""
+  },
+  {
+   "id": "H61",
+   "angle": "REVEAL",
+   "text": "Today’s find.",
+   "status": "ready",
+   "note": ""
+  },
+  {
+   "id": "H62",
+   "angle": "REVEAL",
+   "text": "WEDRA Discovery #01.",
+   "status": "ready",
+   "note": ""
+  },
+  {
+   "id": "H63",
+   "angle": "REVEAL",
+   "text": "This is what we’re featuring first.",
+   "status": "ready",
+   "note": ""
+  },
+  {
+   "id": "H64",
+   "angle": "REVEAL",
+   "text": "Found for your everyday.",
+   "status": "ready",
+   "note": ""
+  },
+  {
+   "id": "H65",
+   "angle": "MIN",
+   "text": "Less stuff. Better stuff.",
+   "status": "ready",
+   "note": ""
+  },
+  {
+   "id": "H66",
+   "angle": "MIN",
+   "text": "Small products can make a big difference in your routine.",
+   "status": "ready",
+   "note": "“Difference” means convenience only, never health."
+  },
+  {
+   "id": "H67",
+   "angle": "MIN",
+   "text": "Keep the routine. Lose the clutter.",
+   "status": "ready",
+   "note": ""
+  },
+  {
+   "id": "H68",
+   "angle": "MIN",
+   "text": "Minimal setup. Everyday use.",
+   "status": "ready",
+   "note": ""
+  },
+  {
+   "id": "H69",
+   "angle": "MIN",
+   "text": "For people who like their routines simple.",
+   "status": "ready",
+   "note": ""
+  },
+  {
+   "id": "H70",
+   "angle": "MIN",
+   "text": "Simple products. Better routines.",
+   "status": "ready",
+   "note": ""
+  },
+  {
+   "id": "H71",
+   "angle": "FOUND",
+   "text": "Okay, I found something.",
+   "status": "ready",
+   "note": ""
+  },
+  {
+   "id": "H72",
+   "angle": "FOUND",
+   "text": "Look what I found.",
+   "status": "ready",
+   "note": ""
+  },
+  {
+   "id": "H73",
+   "angle": "FOUND",
+   "text": "Adding this to my daily routine.",
+   "status": "creator",
+   "note": "Personal-use claim: creator-only."
+  },
+  {
+   "id": "H74",
+   "angle": "FOUND",
+   "text": "Didn’t think I’d use this as much as I do.",
+   "status": "creator",
+   "note": "Testimonial: only a real creator who used it."
+  },
+  {
+   "id": "H75",
+   "angle": "FOUND",
+   "text": "Things I didn’t know I needed.",
+   "status": "ready",
+   "note": ""
+  },
+  {
+   "id": "H76",
+   "angle": "FOUND",
+   "text": "Found this and immediately understood the appeal.",
+   "status": "ready",
+   "note": ""
+  },
+  {
+   "id": "H77",
+   "angle": "FOUND",
+   "text": "This is one of those products that just makes sense.",
+   "status": "ready",
+   "note": ""
+  },
+  {
+   "id": "H78",
+   "angle": "FOUND",
+   "text": "Why is this actually so convenient?",
+   "status": "ready",
+   "note": ""
+  },
+  {
+   "id": "H79",
+   "angle": "WEDRA",
+   "text": "WEDRA finds products worth discovering.",
+   "status": "ready",
+   "note": ""
+  },
+  {
+   "id": "H80",
+   "angle": "WEDRA",
+   "text": "Another WEDRA discovery.",
+   "status": "ready",
+   "note": ""
+  },
+  {
+   "id": "H81",
+   "angle": "WEDRA",
+   "text": "We look for the products you didn’t know you wanted.",
+   "status": "ready",
+   "note": ""
+  },
+  {
+   "id": "H82",
+   "angle": "WEDRA",
+   "text": "Found something interesting.",
+   "status": "ready",
+   "note": ""
+  },
+  {
+   "id": "H83",
+   "angle": "WEDRA",
+   "text": "Not another random product. Something actually useful.",
+   "status": "ready",
+   "note": "Framed as WEDRA’s curation philosophy, not a factual guarantee."
+  },
+  {
+   "id": "H84",
+   "angle": "WEDRA",
+   "text": "Here’s what caught our attention.",
+   "status": "ready",
+   "note": ""
+  },
+  {
+   "id": "H85",
+   "angle": "WEDRA",
+   "text": "Something new for your everyday.",
+   "status": "ready",
+   "note": ""
+  },
+  {
+   "id": "H86",
+   "angle": "WEDRA",
+   "text": "Welcome to WEDRA.",
+   "status": "ready",
+   "note": ""
+  },
+  {
+   "id": "H87",
+   "angle": "GIFT",
+   "text": "Know someone who lives on smoothies?",
+   "status": "ready",
+   "note": ""
+  },
+  {
+   "id": "H88",
+   "angle": "GIFT",
+   "text": "Gift idea for the person who loves their routine.",
+   "status": "ready",
+   "note": ""
+  },
+  {
+   "id": "H89",
+   "angle": "GIFT",
+   "text": "One for you. One for them.",
+   "status": "ready",
+   "note": "No bundle or multi-buy offer exists; never imply one."
+  },
+  {
+   "id": "H90",
+   "angle": "GIFT",
+   "text": "An easy gift for the smoothie person.",
+   "status": "ready",
+   "note": ""
+  }
+ ],
+ "ads": [
+  {
+   "id": "WD01-CUR-H01-LIFE-FAST-C1",
+   "hook": "H01",
+   "angle": "CUR",
+   "text": "Okay… why did nobody show me this sooner?",
+   "structure": "fast",
+   "open": "life",
+   "cta": "Discover it"
+  },
+  {
+   "id": "WD01-CUR-H03-LIFE-NATV-C2",
+   "hook": "H03",
+   "angle": "CUR",
+   "text": "This might be one of the most useful things I found this week.",
+   "structure": "native",
+   "open": "life",
+   "cta": "See the find"
+  },
+  {
+   "id": "WD01-CUR-H04-STUDIO-NATV-C3",
+   "hook": "H04",
+   "angle": "CUR",
+   "text": "I wasn’t looking for a blender. Then I found this.",
+   "structure": "native",
+   "open": "studio",
+   "cta": "Explore the discovery"
+  },
+  {
+   "id": "WD01-CUR-H05-LIFE-FAST-C4",
+   "hook": "H05",
+   "angle": "CUR",
+   "text": "Wait until you see what this little thing does.",
+   "structure": "fast",
+   "open": "life",
+   "cta": "Meet the latest WEDRA find"
+  },
+  {
+   "id": "WD01-CUR-H07-LIFE-PREM-C5",
+   "hook": "H07",
+   "angle": "CUR",
+   "text": "Found something worth putting on your radar.",
+   "structure": "premium",
+   "open": "life",
+   "cta": "Shop the discovery"
+  },
+  {
+   "id": "WD01-CUR-H08-STUDIO-PREM-C6",
+   "hook": "H08",
+   "angle": "CUR",
+   "text": "This is exactly the kind of product WEDRA looks for.",
+   "structure": "premium",
+   "open": "studio",
+   "cta": "Discover WEDRA"
+  },
+  {
+   "id": "WD01-CUR-H09-STUDIO-PREM-C7",
+   "hook": "H09",
+   "angle": "CUR",
+   "text": "Here’s today’s WEDRA discovery.",
+   "structure": "premium",
+   "open": "studio",
+   "cta": "See why we found it"
+  },
+  {
+   "id": "WD01-CUR-H10-PINK-NATV-C8",
+   "hook": "H10",
+   "angle": "CUR",
+   "text": "Another product we think is worth knowing about.",
+   "structure": "native",
+   "open": "pink",
+   "cta": "Explore the product"
+  },
+  {
+   "id": "WD01-CONV-H11-STUDIO-FAST-C1",
+   "hook": "H11",
+   "angle": "CONV",
+   "text": "Your blender doesn’t have to live on your countertop.",
+   "structure": "fast",
+   "open": "studio",
+   "cta": "Discover it"
+  },
+  {
+   "id": "WD01-CONV-H13-STUDIO-NATV-C2",
+   "hook": "H13",
+   "angle": "CONV",
+   "text": "Why use a full-size blender for one drink?",
+   "structure": "native",
+   "open": "studio",
+   "cta": "See the find"
+  },
+  {
+   "id": "WD01-CONV-H14-LIFE-PREM-C3",
+   "hook": "H14",
+   "angle": "CONV",
+   "text": "One drink. One compact blender.",
+   "structure": "premium",
+   "open": "life",
+   "cta": "Explore the discovery"
+  },
+  {
+   "id": "WD01-CONV-H15-LIFE-NATV-C4",
+   "hook": "H15",
+   "angle": "CONV",
+   "text": "Your smoothie routine just got a lot simpler.",
+   "structure": "native",
+   "open": "life",
+   "cta": "Meet the latest WEDRA find"
+  },
+  {
+   "id": "WD01-CONV-H16-LIFE-FAST-C5",
+   "hook": "H16",
+   "angle": "CONV",
+   "text": "Less setup. More smoothie.",
+   "structure": "fast",
+   "open": "life",
+   "cta": "Shop the discovery"
+  },
+  {
+   "id": "WD01-CONV-H17-LIFE-FAST-C6",
+   "hook": "H17",
+   "angle": "CONV",
+   "text": "Small enough to take with you.",
+   "structure": "fast",
+   "open": "life",
+   "cta": "Discover WEDRA"
+  },
+  {
+   "id": "WD01-CONV-H19-STUDIO-NATV-C7",
+   "hook": "H19",
+   "angle": "CONV",
+   "text": "For the person who hates pulling out the big blender.",
+   "structure": "native",
+   "open": "studio",
+   "cta": "See why we found it"
+  },
+  {
+   "id": "WD01-CONV-H20-LIFE-PREM-C8",
+   "hook": "H20",
+   "angle": "CONV",
+   "text": "Sometimes simpler is better.",
+   "structure": "premium",
+   "open": "life",
+   "cta": "Explore the product"
+  },
+  {
+   "id": "WD01-PORT-H21-LIFE-NATV-C1",
+   "hook": "H21",
+   "angle": "PORT",
+   "text": "Your smoothie doesn’t have to stay home.",
+   "structure": "native",
+   "open": "life",
+   "cta": "Discover it"
+  },
+  {
+   "id": "WD01-PORT-H22-LIFE-PREM-C2",
+   "hook": "H22",
+   "angle": "PORT",
+   "text": "Take your routine with you.",
+   "structure": "premium",
+   "open": "life",
+   "cta": "See the find"
+  },
+  {
+   "id": "WD01-PORT-H27-LIFE-FAST-C3",
+   "hook": "H27",
+   "angle": "PORT",
+   "text": "Small enough to bring along.",
+   "structure": "fast",
+   "open": "life",
+   "cta": "Explore the discovery"
+  },
+  {
+   "id": "WD01-PORT-H28-LIFE-NATV-C4",
+   "hook": "H28",
+   "angle": "PORT",
+   "text": "Why leave your smoothie routine at home?",
+   "structure": "native",
+   "open": "life",
+   "cta": "Meet the latest WEDRA find"
+  },
+  {
+   "id": "WD01-MORN-H32-LIFE-PREM-C5",
+   "hook": "H32",
+   "angle": "MORN",
+   "text": "A simpler way to start the morning.",
+   "structure": "premium",
+   "open": "life",
+   "cta": "Shop the discovery"
+  },
+  {
+   "id": "WD01-MORN-H34-LIFE-PREM-C6",
+   "hook": "H34",
+   "angle": "MORN",
+   "text": "A few quiet minutes to make the morning feel easier.",
+   "structure": "premium",
+   "open": "life",
+   "cta": "Discover WEDRA"
+  },
+  {
+   "id": "WD01-MORN-H35-LIFE-NATV-C7",
+   "hook": "H35",
+   "angle": "MORN",
+   "text": "Your morning routine, but simpler.",
+   "structure": "native",
+   "open": "life",
+   "cta": "See why we found it"
+  },
+  {
+   "id": "WD01-MORN-H36-LIFE-NATV-C8",
+   "hook": "H36",
+   "angle": "MORN",
+   "text": "Coffee isn’t the only thing you can make part of your morning ritual.",
+   "structure": "native",
+   "open": "life",
+   "cta": "Explore the product"
+  },
+  {
+   "id": "WD01-GYM-H46-STUDIO-FAST-C1",
+   "hook": "H46",
+   "angle": "GYM",
+   "text": "This takes up way less space than you think.",
+   "structure": "fast",
+   "open": "studio",
+   "cta": "Discover it"
+  },
+  {
+   "id": "WD01-PS-H51-STUDIO-NATV-C2",
+   "hook": "H51",
+   "angle": "PS",
+   "text": "Don’t want to pull out the giant blender?",
+   "structure": "native",
+   "open": "studio",
+   "cta": "See the find"
+  },
+  {
+   "id": "WD01-PS-H52-STUDIO-FAST-C3",
+   "hook": "H52",
+   "angle": "PS",
+   "text": "There’s an easier way to make one drink.",
+   "structure": "fast",
+   "open": "studio",
+   "cta": "Explore the discovery"
+  },
+  {
+   "id": "WD01-PS-H53-LIFE-NATV-C4",
+   "hook": "H53",
+   "angle": "PS",
+   "text": "The problem with making one smoothie…",
+   "structure": "native",
+   "open": "life",
+   "cta": "Meet the latest WEDRA find"
+  },
+  {
+   "id": "WD01-PS-H55-STUDIO-FAST-C5",
+   "hook": "H55",
+   "angle": "PS",
+   "text": "Sometimes the big blender is just too much.",
+   "structure": "fast",
+   "open": "studio",
+   "cta": "Shop the discovery"
+  },
+  {
+   "id": "WD01-PS-H56-LIFE-NATV-C6",
+   "hook": "H56",
+   "angle": "PS",
+   "text": "Want the smoothie without turning the kitchen into a project?",
+   "structure": "native",
+   "open": "life",
+   "cta": "Discover WEDRA"
+  },
+  {
+   "id": "WD01-PS-H57-STUDIO-PREM-C7",
+   "hook": "H57",
+   "angle": "PS",
+   "text": "There’s a reason compact products exist.",
+   "structure": "premium",
+   "open": "studio",
+   "cta": "See why we found it"
+  },
+  {
+   "id": "WD01-REVEAL-H58-STUDIO-FAST-C8",
+   "hook": "H58",
+   "angle": "REVEAL",
+   "text": "Meet your new little smoothie maker.",
+   "structure": "fast",
+   "open": "studio",
+   "cta": "Explore the product"
+  },
+  {
+   "id": "WD01-REVEAL-H59-STUDIO-PREM-C1",
+   "hook": "H59",
+   "angle": "REVEAL",
+   "text": "Small. Simple. Portable.",
+   "structure": "premium",
+   "open": "studio",
+   "cta": "Discover it"
+  },
+  {
+   "id": "WD01-REVEAL-H60-LIFE-PREM-C2",
+   "hook": "H60",
+   "angle": "REVEAL",
+   "text": "Say hello to the WEDRA discovery.",
+   "structure": "premium",
+   "open": "life",
+   "cta": "See the find"
+  },
+  {
+   "id": "WD01-REVEAL-H61-PINK-NATV-C3",
+   "hook": "H61",
+   "angle": "REVEAL",
+   "text": "Today’s find.",
+   "structure": "native",
+   "open": "pink",
+   "cta": "Explore the discovery"
+  },
+  {
+   "id": "WD01-REVEAL-H62-STUDIO-PREM-C4",
+   "hook": "H62",
+   "angle": "REVEAL",
+   "text": "WEDRA Discovery #01.",
+   "structure": "premium",
+   "open": "studio",
+   "cta": "Meet the latest WEDRA find"
+  },
+  {
+   "id": "WD01-REVEAL-H63-PINK-FAST-C5",
+   "hook": "H63",
+   "angle": "REVEAL",
+   "text": "This is what we’re featuring first.",
+   "structure": "fast",
+   "open": "pink",
+   "cta": "Shop the discovery"
+  },
+  {
+   "id": "WD01-REVEAL-H64-LIFE-PREM-C6",
+   "hook": "H64",
+   "angle": "REVEAL",
+   "text": "Found for your everyday.",
+   "structure": "premium",
+   "open": "life",
+   "cta": "Discover WEDRA"
+  },
+  {
+   "id": "WD01-MIN-H65-STUDIO-PREM-C7",
+   "hook": "H65",
+   "angle": "MIN",
+   "text": "Less stuff. Better stuff.",
+   "structure": "premium",
+   "open": "studio",
+   "cta": "See why we found it"
+  },
+  {
+   "id": "WD01-MIN-H66-LIFE-PREM-C8",
+   "hook": "H66",
+   "angle": "MIN",
+   "text": "Small products can make a big difference in your routine.",
+   "structure": "premium",
+   "open": "life",
+   "cta": "Explore the product"
+  },
+  {
+   "id": "WD01-MIN-H67-LIFE-NATV-C1",
+   "hook": "H67",
+   "angle": "MIN",
+   "text": "Keep the routine. Lose the clutter.",
+   "structure": "native",
+   "open": "life",
+   "cta": "Discover it"
+  },
+  {
+   "id": "WD01-MIN-H68-STUDIO-FAST-C2",
+   "hook": "H68",
+   "angle": "MIN",
+   "text": "Minimal setup. Everyday use.",
+   "structure": "fast",
+   "open": "studio",
+   "cta": "See the find"
+  },
+  {
+   "id": "WD01-MIN-H69-LIFE-NATV-C3",
+   "hook": "H69",
+   "angle": "MIN",
+   "text": "For people who like their routines simple.",
+   "structure": "native",
+   "open": "life",
+   "cta": "Explore the discovery"
+  },
+  {
+   "id": "WD01-MIN-H70-LIFE-PREM-C4",
+   "hook": "H70",
+   "angle": "MIN",
+   "text": "Simple products. Better routines.",
+   "structure": "premium",
+   "open": "life",
+   "cta": "Meet the latest WEDRA find"
+  },
+  {
+   "id": "WD01-FOUND-H71-LIFE-NATV-C5",
+   "hook": "H71",
+   "angle": "FOUND",
+   "text": "Okay, I found something.",
+   "structure": "native",
+   "open": "life",
+   "cta": "Shop the discovery"
+  },
+  {
+   "id": "WD01-FOUND-H72-LIFE-NATV-C6",
+   "hook": "H72",
+   "angle": "FOUND",
+   "text": "Look what I found.",
+   "structure": "native",
+   "open": "life",
+   "cta": "Discover WEDRA"
+  },
+  {
+   "id": "WD01-FOUND-H75-LIFE-NATV-C7",
+   "hook": "H75",
+   "angle": "FOUND",
+   "text": "Things I didn’t know I needed.",
+   "structure": "native",
+   "open": "life",
+   "cta": "See why we found it"
+  },
+  {
+   "id": "WD01-FOUND-H76-STUDIO-NATV-C8",
+   "hook": "H76",
+   "angle": "FOUND",
+   "text": "Found this and immediately understood the appeal.",
+   "structure": "native",
+   "open": "studio",
+   "cta": "Explore the product"
+  },
+  {
+   "id": "WD01-FOUND-H77-LIFE-NATV-C1",
+   "hook": "H77",
+   "angle": "FOUND",
+   "text": "This is one of those products that just makes sense.",
+   "structure": "native",
+   "open": "life",
+   "cta": "Discover it"
+  },
+  {
+   "id": "WD01-FOUND-H78-LIFE-FAST-C2",
+   "hook": "H78",
+   "angle": "FOUND",
+   "text": "Why is this actually so convenient?",
+   "structure": "fast",
+   "open": "life",
+   "cta": "See the find"
+  },
+  {
+   "id": "WD01-WEDRA-H79-STUDIO-PREM-C3",
+   "hook": "H79",
+   "angle": "WEDRA",
+   "text": "WEDRA finds products worth discovering.",
+   "structure": "premium",
+   "open": "studio",
+   "cta": "Explore the discovery"
+  },
+  {
+   "id": "WD01-WEDRA-H80-STUDIO-FAST-C4",
+   "hook": "H80",
+   "angle": "WEDRA",
+   "text": "Another WEDRA discovery.",
+   "structure": "fast",
+   "open": "studio",
+   "cta": "Meet the latest WEDRA find"
+  },
+  {
+   "id": "WD01-WEDRA-H81-LIFE-PREM-C5",
+   "hook": "H81",
+   "angle": "WEDRA",
+   "text": "We look for the products you didn’t know you wanted.",
+   "structure": "premium",
+   "open": "life",
+   "cta": "Shop the discovery"
+  },
+  {
+   "id": "WD01-WEDRA-H82-LIFE-NATV-C6",
+   "hook": "H82",
+   "angle": "WEDRA",
+   "text": "Found something interesting.",
+   "structure": "native",
+   "open": "life",
+   "cta": "Discover WEDRA"
+  },
+  {
+   "id": "WD01-WEDRA-H83-STUDIO-FAST-C7",
+   "hook": "H83",
+   "angle": "WEDRA",
+   "text": "Not another random product. Something actually useful.",
+   "structure": "fast",
+   "open": "studio",
+   "cta": "See why we found it"
+  },
+  {
+   "id": "WD01-WEDRA-H84-LIFE-NATV-C8",
+   "hook": "H84",
+   "angle": "WEDRA",
+   "text": "Here’s what caught our attention.",
+   "structure": "native",
+   "open": "life",
+   "cta": "Explore the product"
+  },
+  {
+   "id": "WD01-WEDRA-H85-LIFE-PREM-C1",
+   "hook": "H85",
+   "angle": "WEDRA",
+   "text": "Something new for your everyday.",
+   "structure": "premium",
+   "open": "life",
+   "cta": "Discover it"
+  },
+  {
+   "id": "WD01-WEDRA-H86-STUDIO-PREM-C2",
+   "hook": "H86",
+   "angle": "WEDRA",
+   "text": "Welcome to WEDRA.",
+   "structure": "premium",
+   "open": "studio",
+   "cta": "See the find"
+  },
+  {
+   "id": "WD01-GIFT-H87-LIFE-NATV-C3",
+   "hook": "H87",
+   "angle": "GIFT",
+   "text": "Know someone who lives on smoothies?",
+   "structure": "native",
+   "open": "life",
+   "cta": "Explore the discovery"
+  },
+  {
+   "id": "WD01-GIFT-H88-LIFE-PREM-C4",
+   "hook": "H88",
+   "angle": "GIFT",
+   "text": "Gift idea for the person who loves their routine.",
+   "structure": "premium",
+   "open": "life",
+   "cta": "Meet the latest WEDRA find"
+  },
+  {
+   "id": "WD01-GIFT-H89-PINK-FAST-C5",
+   "hook": "H89",
+   "angle": "GIFT",
+   "text": "One for you. One for them.",
+   "structure": "fast",
+   "open": "pink",
+   "cta": "Shop the discovery"
+  },
+  {
+   "id": "WD01-GIFT-H90-LIFE-NATV-C6",
+   "hook": "H90",
+   "angle": "GIFT",
+   "text": "An easy gift for the smoothie person.",
+   "structure": "native",
+   "open": "life",
+   "cta": "Discover WEDRA"
+  },
+  {
+   "id": "WD01-CONV-H18-LIFE-NATV-C7",
+   "hook": "H18",
+   "angle": "CONV",
+   "text": "Your morning routine doesn’t need more equipment.",
+   "structure": "native",
+   "open": "life",
+   "cta": "See why we found it"
+  }
+ ]
+}

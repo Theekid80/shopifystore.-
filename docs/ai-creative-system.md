@@ -77,21 +77,28 @@ gradients, no cartoon or CGI look, no distorted hands, no floating objects.
 
 ## 3. Product lock (per product)
 
-A short, literal description of the product from its reference photos. For
-Discovery #01, fill it in from the actual Zendrop photos. A starting point:
+A short, literal description of the product from its reference photos.
+Discovery #01, written from the supplied reference photos (white studio,
+pink render with base close-up, white lifestyle on a balcony table):
 
 ```
-A portable electric juicer blender of about 82 × 82 × 218 mm: a
-cylindrical {colour of the variant} body with a {describe the jar exactly:
-clear / tinted}, a food-grade PC + ABS lid {describe its shape, handle or
-loop if present}, dual 304 stainless-steel blades at the base of the jar,
-{describe the power button: position, shape, indicator light if present}
-and {describe the charging port exactly as in the reference}.
+A portable electric juicer blender about 22 cm tall, shaped like a bottle:
+a clear, transparent jar that narrows to a short neck; a flat round cap on
+top; a collar at the neck with a round ring-shaped carry loop on one side;
+a ribbed translucent sleeve around the lower part of the jar over the blade
+area; dual stainless-steel blades at the bottom of the jar; a cylindrical
+base in {white | pink} with small grey "FRESH JUICE" printing, exactly as in
+the reference; a cable charging port on the base, as shown in the reference.
+Cap, collar, loop and base are all the same colour.
 ```
 
-Only state what the reference shows. If the lid shape or button placement
-isn't clear in the photos, say "as shown in the reference" rather than
-guessing.
+- Keep the "FRESH JUICE" print exactly as the reference shows it: never
+  remove, move or restyle it, and never add any other text or logo
+  (including WEDRA).
+- Use the white reference for white shots and the pink reference for pink
+  shots. Other colour variants need their own reference photo first.
+- The button position isn't clear in the current photos: describe it only
+  as "as shown in the reference" until a clear photo is available.
 
 ---
 
