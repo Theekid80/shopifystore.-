@@ -29,10 +29,14 @@
     if product.featured_media != blank
       assign count = count | plus: 1
       if count == 1
-        assign only_product = product
+        assign first_product = product
       endif
     endif
   endfor
+  # only_product is set only when a single product has images.
+  if count == 1
+    assign only_product = first_product
+  endif
   # Card source: slide blocks, else one product's images, else products.
   assign slides = section.blocks | where: 'type', 'slide'
   assign mode = 'products'

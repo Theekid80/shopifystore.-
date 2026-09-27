@@ -11,8 +11,8 @@
         "eyebrow": "Curated for better everyday living",
         "heading": "Products worth discovering.",
         "subheading": "WEDRA finds useful, well-made products for wellness and everyday living, and shows you only the ones worth your attention.",
-        "button_1_label": "Explore the discovery",
-        "button_1_link": "",
+        "button_1_label": "Explore the discoveries",
+        "button_1_link": "/collections/all",
         "button_2_label": "How we choose",
         "button_2_link": "#why-wedra"
       },
@@ -22,7 +22,7 @@
           "settings": {
             "image": "shopify://shop_images/wedra-d01-slide-1.jpg",
             "caption": "",
-            "link": ""
+            "link": "/products/portable-electric-juicer-blender"
           }
         },
         "slide_2": {
@@ -30,7 +30,7 @@
           "settings": {
             "image": "shopify://shop_images/wedra-d01-slide-2.jpg",
             "caption": "",
-            "link": ""
+            "link": "/products/portable-electric-juicer-blender"
           }
         },
         "slide_3": {
@@ -38,41 +38,50 @@
           "settings": {
             "image": "shopify://shop_images/wedra-d01-slide-3.jpg",
             "caption": "",
-            "link": ""
+            "link": "/products/portable-electric-juicer-blender"
           }
         },
-        "slide_4": {
+        "slide_oil": {
           "type": "slide",
           "settings": {
-            "image": "shopify://shop_images/wedra-d01-slide-4.jpg",
+            "image": "shopify://shop_images/wedra-oil-slide-4x5.jpg",
             "caption": "",
-            "link": ""
+            "link": "/products/versatile-oil-sprayer"
           }
         },
-        "slide_5": {
+        "slide_spoon": {
           "type": "slide",
           "settings": {
-            "image": "shopify://shop_images/wedra-d01-slide-5.jpg",
+            "image": "shopify://shop_images/wedra-spoon-slide-4x5.jpg",
             "caption": "",
-            "link": ""
+            "link": "/products/digital-measuring-spoon"
           }
         },
-        "slide_6": {
+        "slide_sealer": {
           "type": "slide",
           "settings": {
-            "image": "shopify://shop_images/wedra-d01-slide-6.jpg",
+            "image": "shopify://shop_images/wedra-sealer-slide-4x5.jpg",
             "caption": "",
-            "link": ""
+            "link": "/products/mini-bag-sealer-rechargeable-handheld-heat-sealing-tool"
+          }
+        },
+        "slide_scrubber": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/wedra-scrubber-slide-4x5.jpg",
+            "caption": "",
+            "link": "/products/cordless-electric-spin-scrubber-for-kitchen-cleaning"
           }
         }
       },
       "block_order": [
         "slide_1",
+        "slide_oil",
+        "slide_spoon",
         "slide_2",
-        "slide_3",
-        "slide_4",
-        "slide_5",
-        "slide_6"
+        "slide_sealer",
+        "slide_scrubber",
+        "slide_3"
       ]
     },
     "discovery": {
@@ -153,7 +162,7 @@
       "settings": {
         "index": "01",
         "eyebrow": "The discovery",
-        "heading": "One discovery today. More to come.",
+        "heading": "A few discoveries. More to come.",
         "heading_size": "headline",
         "heading_tag": "h2",
         "text": "WEDRA is an evolving collection. Each new product is chosen with the same care, and added only when it is worth showing you.",
@@ -227,10 +236,26 @@
         "anchor": "newsletter",
         "color_scheme": "bg-base"
       }
+    },
+    "discoveries": {
+      "type": "featured-collection",
+      "settings": {
+        "eyebrow": "The discoveries",
+        "heading": "Everything we have found so far.",
+        "text": "Each one chosen for everyday living. Swipe through them all.",
+        "collection_handle": "all",
+        "limit": 24,
+        "columns": 4,
+        "desktop_layout": "carousel",
+        "view_all_label": "View all",
+        "anchor": "discoveries",
+        "color_scheme": "bg-base"
+      }
     }
   },
   "order": [
     "hero",
+    "discoveries",
     "discovery",
     "highlights",
     "why",

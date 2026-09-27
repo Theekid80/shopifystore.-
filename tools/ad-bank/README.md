@@ -31,3 +31,11 @@ Rules baked in: no prices, no reviews or numbers, no health claims, no
 battery-life or ice claims, WEDRA shown as the finder, never the maker.
 Hooks marked `footage`, `creator` or `hold` in `bank.json` are never
 rendered.
+
+## Discoveries after #01
+
+`node discoveries.mjs [--only=oil,spoon,sealer,scrubber] [--videos=0]` renders,
+per product, clean 4:5 gallery images, a 4:5 homepage hero slide, and a 4:5
+and 9:16 video into `out/discoveries/<product>/`. Source photos are
+text-free crops of the reference photos in `photos/<product>/` (git-ignored).
+Copy and facts follow `docs/discovery-next-four.md`.

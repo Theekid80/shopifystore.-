@@ -25,7 +25,19 @@
     </div>
 
     {%- if c.products_count > 0 -%}
-      <ul class="slider-mobile mt-lg" role="list" style="--cols-desktop: {{ section.settings.columns }};">
+      {%- liquid
+        assign carousel = false
+        if section.settings.desktop_layout == 'carousel' and c.products_count > section.settings.columns
+          assign carousel = true
+        endif
+      -%}
+      {%- if carousel -%}
+        <div class="slider-nav" data-slider-nav hidden>
+          <button type="button" class="slider-nav__btn" data-slider-prev aria-label="Previous products"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3 5 8l5 5" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></button>
+          <button type="button" class="slider-nav__btn" data-slider-next aria-label="Next products"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="m6 3 5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></button>
+        </div>
+      {%- endif -%}
+      <ul class="slider-mobile{% if carousel %} slider-all{% endif %} mt-lg" role="list" style="--cols-desktop: {{ section.settings.columns }};"{% if carousel %} data-slider{% endif %}>
         {%- for product in c.products limit: limit -%}
           <li class="reveal" style="--delay: {{ forloop.index0 | modulo: 4 | times: 90 }}ms;">
             {% render 'product-card', product: product, section: section %}
@@ -54,8 +66,18 @@
     { "type": "textarea", "id": "text", "label": "Text", "default": "Every product WEDRA has found and chosen to feature." },
     { "type": "collection", "id": "collection", "label": "Collection" },
     { "type": "text", "id": "collection_handle", "label": "…or collection handle", "default": "all", "info": "\"all\" shows every product. Used only when no collection is picked." },
-    { "type": "range", "id": "limit", "label": "Products to show", "min": 2, "max": 12, "step": 1, "default": 8 },
+    { "type": "range", "id": "limit", "label": "Products to show", "min": 2, "max": 24, "step": 1, "default": 8 },
     { "type": "range", "id": "columns", "label": "Columns on desktop", "min": 2, "max": 4, "step": 1, "default": 4 },
+    {
+      "type": "select",
+      "id": "desktop_layout",
+      "label": "Desktop layout",
+      "options": [
+        { "value": "grid", "label": "Grid" },
+        { "value": "carousel", "label": "Carousel (scrolls when there are more products than columns)" }
+      ],
+      "default": "grid"
+    },
     { "type": "text", "id": "view_all_label", "label": "View all label", "default": "View all" },
     { "type": "text", "id": "anchor", "label": "Anchor id", "default": "edit" },
     {

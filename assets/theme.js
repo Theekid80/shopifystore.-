@@ -419,6 +419,32 @@
   initHeroCarousels();
   document.addEventListener("shopify:section:load", (e) => initHeroCarousels(e.target));
 
+  /* Product carousels: previous / next buttons, shown only when the row overflows. */
+  function initSliders(root = document) {
+    root.querySelectorAll("[data-slider]").forEach((track) => {
+      if (track.dataset.ready) return;
+      track.dataset.ready = "1";
+      const nav = track.parentElement.querySelector("[data-slider-nav]");
+      if (!nav) return;
+      const prev = nav.querySelector("[data-slider-prev]");
+      const next = nav.querySelector("[data-slider-next]");
+      const step = () => (track.firstElementChild ? track.firstElementChild.getBoundingClientRect().width + parseFloat(getComputedStyle(track).columnGap || 0) : track.clientWidth);
+      const update = () => {
+        const max = track.scrollWidth - track.clientWidth;
+        nav.hidden = max <= 2;
+        prev.disabled = track.scrollLeft <= 2;
+        next.disabled = track.scrollLeft >= max - 2;
+      };
+      prev.addEventListener("click", () => track.scrollBy({ left: -step(), behavior: "smooth" }));
+      next.addEventListener("click", () => track.scrollBy({ left: step(), behavior: "smooth" }));
+      track.addEventListener("scroll", update, { passive: true });
+      window.addEventListener("resize", update);
+      update();
+    });
+  }
+  initSliders();
+  document.addEventListener("shopify:section:load", (e) => initSliders(e.target));
+
   /* ---------- Variant picker ---------- */
   function initVariantPickers(root = document) {
     $$("[data-variant-picker]", root).forEach((picker) => {
