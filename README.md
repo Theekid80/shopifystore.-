@@ -28,6 +28,7 @@ The theme never takes payment, stores orders or holds product data of its own.
 | [`docs/discovery-01-blender.md`](docs/discovery-01-blender.md) | Verified facts for the blender, allowed and forbidden claims, the Shopify fields to fill in, launch checklist |
 | [`docs/content-templates.md`](docs/content-templates.md) | Reusable Instagram, TikTok and website content templates |
 | [`docs/ad-testing-bank.md`](docs/ad-testing-bank.md) | 90 ad hooks, test variables, naming, test plan, metrics, footage and creator briefs |
+| [`docs/discovery-next-four.md`](docs/discovery-next-four.md) | Creative development for the next four candidate discoveries (not in Shopify yet): audit, image systems, video concepts, hooks, claims to avoid |
 | [`docs/platform-ads.md`](docs/platform-ads.md) | Which file goes to which Instagram, Facebook and TikTok placement, safe zones, copy fields, pre-launch checklist |
 | [`tools/ad-bank/`](tools/ad-bank/) | Renders the hook-testing videos, statics and carousel from `bank.json` |
 | [`tools/discovery-video/`](tools/discovery-video/) | Renders the reusable "WEDRA Discovery" short video (9:16, 4:5, 1:1, 16:9) from product photos |
