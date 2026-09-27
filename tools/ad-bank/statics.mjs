@@ -14,7 +14,7 @@ export async function renderStatics(browser, bank, HERE) {
     ["B", "Product + lifestyle", { kind: "editorial", ...LIFE_WIDE, eyebrow: D, text: "Discover something better.", mark: true }],
     ["C", "Portable lifestyle", { kind: "editorial", ...LIFE_WIDE, text: "Smoothie.\nWherever.", mark: true }],
     ["D", "Large product", { kind: "studio", image: photo("studio_tall"), height: "66%", eyebrow: P, text: D, mark: true }],
-    ["E", "Close-up", { kind: "studio", image: photo("charge"), height: "36%", top: "37%", eyebrow: "Rechargeable · 350 ml", text: "Small format.\nEveryday convenience.", mark: true }],
+    ["E", "Close-up", { kind: "studio", image: photo("charge"), height: "30%", top: "36%", eyebrow: "Rechargeable · 350 ml", text: "Small format.\nEveryday convenience.", mark: true }],
     ["F", "Product pair (gym/office version needs footage)", { kind: "pair", images: [photo("studio_tall"), photo("pink")], tone: "stone", text: "The little blender\nthat goes with you.", mark: true }],
     ["G", "Clean editorial product", { kind: "studio", image: photo("pink"), height: "60%", tone: "ivory", eyebrow: D, text: "Found for your everyday.", mark: true }],
     ["H", "Lifestyle", { kind: "editorial", ...LIFE_DRINK, text: "Less setup.\nMore routine.", mark: true }],
@@ -42,6 +42,6 @@ export async function renderStatics(browser, bank, HERE) {
   };
   for (const fmt of ["4x5", "9x16", "1x1", "191x1"])
     for (const [id, , scene] of statics) await shot(scene, fmt, path.join(HERE, "out", "static", fmt, `WD01-STATIC-${id}-${fmt}.jpg`));
-  for (const fmt of ["4x5", "1x1"])
+  for (const fmt of ["4x5", "1x1", "9x16"])
     for (const [n, scene] of carousel) await shot(scene, fmt, path.join(HERE, "out", "carousel", fmt, `WD01-CAROUSEL-${n}-${fmt}.jpg`));
 }

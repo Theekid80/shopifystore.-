@@ -14,7 +14,7 @@ html, body { width: 100vw; height: 100vh; overflow: hidden; background: var(--ch
 .scene { position: absolute; inset: 0; overflow: hidden; opacity: 0; }
 .bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .ivory { background: var(--ivory); } .stone { background: var(--stone); } .dark { background: var(--charcoal); color: #fff; }
-.product { position: absolute; left: 50%; top: 46%; transform: translate(-50%, -50%); height: 62%; mix-blend-mode: multiply; filter: brightness(1.05) contrast(1.04); }
+.product { position: absolute; left: 50%; top: 46%; transform: translate(-50%, -50%); height: var(--h, 62%); mix-blend-mode: multiply; filter: brightness(1.05) contrast(1.04); }
 .pair { position: absolute; left: 0; right: 0; top: 12%; height: 62%; display: flex; justify-content: center; align-items: flex-end; gap: 2%; background: inherit; }
 .stone .pair { background: var(--stone); } .ivory .pair { background: var(--ivory); }
 .pair img { height: 100%; max-width: 48%; object-fit: contain; mix-blend-mode: multiply; filter: brightness(1.05) contrast(1.04); }
@@ -48,25 +48,25 @@ html, body { width: 100vw; height: 100vh; overflow: hidden; background: var(--ch
 /* Layouts. tall = 9:16 with TikTok / Reels / Stories safe zones
    (keep text out of the top 12 %, bottom 26 % and right 14 %);
    feed = 4:5 and 1:1; wide = 1.91:1 and 16:9. */
-.tall .product { top: 40%; height: 46%; }
-.tall .pair { top: 13%; height: 46%; }
+.tall .product { top: 38%; height: min(var(--h, 40%), 40%); }
+.tall .pair { top: 17%; height: 40%; }
 .tall .label { bottom: 27%; right: 14%; left: 6%; }
 .tall .ed { bottom: 28%; right: 14%; left: 6%; }
 .tall .cap { left: 6%; right: 14%; } .tall .cap.top { top: 14%; } .tall .cap.low { bottom: 29%; }
 .tall .wm { top: 12.5%; }
 .tall .end { padding-bottom: 14%; padding-right: 12%; padding-left: 6%; }
-.feed .product { top: 40%; height: 54%; }
+.feed .product { top: 40%; height: min(var(--h, 54%), 54%); }
 .feed .pair { top: 7%; height: 54%; }
 .feed .label { bottom: 7%; }
 .feed .cap.top { top: 9%; } .feed .cap.low { bottom: 10%; }
 .feed .wm { top: 4.5%; }
-.wide .product { left: 30%; top: 50%; height: 84%; }
+.wide .product { left: 30%; top: 50%; height: min(var(--h, 84%), 84%); }
 .wide .pair { top: 8%; height: 84%; left: 0; right: 42%; }
 .wide .label { left: 56%; right: 5%; bottom: auto; top: 30%; text-align: left; }
 .wide .ed { right: 42%; left: 5%; bottom: 12%; }
 .wide .cap { left: 20%; right: 20%; }
 .wide .end .display { margin-top: calc(var(--u) * 4); }
-.tall .scene:has(> .cap.top) .product { top: 55%; height: 44%; }
+.tall .scene:has(> .cap.top) .product { top: 54%; height: 42%; }
 .feed .scene:has(> .cap.top) .product { top: 60%; height: 56%; }
 .wide .scene:has(> .cap.top) .product { top: 60%; height: 70%; left: 50%; }
 </style>
@@ -97,7 +97,7 @@ window.setup = (cfg) => {
       if (sc.mark) node.append(el("p", "wm", "WEDRA"));
     } else if (k === "studio" || k === "pair") {
       node.classList.add(sc.tone || "ivory");
-      if (k === "studio") { const img = el("img", "product"); img.src = sc.image; if (sc.height) img.style.height = sc.height; if (sc.top) img.style.top = sc.top; node.append(img); }
+      if (k === "studio") { const img = el("img", "product"); img.src = sc.image; if (sc.height) img.style.setProperty("--h", sc.height); if (sc.top) img.style.top = sc.top; node.append(img); }
       else { const p = el("div", "pair"); for (const s of sc.images) { const i = el("img"); i.src = s; p.append(i); } node.append(p); }
       if (sc.text && sc.style === "caption") node.append(caption(sc.text, sc.at || "top"));
       else if (sc.text || sc.eyebrow) { const l = el("div", "label"); if (sc.eyebrow) l.append(el("p", "eyebrow", sc.eyebrow)); if (sc.text) l.append(el("p", "display", sc.text)); node.append(l); }

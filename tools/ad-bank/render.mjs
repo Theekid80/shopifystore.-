@@ -1,6 +1,8 @@
 // WEDRA ad bank renderer.
 //   node render.mjs videos [--format=9x16|4x5|1x1|16x9] [--set=round1] [--only=H01] [--shard=0/4]
 //        → out/video/<format>/<id>-<format>.mp4
+//        --cta="Link in bio" --dir=organic --tag=ORG  → organic versions (own CTA, folder, file tag)
+//        existing files are skipped unless --force
 //   node render.mjs statics  → out/static/<format>/ (4x5, 9x16, 1x1, 191x1) + out/carousel/<format>/ (4x5, 1x1)
 // Reads bank.json (hooks, ads, CTAs, facts, photo paths). Photos live in photos/ (git-ignored).
 // Needs Playwright and ffmpeg (FFMPEG, CHROMIUM_PATH, PLAYWRIGHT_MODULE env overrides).
@@ -58,6 +60,11 @@ function build(ad) {
 
 async function renderVideo(ad, fmt) {
   const { size: [w, h], layout } = bank.formats[fmt];
+  const tag = opt.tag ? `-${opt.tag}` : "";
+  const outDir = path.join(HERE, "out", opt.dir || "video", fmt);
+  const out = path.join(outDir, `${ad.id}${tag}-${fmt}.mp4`);
+  if (fs.existsSync(out) && !opt.force) { console.log(`= ${path.basename(out)} (exists)`); return; }
+  if (opt.cta) ad = { ...ad, cta: opt.cta };
   const cfg = { ...build(ad), layout };
   const dur = cfg.scenes.reduce((n, s) => n + s.dur, 0);
   const dir = path.join(HERE, "out", "frames", `${ad.id}-${fmt}`);
@@ -72,18 +79,17 @@ async function renderVideo(ad, fmt) {
     await page.screenshot({ path: path.join(dir, `f${String(i).padStart(4, "0")}.jpg`), type: "jpeg", quality: 90 });
   }
   await page.close();
-  const outDir = path.join(HERE, "out", "video", fmt); fs.mkdirSync(outDir, { recursive: true });
-  const out = path.join(outDir, `${ad.id}-${fmt}.mp4`);
+  fs.mkdirSync(outDir, { recursive: true });
   const r = spawnSync(ffmpeg, ["-y", "-loglevel", "error", "-framerate", String(FPS), "-i", path.join(dir, "f%04d.jpg"), "-c:v", "libx264", "-pix_fmt", "yuv420p", "-crf", "19", "-movflags", "+faststart", out]);
   fs.rmSync(dir, { recursive: true, force: true });
   if (r.status !== 0) throw new Error(`ffmpeg failed for ${ad.id}: ${r.stderr}`);
-  console.log(`✓ ${ad.id}-${fmt} (${dur.toFixed(1)} s)`);
+  console.log(`✓ ${path.basename(out)} (${dur.toFixed(1)} s)`);
 }
 
 if (mode === "videos") {
   const set = opt.set ? bank.sets[opt.set] : null;
   const ads = bank.ads
-    .filter((a) => (!set || set.includes(a.hook)) && (!opt.only || a.id.includes(opt.only)))
+    .filter((a) => (!set || set.includes(a.hook)) && (!opt.only || opt.only.split(",").some((o) => a.id.includes(o))))
     .filter((a, i) => i % shardCount === shardIndex);
   for (const ad of ads) await renderVideo(ad, fmt);
 } else if (mode === "statics") {
