@@ -84,20 +84,60 @@
       {% render 'rating', product: product, show_count: false %}
       <div class="card__price">{% render 'price', product: product, show_from: true %}</div>
       {%- if settings.card_show_swatches and color_option and color_option.values.size > 1 -%}
-        <div class="card__footer">
-          <ul class="swatches" role="list" aria-label="{{ color_option.name | escape }}: {{ color_option.values | join: ', ' | escape }}">
-            {%- for value in color_option.values limit: 6 -%}
-              {%- liquid
-                if value.swatch.color
-                  assign swatch = value.swatch.color
-                else
-                  assign swatch = value | handleize | replace: '-', ''
-                endif
-              -%}
-              <li class="swatch" style="--swatch: {{ swatch }};" title="{{ value | escape }}"></li>
+        {%- liquid
+          # One dot per distinct colour ("Pink / USB" and "Pink / Magnetic" are one pink).
+          assign dots = ''
+          assign names = ''
+          for value in color_option.values
+            assign vname = value.name | default: value | append: ''
+            capture c
+              render 'swatch-color', value: vname, swatch: value.swatch
+            endcapture
+            assign c = c | strip
+            if c == blank
+              continue
+            endif
+            assign marker = '|' | append: c | append: '|'
+            assign seen = '|' | append: dots | append: '|'
+            if seen contains marker
+              continue
+            endif
+            capture n
+              render 'option-label', value: vname
+            endcapture
+            assign n = n | split: ' · ' | first | strip
+            if dots == ''
+              assign dots = c
+              assign names = n
+            else
+              assign dots = dots | append: '|' | append: c
+              assign names = names | append: '|' | append: n
+            endif
+          endfor
+          assign dot_list = dots | split: '|'
+          assign name_list = names | split: '|'
+        -%}
+        {%- if dot_list.size > 1 -%}
+          <div class="card__footer">
+            <p class="visually-hidden">{{ color_option.name | escape }}: {{ name_list | join: ', ' | escape }}</p>
+            <ul class="swatches" role="list" aria-hidden="true">
+              {%- for c in dot_list limit: 6 -%}
+                <li class="swatch" style="--swatch: {{ c }};" title="{{ name_list[forloop.index0] | escape }}"></li>
+              {%- endfor -%}
+            </ul>
+          </div>
+        {%- endif -%}
+      {%- endif -%}
+      {%- if color_option == nil and product.has_only_default_variant == false -%}
+        {%- assign first_option = product.options_with_values | first -%}
+        {%- if first_option.values.size > 1 -%}
+          <p class="card__options xsmall muted">
+            {%- for value in first_option.values limit: 4 -%}
+              {%- assign vname = value.name | default: value | append: '' -%}
+              {%- render 'option-label', value: vname -%}{%- unless forloop.last %} · {% endunless -%}
             {%- endfor -%}
-          </ul>
-        </div>
+          </p>
+        {%- endif -%}
       {%- endif -%}
       <p class="product-form__error xsmall" role="alert" data-form-error hidden></p>
     </div>

@@ -94,17 +94,8 @@
         "show_buy": false,
         "link_label": "Discover the product",
         "layout": "reverse",
-        "color_scheme": "bg-surface"
-      }
-    },
-    "highlights": {
-      "type": "discovery-highlights",
-      "settings": {
-        "eyebrow": "The details",
-        "heading": "What you get",
-        "limit": 8,
-        "link_label": "See the full product",
-        "color_scheme": "bg-base"
+        "color_scheme": "bg-surface",
+        "product": "portable-electric-juicer-blender"
       }
     },
     "why": {
@@ -154,20 +145,21 @@
         "show_price": true,
         "link_label": "Discover the product",
         "layout": "even",
-        "color_scheme": "bg-base"
+        "color_scheme": "bg-base",
+        "product": "mini-bag-sealer-rechargeable-handheld-heat-sealing-tool"
       }
     },
     "philosophy": {
       "type": "statement",
       "settings": {
-        "index": "01",
-        "eyebrow": "The discovery",
+        "index": "",
+        "eyebrow": "Keep discovering",
         "heading": "A few discoveries. More to come.",
         "heading_size": "headline",
         "heading_tag": "h2",
         "text": "WEDRA is an evolving collection. Each new product is chosen with the same care, and added only when it is worth showing you.",
-        "link_label": "Hear about the next one",
-        "link": "#newsletter",
+        "link_label": "Explore all discoveries",
+        "link": "/collections/all",
         "layout": "split",
         "color_scheme": "color-dark"
       }
@@ -242,7 +234,7 @@
       "settings": {
         "eyebrow": "The discoveries",
         "heading": "Everything we have found so far.",
-        "text": "Each one chosen for everyday living. Swipe through them all.",
+        "text": "Each one chosen for everyday living.",
         "collection_handle": "all",
         "limit": 24,
         "columns": 4,
@@ -251,13 +243,43 @@
         "anchor": "discoveries",
         "color_scheme": "bg-base"
       }
+    },
+    "brand": {
+      "type": "statement",
+      "settings": {
+        "index": "",
+        "eyebrow": "The idea",
+        "heading": "Useful things, found for you.",
+        "heading_size": "headline",
+        "heading_tag": "h2",
+        "text": "We look through a lot of products so you don’t have to, and show you only the useful ones: clearly explained, honestly photographed and fairly priced.",
+        "link_label": "How we choose",
+        "link": "#why-wedra",
+        "layout": "split",
+        "color_scheme": "bg-base"
+      }
+    },
+    "spotlight_2": {
+      "type": "featured-product",
+      "settings": {
+        "product": "versatile-oil-sprayer",
+        "eyebrow": "WEDRA Discovery #02",
+        "heading": "",
+        "text": "<p>One glass bottle by the stove that sprays a fine mist or pours, so the pan, the salad and the air-fryer basket all get just what they need.</p>",
+        "show_detail": true,
+        "show_buy": false,
+        "link_label": "Discover the product",
+        "layout": "default",
+        "color_scheme": "bg-base"
+      }
     }
   },
   "order": [
     "hero",
+    "brand",
     "discoveries",
     "discovery",
-    "highlights",
+    "spotlight_2",
     "why",
     "video",
     "philosophy",

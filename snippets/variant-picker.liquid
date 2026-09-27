@@ -1,16 +1,23 @@
 {%- comment -%}
   Variant picker driven by the product's real options (Color, Size, …).
-  Color options render as swatches (Shopify swatch data if set), others as pills.
-  Color values that carry more than a colour (e.g. "Pink / USB") render as a
-  labelled pill with a colour dot, so similar colours stay distinguishable.
-  A value is greyed out only when Shopify has no variant with that value
-  available for sale (variant.available, which honours "continue selling
-  when out of stock"), never because of the other options currently picked.
-  An option fully decided by the others (e.g. a "Size" that is always "New"
-  for one colour and "n/a" for the rest) is hidden; theme.js keeps it in
-  step so the right variant is always submitted.
+
+  - Every comparison uses the value's name as text, so it works whether
+    Shopify hands the value over as a string or as a product_option_value.
+  - Labels read cleanly ('option-label': "White W159" → White, "2PC" → Set of 2);
+    the submitted value is always Shopify's own.
+  - Colours render as swatches ('swatch-color') with the colour name for
+    screen readers and in the legend, so colour is never the only cue.
+    Colour values that carry more than a colour (e.g. "Pink / USB"), or
+    that name no known colour, render as labelled pills with a colour dot.
+  - A value is greyed out only when Shopify has no variant with that value
+    available for sale (variant.available, which honours "continue selling
+    when out of stock").
+  - An option fully decided by the others (e.g. a "Size" that is always
+    "New" for one colour and "n/a" for the rest) is hidden; theme.js keeps
+    it in step so the right variant is always submitted.
   theme.js keeps the form's variant id, price, availability and image in sync.
 {%- endcomment -%}
+{%- assign current = product.selected_or_first_available_variant -%}
 <div class="variant-picker-wrap" data-variant-picker>
   {%- for option in product.options_with_values -%}
     {%- liquid
@@ -20,6 +27,7 @@
         assign is_color = true
       endif
       assign idx = option.position | minus: 1
+      assign selected_name = current.options[idx] | append: ''
 
       # Derived option: every combination of the other options maps to one value of this option.
       assign derived = false
@@ -47,76 +55,72 @@
         endfor
       endif
 
-      # Labelled colours: any value naming more than a colour.
+      # Colour display: plain swatches only when every value is a single known colour.
       assign labelled = false
       if is_color
         for value in option.values
-          if value contains ' / ' or value contains ' ('
+          assign vname = value.name | default: value | append: ''
+          capture vlabel
+            render 'option-label', value: vname
+          endcapture
+          capture vcolor
+            render 'swatch-color', value: vname, swatch: value.swatch
+          endcapture
+          assign vwords = vlabel | split: ' '
+          if vcolor == blank or vwords.size > 1
             assign labelled = true
             break
           endif
         endfor
       endif
     -%}
-    <fieldset class="variant-picker" style="margin-bottom: 1.25rem;" data-option-index="{{ idx }}"{% if derived %} hidden data-derived{% endif %}>
-      <legend class="eyebrow muted">
-        {{ option.name | escape }}
-        <span class="small" style="text-transform:none; letter-spacing:0; color: var(--color-text); margin-left:.5rem;" data-selected-value>{{ option.selected_value | escape }}</span>
+    {%- capture selected_label -%}{% render 'option-label', value: selected_name %}{%- endcapture -%}
+    <fieldset class="variant-picker" data-option-index="{{ idx }}"{% if derived %} hidden data-derived{% endif %}>
+      <legend class="variant-picker__legend">
+        <span class="eyebrow muted">{{ option.name | escape }}</span>
+        <span class="variant-picker__selected" data-selected-value>{{ selected_label | strip | escape }}</span>
       </legend>
       <div class="variant-picker__values">
         {%- for value in option.values -%}
           {%- liquid
+            assign vname = value.name | default: value | append: ''
             assign input_id = section_id | append: '-' | append: option.position | append: '-' | append: forloop.index
             assign value_available = false
             for v in product.variants
-              if v.available and v.options[idx] == value
+              assign v_opt = v.options[idx] | append: ''
+              if v.available and v_opt == vname
                 assign value_available = true
                 break
               endif
             endfor
-            if value.swatch.color
-              assign swatch = value.swatch.color
-            else
-              # Colour from the name's base, so "Black (Small)", "Dark Gray + Eye Mask" or "Pink / USB" still get a dot.
-              assign base = value | split: ' (' | first | split: ' +' | first | split: ',' | first | split: ' / ' | first | strip
-              assign base_down = base | downcase
-              if base_down contains 'new '
-                assign base = base_down | remove_first: 'new '
-              endif
-              assign swatch = base | handleize | replace: '-', ''
-              case swatch
-                when 'navyblue'
-                  assign swatch = 'navy'
-                when 'rosered'
-                  assign swatch = '#c2185b'
-                when 'claret'
-                  assign swatch = '#7f1734'
-                when 'silvery'
-                  assign swatch = 'silver'
-                when 'pink'
-                  assign swatch = '#f2b8b5'
-              endcase
-            endif
           -%}
-          <label class="{% if is_color and labelled %}variant-pill variant-pill--dot{% elsif is_color %}variant-swatch{% else %}variant-pill{% endif %}" for="{{ input_id }}">
+          {%- capture label -%}{% render 'option-label', value: vname %}{%- endcapture -%}
+          {%- assign label = label | strip -%}
+          {%- if is_color -%}
+            {%- capture swatch -%}{% render 'swatch-color', value: vname, swatch: value.swatch %}{%- endcapture -%}
+            {%- assign swatch = swatch | strip -%}
+          {%- endif -%}
+          <label class="{% if is_color and labelled == false %}variant-swatch{% elsif is_color %}variant-pill variant-pill--dot{% else %}variant-pill{% endif %}" for="{{ input_id }}"{% if is_color and labelled == false %} title="{{ label | escape }}"{% endif %}>
             <input
               type="radio"
               id="{{ input_id }}"
               name="{{ section_id }}-{{ option.name | handle }}"
-              value="{{ value | escape }}"
-              {% if option.selected_value == value %}checked{% endif %}
-              {% unless value_available %}class="is-unavailable"{% endunless %}
+              value="{{ vname | escape }}"
+              data-label="{{ label | escape }}"
+              {% if vname == selected_name %}checked{% endif %}
+              {% unless value_available %}class="is-unavailable" aria-describedby="{{ section_id }}-unavailable"{% endunless %}
             >
-            {%- if is_color and labelled -%}
-              <span><i style="--swatch: {{ swatch }};" aria-hidden="true"></i>{{ value | escape }}</span>
+            {%- if is_color and labelled == false -%}
+              <span style="--swatch: {{ swatch }};"><span class="visually-hidden">{{ label | escape }}</span></span>
             {%- elsif is_color -%}
-              <span style="--swatch: {{ swatch }};" title="{{ value | escape }}"><span class="visually-hidden">{{ value | escape }}</span></span>
+              <span>{% if swatch != blank %}<i style="--swatch: {{ swatch }};" aria-hidden="true"></i>{% endif %}{{ label | escape }}</span>
             {%- else -%}
-              <span>{{ value | escape }}</span>
+              <span>{{ label | escape }}</span>
             {%- endif -%}
           </label>
         {%- endfor -%}
       </div>
     </fieldset>
   {%- endfor -%}
+  <p id="{{ section_id }}-unavailable" class="visually-hidden">{{ 'products.product.sold_out' | t }}</p>
 </div>

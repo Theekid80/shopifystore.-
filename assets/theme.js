@@ -474,7 +474,8 @@
         }
         $$("fieldset", picker).forEach((fs) => {
           const label = $("[data-selected-value]", fs);
-          if (label) label.textContent = $("input:checked", fs)?.value || "";
+          const checked = $("input:checked", fs);
+          if (label) label.textContent = checked ? checked.dataset.label || checked.value : "";
         });
         updateVariant(section, product, variant);
       });

@@ -116,10 +116,15 @@
                   if slide_link == blank
                     assign slide_link = only_product.url | default: source.url
                   endif
-                  assign slide_alt = block.settings.image.alt | default: block.settings.caption | default: only_product.title
+                  assign slide_product_title = ''
+                  if slide_link contains '/products/'
+                    assign slide_handle = slide_link | split: '/products/' | last | split: '?' | first
+                    assign slide_product_title = all_products[slide_handle].title
+                  endif
+                  assign slide_alt = block.settings.image.alt | default: block.settings.caption | default: slide_product_title | default: only_product.title | default: shop.name
                 -%}
                 <li class="hero-carousel__card" aria-roledescription="slide" {{ block.shopify_attributes }}>
-                  <a href="{{ slide_link }}" class="hero-carousel__link">
+                  <a href="{{ slide_link }}" class="hero-carousel__link" aria-label="{{ slide_alt | escape }}">
                     <span class="hero-carousel__media">
                       {%- render 'responsive-image', image: block.settings.image, alt: slide_alt, sizes: '(min-width: 990px) 30vw, 70vw', widths: '360, 540, 720, 900, 1080', priority: forloop.first -%}
                     </span>

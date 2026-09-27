@@ -21,7 +21,8 @@
 {%- capture col_legal -%}
   {%- if shop.privacy_policy.body != blank -%}{{ shop.privacy_policy.url }}|{{ 'general.privacy' | t }}^{%- endif -%}
   {%- if shop.terms_of_service.body != blank -%}{{ shop.terms_of_service.url }}|{{ 'general.terms' | t }}^{%- endif -%}
-  {%- if shop.contact_information.body != blank -%}{{ shop.contact_information.url }}|{{ shop.contact_information.title }}{%- endif -%}
+  {%- if shop.contact_information.body != blank -%}{{ shop.contact_information.url }}|{{ shop.contact_information.title }}^{%- endif -%}
+  {%- if pages['data-sharing-opt-out'].url != blank -%}{{ pages['data-sharing-opt-out'].url }}|{{ pages['data-sharing-opt-out'].title }}{%- endif -%}
 {%- endcapture -%}
 
 <footer class="footer color-dark" {{ section.shopify_attributes }}>

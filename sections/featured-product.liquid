@@ -41,7 +41,7 @@
           -%}
           {%- if spot_text != blank -%}<div class="rte">{{ spot_text }}</div>{%- endif -%}
           {%- if section.settings.heading != blank -%}<p class="label">{{ product.title | escape }}</p>{%- endif -%}
-          {% render 'price', product: product %}
+          {% render 'price', product: product, show_from: true %}
           {%- if section.settings.show_buy -%}
             {% render 'product-form', product: product, section_id: section.id, show_quantity: false, show_buy_now: false %}
           {%- endif -%}

@@ -1,0 +1,76 @@
+{%- comment -%}
+  Customer-facing label for a product option value, from the value Shopify
+  stores. The value itself (and the variant it selects) never changes; only
+  how it reads:
+    "White W159"            → White            (internal model code dropped)
+    "Beige 470ML"           → Beige            (a size all variants share)
+    "1PC" / "2PC"           → 1 piece / Set of 2
+    "300G" / "1200mA"       → 300 g / 1200 mA
+    "Pink / Magnetic"       → Pink · Magnetic
+  Params: value (string)
+{%- endcomment -%}
+{%- liquid
+  assign parts = value | append: '' | split: ' '
+  assign out = ''
+  assign units = 'ML,PC,MA,G' | split: ','
+  for w in parts
+    assign up = w | upcase
+    assign size = w | size
+    assign keep = w
+    if w == '/'
+      assign keep = '·'
+    elsif size > 2
+      assign head = w | slice: 0
+      assign rest = w | slice: 1, 30
+      assign rest_num = rest | plus: 0 | append: ''
+      assign head_is_letter = false
+      assign head_num = head | plus: 0 | append: ''
+      unless head_num == head
+        assign head_is_letter = true
+      endunless
+      if head_is_letter and rest_num == rest
+        # A model code such as W159.
+        assign keep = ''
+      else
+        for unit in units
+          assign unit_size = unit | size
+          assign n_size = size | minus: unit_size
+          assign tail = up | slice: n_size, unit_size
+          if tail == unit
+            assign n = w | slice: 0, n_size
+            assign n_num = n | plus: 0 | append: ''
+            if n_num == n and n != ''
+              case unit
+                when 'ML'
+                  assign keep = ''
+                when 'PC'
+                  if n == '1'
+                    assign keep = '1 piece'
+                  else
+                    assign keep = 'Set of ' | append: n
+                  endif
+                when 'MA'
+                  assign keep = n | append: ' mA'
+                when 'G'
+                  assign keep = n | append: ' g'
+              endcase
+              break
+            endif
+          endif
+        endfor
+      endif
+    endif
+    if keep != ''
+      assign out = out | append: ' ' | append: keep
+    endif
+  endfor
+  assign out = out | strip | remove: '· ·' | strip
+  assign last_char = out | slice: -1
+  if last_char == '·'
+    assign out = out | remove_last: '·' | strip
+  endif
+  if out == ''
+    assign out = value
+  endif
+-%}
+{{- out -}}

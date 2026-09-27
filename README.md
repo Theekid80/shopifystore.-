@@ -66,16 +66,18 @@ real to show, so no section ever needs a placeholder product.
 | Brand philosophy | `principles`, `statement` | Section settings |
 | Discovery grid | `featured-collection`, collection page | Any collection (use it once there are several discoveries) |
 | FAQ | `faq` | Section blocks |
+| Variant picker | `snippets/variant-picker` | The product's real options. Colours render as swatches (Shopify's swatch colour, else the colour word in the value, via `swatch-color`); labels read cleanly via `option-label` ("White W159" → White, "2PC" → Set of 2, "300G" → 300 g) while the submitted value stays Shopify's own. Availability is `variant.available`. |
 | Email sign-up | `newsletter` | Shopify customers with marketing consent |
 
-**Homepage:** hero → featured discovery → highlights → why WEDRA → video →
-"One discovery today. More to come." → FAQ → email sign-up.
+**Homepage:** hero carousel (every product) → brand statement → all
+discoveries carousel → spotlight #01 → spotlight #02 → why WEDRA → video →
+"A few discoveries. More to come." → FAQ → email sign-up.
 
 **Product page:** gallery → name → price → variants → short value line →
 add to cart → specifications → what's included → product details → shipping
 → returns → everyday use (lifestyle photo) → video → genuine reviews (only if
-a review app provides them) → FAQ → more discoveries (only when there are
-other products).
+a review app provides them) → FAQ → more discoveries (a carousel of every
+other product).
 
 No fake reviews, ratings, sales counts, scarcity, countdowns, badges or
 guarantees exist anywhere in the theme.

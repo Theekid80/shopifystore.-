@@ -1,0 +1,52 @@
+{%- comment -%}
+  CSS colour for a colour option value: Shopify's own swatch colour when one
+  is set (Settings → Metafields / category options), otherwise the first
+  colour word in the value ("Pink / USB" → pink, "Beige 470ML" → beige),
+  in tones matched to the product photos. Outputs nothing when the value
+  names no known colour, so no empty swatch is ever drawn.
+  Params: value (string), swatch (optional Shopify swatch object)
+{%- endcomment -%}
+{%- liquid
+  assign found = ''
+  if swatch.color
+    assign found = swatch.color
+  else
+    assign words = value | append: '' | downcase | replace: '/', ' ' | replace: '-', ' ' | split: ' '
+    for w in words
+      case w
+        when 'pink', 'rose', 'blush'
+          assign found = '#EDBDBA'
+        when 'white'
+          assign found = '#FFFFFF'
+        when 'black'
+          assign found = '#1F1F1E'
+        when 'gray', 'grey'
+          assign found = '#C9C8C4'
+        when 'green', 'sage'
+          assign found = '#B6CBBB'
+        when 'yellow'
+          assign found = '#EED27C'
+        when 'beige', 'cream', 'ivory'
+          assign found = '#E7D9BF'
+        when 'blue'
+          assign found = '#9EB5CC'
+        when 'navy'
+          assign found = '#27324A'
+        when 'red'
+          assign found = '#C0504D'
+        when 'brown'
+          assign found = '#8B6B4F'
+        when 'silver'
+          assign found = '#CFCFCF'
+        when 'purple', 'lilac', 'lavender'
+          assign found = '#B9A9D1'
+        when 'orange'
+          assign found = '#E9A060'
+      endcase
+      if found != ''
+        break
+      endif
+    endfor
+  endif
+-%}
+{{- found -}}
