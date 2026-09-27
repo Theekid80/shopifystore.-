@@ -8,13 +8,16 @@ supporting lines. The playbook for testing them is
 
 | Output | Command |
 | --- | --- |
-| 9:16 videos (FAST 12 s, PREMIUM 15 s, NATIVE 10 s) | `node render.mjs videos` |
-| Only some ads (ID contains a string) | `node render.mjs videos H01` |
-| Parallel runs | `node render.mjs videos "" 0/4` … `3/4` |
-| Statics A–J (4:5 + 9:16) and the 5-slide carousel | `node render.mjs statics` |
+| 9:16 videos with TikTok / Reels / Stories safe zones | `node render.mjs videos --format=9x16` |
+| 4:5 or 1:1 feed videos for the round-1 set | `node render.mjs videos --format=4x5 --set=round1` |
+| Only some ads (ID contains a string) | `node render.mjs videos --only=H01` |
+| Parallel runs | add `--shard=0/4` … `--shard=3/4` |
+| Photo ads A–J (4:5, 9:16, 1:1, 1.91:1) and carousels (4:5, 1:1) | `node render.mjs statics` |
 
-Files land in `out/` (git-ignored), named by their test cell, e.g.
-`WD01-CUR-H01-LIFE-FAST-C1.mp4`.
+Files land in `out/<kind>/<format>/` (git-ignored), named by their test
+cell and format, e.g. `WD01-CUR-H01-LIFE-FAST-C1-9x16.mp4`. Per-ad
+platform copy (Meta primary text, headline, button; TikTok ad text; UTM
+parameters) is in `ad-copy.csv`; see `docs/platform-ads.md`.
 
 Photos go in `photos/` (git-ignored): `life.jpg`, `studio.jpg`,
 `studio-tall.jpg`, `pink.jpg`, `charge.jpg`. Use only real product photos or

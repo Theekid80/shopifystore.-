@@ -1225,5 +1225,67 @@
    "open": "life",
    "cta": "See why we found it"
   }
- ]
+ ],
+ "sets": {
+  "round1": [
+   "H01",
+   "H04",
+   "H09",
+   "H13",
+   "H17",
+   "H21",
+   "H32",
+   "H46",
+   "H51",
+   "H55",
+   "H59",
+   "H62",
+   "H67",
+   "H72",
+   "H79",
+   "H87"
+  ]
+ },
+ "formats": {
+  "9x16": {
+   "size": [
+    1080,
+    1920
+   ],
+   "layout": "tall",
+   "use": "TikTok, Instagram Reels and Stories, Facebook Reels and Stories"
+  },
+  "4x5": {
+   "size": [
+    1080,
+    1350
+   ],
+   "layout": "feed",
+   "use": "Instagram and Facebook feed"
+  },
+  "1x1": {
+   "size": [
+    1080,
+    1080
+   ],
+   "layout": "feed",
+   "use": "Facebook feed and Marketplace, Instagram feed"
+  },
+  "16x9": {
+   "size": [
+    1920,
+    1080
+   ],
+   "layout": "wide",
+   "use": "Facebook in-stream, YouTube"
+  },
+  "191x1": {
+   "size": [
+    1200,
+    628
+   ],
+   "layout": "wide",
+   "use": "Facebook link ads (photo only)"
+  }
+ }
 }

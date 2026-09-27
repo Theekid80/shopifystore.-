@@ -12,9 +12,10 @@ source of truth.
 
 | Asset | Count | Where |
 | --- | --- | --- |
-| 9:16 video ads | 63 (16 Fast · 21 Premium · 26 Native text-over-video) | `tools/ad-bank/out/video/` |
-| Static ads (concepts A–J) | 10 × 2 sizes (4:5 feed, 9:16 story) | `tools/ad-bank/out/static/` |
-| Carousel | 5 slides, 4:5 | `tools/ad-bank/out/carousel/` |
+| 9:16 video ads (safe zones for TikTok, Reels, Stories) | 63 (16 Fast · 21 Premium · 26 Native text-over-video) | `tools/ad-bank/out/video/` |
+| 4:5 and 1:1 feed videos | 16 each (round-1 set) | `tools/ad-bank/out/video/4x5/`, `/1x1/` |
+| Static ads (concepts A–J) | 10 × 4 sizes (4:5, 9:16, 1:1, 1.91:1) | `tools/ad-bank/out/static/` |
+| Carousel | 5 slides, 4:5 and 1:1 | `tools/ad-bank/out/carousel/` |
 | Hooks catalogued | 90 | this document + `tools/ad-bank/bank.json` |
 
 Hook status: 62 rendered · 1 reworded and rendered ·
@@ -311,9 +312,10 @@ experience; no scripted testimonials.
 
 ```
 cd tools/ad-bank
-node render.mjs videos                # every ad in bank.json
-node render.mjs videos H01            # ads whose ID contains H01
-node render.mjs statics               # statics + carousel
+node render.mjs videos --format=9x16            # every ad, vertical
+node render.mjs videos --format=4x5 --set=round1 # feed versions of round 1
+node render.mjs videos --only=H01                # ads whose ID contains H01
+node render.mjs statics                          # photos + carousels, all sizes
 ```
 
 For the next discovery: new photos in `photos/`, a new `bank.json` (same
