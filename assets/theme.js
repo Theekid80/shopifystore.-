@@ -531,7 +531,7 @@
         const res = await fetch(el.dataset.url);
         const html = new DOMParser().parseFromString(await res.text(), "text/html");
         const fresh = $("[data-recommendations]", html);
-        if (fresh && fresh.innerHTML.trim()) { el.innerHTML = fresh.innerHTML; initReveal(el); }
+        if (fresh && fresh.innerHTML.trim()) { el.innerHTML = fresh.innerHTML; el.closest("section")?.removeAttribute("hidden"); initReveal(el); }
         else el.closest(".shopify-section")?.setAttribute("hidden", "");
       } catch (_) { el.closest(".shopify-section")?.setAttribute("hidden", ""); }
     }

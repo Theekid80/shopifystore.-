@@ -1,9 +1,10 @@
 {%- comment -%}
   Related products from Shopify's Product Recommendations API
   (loaded after the page with theme.js). Manual picks can be set per
-  product in the Search & Discovery app.
+  product in the Search & Discovery app. Hidden until there is at least one
+  other product to show, so a one-product store has no empty block.
 {%- endcomment -%}
-<section class="section rule-top {{ section.settings.color_scheme }}" aria-labelledby="Related-{{ section.id }}">
+<section class="section rule-top {{ section.settings.color_scheme }}" aria-labelledby="Related-{{ section.id }}"{% unless recommendations.performed? and recommendations.products_count > 0 %} hidden{% endunless %}>
   <div class="page-width">
     <div
       data-recommendations
