@@ -7,8 +7,8 @@ Nothing in this document changes the store, the blender or checkout.
 
 | Working name | Reference | Variants (as listed by the fulfilment partner) | Reference photos in hand |
 | --- | --- | --- | --- |
-| Oil Sprayer | 1972168 | 1 pc 470 ml: Beige, Black, Green, Yellow · 2 pc 470 ml: Black, Green, Beige | 5 (beige, with overlay text) |
-| Digital Measuring Spoon | 2076060 | 300 g, 500 g | 1 (one size, on white) |
+| Oil Sprayer | 1972168 | 1 pc 470 ml: Beige, Black, Green, Yellow · 2 pc 470 ml: Black, Green, Beige | 6 (beige, incl. spray-and-pour in use; with overlay text) |
+| Digital Measuring Spoon | 2076060 | 300 g, 500 g | 5 (display, buttons, contents; one size) |
 | Electric Dish Scrubber | 2864377 | 800 mA / 1200 mA × White, Green, Pink | 5 (green, white, pink, in use, measurements) |
 | Mini Bag Sealer | 2872197 | White, Pink, Gray, Black (W159) | 10 (all four colours, sizes, charging, steps; with overlay text) |
 
@@ -134,17 +134,30 @@ by the stove instead of a spray bottle plus a pourer. The WEDRA angle:
 *the small kitchen upgrade you use every single day.* Audience: people who
 cook at home, air-fryer users, people who like a tidy counter.
 
-### Product lock (from the 5 reference photos, beige)
+### What the photos confirm
+- A tall, straight-sided cylindrical clear glass bottle with a rounded
+  base, holding golden oil.
+- A cream-beige cylindrical top unit with a small button on top, a trigger
+  lever at the back, a fine spray nozzle at the front, and a pour spout
+  under a small flip cap, also at the front.
+- Spray: hold upright and squeeze the trigger for a fine mist to the front.
+  Pour: tip the bottle and a thin stream runs from the spout (the in-use
+  photo shows both over a salad and a grill pan).
+
+### Product lock (from the 6 reference photos, beige)
 ```
-A clear glass oil bottle, 470 ml, tall with rounded shoulders, holding
-golden oil. A {beige} plastic top unit with: a flip lid over a pour spout;
-a press button on top; a short side nozzle for spraying; a trigger-style
-handle on one side, all exactly as in the reference. The cap colour is
-uniform {beige}. No printing on the glass.
+A tall, straight-sided cylindrical clear glass oil bottle, 470 ml, with a
+rounded base, holding golden oil. A {cream-beige} cylindrical plastic top
+unit with: a small button on top; a trigger lever at the back; a fine spray
+nozzle at the front; a pour spout under a small flip cap at the front, all
+exactly as in the reference. The top unit is one uniform colour. No
+printing on the glass.
 ```
 - Only beige is confirmed by photo. Black, Green and Yellow need their own
   reference photos before any image in those colours. For 2 pc, show two
   real bottles only once a 2 pc photo exists.
+- The in-use photo (spray over a grill pan, pour over a salad) is the
+  model for images 3 and 5 and for video concept 1.
 - The reference photos carry overlay text ("SPRAY DOWN INTEGRATED OILER
   POT", "LARGE CALIBER", "FREE SWITCHIN", "2 IN 1") and arrows. Crop them
   out or use the photos as a shape reference only. None of that wording is
@@ -211,8 +224,8 @@ food-grade or dishwasher-safe (unless confirmed in writing), heat-resistant,
 "2 in 1" styled as the partner's overlay, any of the partner's overlay words.
 
 ### Reference checklist (per image)
-- [ ] Cap shape, flip lid, press button, side nozzle and handle match the photos
-- [ ] Bottle proportions and rounded shoulders match; glass has no printing
+- [ ] Top unit: button on top, trigger at the back, spray nozzle and flip-cap pour spout at the front, as in the photos
+- [ ] Tall straight-sided cylinder with a rounded base; glass has no printing
 - [ ] Colour is a photographed colour (beige until others are received)
 - [ ] No overlay text, arrows or badges from the source photos
 - [ ] Mist and pour look physically plausible; no invented extra nozzle or measuring marks
@@ -222,16 +235,24 @@ food-grade or dishwasher-safe (unless confirmed in writing), heat-resistant,
 
 ## 4. Digital Measuring Spoon
 
-**Reference photo: 1 received** (one size, on white, no overlay text). It
-doesn't say whether it's the 300 g or the 500 g version: confirm that both
-look the same before one image stands for both.
+**Reference photos: 5 received** (on white, no overlay text): scoop with
+rice, empty scoop, button close-up and the box contents. They don't say
+whether they show the 300 g or the 500 g version: confirm that both look
+the same before one image stands for both.
 
 ### What the photo confirms
 - A black, deep oval scoop on a short flat black neck.
 - A long handle: silver/white top with a black underside.
 - A rectangular LCD display in the handle (shown reading "10.0 g").
-- Below the display, a black pad with a round power button, plus the
-  printed labels "MODE" and "TARE" beside their buttons.
+- Below the display, a black triangular button pad with three buttons,
+  labelled "MODE" (top), "TARE" (right, with a power symbol) and "HOLD"
+  (left). The display shows "g".
+- A hanging hole at the end of the handle.
+- Runs on batteries: the contents photo shows two AAA-size batteries and an
+  instruction manual with the spoon. Confirm with the listing that the
+  batteries are included before saying so.
+- The retail box is printed with a generic "Digital Scale / Innovative
+  Kitchen Accessories" design: never show the box.
 
 ### Creative brief
 A kitchen spoon with a small digital display in the handle that shows the
@@ -243,11 +264,13 @@ capacity variants: up to 300 g or up to 500 g.
 ```
 A digital measuring spoon: a deep oval black scoop on a short flat black
 neck, joined to a long handle with a silver-white top and black underside;
-a rectangular grey LCD display in the handle; below it a black pad with a
-round power button and the small printed labels "MODE" and "TARE" beside
-their buttons, exactly as in the reference. No other printing or logo.
+a rectangular grey LCD display in the handle; below it a black triangular
+button pad with three buttons and the small printed labels "MODE", "TARE"
+and "HOLD" around it; a hanging hole at the end of the handle, exactly as
+in the reference. No other printing or logo.
 ```
-- Keep "MODE" and "TARE" exactly as printed; add no other text.
+- Keep "MODE", "TARE" and "HOLD" exactly as printed; add no other text.
+- No box, manual or batteries in images, except a flat-lay of what's included once confirmed.
 - The display shows either nothing or a reading actually captured from the
   product for that amount. Never a made-up number.
 
@@ -293,13 +316,13 @@ never made up in editing.
 
 ### Website placement and mobile
 - Gallery: hero, display detail, coffee lifestyle, baking use case, side profile.
-- Highlights: Capacity (300 g / 500 g) · LCD display · Tare button · Units (only if confirmed).
+- Highlights: Capacity (300 g / 500 g) · LCD display · Tare and hold buttons · Hanging hole · Battery powered (AAA, as confirmed) · Units (only if confirmed).
 - Mobile: capacity picker as two plain pills ("Up to 300 g", "Up to 500 g").
 
 ### Product-page copy direction
 How to use (details tab, once confirmed from the listing): power on, press
-TARE to zero with the empty scoop, then scoop. Mention MODE only once it's
-confirmed what it switches.
+TARE to zero with the empty scoop, then scoop; HOLD keeps the reading on
+screen. Mention MODE only once it's confirmed what it switches.
 
 Value line: "A spoon with a display: measure coffee, tea and baking as you
 scoop." Practical, precise, understated. No numbers beyond capacity.
@@ -311,7 +334,8 @@ waterproof, "replaces your scale".
 
 ### Reference checklist
 - [ ] Oval black scoop, silver-white handle with black underside, display and black button pad match the photo
-- [ ] "MODE" and "TARE" printed exactly as in the reference, nothing else
+- [ ] "MODE", "TARE" and "HOLD" printed exactly as in the reference, nothing else
+- [ ] Triangular button pad and hanging hole as in the reference; no box shown
 - [ ] Display shows a real captured reading, or is off
 - [ ] Printing on the handle only as in the reference
 - [ ] The 300 g and 500 g versions look as their photos show (don't assume they're identical)
@@ -566,11 +590,12 @@ bag, or before/after splits. Never show other brands' packaging.
 
 ## 7. Next steps (owner)
 
-1. Send the fulfilment partner's photos for the Measuring Spoon (both
-   sizes), a clear view of the Dish Scrubber's charging port, and the Oil Sprayer in Black, Green, Yellow
-   and the 2 pc pack (and the beige photos again as files).
+1. Send the fulfilment partner's photos for the Oil Sprayer in Black,
+   Green, Yellow and the 2 pc pack, and a clear view of the Dish
+   Scrubber's charging port.
 2. Confirm from the listing: the scrubber's 800 / 1200 figure and how it
-   charges, and how the spoon is powered.
+   charges; whether the spoon's two sizes look the
+   same, whether batteries come in the box, and what MODE switches.
 3. Pick the next discovery for when the blender reaches $10K. Then the
    seven images and five videos are produced for that one product only, and
    the theme changes in section 1 are made at launch.
