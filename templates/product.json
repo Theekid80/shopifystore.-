@@ -189,11 +189,19 @@
         "color_scheme": "bg-surface"
       }
     },
-    "related": {
-      "type": "related-products",
+    "discoveries": {
+      "type": "featured-collection",
       "settings": {
+        "eyebrow": "Keep discovering",
         "heading": "More discoveries",
-        "limit": 4,
+        "text": "Everything else WEDRA has found. Swipe through them all.",
+        "collection_handle": "all",
+        "limit": 24,
+        "columns": 3,
+        "desktop_layout": "carousel",
+        "exclude_current": true,
+        "view_all_label": "View all",
+        "anchor": "more-discoveries",
         "color_scheme": "bg-base"
       }
     }
@@ -204,6 +212,6 @@
     "video",
     "reviews",
     "faq",
-    "related"
+    "discoveries"
   ]
 }

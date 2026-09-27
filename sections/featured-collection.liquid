@@ -9,8 +9,16 @@
     assign c = collections[section.settings.collection_handle]
   endif
   assign limit = section.settings.limit
+  # On a product page, optionally leave out the product being viewed.
+  assign current_id = 0
+  assign min_count = 1
+  if section.settings.exclude_current and product.id != blank
+    assign current_id = product.id
+    assign min_count = 2
+    assign limit = limit | plus: 1
+  endif
 -%}
-{%- if c.products_count > 0 or request.design_mode -%}
+{%- if c.products_count >= min_count or request.design_mode -%}
 <section id="{{ section.settings.anchor }}" class="section {{ section.settings.color_scheme }}" aria-labelledby="FeaturedCollection-{{ section.id }}">
   <div class="page-width">
     <div class="section-heading__row">
@@ -24,10 +32,14 @@
       {%- endif -%}
     </div>
 
-    {%- if c.products_count > 0 -%}
+    {%- if c.products_count >= min_count -%}
       {%- liquid
         assign carousel = false
-        if section.settings.desktop_layout == 'carousel' and c.products_count > section.settings.columns
+        assign shown = c.products_count
+        if current_id != 0
+          assign shown = shown | minus: 1
+        endif
+        if section.settings.desktop_layout == 'carousel' and shown > section.settings.columns
           assign carousel = true
         endif
       -%}
@@ -39,6 +51,7 @@
       {%- endif -%}
       <ul class="slider-mobile{% if carousel %} slider-all{% endif %} mt-lg" role="list" style="--cols-desktop: {{ section.settings.columns }};"{% if carousel %} data-slider{% endif %}>
         {%- for product in c.products limit: limit -%}
+          {%- if product.id == current_id -%}{%- continue -%}{%- endif -%}
           <li class="reveal" style="--delay: {{ forloop.index0 | modulo: 4 | times: 90 }}ms;">
             {% render 'product-card', product: product, section: section %}
           </li>
@@ -79,6 +92,7 @@
       "default": "grid",
       "info": "Carousel scrolls when there are more products than columns."
     },
+    { "type": "checkbox", "id": "exclude_current", "label": "Leave out the product being viewed", "default": false },
     { "type": "text", "id": "view_all_label", "label": "View all label", "default": "View all" },
     { "type": "text", "id": "anchor", "label": "Anchor id", "default": "edit" },
     {
