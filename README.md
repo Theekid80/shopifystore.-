@@ -156,6 +156,14 @@ on the homepage.
 
 ---
 
+## Deploying
+
+This branch is connected to the Shopify theme **"shopifystore.-/claude
+designer"** (Online Store → Themes). Every push to it updates that theme;
+preview it from the theme's **⋯ → Preview**, and publish only when approved.
+Theme-editor changes made in Shopify are committed back to the branch, so
+pull before editing. See `AGENTS.md` for the full workflow.
+
 ## Local development
 
 With the [Shopify CLI](https://shopify.dev/docs/api/shopify-cli):

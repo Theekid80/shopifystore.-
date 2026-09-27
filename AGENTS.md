@@ -14,3 +14,32 @@ app, build step or package manager; the old headless prototype was removed.
 - Brand, voice and creative rules: `docs/brand-system.md`,
   `docs/ai-creative-system.md`. Product facts: `docs/discovery-*.md`.
 - Lint with `shopify theme check`; preview with `shopify theme dev`.
+
+## Permanent workflow: one continuous theme
+
+The branch `claude/shopify-website-rbdqm0` of `Theekid80/shopifystore.-` is
+connected to the Shopify theme **"shopifystore.-/claude designer"** through
+Shopify's GitHub integration. That theme is the single source of truth for
+the storefront code. A push to the branch updates the theme within about a
+minute; edits made in the Shopify theme editor are committed back to the
+branch by Shopify.
+
+For every storefront request, unless the owner explicitly says "Start a new
+theme":
+
+1. `git pull` the branch first (Shopify may have committed editor changes).
+2. Read the existing implementation and make the smallest change that
+   builds on it. Preserve everything that already works; don't duplicate
+   components or replace unrelated systems.
+3. Test the affected pages (Theme Check, plus a browser check of the flow).
+4. Commit only the relevant work with a clear message, and push to the same
+   branch. Don't create other branches, and don't upload zips or create
+   separate themes.
+5. Confirm the connected theme picked up the commit (compare file checksums
+   through the Admin API when available).
+6. Never publish the theme unless the owner explicitly says to publish.
+   wedra.co stays on Shopify; GitHub only holds the theme code.
+
+After each edit, report: what changed, files changed, what was preserved,
+bugs fixed, new functionality, the commit SHA, whether the connected theme
+is ready to preview, and anything that still needs Shopify-side setup.
