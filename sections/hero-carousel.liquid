@@ -1,9 +1,11 @@
 {%- comment -%}
-  Homepage hero: the brand statement beside the live discoveries. Each card
-  is a product's first image and links to the product. Products come from
-  the chosen collection, or every live product when none is chosen. With one
-  product the card stands still; with more, theme.js loops them every
-  "interval" seconds. With none, only the statement shows.
+  Homepage hero: the brand statement beside a looping carousel.
+  Cards come from, in order of preference:
+  1. Slide blocks added in the theme editor (e.g. the discovery's ad images);
+  2. with a single live product, that product's own images;
+  3. otherwise one card per live product (its first image).
+  theme.js loops the cards every "interval" seconds. With no cards, only the
+  statement shows.
 {%- endcomment -%}
 {%- liquid
   assign source = section.settings.collection | default: collections.all
@@ -31,6 +33,22 @@
       endif
     endif
   endfor
+  # Card source: slide blocks, else one product's images, else products.
+  assign slides = section.blocks | where: 'type', 'slide'
+  assign mode = 'products'
+  assign cards = count
+  if slides.size > 0
+    assign mode = 'slides'
+    assign cards = 0
+    for b in slides
+      if b.settings.image != blank
+        assign cards = cards | plus: 1
+      endif
+    endfor
+  elsif count == 1 and only_product.images.size > 1
+    assign mode = 'images'
+    assign cards = only_product.images.size | at_most: section.settings.limit
+  endif
   # One discovery: the primary button goes straight to it.
   assign b1_link = section.settings.button_1_link
   if b1_link == blank
@@ -74,37 +92,65 @@
       {%- endif -%}
     </div>
 
-    {%- if count > 0 -%}
+    {%- if cards > 0 -%}
       <div
         class="hero-carousel rise"
         style="--delay: 350ms;"
         role="region"
         aria-roledescription="carousel"
-        aria-label="{{ source.title | default: 'Products' | escape }}"
+        aria-label="{{ only_product.title | default: source.title | default: 'Products' | escape }}"
         data-hero-carousel
         data-interval="{{ section.settings.interval | times: 1000 }}"
       >
         <ul class="hero-carousel__track" data-track aria-live="off">
-          {%- for product in source.products limit: section.settings.limit -%}
-            {%- if product.featured_media == blank -%}{%- continue -%}{%- endif -%}
-            {%- assign card_alt = product.featured_media.alt | default: product.title -%}
-            <li class="hero-carousel__card" aria-roledescription="slide" aria-label="{{ product.title | escape }}">
-              <a href="{{ product.url }}" class="hero-carousel__link">
-                <span class="hero-carousel__media">
-                  {%- render 'responsive-image',
-                    image: product.featured_media.preview_image,
-                    alt: card_alt,
-                    sizes: '(min-width: 990px) 30vw, 70vw',
-                    widths: '360, 540, 720, 900, 1080',
-                    priority: forloop.first
-                  -%}
-                </span>
-                <span class="hero-carousel__title">{{ product.title | escape }}</span>
-              </a>
-            </li>
-          {%- endfor -%}
+          {%- case mode -%}
+            {%- when 'slides' -%}
+              {%- for block in slides -%}
+                {%- if block.settings.image == blank -%}{%- continue -%}{%- endif -%}
+                {%- liquid
+                  assign slide_link = block.settings.link
+                  if slide_link == blank
+                    assign slide_link = only_product.url | default: source.url
+                  endif
+                  assign slide_alt = block.settings.image.alt | default: block.settings.caption | default: only_product.title
+                -%}
+                <li class="hero-carousel__card" aria-roledescription="slide" {{ block.shopify_attributes }}>
+                  <a href="{{ slide_link }}" class="hero-carousel__link">
+                    <span class="hero-carousel__media">
+                      {%- render 'responsive-image', image: block.settings.image, alt: slide_alt, sizes: '(min-width: 990px) 30vw, 70vw', widths: '360, 540, 720, 900, 1080', priority: forloop.first -%}
+                    </span>
+                    {%- if block.settings.caption != blank -%}<span class="hero-carousel__title">{{ block.settings.caption | escape }}</span>{%- endif -%}
+                  </a>
+                </li>
+              {%- endfor -%}
+            {%- when 'images' -%}
+              {%- for image in only_product.images limit: section.settings.limit -%}
+                {%- assign image_alt = image.alt | default: only_product.title -%}
+                <li class="hero-carousel__card" aria-roledescription="slide">
+                  <a href="{{ only_product.url }}" class="hero-carousel__link">
+                    <span class="hero-carousel__media">
+                      {%- render 'responsive-image', image: image, alt: image_alt, sizes: '(min-width: 990px) 30vw, 70vw', widths: '360, 540, 720, 900, 1080', priority: forloop.first -%}
+                    </span>
+                    {%- if forloop.first -%}<span class="hero-carousel__title">{{ only_product.title | escape }}</span>{%- endif -%}
+                  </a>
+                </li>
+              {%- endfor -%}
+            {%- else -%}
+              {%- for product in source.products limit: section.settings.limit -%}
+                {%- if product.featured_media == blank -%}{%- continue -%}{%- endif -%}
+                {%- assign card_alt = product.featured_media.alt | default: product.title -%}
+                <li class="hero-carousel__card" aria-roledescription="slide" aria-label="{{ product.title | escape }}">
+                  <a href="{{ product.url }}" class="hero-carousel__link">
+                    <span class="hero-carousel__media">
+                      {%- render 'responsive-image', image: product.featured_media.preview_image, alt: card_alt, sizes: '(min-width: 990px) 30vw, 70vw', widths: '360, 540, 720, 900, 1080', priority: forloop.first -%}
+                    </span>
+                    <span class="hero-carousel__title">{{ product.title | escape }}</span>
+                  </a>
+                </li>
+              {%- endfor -%}
+          {%- endcase -%}
         </ul>
-        {%- if count > 1 -%}
+        {%- if cards > 1 -%}
           <button type="button" class="hero-carousel__toggle" data-toggle aria-pressed="false">
             <span class="visually-hidden" data-toggle-label>Pause carousel</span>
             <svg class="hero-carousel__icon-pause" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 1h2v10H3zM7 1h2v10H7z" fill="currentColor"/></svg>
@@ -113,7 +159,7 @@
         {%- endif -%}
       </div>
     {%- elsif request.design_mode -%}
-      <p class="editor-hint">No live products with images yet. The first one appears here automatically.</p>
+      <p class="editor-hint">Add slides (for example the discovery's ad images), or they will come from your live products automatically.</p>
     {%- endif -%}
   </div>
 </section>
@@ -123,7 +169,7 @@
   "name": "Hero carousel",
   "class": "section-hero",
   "settings": [
-    { "type": "collection", "id": "collection", "label": "Products from", "info": "Leave empty to show every live product. Each card shows the product's first image." },
+    { "type": "collection", "id": "collection", "label": "Products from", "info": "Used when there are no slides. Leave empty for every live product. With one product, its own images loop." },
     { "type": "range", "id": "limit", "label": "Products shown", "min": 2, "max": 24, "step": 1, "default": 12 },
     { "type": "range", "id": "interval", "label": "Seconds per slide", "min": 1, "max": 8, "step": 0.1, "unit": "s", "default": 1.7 },
     {
@@ -154,6 +200,17 @@
     { "type": "url", "id": "button_1_link", "label": "Primary button link", "info": "Defaults to the product when there is only one, otherwise the collection." },
     { "type": "text", "id": "button_2_label", "label": "Secondary button" },
     { "type": "url", "id": "button_2_link", "label": "Secondary button link" }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image", "info": "4:5 portrait works best (1080 × 1350), e.g. a discovery ad." },
+        { "type": "text", "id": "caption", "label": "Caption", "info": "Optional small line under the card." },
+        { "type": "url", "id": "link", "label": "Link", "info": "Defaults to the product when there is only one, otherwise the collection." }
+      ]
+    }
   ],
   "presets": [{ "name": "Hero carousel" }]
 }
