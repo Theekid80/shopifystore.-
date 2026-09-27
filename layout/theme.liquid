@@ -17,7 +17,7 @@
     -%}
     <title>
       {%- if request.page_type == 'index' -%}
-        {{ page_title | default: brand }}
+        {{ settings.seo_home_title | default: page_title | default: brand }}
       {%- else -%}
         {{ page_title }}
         {%- if current_tags %} &ndash; {{ 'general.meta.tags' | t: tags: current_tags }}{% endif -%}
@@ -25,8 +25,9 @@
         {%- unless page_title contains brand %}{{ title_suffix }}{% endunless -%}
       {%- endif -%}
     </title>
-    {%- if page_description -%}
-      <meta name="description" content="{{ page_description | escape }}">
+    {%- assign meta_description = page_description | default: settings.seo_description -%}
+    {%- if meta_description != blank -%}
+      <meta name="description" content="{{ meta_description | escape }}">
     {%- endif -%}
 
     {% render 'meta-tags' %}

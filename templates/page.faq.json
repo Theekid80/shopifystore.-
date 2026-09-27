@@ -7,7 +7,7 @@
           "type": "question",
           "settings": {
             "question": "How do I place an order?",
-            "answer": "<p>Add a piece to your bag and check out. Checkout is handled securely by Shopify, and you'll receive an order confirmation by email.</p>"
+            "answer": "<p>Add the product to your bag and check out. Checkout is handled securely by Shopify, and you'll receive an order confirmation by email.</p>"
           }
         },
         "q2": {
@@ -48,8 +48,8 @@
         "q0": {
           "type": "question",
           "settings": {
-            "question": "Who makes the products WEDRA sells?",
-            "answer": "<p>WEDRA is a retailer. We sell products from different brands and makers. When a product has a brand, it's shown on the product page; products without a brand are marked as unbranded. Every order is sold, shipped and supported by WEDRA.</p>"
+            "question": "Does WEDRA make the products it features?",
+            "answer": "<p>No. WEDRA finds and selects products made by others and presents them honestly. We don't put our name on things we didn't make. Every order placed here is sold, shipped and supported by WEDRA.</p>"
           }
         }
       },

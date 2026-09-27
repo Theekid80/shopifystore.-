@@ -792,3 +792,21 @@ body:not(:has(#MainContent > .shopify-section:first-child .hero)) .header--overl
 .hero-carousel__icon-play, .hero-carousel__toggle[aria-pressed="true"] .hero-carousel__icon-pause { display: none; }
 .hero-carousel__toggle[aria-pressed="true"] .hero-carousel__icon-play { display: block; }
 @media (prefers-reduced-motion: reduce) { .hero-carousel__card { transition: none; } .hero-carousel { overflow-x: auto; } }
+.hero--light { background: var(--color-bg); color: var(--color-text); }
+.hero--light::before { display: none; }
+.hero--light .hero__subtitle { color: var(--color-muted); }
+.hero--light .hero-carousel__link { color: var(--color-text); }
+.hero--light .hero-carousel__title { color: var(--color-muted); }
+.hero--light .hero-carousel__link:hover .hero-carousel__title, .hero--light .hero-carousel__link:focus-visible .hero-carousel__title { color: var(--color-text); }
+.hero--light .hero-carousel__media { background: var(--color-surface); }
+/* A single discovery: no fade, full presence. */
+.hero-carousel__track:has(> :only-child) .hero-carousel__card { opacity: 1; transform: none; }
+
+/* ---------- Discovery highlights: verified facts as a quiet grid ---------- */
+.highlights__head { display: grid; gap: 1rem; max-width: 40rem; }
+.highlights { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); margin: clamp(2rem, 5vw, 3.5rem) 0 0; border-top: var(--rule); }
+@media (min-width: 750px) { .highlights { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.highlights__item { display: grid; gap: .6rem; align-content: start; padding: 1.5rem 1.25rem 1.75rem 0; border-bottom: var(--rule); }
+.highlights dt { font-size: .6875rem; letter-spacing: .22em; text-transform: uppercase; color: var(--color-muted); }
+.highlights dd { margin: 0; font-family: var(--font-heading, inherit); font-size: clamp(1.25rem, 2.2vw, 1.75rem); line-height: 1.2; }
+.highlights__link { margin-top: 2rem; }

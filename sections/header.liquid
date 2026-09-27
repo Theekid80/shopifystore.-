@@ -5,31 +5,18 @@
   if section.settings.overlay_on_home and request.page_type == 'index'
     assign overlay = true
   endif
-  assign experience_handles = section.settings.experience_handles | split: ','
 -%}
 
 {%- comment -%}
   Navigation comes from the Shopify menu picked in the theme editor.
   Until that menu has links, a fallback is built only from things that
-  exist: Shop (with a dropdown of collections that have products), the
-  experience collections (Travel, Sleep, …) that have products, and the
-  Brands / About pages if they exist. Nothing links to an empty page.
+  exist: Discover (every live product), then the About and Contact pages
+  if they exist. Nothing links to an empty page.
 {%- endcomment -%}
-{%- capture shop_children -%}
-  {{ routes.all_products_collection_url }}|{{ 'general.all_products' | t }}
-  {%- for c in collections -%}
-    {%- if c.products_count > 0 and c.handle != 'frontpage' and c.handle != 'all' -%}^{{ c.url }}|{{ c.title | escape }}{%- endif -%}
-  {%- endfor -%}
-{%- endcapture -%}
-{%- assign shop_children = shop_children | strip | split: '^' -%}
 {%- capture fallback_links -%}
-  {%- for h in experience_handles -%}
-    {%- assign handle = h | strip -%}
-    {%- assign c = collections[handle] -%}
-    {%- if c.products_count > 0 -%}^{{ c.url }}|{{ c.title | escape }}{%- endif -%}
-  {%- endfor -%}
-  {%- if pages[section.settings.brands_page_handle].url != blank -%}^{{ pages[section.settings.brands_page_handle].url }}|{{ 'general.brands' | t }}{%- endif -%}
+  {%- if collections.all.products_count > 0 -%}^{{ routes.all_products_collection_url }}|{{ 'general.discover' | t }}{%- endif -%}
   {%- if pages[section.settings.about_page_handle].url != blank -%}^{{ pages[section.settings.about_page_handle].url }}|{{ 'general.about' | t }}{%- endif -%}
+  {%- if pages[section.settings.contact_page_handle].url != blank -%}^{{ pages[section.settings.contact_page_handle].url }}|{{ 'general.contact' | t }}{%- endif -%}
 {%- endcapture -%}
 {%- assign fallback_links = fallback_links | strip | remove_first: '^' | split: '^' -%}
 
@@ -59,17 +46,6 @@
             </li>
           {%- endfor -%}
         {%- else -%}
-          <li{% if shop_children.size > 1 %} class="has-dropdown"{% endif %}>
-            <a href="{{ routes.all_products_collection_url }}" {% if request.path == routes.all_products_collection_url %}aria-current="page"{% endif %}>{{ 'general.shop' | t }}</a>
-            {%- if shop_children.size > 1 -%}
-              <ul class="header__dropdown" role="list">
-                {%- for item in shop_children -%}
-                  {%- assign parts = item | strip | split: '|' -%}
-                  <li><a href="{{ parts[0] }}">{{ parts[1] }}</a></li>
-                {%- endfor -%}
-              </ul>
-            {%- endif -%}
-          </li>
           {%- for item in fallback_links -%}
             {%- assign parts = item | strip | split: '|' -%}
             {%- if parts[0] != blank -%}
@@ -121,21 +97,6 @@
             </li>
           {%- endfor -%}
         {%- else -%}
-          <li>
-            {%- if shop_children.size > 1 -%}
-              <details>
-                <summary>{{ 'general.shop' | t }}{% render 'icon', name: 'plus', class: 'icon-arrow' %}</summary>
-                <ul class="menu-drawer__sub" role="list">
-                  {%- for item in shop_children -%}
-                    {%- assign parts = item | strip | split: '|' -%}
-                    <li><a href="{{ parts[0] }}">{{ parts[1] }}</a></li>
-                  {%- endfor -%}
-                </ul>
-              </details>
-            {%- else -%}
-              <a href="{{ routes.all_products_collection_url }}">{{ 'general.shop' | t }}</a>
-            {%- endif -%}
-          </li>
           {%- for item in fallback_links -%}
             {%- assign parts = item | strip | split: '|' -%}
             {%- if parts[0] != blank -%}<li><a href="{{ parts[0] }}">{{ parts[1] }}</a></li>{%- endif -%}
@@ -163,15 +124,14 @@
       "id": "menu",
       "label": "Menu",
       "default": "main-menu",
-      "info": "Suggested: Shop (with sub-links), Travel, Sleep, Leisure, Comfort, Brands, About. Build it in Online Store → Navigation; nested links become dropdowns."
+      "info": "Suggested: Discover, About, Contact. Build it in Online Store → Navigation; nested links become dropdowns. Add category links only once they have products."
     },
     { "type": "header", "content": "Fallback menu" },
-    { "type": "paragraph", "content": "Used until the menu above has links. Only collections with products and pages that exist are shown." },
-    { "type": "text", "id": "experience_handles", "label": "Experience collection handles", "default": "travel, sleep, leisure, comfort" },
-    { "type": "text", "id": "brands_page_handle", "label": "Brands page handle", "default": "brands" },
+    { "type": "paragraph", "content": "Used until the menu above has links: Discover (when products are live), then About and Contact if those pages exist." },
     { "type": "text", "id": "about_page_handle", "label": "About page handle", "default": "about" },
+    { "type": "text", "id": "contact_page_handle", "label": "Contact page handle", "default": "contact" },
     { "type": "header", "content": "Appearance" },
-    { "type": "checkbox", "id": "overlay_on_home", "label": "Transparent over the homepage hero", "default": true }
+    { "type": "checkbox", "id": "overlay_on_home", "label": "Transparent over the homepage hero", "default": false, "info": "Only for a charcoal hero with a photo. Leave off with the warm white hero so the header stays readable." }
   ]
 }
 {% endschema %}

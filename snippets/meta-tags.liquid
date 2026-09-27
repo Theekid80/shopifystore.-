@@ -1,9 +1,12 @@
 {%- comment -%} Open Graph + Twitter/X card metadata. {%- endcomment -%}
 {%- liquid
   assign og_title = page_title | default: shop.name
+  if request.page_type == 'index' and settings.seo_home_title != blank
+    assign og_title = settings.seo_home_title
+  endif
   assign og_url = canonical_url | default: request.origin
   assign og_type = 'website'
-  assign og_description = page_description | default: shop.description | default: settings.brand_tagline
+  assign og_description = page_description | default: settings.seo_description | default: shop.description | default: settings.brand_tagline
   if request.page_type == 'product'
     assign og_type = 'product'
   elsif request.page_type == 'article'

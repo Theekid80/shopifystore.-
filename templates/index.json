@@ -1,234 +1,184 @@
 {
   "sections": {
-    "hero_carousel": {
+    "hero": {
       "type": "hero-carousel",
       "settings": {
+        "color_scheme": "light",
         "limit": 12,
         "interval": 1.7,
         "overlay": 0,
         "height": "full",
-        "eyebrow": "The WEDRA Catalogue",
-        "heading": "Travel better. Rest better.",
-        "subheading": "Thoughtfully selected essentials for travel, leisure, comfort and sleep.",
-        "button_1_label": "Shop the catalogue",
-        "button_1_link": "/collections/all",
-        "button_2_label": "Explore brands",
-        "button_2_link": "/pages/brands"
+        "eyebrow": "Curated for better everyday living",
+        "heading": "Products worth discovering.",
+        "subheading": "WEDRA finds useful, well-made products for wellness and everyday living, and shows you only the ones worth your attention.",
+        "button_1_label": "Explore the discovery",
+        "button_1_link": "",
+        "button_2_label": "How we choose",
+        "button_2_link": "#why-wedra"
       }
     },
-    "hero": {
-      "type": "hero",
-      "settings": {
-        "height": "full",
-        "align": "left",
-        "overlay": 30,
-        "eyebrow": "Travel · Leisure · Sleep",
-        "heading": "Travel better. Rest better.",
-        "subheading": "Thoughtfully selected essentials for travel, leisure, comfort and sleep.",
-        "button_1_label": "Shop the collection",
-        "button_1_link": "/collections/all",
-        "button_2_label": "Explore brands",
-        "button_2_link": "/pages/brands",
-        "show_foot": true,
-        "scroll_label": "Scroll",
-        "image": "shopify://shop_images/wedra-home-travel-suitcase.jpg",
-        "image_mobile": "shopify://shop_images/wedra-home-travel-rolling.jpg"
-      },
-      "disabled": true
-    },
-    "experience": {
-      "type": "experience-cards",
-      "blocks": {
-        "travel": {
-          "type": "experience",
-          "settings": {
-            "title": "Travel",
-            "text": "Pack smarter. Move easier.",
-            "collection_handle": "travel",
-            "link": "/collections/the-wedra-travel-edit",
-            "image": "shopify://shop_images/wedra-home-travel-cubes.jpg"
-          }
-        },
-        "sleep": {
-          "type": "experience",
-          "settings": {
-            "title": "Sleep",
-            "text": "Rest wherever you are.",
-            "collection_handle": "sleep",
-            "link": "/products/sleep-eye-mask",
-            "image": "shopify://shop_images/wedra-home-sleep-mask.jpg"
-          }
-        },
-        "comfort": {
-          "type": "experience",
-          "settings": {
-            "title": "Comfort",
-            "text": "Make every journey more comfortable.",
-            "collection_handle": "comfort",
-            "link": "/products/memory-foam-travel-neck-pillow",
-            "image": "shopify://shop_images/wedra-home-comfort-pillow.jpg"
-          }
-        },
-        "leisure": {
-          "type": "experience",
-          "settings": {
-            "title": "Leisure",
-            "text": "Slow down and enjoy the journey.",
-            "collection_handle": "leisure"
-          }
-        }
-      },
-      "block_order": [
-        "travel",
-        "sleep",
-        "comfort",
-        "leisure"
-      ],
-      "settings": {
-        "eyebrow": "Shop by experience",
-        "heading": "Wherever the journey takes you.",
-        "cta_label": "Explore",
-        "color_scheme": "bg-base"
-      }
-    },
-    "edit": {
-      "type": "featured-collection",
-      "settings": {
-        "eyebrow": "Curated",
-        "heading": "The WEDRA Catalogue",
-        "text": "A considered collection of essentials chosen for the way you travel.",
-        "collection_handle": "the-wedra-travel-edit",
-        "limit": 8,
-        "columns": 4,
-        "view_all_label": "View all",
-        "anchor": "edit",
-        "color_scheme": "bg-base"
-      }
-    },
-    "statement": {
-      "type": "statement",
-      "settings": {
-        "index": "",
-        "eyebrow": "About WEDRA",
-        "heading": "Everything you need to travel better, rest better, and feel better wherever you go.",
-        "text": "WEDRA is a curated retailer of travel, leisure and sleep essentials — products from different brands and makers, chosen for how well they work on the road and at rest.",
-        "link_label": "About us",
-        "link": "/pages/about",
-        "layout": "split",
-        "color_scheme": "bg-surface",
-        "heading_size": "headline"
-      }
-    },
-    "brands": {
-      "type": "brand-list",
-      "settings": {
-        "eyebrow": "Featured brands",
-        "heading": "Discover the brands we carry.",
-        "limit": 8,
-        "show_link": true,
-        "link_label": "All brands",
-        "brands_page_handle": "brands",
-        "anchor": "brands",
-        "color_scheme": "bg-base"
-      }
-    },
-    "editorial": {
-      "type": "image-banner",
-      "settings": {
-        "height": "full",
-        "align": "left",
-        "overlay": 30,
-        "eyebrow": "Rest",
-        "heading": "Arrive rested.",
-        "text": "Sleep and comfort essentials for the time between here and there.",
-        "link_label": "Shop the collection",
-        "image": "shopify://shop_images/wedra-home-rest.jpg"
-      }
-    },
-    "spotlight": {
+    "discovery": {
       "type": "featured-product",
       "settings": {
-        "eyebrow": "In focus",
+        "eyebrow": "WEDRA Discovery #01",
+        "heading": "",
+        "text": "<p>A compact way to bring your everyday blends wherever your routine takes you. We selected it because it keeps a simple habit simple: a single-serve cup, a rechargeable base and nothing extra to set up.</p>",
         "show_detail": true,
-        "show_buy": true,
-        "link_label": "View details",
+        "show_buy": false,
+        "link_label": "Discover the product",
         "layout": "reverse",
         "color_scheme": "bg-surface"
       }
     },
-    "principles": {
+    "highlights": {
+      "type": "discovery-highlights",
+      "settings": {
+        "eyebrow": "The details",
+        "heading": "What you get",
+        "limit": 8,
+        "link_label": "See the full product",
+        "color_scheme": "bg-base"
+      }
+    },
+    "why": {
       "type": "principles",
       "blocks": {
-        "useful": {
+        "search": {
           "type": "principle",
           "settings": {
-            "title": "Useful",
-            "text": "Every product has to earn its place in a bag or beside the bed."
+            "title": "We search",
+            "text": "We look across a wide range of products for the ones that make everyday life easier, calmer or more enjoyable."
           }
         },
-        "considered": {
+        "filter": {
           "type": "principle",
           "settings": {
-            "title": "Considered",
-            "text": "We look for thoughtful design and materials, whoever makes it."
+            "title": "We filter",
+            "text": "Most don't make it. A product earns a place only if it is genuinely useful and easy to understand."
           }
         },
-        "comfortable": {
+        "discover": {
           "type": "principle",
           "settings": {
-            "title": "Comfortable",
-            "text": "Chosen for how it feels at the end of a long day of travel."
+            "title": "You discover",
+            "text": "We present each one clearly, with real specifications, real photos and a fair price, and nothing invented."
           }
         }
       },
       "block_order": [
-        "useful",
-        "considered",
-        "comfortable"
+        "search",
+        "filter",
+        "discover"
       ],
       "settings": {
-        "eyebrow": "How we choose",
-        "heading": "Curated, not collected.",
+        "eyebrow": "Why WEDRA",
+        "heading": "We search. We filter. You discover.",
+        "color_scheme": "bg-surface",
+        "anchor": "why-wedra"
+      }
+    },
+    "video": {
+      "type": "featured-video",
+      "settings": {
+        "autoplay": true,
+        "eyebrow": "In everyday use",
+        "heading": "",
+        "text": "",
+        "show_price": true,
+        "link_label": "Discover the product",
+        "layout": "even",
+        "color_scheme": "bg-base"
+      }
+    },
+    "philosophy": {
+      "type": "statement",
+      "settings": {
+        "index": "01",
+        "eyebrow": "The discovery",
+        "heading": "One discovery today. More to come.",
+        "heading_size": "headline",
+        "heading_tag": "h2",
+        "text": "WEDRA is an evolving collection. Each new product is chosen with the same care, and added only when it is worth showing you.",
+        "link_label": "Hear about the next one",
+        "link": "#newsletter",
+        "layout": "split",
+        "color_scheme": "color-dark"
+      }
+    },
+    "faq": {
+      "type": "faq",
+      "blocks": {
+        "make": {
+          "type": "question",
+          "settings": {
+            "question": "Does WEDRA make these products?",
+            "answer": "<p>No. WEDRA finds and selects products made by others and presents them honestly. We don't put our name on things we didn't make.</p>"
+          }
+        },
+        "choose": {
+          "type": "question",
+          "settings": {
+            "question": "How do you choose what to feature?",
+            "answer": "<p>We look for products that are useful in everyday life, easy to understand and fairly priced. We only publish specifications we can confirm.</p>"
+          }
+        },
+        "shipping": {
+          "type": "question",
+          "settings": {
+            "question": "How much does shipping cost?",
+            "answer": "<p>Shipping options and costs for your address are shown at checkout, before you pay.</p>"
+          }
+        },
+        "returns": {
+          "type": "question",
+          "settings": {
+            "question": "What is your return policy?",
+            "answer": "<p>Our return policy is published on the <a href=\"/policies/refund-policy\">Returns</a> page.</p>"
+          }
+        },
+        "contact": {
+          "type": "question",
+          "settings": {
+            "question": "How do I contact you?",
+            "answer": "<p>Write to us through the <a href=\"/pages/contact\">contact page</a>.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "make",
+        "choose",
+        "shipping",
+        "returns",
+        "contact"
+      ],
+      "settings": {
+        "eyebrow": "FAQ",
+        "heading": "Questions, answered.",
+        "heading_tag": "h2",
+        "open_first": true,
+        "anchor": "faq",
         "color_scheme": "bg-surface"
       }
     },
     "newsletter": {
       "type": "newsletter",
       "settings": {
-        "eyebrow": "The WEDRA letter",
-        "heading": "New arrivals, occasionally.",
-        "text": "New products and brands as they join WEDRA. Nothing more.",
+        "eyebrow": "The next discovery",
+        "heading": "Be the first to see what we find next.",
+        "text": "An occasional email when there is something worth showing you. Nothing more.",
         "anchor": "newsletter",
         "color_scheme": "bg-base"
-      }
-    },
-    "video": {
-      "type": "featured-video",
-      "settings": {
-        "product": "travel-compression-packing-cube-set-3-piece",
-        "autoplay": true,
-        "eyebrow": "In motion",
-        "heading": "Pack flat. Travel light.",
-        "text": "<p>Three compression cubes that keep clothing and travel essentials organized with less bulk.</p>",
-        "show_price": true,
-        "link_label": "View product",
-        "layout": "even",
-        "anchor": "",
-        "color_scheme": "bg-surface"
       }
     }
   },
   "order": [
-    "hero_carousel",
     "hero",
-    "experience",
-    "edit",
+    "discovery",
+    "highlights",
+    "why",
     "video",
-    "statement",
-    "brands",
-    "editorial",
-    "spotlight",
-    "principles",
+    "philosophy",
+    "faq",
     "newsletter"
   ]
 }

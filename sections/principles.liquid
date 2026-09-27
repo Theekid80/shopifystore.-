@@ -1,5 +1,5 @@
 {%- comment -%} Numbered principles / values in hairline columns. Keep them to what WEDRA actually does. {%- endcomment -%}
-<section class="section {{ section.settings.color_scheme }}" aria-labelledby="Principles-{{ section.id }}">
+<section class="section {{ section.settings.color_scheme }}"{% if section.settings.anchor != blank %} id="{{ section.settings.anchor | handle }}"{% endif %} aria-labelledby="Principles-{{ section.id }}">
   <div class="page-width">
     <div class="section-heading__row reveal" style="margin-bottom: clamp(2.5rem, 5vw, 4rem);">
       <div class="section-heading">
@@ -25,8 +25,9 @@
   "class": "section-principles",
   "max_blocks": 4,
   "settings": [
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "How we choose" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Chosen with intention." },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Why WEDRA" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "We search. We filter. You discover." },
+    { "type": "text", "id": "anchor", "label": "Anchor id", "info": "Lets a button link here, e.g. #why-wedra." },
     {
       "type": "select",
       "id": "color_scheme",

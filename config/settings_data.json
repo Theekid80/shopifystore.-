@@ -3,10 +3,14 @@
   "presets": {
     "Default": {
       "brand_name": "WEDRA",
-      "brand_tagline": "Premium travel, leisure & sleep essentials.",
+      "brand_tagline": "Products worth discovering.",
       "prelaunch_mode": false,
       "use_brand_fonts": true,
-      "cart_type": "drawer"
+      "cart_type": "drawer",
+      "color_accent": "#6F7A63",
+      "unbranded_vendors": "My Store, Wedra.co, WEDRA, Unbranded, Generic, No brand, Default, Zendrop",
+      "seo_home_title": "WEDRA | Wellness & everyday products worth discovering",
+      "seo_description": "WEDRA finds useful wellness and everyday lifestyle products worth discovering. Now featuring a portable electric juicer blender for smoothies and shakes."
     }
   }
 }

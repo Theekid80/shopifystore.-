@@ -1,9 +1,16 @@
 {%- comment -%}
   Product spotlight: one product told editorially — a large image, a short
-  story, real price and a direct add to cart. Hidden on the live store until
-  a product is picked.
+  story, real price and a direct add to cart. Without a picked product it
+  uses the current product (on a product page) or the store's first live
+  product, so a newly added discovery appears without editing the theme.
+  Hidden when there is no product at all.
 {%- endcomment -%}
-{%- assign product = section.settings.product -%}
+{%- liquid
+  assign product = section.settings.product | default: product
+  if product == blank
+    assign product = collections.all.products.first
+  endif
+-%}
 {%- if product != blank and product.title != blank -%}
   <section class="section {{ section.settings.color_scheme }}" data-product-section aria-labelledby="Spotlight-{{ section.id }}">
     <div class="page-width">
@@ -44,7 +51,7 @@
     </div>
   </section>
 {%- elsif request.design_mode -%}
-  <section class="section"><div class="page-width"><p class="editor-hint">Product spotlight: pick a product in this section's settings. The section stays hidden on the live store until then.</p></div></section>
+  <section class="section"><div class="page-width"><p class="editor-hint">Product spotlight: no live product yet. It appears automatically once a product is active, or pick one in this section's settings.</p></div></section>
 {%- endif -%}
 
 {% schema %}
@@ -52,7 +59,7 @@
   "name": "Product spotlight",
   "class": "section-featured-product",
   "settings": [
-    { "type": "product", "id": "product", "label": "Product" },
+    { "type": "product", "id": "product", "label": "Product", "info": "Optional. Defaults to the current product, or the store's first live product." },
     { "type": "image_picker", "id": "image", "label": "Editorial image", "info": "Defaults to the product's first image." },
     { "type": "checkbox", "id": "show_detail", "label": "Show second product image as inset", "default": true },
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "In focus" },

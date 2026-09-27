@@ -8,7 +8,7 @@
   if its page or policy actually exists (no broken links before setup).
 {%- endcomment -%}
 {%- capture col_nav -%}
-  {{ routes.all_products_collection_url }}|{{ 'general.shop' | t }}^{{ routes.collections_url }}|{{ 'general.collections' | t }}
+  {{ routes.all_products_collection_url }}|{{ 'general.discover' | t }}
   {%- if pages.about.url != blank -%}^{{ pages.about.url }}|{{ 'general.about' | t }}{%- endif -%}
   {%- if pages.contact.url != blank -%}^{{ pages.contact.url }}|{{ 'general.contact' | t }}{%- endif -%}
 {%- endcapture -%}
@@ -118,7 +118,7 @@
   "enabled_on": { "groups": ["footer"] },
   "settings": [
     { "type": "checkbox", "id": "show_signup", "label": "Show email sign-up", "default": true },
-    { "type": "text", "id": "signup_text", "label": "Sign-up text", "default": "New arrivals and considered notes, occasionally." },
+    { "type": "text", "id": "signup_text", "label": "Sign-up text", "default": "Be the first to see the next discovery." },
     { "type": "header", "content": "Columns" },
     { "type": "paragraph", "content": "Pick a menu for each column (Online Store → Navigation). Without a menu, a column shows default links — only for pages and policies that exist." },
     { "type": "text", "id": "heading_1", "label": "Column 1 heading", "default": "Navigation" },

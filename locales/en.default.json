@@ -44,6 +44,7 @@
     "coming_soon": "Coming soon",
     "placeholder_editor": "Select content in the theme editor.",
     "shop": "Shop",
+    "discover": "Discover",
     "collections": "Collections",
     "about": "About",
     "contact": "Contact",
@@ -138,7 +139,7 @@
         "other": "{{ count }} products"
       }
     },
-    "empty": "This collection is being curated. New pieces will appear here soon.",
+    "empty": "The next discovery is on its way. Check back soon.",
     "empty_filtered": "No products match these filters.",
     "empty_title": "Coming soon"
   },
@@ -157,7 +158,7 @@
     "free_shipping_reached": "Your order qualifies for free shipping.",
     "error": "Something went wrong. Please try again.",
     "view_cart": "View bag",
-    "you_may_like": "Complete your journey"
+    "you_may_like": "More discoveries"
   },
   "customer": {
     "login": "Sign in",

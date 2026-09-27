@@ -3,23 +3,9 @@
     "main": {
       "type": "main-cart",
       "settings": {}
-    },
-    "related": {
-      "type": "featured-collection",
-      "settings": {
-        "collection_handle": "the-wedra-travel-edit",
-        "eyebrow": "Complete your journey",
-        "heading": "You may also like",
-        "limit": 4,
-        "columns": 4,
-        "view_all_label": "View all",
-        "anchor": "more",
-        "color_scheme": "bg-surface"
-      }
     }
   },
   "order": [
-    "main",
-    "related"
+    "main"
   ]
 }

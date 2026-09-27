@@ -1,8 +1,9 @@
 {%- comment -%}
-  Homepage hero with a looping product carousel. Each card is the product's
-  featured media (its WEDRA ad) and links to the product. Products come from
-  the chosen collection, or every product when none is chosen.
-  theme.js advances the carousel every "interval" seconds.
+  Homepage hero: the brand statement beside the live discoveries. Each card
+  is a product's first image and links to the product. Products come from
+  the chosen collection, or every live product when none is chosen. With one
+  product the card stands still; with more, theme.js loops them every
+  "interval" seconds. With none, only the statement shows.
 {%- endcomment -%}
 {%- liquid
   assign source = section.settings.collection | default: collections.all
@@ -25,11 +26,30 @@
   for product in source.products limit: section.settings.limit
     if product.featured_media != blank
       assign count = count | plus: 1
+      if count == 1
+        assign only_product = product
+      endif
     endif
   endfor
+  # One discovery: the primary button goes straight to it.
+  assign b1_link = section.settings.button_1_link
+  if b1_link == blank
+    if source.products_count == 1 and only_product != blank
+      assign b1_link = only_product.url
+    else
+      assign b1_link = source.url
+    endif
+  endif
+  if section.settings.color_scheme == 'dark'
+    assign b1_class = 'btn--light'
+    assign b2_class = 'btn--ghost-light'
+  else
+    assign b1_class = 'btn--primary'
+    assign b2_class = 'btn--secondary'
+  endif
 -%}
 <section
-  class="hero hero--{{ section.settings.height }} hero--carousel"
+  class="hero hero--{{ section.settings.height }} hero--carousel hero--{{ section.settings.color_scheme | default: 'light' }}"
   style="--overlay: {{ overlay }};"
   aria-labelledby="Hero-{{ section.id }}"
 >
@@ -45,10 +65,10 @@
       {%- if show_b1 or show_b2 -%}
         <div class="btn-row rise" style="--delay: 600ms;">
           {%- if show_b1 -%}
-            <a href="{{ section.settings.button_1_link | default: source.url }}" class="btn btn--light btn--lg">{{ section.settings.button_1_label | escape }}</a>
+            <a href="{{ b1_link }}" class="btn {{ b1_class }} btn--lg">{{ section.settings.button_1_label | escape }}</a>
           {%- endif -%}
           {%- if show_b2 -%}
-            <a href="{{ section.settings.button_2_link | default: routes.collections_url }}" class="btn btn--ghost-light btn--lg">{{ section.settings.button_2_label | escape }}</a>
+            <a href="{{ section.settings.button_2_link | default: routes.collections_url }}" class="btn {{ b2_class }} btn--lg">{{ section.settings.button_2_label | escape }}</a>
           {%- endif -%}
         </div>
       {%- endif -%}
@@ -93,7 +113,7 @@
         {%- endif -%}
       </div>
     {%- elsif request.design_mode -%}
-      <p class="editor-hint">Choose a collection with products that have images.</p>
+      <p class="editor-hint">No live products with images yet. The first one appears here automatically.</p>
     {%- endif -%}
   </div>
 </section>
@@ -103,10 +123,20 @@
   "name": "Hero carousel",
   "class": "section-hero",
   "settings": [
-    { "type": "collection", "id": "collection", "label": "Products from", "info": "Leave empty to show every product. Each card shows the product's first image." },
+    { "type": "collection", "id": "collection", "label": "Products from", "info": "Leave empty to show every live product. Each card shows the product's first image." },
     { "type": "range", "id": "limit", "label": "Products shown", "min": 2, "max": 24, "step": 1, "default": 12 },
     { "type": "range", "id": "interval", "label": "Seconds per slide", "min": 1, "max": 8, "step": 0.1, "unit": "s", "default": 1.7 },
-    { "type": "range", "id": "overlay", "label": "Background darkening", "min": 0, "max": 70, "step": 5, "unit": "%", "default": 0 },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Background",
+      "options": [
+        { "value": "light", "label": "Warm white" },
+        { "value": "dark", "label": "Charcoal" }
+      ],
+      "default": "light"
+    },
+    { "type": "range", "id": "overlay", "label": "Background darkening (charcoal only)", "min": 0, "max": 70, "step": 5, "unit": "%", "default": 0 },
     {
       "type": "select",
       "id": "height",
@@ -118,10 +148,10 @@
       "default": "full"
     },
     { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
-    { "type": "text", "id": "heading", "label": "Headline", "default": "Travel better. Rest better." },
+    { "type": "text", "id": "heading", "label": "Headline", "default": "Products worth discovering." },
     { "type": "textarea", "id": "subheading", "label": "Supporting text" },
-    { "type": "text", "id": "button_1_label", "label": "Primary button", "default": "Shop the collection" },
-    { "type": "url", "id": "button_1_link", "label": "Primary button link", "info": "Defaults to the chosen collection." },
+    { "type": "text", "id": "button_1_label", "label": "Primary button", "default": "Explore the discovery" },
+    { "type": "url", "id": "button_1_link", "label": "Primary button link", "info": "Defaults to the product when there is only one, otherwise the collection." },
     { "type": "text", "id": "button_2_label", "label": "Secondary button" },
     { "type": "url", "id": "button_2_link", "label": "Secondary button link" }
   ],

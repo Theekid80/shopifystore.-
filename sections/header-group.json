@@ -8,8 +8,16 @@
     },
     "header": {
       "type": "header",
-      "settings": { "menu": "main-menu", "experience_handles": "travel, sleep, leisure, comfort", "brands_page_handle": "brands", "about_page_handle": "about", "overlay_on_home": true }
+      "settings": {
+        "menu": "main-menu",
+        "about_page_handle": "about",
+        "contact_page_handle": "contact",
+        "overlay_on_home": false
+      }
     }
   },
-  "order": ["announcement", "header"]
+  "order": [
+    "announcement",
+    "header"
+  ]
 }

@@ -12,7 +12,7 @@
     "settings": [
       {
         "type": "paragraph",
-        "content": "WEDRA is the retailer and curator. This name is used for the header wordmark, footer, page titles, sharing and store structured data — never as the brand of a product."
+        "content": "WEDRA is the finder and curator of the products it features, not their maker. This name is used for the header wordmark, footer, page titles, sharing and store structured data — never as the brand of a product."
       },
       {
         "type": "text",
@@ -24,7 +24,19 @@
         "type": "text",
         "id": "brand_tagline",
         "label": "Tagline",
-        "default": "Premium travel, leisure & sleep essentials."
+        "default": "Products worth discovering."
+      },
+      {
+        "type": "text",
+        "id": "seo_home_title",
+        "label": "Homepage title (search results)",
+        "info": "Overrides the title set in Online Store → Preferences. Keep it under about 60 characters."
+      },
+      {
+        "type": "textarea",
+        "id": "seo_description",
+        "label": "Default meta description",
+        "info": "Used on any page without its own description, including the homepage. Keep it under about 160 characters."
       },
       {
         "type": "image_picker",
@@ -67,7 +79,7 @@
         "type": "textarea",
         "id": "unbranded_vendors",
         "label": "Vendor values that are not brands",
-        "default": "My Store, Wedra.co, WEDRA, Unbranded, Generic, No brand, Default",
+        "default": "My Store, Wedra.co, WEDRA, Unbranded, Generic, No brand, Default, Zendrop",
         "info": "Comma-separated. Products whose vendor matches one of these are treated as unbranded. WEDRA is listed so supplier products are never shown as WEDRA-made; for a genuine WEDRA product, set its Brand metafield to WEDRA (the metafield always wins)."
       },
       {
@@ -160,8 +172,8 @@
       {
         "type": "color",
         "id": "color_accent",
-        "label": "Accent (neutral)",
-        "default": "#8B867D"
+        "label": "Accent (muted sage)",
+        "default": "#6F7A63"
       },
       {
         "type": "color",
