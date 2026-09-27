@@ -519,6 +519,9 @@ html.scroll-lock { overflow: hidden; }
 .variant-pill input:checked + span { border-color: var(--color-text); background: var(--color-text); color: var(--color-bg); }
 .variant-pill input:focus-visible + span, .variant-swatch input:focus-visible + span { outline: 1px solid var(--color-text); outline-offset: 3px; }
 .variant-pill input.is-unavailable + span { color: var(--color-muted); background: linear-gradient(to top right, transparent calc(50% - .5px), var(--color-border) 50%, transparent calc(50% + .5px)); }
+.variant-pill--dot span { gap: .6rem; }
+.variant-pill--dot i { width: .85rem; height: .85rem; border-radius: 999px; background: var(--swatch); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-text) 22%, transparent); flex: none; }
+.variant-pill--dot input:checked + span i { box-shadow: inset 0 0 0 1px rgba(255,255,255,.55); }
 .variant-swatch span { display: block; width: 2.25rem; height: 2.25rem; border-radius: 999px; background: var(--swatch); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-text) 16%, transparent); cursor: pointer; outline: 1px solid transparent; outline-offset: 3px; transition: outline-color .3s; }
 .variant-swatch input:checked + span { outline-color: var(--color-text); }
 .quantity { display: inline-flex; align-items: center; height: 3.75rem; border: var(--rule); }

@@ -428,9 +428,24 @@
       const json = $("[data-product-json]", section);
       if (!json) return;
       const product = JSON.parse(json.textContent);
-      picker.addEventListener("change", () => {
-        const selected = $$("fieldset", picker).map((fs) => $("input:checked", fs)?.value);
-        const variant = product.variants.find((v) => v.options.every((o, i) => o === selected[i]));
+      const fieldsets = $$("fieldset", picker);
+      picker.addEventListener("change", (e) => {
+        const selected = fieldsets.map((fs) => $("input:checked", fs)?.value);
+        let variant = product.variants.find((v) => v.options.every((o, i) => o === selected[i]));
+        if (!variant) {
+          // The combination doesn't exist (e.g. an option that only one colour has):
+          // keep the value just picked and move the other options to the closest
+          // real variant, preferring one Shopify says is available for sale.
+          const changed = fieldsets.indexOf(e.target.closest("fieldset"));
+          const score = (v) => (v.available ? 100 : 0) + v.options.filter((o, i) => o === selected[i]).length;
+          variant = product.variants
+            .filter((v) => changed < 0 || v.options[changed] === selected[changed])
+            .sort((a, b) => score(b) - score(a))[0];
+          if (variant) fieldsets.forEach((fs, i) => {
+            const input = $$("input", fs).find((el) => el.value === variant.options[i]);
+            if (input) input.checked = true;
+          });
+        }
         $$("fieldset", picker).forEach((fs) => {
           const label = $("[data-selected-value]", fs);
           if (label) label.textContent = $("input:checked", fs)?.value || "";
