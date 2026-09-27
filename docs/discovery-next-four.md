@@ -10,7 +10,7 @@ Nothing in this document changes the store, the blender or checkout.
 | Oil Sprayer | 1972168 | 1 pc 470 ml: Beige, Black, Green, Yellow · 2 pc 470 ml: Black, Green, Beige | 5 (beige, with overlay text) |
 | Digital Measuring Spoon | 2076060 | 300 g, 500 g | None yet |
 | Electric Dish Scrubber | 2864377 | 800 mA / 1200 mA × White, Green, Pink | None yet |
-| Mini Bag Sealer | 2872197 | White, Pink, Gray, Black (W159) | None yet |
+| Mini Bag Sealer | 2872197 | White, Pink, Gray, Black (W159) | 5 (white, back of gray; with overlay text) |
 
 The reference numbers are internal. They never appear in a caption, file
 name that is uploaded publicly, alt text, product field or ad.
@@ -390,86 +390,136 @@ confirmed spec.
 
 ## 6. Mini Bag Sealer
 
-**Reference photos needed first**, for each colour.
+**Reference photos: 5 received (white, plus the back of a gray one).** They
+are collages with the partner's text, icons, tick marks, other brands'
+packaging and a before/after layout. Use them as a **shape reference only**:
+never reuse a crop that shows their text, icons or another brand's bag.
+Pink and black still need photos, and so does the front of the gray one.
+
+### What the photos confirm
+- A white, rounded-rectangle clip. The upper arm is hinged at one end and
+  closes onto the base.
+- A small metal heating strip with a knurled pad at the jaw end.
+- A round button on top with a small blue indicator light beside it.
+- A built-in cutter at the hinge end: a small blade that opens bags.
+- The back has a dark magnetic panel held by two screws (shown on the gray
+  one), so it sticks to a fridge.
+- It charges with a USB cable through a port on the side (shown plugged in
+  to a power bank).
+- Suitable for plastic snack and storage bags. The partner lists thin bags,
+  paper, kraft and foil bags as **not suitable**.
+- Safety notes from the partner: don't touch the heating pad, don't heat for
+  long, keep away from children.
 
 ### Creative brief
-A pocket-size heat sealer that closes opened snack and food bags. The WEDRA
-angle: *close the bag, keep the counter tidy.* For snack drawers, coffee
-bags, pantry organisers. Colours: White, Pink, Gray, Black.
+A pocket-size clip that seals opened plastic snack bags with heat, and opens
+them with a small built-in cutter. It sticks to the fridge. The WEDRA angle:
+*close the bag, keep the drawer tidy.* For snack drawers, pantry organisers
+and anyone with a drawer full of clips. Colours: White, Pink, Gray, Black.
 
-### Product lock (template; fill from photos)
+### Product lock (from the reference photos, white)
 ```
-A small handheld bag sealer about {size} long, {colour} body with a
-{hinge / clip shape}, {button or slide} and {magnet or hook if shown},
-exactly as in the reference. No added cutter or light unless in the
-reference.
+A small handheld bag sealer shaped like a rounded rectangular clip, about
+the length of a palm, in matte {white}. An upper arm hinged at one end
+closes onto the base; at the open end a narrow metal heating strip with a
+knurled pad; a round button on top with a small blue indicator light beside
+it; a small cutting blade at the hinge end; a charging port on the side; a
+dark rectangular magnet panel held by two screws on the back, all exactly
+as in the reference. No printing or logo anywhere.
 ```
+- Show the blue light only when the button is pressed, and only as small as
+  in the reference.
+- Never show the blade touching fingers. Hands hold the body, never the
+  heating strip.
 
 ### Hero direction
-The sealer lying on warm white beside a neatly folded, closed coffee bag.
-Tidy, graphic, pastel-calm.
+The sealer lying top-down on warm white, the button and blue light facing
+the camera, beside a neatly closed, clear plastic snack bag with no brand.
+Tidy, graphic and calm.
 
 ### Seven images
 | # | Direction |
 | --- | --- |
-| 1 Hero | As above, top-down |
-| 2 Alternate | Open position, showing the sealing edge |
-| 3 Lifestyle | Pantry shelf with glass jars and a few sealed bags |
-| 4 Detail | Macro of the sealing edge and button |
-| 5 Use case | Hands sliding it along the top of a chip bag |
-| 6 Collection | The four colours fanned out on linen (only with all four photographed) |
-| 7 Mobile | Hand with sealer mid-slide on a tall pantry backdrop |
+| 1 Hero | As above, top-down, soft shadow |
+| 2 Alternate | Standing on end, arm slightly open to show the heating strip |
+| 3 Lifestyle | The sealer on the fridge door (magnet side) beside a plain note, a pantry shelf soft in the background |
+| 4 Detail | Macro of the jaw: heating strip and knurled pad, the button and blue light |
+| 5 Use case | Hands pressing it on the top edge of an unbranded plastic snack bag and sliding it along; companion frame: the cutter opening the bag |
+| 6 Collection | The four colours fanned out on linen (only once pink, gray and black are photographed) |
+| 7 Mobile | Hand with the sealer mid-slide on an unbranded bag, tall pantry backdrop |
+
+Props: plain, unbranded plastic snack or storage bags only. No other brands'
+packaging, no foil, kraft or paper bags (the partner lists them as not
+suitable), no raw meat, and no before/after split.
 
 ### Five Reels / TikTok concepts
 | # | Hook | First 1–2 s | Shot list and action | Voiceover | Caption | CTA | Runtime |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| 1 | "Close the bag. Properly." | Sealer slides along a bag top | 1 slide · 2 close-up of the sealed edge · 3 bag into drawer · 4 end card | "Slide it along. Done." | "Close the bag, properly." | Discover it | 15 s |
-| 2 | "No more clips in the drawer" | Drawer of mismatched clips | 1 clips · 2 swap for sealer · 3 slide · 4 tidy drawer · 5 end card | "One small sealer instead." | "Swap the clips." | See the find | 18 s |
-| 3 | "Coffee bag, chips, pasta" | Three quick slides to a beat | 1 coffee · 2 chips · 3 pasta · 4 hero · 5 end card | None | "Coffee, chips, pasta." | Find it at WEDRA | 15 s |
-| 4 | "Pocket-size pantry tidy" | Sealer in palm | 1 palm · 2 on the fridge or hook (only if shown) · 3 in use · 4 pantry wide · 5 end card | "Small enough to keep by the snacks." | "A pocket-size pantry tidy." | Worth a look | 20 s |
-| 5 | "WEDRA found: the tiny bag sealer" | Four colours fanned on linen | 1 colours · 2 pick one · 3 slide · 4 edge macro · 5 pantry · 6 end card | "Four colours. Found by WEDRA." | "Found: the tiny bag sealer." | Explore the discovery | 25 s |
+| 1 | "Close the bag. Properly." | Sealer slides along a bag top | 1 press and slide · 2 close-up of the sealed edge · 3 bag into the drawer · 4 end card | "Press, slide. Closed." | "Close the bag, properly." | Discover it | 15 s |
+| 2 | "Seal it. Or cut it open." | The cutter opens a sealed bag | 1 cutter opens the bag · 2 snack out · 3 press and slide to reseal · 4 sealer onto the fridge · 5 end card | "It opens the bag, and it closes it again." | "Seal it, or cut it open. Same clip." | See the find | 18 s |
+| 3 | "No more clips in the drawer" | Drawer of mismatched clips | 1 clips · 2 swap for the sealer · 3 slide · 4 tidy drawer · 5 end card | "One small sealer instead." | "Swap the clips." | Worth a look | 18 s |
+| 4 | "It lives on the fridge" | Sealer clicks onto the fridge door | 1 magnet on the fridge · 2 take it off · 3 seal a snack bag · 4 back on the fridge · 5 end card | "Right where you need it." | "It lives on the fridge." | Find it at WEDRA | 15 s |
+| 5 | "WEDRA found: the tiny bag sealer" | Sealer turns on warm white | 1 turn · 2 heating-strip macro · 3 button and light · 4 slide · 5 cutter · 6 fridge · 7 end card | "Seals, opens, sticks to the fridge. Found by WEDRA." | "Found: the tiny bag sealer." | Explore the discovery | 25 s |
+
+Film real seals only: the sealed edge on screen must come from the product,
+in one take.
 
 ### Hooks
 1. Close the bag. Properly.
-2. Swap the clips.
-3. Slide it along. Done.
-4. A pocket-size pantry tidy.
+2. Seal it. Or cut it open.
+3. Swap the clips.
+4. It lives on the fridge.
 5. Found: the tiny bag sealer.
 
 ### Captions
-1. Slide it along the top of the bag and it's closed. A tiny sealer for the snack drawer. Found by WEDRA.
-2. Coffee, chips, pasta: close them neatly. White, pink, gray or black. Link in bio.
-3. Swap the drawer of clips for one small sealer.
+1. Press, slide, closed. A tiny sealer for opened snack bags, with a cutter to open them again. Found by WEDRA.
+2. Swap the drawer of clips for one small sealer that sticks to the fridge. Link in bio.
+3. Seal it, or cut it open. White, pink, gray or black.
 
 ### Website placement and mobile
-- Gallery: hero, in-use slide, sealed-edge detail, pantry lifestyle, one per colour.
-- Highlights: Handheld · Colours · How it's powered (as confirmed).
-- Mobile: four colour swatches ("Black", never "Black W159").
+- Gallery: hero, use case (slide), heating-strip detail, cutter frame, fridge
+  lifestyle, then one image per colour (only colours with photos).
+- Highlights: Seals plastic bags · Built-in cutter · Magnetic back ·
+  Charges by USB cable.
+- Specifications (verified only): "Works with: plastic snack and storage
+  bags" and "Not for: thin, paper, kraft or foil bags".
+- Safety line in the details tab, as supplied: "The heating strip gets hot.
+  Don't touch it, don't hold the sealer closed for long, and keep it away
+  from children."
+- Mobile: four colour swatches ("Black", never "Black W159"), with the video
+  (concept 2) straight after the tabs.
 
 ### Product-page copy direction
-Value line: "A small sealer that closes opened bags neatly." Light, tidy,
-a little playful, still WEDRA-calm.
+Value line: "A small clip that seals opened snack bags, opens them with a
+built-in cutter and sticks to the fridge." Light, tidy, a little playful,
+still WEDRA-calm. Be clear which bags it works with, so expectations match.
 
 ### Claims to avoid
-Airtight, vacuum, keeps food fresh for X days, freshness, temperature
-figures, number of seals per charge, battery life, "works on every bag",
-food safety, child-safe.
+"Keep food fresh", airtight, vacuum, freshness for X days, "suitable for any
+bag", temperature figures, seconds to seal, seals per charge, battery
+capacity (the partner's "400 mAh") or battery life, "strong heating",
+"sharp blade", food safety, child-safe. Never show meat, fresh produce in a
+bag, or before/after splits. Never show other brands' packaging.
 
 ### Reference checklist
-- [ ] Body shape, hinge, button and any magnet/hook exactly as in the photos
-- [ ] Colour from its own photo; black shown as black
-- [ ] Sealed edge looks like a real result from the product, not a factory seal
-- [ ] No added cutter, light or cable unless in the reference
+- [ ] Clip shape, hinge, heating strip, button, blue light, cutter and side port exactly as in the photos
+- [ ] Magnet panel with two screws on the back when the back is shown
+- [ ] Colour from its own photo (white now; pink, gray front and black pending)
+- [ ] Bags are plain, unbranded plastic; no foil, kraft or paper
+- [ ] No partner text, icons, ticks or before/after layout
+- [ ] Sealed edge is a real result filmed in one take
+- [ ] Fingers never on the heating strip or blade
 
 ---
 
 ## 7. Next steps (owner)
 
-1. Send the fulfilment partner's photos for the Measuring Spoon, Dish
-   Scrubber and Bag Sealer (every colour/size), and the Oil Sprayer in
-   Black, Green, Yellow and the 2 pc pack.
+1. Send the fulfilment partner's photos for the Measuring Spoon and Dish
+   Scrubber (every colour/size), the Bag Sealer in pink, black and the
+   gray front, and the Oil Sprayer in Black, Green, Yellow and the 2 pc
+   pack.
 2. Confirm from the listing: the scrubber's 800 / 1200 figure, and the
-   charging method for the spoon, scrubber and sealer.
+   charging method for the spoon and scrubber.
 3. Pick the next discovery for when the blender reaches $10K. Then the
    seven images and five videos are produced for that one product only, and
    the theme changes in section 1 are made at launch.
