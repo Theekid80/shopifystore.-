@@ -8,8 +8,8 @@ Nothing in this document changes the store, the blender or checkout.
 | Working name | Reference | Variants (as listed by the fulfilment partner) | Reference photos in hand |
 | --- | --- | --- | --- |
 | Oil Sprayer | 1972168 | 1 pc 470 ml: Beige, Black, Green, Yellow · 2 pc 470 ml: Black, Green, Beige | 5 (beige, with overlay text) |
-| Digital Measuring Spoon | 2076060 | 300 g, 500 g | None yet |
-| Electric Dish Scrubber | 2864377 | 800 mA / 1200 mA × White, Green, Pink | 1 (green, both heads) |
+| Digital Measuring Spoon | 2076060 | 300 g, 500 g | 1 (one size, on white) |
+| Electric Dish Scrubber | 2864377 | 800 mA / 1200 mA × White, Green, Pink | 5 (green, white, pink, in use, measurements) |
 | Mini Bag Sealer | 2872197 | White, Pink, Gray, Black (W159) | 10 (all four colours, sizes, charging, steps; with overlay text) |
 
 The reference numbers are internal. They never appear in a caption, file
@@ -222,10 +222,16 @@ food-grade or dishwasher-safe (unless confirmed in writing), heat-resistant,
 
 ## 4. Digital Measuring Spoon
 
-**Reference photos needed first.** Nothing below may be generated until the
-partner's photos of the 300 g and 500 g versions are in hand. The product
-lock is then written from them (handle shape, display position, buttons,
-bowl shape, colour, any printing).
+**Reference photo: 1 received** (one size, on white, no overlay text). It
+doesn't say whether it's the 300 g or the 500 g version: confirm that both
+look the same before one image stands for both.
+
+### What the photo confirms
+- A black, deep oval scoop on a short flat black neck.
+- A long handle: silver/white top with a black underside.
+- A rectangular LCD display in the handle (shown reading "10.0 g").
+- Below the display, a black pad with a round power button, plus the
+  printed labels "MODE" and "TARE" beside their buttons.
 
 ### Creative brief
 A kitchen spoon with a small digital display in the handle that shows the
@@ -233,26 +239,30 @@ weight of what's in the bowl. The WEDRA angle: *measure as you scoop.* For
 coffee, baking, protein or tea routines and small-batch recipes. Two
 capacity variants: up to 300 g or up to 500 g.
 
-### Product lock (template; fill from photos)
+### Product lock (from the reference photo)
 ```
-A digital measuring spoon: {bowl shape and material} bowl, {handle colour}
-handle with a {size} digital display {position} and {n} buttons {labels},
-exactly as in the reference. Any printing on the handle appears only as in
-the reference.
+A digital measuring spoon: a deep oval black scoop on a short flat black
+neck, joined to a long handle with a silver-white top and black underside;
+a rectangular grey LCD display in the handle; below it a black pad with a
+round power button and the small printed labels "MODE" and "TARE" beside
+their buttons, exactly as in the reference. No other printing or logo.
 ```
+- Keep "MODE" and "TARE" exactly as printed; add no other text.
+- The display shows either nothing or a reading actually captured from the
+  product for that amount. Never a made-up number.
 
 ### Hero direction
 The spoon lying at a slight angle on warm white, display facing the camera
-showing a plausible reading, a small mound of coffee beans in the bowl.
+showing a real reading, a small mound of coffee beans in the bowl.
 Minimal, precise, calm.
 
 ### Seven images
 | # | Direction |
 | --- | --- |
 | 1 Hero | As above, top-down at 30°, soft light |
-| 2 Alternate | Side profile showing the handle and buttons |
+| 2 Alternate | Side profile: the depth of the scoop and the black underside of the handle |
 | 3 Lifestyle | Morning coffee station: grinder, cup, spoon in hand scooping beans |
-| 4 Detail | Macro of the display and buttons, as in the reference |
+| 4 Detail | Macro of the display, the power button and the MODE / TARE labels |
 | 5 Use case | Baking: scooping flour over a bowl, display visible |
 | 6 Collection | Spoon with tea, spices and beans in small ceramic dishes, headline space |
 | 7 Mobile | Hand holding spoon vertically, display at centre of frame |
@@ -283,10 +293,14 @@ never made up in editing.
 
 ### Website placement and mobile
 - Gallery: hero, display detail, coffee lifestyle, baking use case, side profile.
-- Highlights: Capacity (300 g / 500 g) · Display · Units (only if confirmed).
+- Highlights: Capacity (300 g / 500 g) · LCD display · Tare button · Units (only if confirmed).
 - Mobile: capacity picker as two plain pills ("Up to 300 g", "Up to 500 g").
 
 ### Product-page copy direction
+How to use (details tab, once confirmed from the listing): power on, press
+TARE to zero with the empty scoop, then scoop. Mention MODE only once it's
+confirmed what it switches.
+
 Value line: "A spoon with a display: measure coffee, tea and baking as you
 scoop." Practical, precise, understated. No numbers beyond capacity.
 
@@ -296,7 +310,8 @@ nutrition, portion control, diet or weight-loss support, battery life,
 waterproof, "replaces your scale".
 
 ### Reference checklist
-- [ ] Handle, bowl, display position and button count match the photos
+- [ ] Oval black scoop, silver-white handle with black underside, display and black button pad match the photo
+- [ ] "MODE" and "TARE" printed exactly as in the reference, nothing else
 - [ ] Display shows a real captured reading, or is off
 - [ ] Printing on the handle only as in the reference
 - [ ] The 300 g and 500 g versions look as their photos show (don't assume they're identical)
@@ -305,22 +320,28 @@ waterproof, "replaces your scale".
 
 ## 5. Electric Dish Scrubber
 
-**Reference photo: 1 received (green, on white, no overlay text).** White
-and pink still need photos. It is a small handheld device: show it at true
-scale in a hand. Don't invent extension handles, stands, extra heads beyond
+**Reference photos: 5 received**: green, white and pink on white, green in
+use and green with measurements (no overlay text). All three colours are
+covered. It is a compact handheld device, 22.4 cm tall with an 11.9 cm
+body: show it at true scale in a hand. Don't invent extension handles, stands, extra heads beyond
 the two shown, IPX ratings, RPM or battery life.
 
 ### What the photo confirms
+- Size: 22.4 cm tall, body 11.9 cm long (8.82 × 4.69 in).
 - Shaped like a small hair dryer: a round motor body with a straight handle
-  below it, in soft sage green with a thin grey band around the body.
+  below it, in soft sage green, white or pale pink, always with a thin grey
+  band around the body.
 - A round head at the front of the body, fitted here with a sponge pad
   (yellow sponge, green scouring layer) on a black mount.
 - A second, detachable head: a round white-bristle brush on a black disc
   with a push-in pin.
 - A grey ribbed tip with a hanging loop at the end of the handle.
-- A small control at the top back of the body (a red mark is visible in the
-  reference). The button and charging port aren't clear yet: describe them
-  only "as in the reference" until a clearer photo arrives.
+- Two round controls on the flat back of the body, a small red mark on the
+  top back, and a small dot low on the front of the handle. What each one
+  does, and where it charges, isn't clear yet: show them only as in the
+  reference and don't describe them until the listing confirms.
+- In use (reference): brush head face-down in a steel bowl with suds, held
+  by the handle like a hair dryer.
 
 ### Creative brief
 A small handheld powered scrubber for dishes, sinks and small surfaces. The
@@ -330,7 +351,8 @@ want the washing-up to be less of a chore. Colours: White, Green, Pink.
 ### Product lock (from the reference photo, green)
 ```
 A small handheld electric scrubber shaped like a compact hair dryer: a
-round motor body in matte {sage green} with a thin grey band, a straight
+round motor body in matte {sage green | white | pale pink} with a thin grey
+band, two round controls on the flat back, a straight
 handle below it ending in a grey ribbed tip with a hanging loop; at the
 front a round black mount holding either a round sponge pad (yellow sponge
 with a green scouring layer) or a round white-bristle brush head, exactly
@@ -346,18 +368,18 @@ linen cloth. Clean, fresh, quiet.
 ### Seven images
 | # | Direction |
 | --- | --- |
-| 1 Hero | As above, in green |
+| 1 Hero | As above, in green (white and pink as colour images) |
 | 2 Alternate | Brush head fitted, three-quarter view from the front |
-| 3 Lifestyle | Bright sink with ceramic dishes, a hand holding the scrubber |
+| 3 Lifestyle | Bright sink, hand holding it like a hair dryer, brush head face-down in a steel bowl with suds, as in the in-use reference |
 | 4 Detail | The two heads side by side: sponge pad and bristle brush |
 | 5 Use case | Sponge head on a plate with suds; companion frame: brush head along the sink edge (no before/after dirt claims) |
-| 6 Collection | The three colours in a row on stone (only with all three photographed) |
+| 6 Collection | Green, white and pink in a row on stone, sponge heads fitted |
 | 7 Mobile | Hand holding it at the centre of a tall sink scene |
 
 ### Five Reels / TikTok concepts
 | # | Hook | First 1–2 s | Shot list and action | Voiceover | Caption | CTA | Runtime |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| 1 | "Small. Powered. At the sink." | Button press, head starts spinning | 1 press · 2 pan edge · 3 mug rim · 4 rinse · 5 end card | "Press, scrub, rinse." | "A small powered scrubber for the sink." | Discover it | 15 s |
+| 1 | "Compact. Powered. At the sink." | Button press, head starts spinning | 1 press · 2 pan edge · 3 mug rim · 4 rinse · 5 end card | "Press, scrub, rinse." | "A compact powered scrubber for the sink." | Discover it | 15 s |
 | 2 | "The washing-up, a little easier" | Stack of dishes, hand picks up scrubber | 1 stack · 2 plate · 3 pan · 4 rack · 5 end card | "For the everyday washing-up." | "The small help at the sink." | See the find | 20 s |
 | 3 | "Sponge or brush. Click and swap." | Hand pulls off the sponge head | 1 sponge off · 2 brush pushed on · 3 brush along the sink edge · 4 hung by its loop · 5 end card | "Sponge for plates. Brush for the sink." | "Two heads, one small scrubber." | Worth a look | 18 s |
 | 4 | "Three colours for your sink" | White, green, pink in a row | 1 row · 2 each in a hand · 3 in use · 4 end card | None | "White, green or pink." | Find it at WEDRA | 15 s |
@@ -367,16 +389,16 @@ Show only real results filmed in one take. No sped-up cleaning presented as
 real time, and no before/after grime reveals.
 
 ### Hooks
-1. Small. Powered. At the sink.
+1. Compact. Powered. At the sink.
 2. The washing-up, a little easier.
-3. Fits in one hand.
+3. Held like a hair dryer, one hand.
 4. Sponge or brush. Click and swap.
 5. Found: the small help at the sink.
 
 ### Captions
-1. A small powered scrubber that lives by the tap. Press, scrub, rinse. Found by WEDRA.
+1. A compact powered scrubber that hangs by the sink. Press, scrub, rinse. Found by WEDRA.
 2. Sponge head for plates, brush head for the sink. White, green or pink. Link in bio.
-3. The small help at the sink. Fits in one hand.
+3. The small help at the sink. Sponge or brush, one hand.
 
 ### Website placement and mobile
 - Gallery: hero, in-hand scale, use case, head detail, one per colour.
@@ -385,8 +407,8 @@ real time, and no before/after grime reveals.
 - Mobile: colour swatches first, capacity pills second.
 
 ### Product-page copy direction
-Value line: "A small handheld powered scrubber for the everyday washing-up."
-Keep it modest and domestic. Say "small" plainly; it sets the right
+Value line: "A compact handheld scrubber with a sponge and a brush head, for the everyday washing-up."
+Keep it modest and domestic. Say "compact" and "handheld" plainly; they set the right
 expectation.
 
 ### Claims to avoid
@@ -397,7 +419,8 @@ handles, heads other than the sponge and brush shown, anything implied by "800 m
 confirmed spec.
 
 ### Reference checklist
-- [ ] Size in the hand matches the listing (small device)
+- [ ] Size in the hand matches the listing (22.4 cm tall, body 11.9 cm)
+- [ ] Two round controls on the back; controls shown only as in the reference
 - [ ] Head, bristles, button and charging method as in the photos
 - [ ] Only the sponge head and brush head shown; no extension handle
 - [ ] Grey band, ribbed tip and hanging loop as in the reference
@@ -544,8 +567,7 @@ bag, or before/after splits. Never show other brands' packaging.
 ## 7. Next steps (owner)
 
 1. Send the fulfilment partner's photos for the Measuring Spoon (both
-   sizes), the Dish Scrubber in white and pink plus a clear view of its
-   button and charging port, and the Oil Sprayer in Black, Green, Yellow
+   sizes), a clear view of the Dish Scrubber's charging port, and the Oil Sprayer in Black, Green, Yellow
    and the 2 pc pack (and the beige photos again as files).
 2. Confirm from the listing: the scrubber's 800 / 1200 figure and how it
    charges, and how the spoon is powered.
