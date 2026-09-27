@@ -9,8 +9,8 @@ Nothing in this document changes the store, the blender or checkout.
 | --- | --- | --- | --- |
 | Oil Sprayer | 1972168 | 1 pc 470 ml: Beige, Black, Green, Yellow · 2 pc 470 ml: Black, Green, Beige | 5 (beige, with overlay text) |
 | Digital Measuring Spoon | 2076060 | 300 g, 500 g | None yet |
-| Electric Dish Scrubber | 2864377 | 800 mA / 1200 mA × White, Green, Pink | None yet |
-| Mini Bag Sealer | 2872197 | White, Pink, Gray, Black (W159) | 5 (white, back of gray; with overlay text) |
+| Electric Dish Scrubber | 2864377 | 800 mA / 1200 mA × White, Green, Pink | 1 (green, both heads) |
+| Mini Bag Sealer | 2872197 | White, Pink, Gray, Black (W159) | 10 (all four colours, sizes, charging, steps; with overlay text) |
 
 The reference numbers are internal. They never appear in a caption, file
 name that is uploaded publicly, alt text, product field or ad.
@@ -305,35 +305,52 @@ waterproof, "replaces your scale".
 
 ## 5. Electric Dish Scrubber
 
-**Reference photos needed first**, for each colour. It is a small handheld
-device: show it at true scale in a hand. Don't invent extra brush heads,
-extension handles, stands, lights, IPX ratings, RPM or battery life.
+**Reference photo: 1 received (green, on white, no overlay text).** White
+and pink still need photos. It is a small handheld device: show it at true
+scale in a hand. Don't invent extension handles, stands, extra heads beyond
+the two shown, IPX ratings, RPM or battery life.
+
+### What the photo confirms
+- Shaped like a small hair dryer: a round motor body with a straight handle
+  below it, in soft sage green with a thin grey band around the body.
+- A round head at the front of the body, fitted here with a sponge pad
+  (yellow sponge, green scouring layer) on a black mount.
+- A second, detachable head: a round white-bristle brush on a black disc
+  with a push-in pin.
+- A grey ribbed tip with a hanging loop at the end of the handle.
+- A small control at the top back of the body (a red mark is visible in the
+  reference). The button and charging port aren't clear yet: describe them
+  only "as in the reference" until a clearer photo arrives.
 
 ### Creative brief
 A small handheld powered scrubber for dishes, sinks and small surfaces. The
 WEDRA angle: *the small help at the sink.* For people who cook daily and
 want the washing-up to be less of a chore. Colours: White, Green, Pink.
 
-### Product lock (template; fill from photos)
+### Product lock (from the reference photo, green)
 ```
-A small handheld electric scrubber about {size from listing} long,
-{body colour} body with {head shape and bristles}, {button position}, and a
-{charging method} exactly as in the reference. Only the heads shown in the
-reference; no extension handle.
+A small handheld electric scrubber shaped like a compact hair dryer: a
+round motor body in matte {sage green} with a thin grey band, a straight
+handle below it ending in a grey ribbed tip with a hanging loop; at the
+front a round black mount holding either a round sponge pad (yellow sponge
+with a green scouring layer) or a round white-bristle brush head, exactly
+as in the reference. Button and charging port only as in the reference.
+No printing or logo.
 ```
 
 ### Hero direction
-The scrubber standing upright on warm white, small in the frame to show its
-real scale, with a folded linen cloth. Clean, fresh, quiet.
+The scrubber in profile on warm white, sponge head fitted, the brush head
+lying beside it, small in the frame to show its real scale, with a folded
+linen cloth. Clean, fresh, quiet.
 
 ### Seven images
 | # | Direction |
 | --- | --- |
-| 1 Hero | As above, in the green (or whichever colour photographs best) |
-| 2 Alternate | Lying on its side, showing the head and button |
+| 1 Hero | As above, in green |
+| 2 Alternate | Brush head fitted, three-quarter view from the front |
 | 3 Lifestyle | Bright sink with ceramic dishes, a hand holding the scrubber |
-| 4 Detail | Macro of the head and bristles |
-| 5 Use case | Scrubbing a pan edge with suds (no before/after dirt claims) |
+| 4 Detail | The two heads side by side: sponge pad and bristle brush |
+| 5 Use case | Sponge head on a plate with suds; companion frame: brush head along the sink edge (no before/after dirt claims) |
 | 6 Collection | The three colours in a row on stone (only with all three photographed) |
 | 7 Mobile | Hand holding it at the centre of a tall sink scene |
 
@@ -342,7 +359,7 @@ real scale, with a folded linen cloth. Clean, fresh, quiet.
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | 1 | "Small. Powered. At the sink." | Button press, head starts spinning | 1 press · 2 pan edge · 3 mug rim · 4 rinse · 5 end card | "Press, scrub, rinse." | "A small powered scrubber for the sink." | Discover it | 15 s |
 | 2 | "The washing-up, a little easier" | Stack of dishes, hand picks up scrubber | 1 stack · 2 plate · 3 pan · 4 rack · 5 end card | "For the everyday washing-up." | "The small help at the sink." | See the find | 20 s |
-| 3 | "Fits in one hand" | Scrubber in palm, true scale | 1 palm · 2 grip · 3 in use · 4 on the counter · 5 end card | "Small enough to keep by the tap." | "Fits in one hand." | Worth a look | 15 s |
+| 3 | "Sponge or brush. Click and swap." | Hand pulls off the sponge head | 1 sponge off · 2 brush pushed on · 3 brush along the sink edge · 4 hung by its loop · 5 end card | "Sponge for plates. Brush for the sink." | "Two heads, one small scrubber." | Worth a look | 18 s |
 | 4 | "Three colours for your sink" | White, green, pink in a row | 1 row · 2 each in a hand · 3 in use · 4 end card | None | "White, green or pink." | Find it at WEDRA | 15 s |
 | 5 | "WEDRA found: a scrubber that does the scrubbing" | Slow turn on warm white | 1 turn · 2 head macro · 3 button · 4 pan · 5 sink wide · 6 end card | "Handheld and powered. Found by WEDRA." | "Found: the small help at the sink." | Explore the discovery | 25 s |
 
@@ -353,17 +370,17 @@ real time, and no before/after grime reveals.
 1. Small. Powered. At the sink.
 2. The washing-up, a little easier.
 3. Fits in one hand.
-4. Press, scrub, rinse.
+4. Sponge or brush. Click and swap.
 5. Found: the small help at the sink.
 
 ### Captions
 1. A small powered scrubber that lives by the tap. Press, scrub, rinse. Found by WEDRA.
-2. For pans, mugs and the everyday washing-up. White, green or pink. Link in bio.
+2. Sponge head for plates, brush head for the sink. White, green or pink. Link in bio.
 3. The small help at the sink. Fits in one hand.
 
 ### Website placement and mobile
 - Gallery: hero, in-hand scale, use case, head detail, one per colour.
-- Highlights: Handheld · Powered · Colours, plus the capacity variant (as
+- Highlights: Handheld · Powered · Sponge and brush heads · Hanging loop, plus the capacity variant (as
   confirmed, in the specifications, not the headline).
 - Mobile: colour swatches first, capacity pills second.
 
@@ -376,13 +393,14 @@ expectation.
 Waterproof, IPX7 or any rating, RPM or speed, battery life or minutes per
 charge, "deep clean", "removes 99%", antibacterial or hygienic, "no more
 scrubbing", heavy-duty grout or grill cleaning, extra heads or extension
-handles not in the box, anything implied by "800 mA / 1200 mA" beyond the
+handles, heads other than the sponge and brush shown, anything implied by "800 mA / 1200 mA" beyond the
 confirmed spec.
 
 ### Reference checklist
 - [ ] Size in the hand matches the listing (small device)
 - [ ] Head, bristles, button and charging method as in the photos
-- [ ] Only the parts in the box, no extension handle or extra heads
+- [ ] Only the sponge head and brush head shown; no extension handle
+- [ ] Grey band, ribbed tip and hanging loop as in the reference
 - [ ] Each colour from its own photo
 - [ ] No sped-up or staged "before/after"
 
@@ -390,22 +408,27 @@ confirmed spec.
 
 ## 6. Mini Bag Sealer
 
-**Reference photos: 5 received (white, plus the back of a gray one).** They
-are collages with the partner's text, icons, tick marks, other brands'
-packaging and a before/after layout. Use them as a **shape reference only**:
-never reuse a crop that shows their text, icons or another brand's bag.
-Pink and black still need photos, and so does the front of the gray one.
+**Reference photos: 10 received, covering all four colours** (black, light
+gray, pink, white), measurements, charging and how to use it. Most are
+collages with the partner's text, icons, tick marks, other brands'
+packaging and a before/after layout. Use them as a **shape reference
+only**: never reuse a crop that shows their text, icons or another brand's
+bag. The four-colour photo is the colour reference.
 
 ### What the photos confirm
-- A white, rounded-rectangle clip. The upper arm is hinged at one end and
-  closes onto the base.
-- A small metal heating strip with a knurled pad at the jaw end.
-- A round button on top with a small blue indicator light beside it.
-- A built-in cutter at the hinge end: a small blade that opens bags.
+- Size: 10.9 × 3.3 × 2.8 cm (4.3 × 1.3 × 1.1 in).
+- A rounded-rectangle clip in one colour. The upper arm is hinged at one
+  end and closes onto the base.
+- A small beige knurled heating pad on the base at the open end.
+- A small round button on top of the base at the hinge end, with a small
+  blue light beside it (a red light shows while charging).
+- A built-in cutter at the hinge end: a small hooked blade that opens bags.
 - The back has a dark magnetic panel held by two screws (shown on the gray
   one), so it sticks to a fridge.
-- It charges with a USB cable through a port on the side (shown plugged in
-  to a power bank).
+- USB rechargeable: a small port on the end of the base, below the button
+  (shown charging from a cable and a power bank).
+- How it's used: switch on, hold the jaw closed a few seconds to warm up,
+  then pull it slowly and steadily along the top of the bag.
 - Suitable for plastic snack and storage bags. The partner lists thin bags,
   paper, kraft and foil bags as **not suitable**.
 - Safety notes from the partner: don't touch the heating pad, don't heat for
@@ -419,13 +442,15 @@ and anyone with a drawer full of clips. Colours: White, Pink, Gray, Black.
 
 ### Product lock (from the reference photos, white)
 ```
-A small handheld bag sealer shaped like a rounded rectangular clip, about
-the length of a palm, in matte {white}. An upper arm hinged at one end
-closes onto the base; at the open end a narrow metal heating strip with a
-knurled pad; a round button on top with a small blue indicator light beside
-it; a small cutting blade at the hinge end; a charging port on the side; a
-dark rectangular magnet panel held by two screws on the back, all exactly
-as in the reference. No printing or logo anywhere.
+A small handheld bag sealer, 10.9 cm long, 3.3 cm wide and 2.8 cm tall,
+shaped like a rounded rectangular clip in matte {white | light gray | pink
+| black}. An upper arm hinged at one end closes onto the base; on the base
+at the open end a small beige knurled heating pad; on top of the base at
+the hinge end a small round button with a tiny blue light beside it; a
+small hooked cutting blade at the hinge end; a small charging port on the
+end of the base below the button; a dark rectangular magnet panel held by
+two screws on the back, all exactly as in the reference. The heating pad is
+beige in every colour. No printing or logo anywhere.
 ```
 - Show the blue light only when the button is pressed, and only as small as
   in the reference.
@@ -445,7 +470,7 @@ Tidy, graphic and calm.
 | 3 Lifestyle | The sealer on the fridge door (magnet side) beside a plain note, a pantry shelf soft in the background |
 | 4 Detail | Macro of the jaw: heating strip and knurled pad, the button and blue light |
 | 5 Use case | Hands pressing it on the top edge of an unbranded plastic snack bag and sliding it along; companion frame: the cutter opening the bag |
-| 6 Collection | The four colours fanned out on linen (only once pink, gray and black are photographed) |
+| 6 Collection | The four colours in a row on linen, arms slightly open, matching the four-colour reference |
 | 7 Mobile | Hand with the sealer mid-slide on an unbranded bag, tall pantry backdrop |
 
 Props: plain, unbranded plastic snack or storage bags only. No other brands'
@@ -455,7 +480,7 @@ suitable), no raw meat, and no before/after split.
 ### Five Reels / TikTok concepts
 | # | Hook | First 1–2 s | Shot list and action | Voiceover | Caption | CTA | Runtime |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| 1 | "Close the bag. Properly." | Sealer slides along a bag top | 1 press and slide · 2 close-up of the sealed edge · 3 bag into the drawer · 4 end card | "Press, slide. Closed." | "Close the bag, properly." | Discover it | 15 s |
+| 1 | "Close the bag. Properly." | Sealer slides along a bag top | 1 switch on, blue light · 2 hold closed a moment · 3 slow slide along the top · 4 close-up of the sealed edge · 5 bag into the drawer · 6 end card | "Switch on, hold, slide. Closed." | "Close the bag, properly." | Discover it | 15 s |
 | 2 | "Seal it. Or cut it open." | The cutter opens a sealed bag | 1 cutter opens the bag · 2 snack out · 3 press and slide to reseal · 4 sealer onto the fridge · 5 end card | "It opens the bag, and it closes it again." | "Seal it, or cut it open. Same clip." | See the find | 18 s |
 | 3 | "No more clips in the drawer" | Drawer of mismatched clips | 1 clips · 2 swap for the sealer · 3 slide · 4 tidy drawer · 5 end card | "One small sealer instead." | "Swap the clips." | Worth a look | 18 s |
 | 4 | "It lives on the fridge" | Sealer clicks onto the fridge door | 1 magnet on the fridge · 2 take it off · 3 seal a snack bag · 4 back on the fridge · 5 end card | "Right where you need it." | "It lives on the fridge." | Find it at WEDRA | 15 s |
@@ -480,7 +505,9 @@ in one take.
 - Gallery: hero, use case (slide), heating-strip detail, cutter frame, fridge
   lifestyle, then one image per colour (only colours with photos).
 - Highlights: Seals plastic bags · Built-in cutter · Magnetic back ·
-  Charges by USB cable.
+  USB rechargeable · 10.9 × 3.3 × 2.8 cm.
+- How to use (details tab): "Switch it on, hold the jaw closed on the bag
+  for a few seconds, then pull it slowly along the top."
 - Specifications (verified only): "Works with: plastic snack and storage
   bags" and "Not for: thin, paper, kraft or foil bags".
 - Safety line in the details tab, as supplied: "The heating strip gets hot.
@@ -497,14 +524,16 @@ still WEDRA-calm. Be clear which bags it works with, so expectations match.
 ### Claims to avoid
 "Keep food fresh", airtight, vacuum, freshness for X days, "suitable for any
 bag", temperature figures, seconds to seal, seals per charge, battery
-capacity (the partner's "400 mAh") or battery life, "strong heating",
+capacity (the partner's "400 mAh") or battery life, "no worries about
+leaking batteries", exact warm-up seconds as a promise, "strong heating",
 "sharp blade", food safety, child-safe. Never show meat, fresh produce in a
 bag, or before/after splits. Never show other brands' packaging.
 
 ### Reference checklist
-- [ ] Clip shape, hinge, heating strip, button, blue light, cutter and side port exactly as in the photos
+- [ ] Clip shape, hinge, beige heating pad, button and blue light at the hinge end, cutter and end port exactly as in the photos
+- [ ] True size: about the length of a palm (10.9 cm)
 - [ ] Magnet panel with two screws on the back when the back is shown
-- [ ] Colour from its own photo (white now; pink, gray front and black pending)
+- [ ] Colour matches the four-colour reference (gray is a light gray, not silver)
 - [ ] Bags are plain, unbranded plastic; no foil, kraft or paper
 - [ ] No partner text, icons, ticks or before/after layout
 - [ ] Sealed edge is a real result filmed in one take
@@ -514,12 +543,12 @@ bag, or before/after splits. Never show other brands' packaging.
 
 ## 7. Next steps (owner)
 
-1. Send the fulfilment partner's photos for the Measuring Spoon and Dish
-   Scrubber (every colour/size), the Bag Sealer in pink, black and the
-   gray front, and the Oil Sprayer in Black, Green, Yellow and the 2 pc
-   pack.
-2. Confirm from the listing: the scrubber's 800 / 1200 figure, and the
-   charging method for the spoon and scrubber.
+1. Send the fulfilment partner's photos for the Measuring Spoon (both
+   sizes), the Dish Scrubber in white and pink plus a clear view of its
+   button and charging port, and the Oil Sprayer in Black, Green, Yellow
+   and the 2 pc pack (and the beige photos again as files).
+2. Confirm from the listing: the scrubber's 800 / 1200 figure and how it
+   charges, and how the spoon is powered.
 3. Pick the next discovery for when the blender reaches $10K. Then the
    seven images and five videos are produced for that one product only, and
    the theme changes in section 1 are made at launch.
