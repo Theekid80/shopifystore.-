@@ -32,8 +32,12 @@ theme":
    builds on it. Preserve everything that already works; don't duplicate
    components or replace unrelated systems.
 3. Test the affected pages (Theme Check, plus a browser check of the flow).
-4. Commit only the relevant work with a clear message, and push to the same
-   branch. Don't create other branches, and don't upload zips or create
+4. Give the edit the next number and a short name, add a row to
+   `CHANGELOG.md` (number, name, date, commit, what changed), and commit it
+   with the work, naming the edit in the commit message
+   ("Edit #6: <name>"). The record lives in this repo only: never create,
+   copy or rename themes in Shopify to label edits. Commit only the
+   relevant work and push to the same branch. Don't create other branches, and don't upload zips or create
    separate themes.
 5. Confirm the connected theme picked up the commit (compare file checksums
    through the Admin API when available).
