@@ -233,3 +233,6 @@ export const FEED = [
   { id: "F11", product: "sealer", pillar: "Lifestyle", scene: cap(P.bsMagnet, "", { pos: "50% 45%" }), caption: "It lives on the fridge, right where the snacks are.", cta: "Discover it at wedra.co" },
   { id: "F12", product: "brand", pillar: "Brand storytelling", scene: card("Found for\nyour everyday.", { tone: "ivory" }), caption: "Five discoveries so far, and more to come, only when they're worth showing you.", cta: "Discover better at wedra.co" },
 ];
+
+// Shared with production-content.mjs (the 30-video production library).
+export { cap, ed, st, pair, card, end, P, LIFE_DRINK };
