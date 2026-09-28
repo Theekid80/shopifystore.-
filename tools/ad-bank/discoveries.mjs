@@ -100,6 +100,27 @@ const products = {
       end("WEDRA Discovery #05"),
     ],
   },
+  espresso: {
+    label: "WEDRA Discovery #06",
+    gallery: [
+      ["01-hero-black", { kind: "studio", image: ph("espresso/studio.png"), height: "78%", tone: "ivory", ...still }],
+      ["02-in-hand", { kind: "caption", image: ph("espresso/pour.png"), pos: "50% 64%", ...still }],
+      ["03-three-in-one", { kind: "studio", image: ph("espresso/parts.png"), height: "64%", tone: "ivory", ...still }],
+      ["04-top", { kind: "caption", image: ph("espresso/top.png"), pos: "50% 50%", ...still }],
+      ["05-button-usb-c", { kind: "caption", image: ph("espresso/button.png"), pos: "50% 50%", ...still }],
+      ["06-studio-stone", { kind: "studio", image: ph("espresso/studio.png"), height: "70%", tone: "stone", ...still }],
+      ["07-with-grinder", { kind: "studio", image: ph("espresso/set.png"), height: "66%", tone: "ivory", ...still }],
+    ],
+    slide: { kind: "studio", image: ph("espresso/studio.png"), height: "62%", tone: "ivory", eyebrow: "WEDRA Discovery #06", text: "Your coffee,\nwherever you are.", mark: true, ...still },
+    video: [
+      { kind: "editorial", image: ph("espresso/pour.png"), pos: "50% 38%", dur: 3.2, eyebrow: "WEDRA Discovery #06", text: "Your coffee,\nwherever\nyou go.", textDelay: -1 },
+      { kind: "studio", image: ph("espresso/studio.png"), h: { feed: "62%", tall: "40%" }, dur: 2.6, eyebrow: "Portable espresso machine", text: "Self-heating.\n60 ml.", zoom: [1, 1.05] },
+      { kind: "studio", image: ph("espresso/parts.png"), h: { feed: "52%", tall: "36%" }, dur: 2.8, eyebrow: "3-in-1", text: "Capsules or\nground coffee.", zoom: [1, 1.04] },
+      { kind: "caption", image: ph("espresso/button.png"), pos: "50% 45%", dur: 2.4, text: "Charges by USB-C.", at: "top", mark: true },
+      { kind: "caption", image: ph("espresso/pour.png"), pos: "50% 75%", dur: 2.4, text: "Press. Pour. Go.", at: "top", zoom: [1.05, 1.15] },
+      end("WEDRA Discovery #06"),
+    ],
+  },
 };
 
 const FORMATS = { gallery: [1080, 1350, "gallery"], "4x5": [1080, 1350, "feed"], "9x16": [1080, 1920, "tall"] };
