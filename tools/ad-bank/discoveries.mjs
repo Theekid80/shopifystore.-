@@ -109,6 +109,7 @@ const products = {
       ["04-top", { kind: "caption", image: ph("espresso/top.png"), pos: "50% 50%", ...still }],
       ["05-button-usb-c", { kind: "caption", image: ph("espresso/button.png"), pos: "50% 50%", ...still }],
       ["06-studio-stone", { kind: "studio", image: ph("espresso/studio.png"), height: "70%", tone: "stone", ...still }],
+      ["08-coffee", { kind: "studio", image: ph("espresso/splash.png"), height: "66%", tone: "ivory", ...still }],
       ["07-with-grinder", { kind: "studio", image: ph("espresso/set.png"), height: "66%", tone: "ivory", ...still }],
     ],
     slide: { kind: "studio", image: ph("espresso/studio.png"), height: "62%", tone: "ivory", eyebrow: "WEDRA Discovery #06", text: "Your coffee,\nwherever you are.", mark: true, ...still },

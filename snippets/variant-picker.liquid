@@ -12,7 +12,8 @@
   - A value is greyed out only when Shopify has no variant with that value
     available for sale (variant.available, which honours "continue selling
     when out of stock").
-  - An option fully decided by the others (e.g. a "Size" that is always
+  - Unavailable pill values carry a visible "Out of stock" note.
+  - An option with one value, or fully decided by the others (e.g. a "Size" that is always
     "New" for one colour and "n/a" for the rest) is hidden; theme.js keeps
     it in step so the right variant is always submitted.
   theme.js keeps the form's variant id, price, availability and image in sync.
@@ -53,6 +54,11 @@
             assign seen = seen | append: pair | append: '|'
           endif
         endfor
+      endif
+
+      # An option with a single value (e.g. a "Size" every variant shares) has nothing to choose.
+      if product.options.size > 1 and option.values.size == 1
+        assign derived = true
       endif
 
       # Colour display: plain swatches only when every value is a single known colour.
@@ -113,9 +119,9 @@
             {%- if is_color and labelled == false -%}
               <span style="--swatch: {{ swatch }};"><span class="visually-hidden">{{ label | escape }}</span></span>
             {%- elsif is_color -%}
-              <span>{% if swatch != blank %}<i style="--swatch: {{ swatch }};" aria-hidden="true"></i>{% endif %}{{ label | escape }}</span>
+              <span>{% if swatch != blank %}<i style="--swatch: {{ swatch }};" aria-hidden="true"></i>{% endif %}{{ label | escape }}{% unless value_available %}<small class="variant-pill__note">{{ 'products.product.sold_out' | t }}</small>{% endunless %}</span>
             {%- else -%}
-              <span>{{ label | escape }}</span>
+              <span>{{ label | escape }}{% unless value_available %}<small class="variant-pill__note">{{ 'products.product.sold_out' | t }}</small>{% endunless %}</span>
             {%- endif -%}
           </label>
         {%- endfor -%}

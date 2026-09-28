@@ -6,6 +6,7 @@ Newest first. Each edit goes live on wedra.co when its commit is pushed.
 
 | # | Name | Date | Commit(s) | What changed |
 | --- | --- | --- | --- | --- |
+| 7 | Portable espresso machine: Featured Discovery | 2026-09-28 | (this commit) | Homepage: espresso hero slide (second) and the video section now features the espresso machine as "Featured discovery". Variant picker: unavailable values say "Out of stock" (on the pill and the button, store-wide), and options with a single value are hidden. |
 | 6 | Remove archived bag sealer from homepage | 2026-09-28 | `ab0f964` | The Mini Bag Sealer is archived in Shopify, so its hero slide (a dead link) is removed and the "In everyday use" video section now shows the spin scrubber. |
 | 5 | Sold-out fix (shipping locations) | 2026-09-28 | — (Shopify setting, no code) | Added the Zendrop location to the five "WEDRA — … Shipping" profiles, so the storefront sees the stock and products are no longer shown as Sold Out. Rates unchanged. |
 | 4 | Connected-theme workflow | 2026-09-27/28 | `de35061`, `7010a74` | Branch ↔ "shopifystore.-/claude designer" theme; pushes go live; this log. |

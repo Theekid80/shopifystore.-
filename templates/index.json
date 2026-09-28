@@ -64,10 +64,19 @@
             "caption": "",
             "link": "/products/cordless-electric-spin-scrubber-for-kitchen-cleaning"
           }
+        },
+        "slide_espresso": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/wedra-espresso-slide-4x5.jpg",
+            "caption": "",
+            "link": "/products/portable-espresso-machine"
+          }
         }
       },
       "block_order": [
         "slide_1",
+        "slide_espresso",
         "slide_oil",
         "slide_spoon",
         "slide_2",
@@ -130,14 +139,14 @@
       "type": "featured-video",
       "settings": {
         "autoplay": true,
-        "eyebrow": "In everyday use",
+        "eyebrow": "Featured discovery",
         "heading": "",
         "text": "",
         "show_price": true,
         "link_label": "Discover the product",
         "layout": "even",
         "color_scheme": "bg-base",
-        "product": "cordless-electric-spin-scrubber-for-kitchen-cleaning"
+        "product": "portable-espresso-machine"
       }
     },
     "philosophy": {

@@ -32,7 +32,14 @@ certifications, awards, reviews, sales numbers or scarcity.
 
 Stock comes from the Zendrop location; never set quantities by hand.
 
-## Shopify content (apply after the Zendrop import)
+## Shopify state (2026-09-28)
+
+- Product ID 15395012804974, handle `portable-espresso-machine` (old Zendrop handle redirects), Zendrop import id 64614786.
+- All seven SKUs match the table above; White and Set have 0 stock at the Zendrop location (shown as Out of stock).
+- Price kept as set on import: $130.59 single colours, $155.27 Set, $240.84 Black Set. Basis: unit cost $23.30 / $26.62 / $39.95 (Shopify cost per item from Zendrop), about 5.6× cost, in line with the other discoveries (blender ~4–6×, scrubber ~10×). Compare-at price equals price, so no sale price is shown.
+- Shipping: Zendrop delivery profile (includes the Zendrop location), Standard US $15.15.
+
+## Shopify content (applied)
 
 - **Title:** Portable Espresso Machine · **Handle:** `portable-espresso-machine`
 - **SEO title:** Portable Espresso Machine | WEDRA
