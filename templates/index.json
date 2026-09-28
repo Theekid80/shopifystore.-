@@ -57,14 +57,6 @@
             "link": "/products/digital-measuring-spoon"
           }
         },
-        "slide_sealer": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/wedra-sealer-slide-4x5.jpg",
-            "caption": "",
-            "link": "/products/mini-bag-sealer-rechargeable-handheld-heat-sealing-tool"
-          }
-        },
         "slide_scrubber": {
           "type": "slide",
           "settings": {
@@ -79,7 +71,6 @@
         "slide_oil",
         "slide_spoon",
         "slide_2",
-        "slide_sealer",
         "slide_scrubber",
         "slide_3"
       ]
@@ -146,7 +137,7 @@
         "link_label": "Discover the product",
         "layout": "even",
         "color_scheme": "bg-base",
-        "product": "mini-bag-sealer-rechargeable-handheld-heat-sealing-tool"
+        "product": "cordless-electric-spin-scrubber-for-kitchen-cleaning"
       }
     },
     "philosophy": {
