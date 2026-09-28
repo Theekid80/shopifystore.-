@@ -37,9 +37,14 @@ theme":
    separate themes.
 5. Confirm the connected theme picked up the commit (compare file checksums
    through the Admin API when available).
-6. Never publish the theme unless the owner explicitly says to publish.
-   wedra.co stays on Shopify; GitHub only holds the theme code.
+6. The connected theme is the **published, live** theme on wedra.co, so
+   every push to this branch goes live within about a minute. Test fully
+   before pushing, and push only finished, verified work. The owner turns
+   the store password on (Online Store → Preferences) when they want to
+   make changes privately; the theme itself stays published. Never
+   publish or unpublish themes. wedra.co stays on Shopify; GitHub only
+   holds the theme code.
 
 After each edit, report: what changed, files changed, what was preserved,
-bugs fixed, new functionality, the commit SHA, whether the connected theme
-is ready to preview, and anything that still needs Shopify-side setup.
+bugs fixed, new functionality, the commit SHA, confirmation that the live
+theme picked it up, and anything that still needs Shopify-side setup.

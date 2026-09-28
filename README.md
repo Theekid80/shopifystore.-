@@ -159,8 +159,10 @@ on the homepage.
 ## Deploying
 
 This branch is connected to the Shopify theme **"shopifystore.-/claude
-designer"** (Online Store → Themes). Every push to it updates that theme;
-preview it from the theme's **⋯ → Preview**, and publish only when approved.
+designer"** (Online Store → Themes), which is the published theme on
+wedra.co. Every push to it goes live within about a minute. To work on
+changes privately, turn on the store password (Online Store → Preferences);
+the theme stays published.
 Theme-editor changes made in Shopify are committed back to the branch, so
 pull before editing. See `AGENTS.md` for the full workflow.
 
