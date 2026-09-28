@@ -37,7 +37,9 @@ Stock comes from the Zendrop location; never set quantities by hand.
 - Product ID 15395012804974, handle `portable-espresso-machine` (old Zendrop handle redirects), Zendrop import id 64614786.
 - All seven SKUs match the table above; White and Set have 0 stock at the Zendrop location (shown as Out of stock).
 - Price kept as set on import: $130.59 single colours, $155.27 Set, $240.84 Black Set. Basis: unit cost $23.30 / $26.62 / $39.95 (Shopify cost per item from Zendrop), about 5.6× cost, in line with the other discoveries (blender ~4–6×, scrubber ~10×). Compare-at price equals price, so no sale price is shown.
-- Shipping: Zendrop delivery profile (includes the Zendrop location), Standard US $15.15.
+- Shipping: Zendrop delivery profile (includes the Zendrop location), Standard US $15.15 (confirmed with draftOrderCalculate to Austin, TX; no order created).
+- Published to Online Store and Shop; in the Discoveries collection (and Zendrop's Kitchen & Dining).
+- Media: WEDRA gallery + video first (featured: black hero); Zendrop's Grey, Silver, Green and Black Set photos kept as those variants' images (the only real photos of those colours); the seven supplier images with text or duplicates were deleted.
 
 ## Shopify content (applied)
 
