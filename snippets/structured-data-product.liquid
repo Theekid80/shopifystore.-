@@ -1,0 +1,45 @@
+{%- comment -%}
+  Product structured data from the real Shopify product. No ratings or
+  reviews are included — add them only through a review app with genuine
+  reviews (most review apps inject their own markup).
+  SKUs are intentionally left out (they are often sourcing codes), and
+  offers are omitted entirely while pre-launch price hiding is on.
+  "brand" is the product's real brand (never the store); unbranded products
+  have none.
+{%- endcomment -%}
+{%- capture sd_brand -%}{% render 'brand-name', product: product %}{%- endcapture -%}
+{%- liquid
+  assign show_offers = true
+  if settings.prelaunch_mode and settings.prelaunch_hide_prices
+    assign show_offers = false
+  endif
+-%}
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": {{ product.title | json }},
+    "url": {{ request.origin | append: product.url | json }},
+    {%- if product.featured_media -%}
+      "image": [{{ product.featured_media | image_url: width: 1200 | prepend: 'https:' | json }}],
+    {%- endif -%}
+    "description": {{ product.description | strip_html | strip | truncate: 500 | json }}
+    {%- if sd_brand != blank -%},
+    "brand": { "@type": "Brand", "name": {{ sd_brand | strip_html | json }} }
+    {%- endif -%}
+    {%- if show_offers -%},
+    "offers": [
+      {%- for variant in product.variants -%}
+        {
+          "@type": "Offer",
+          "seller": { "@type": "Organization", "name": {{ settings.brand_name | default: shop.name | json }} },
+          "availability": "http://schema.org/{% if variant.available and settings.prelaunch_mode == false %}InStock{% else %}OutOfStock{% endif %}",
+          "price": {{ variant.price | divided_by: 100.00 | json }},
+          "priceCurrency": {{ cart.currency.iso_code | json }},
+          "url": {{ request.origin | append: variant.url | json }}
+        }{% unless forloop.last %},{% endunless %}
+      {%- endfor -%}
+    ]
+    {%- endif %}
+  }
+</script>

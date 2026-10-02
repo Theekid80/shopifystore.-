@@ -1,0 +1,37 @@
+{%- comment -%}
+  Page content from Online Store → Pages. Policy and legal wording must be
+  your own — the theme never invents it. With the title hidden (e.g. on the
+  About template) and no content, the section renders nothing.
+{%- endcomment -%}
+{%- liquid
+  assign show_title = section.settings.show_title
+  if show_title == nil
+    assign show_title = true
+  endif
+-%}
+{%- if show_title or page.content != blank -%}
+  <div class="page-width page-width--text section{% if show_title %} section--tight{% endif %}">
+    {%- if show_title -%}
+      <header class="page-header" style="padding-top:0;">
+        {%- if section.settings.show_breadcrumbs -%}{% render 'breadcrumbs' %}{%- endif -%}
+        <h1 class="h-display">{{ page.title | escape }}</h1>
+      </header>
+    {%- endif -%}
+    {%- if page.content != blank -%}
+      <div class="rte" style="font-size: 1.0625rem;">{{ page.content }}</div>
+    {%- elsif request.design_mode -%}
+      <p class="editor-hint">Add this page's text in Online Store → Pages.</p>
+    {%- endif -%}
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Page",
+  "class": "section-main-page",
+  "settings": [
+    { "type": "checkbox", "id": "show_title", "label": "Show page title", "default": true },
+    { "type": "checkbox", "id": "show_breadcrumbs", "label": "Show breadcrumbs", "default": false }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,20 @@
+{
+  "type": "footer",
+  "name": "Footer group",
+  "sections": {
+    "footer": {
+      "type": "footer",
+      "settings": {
+        "show_signup": true,
+        "heading_1": "Navigation",
+        "heading_2": "Customer",
+        "heading_3": "Legal",
+        "show_payment_icons": true,
+        "signup_text": "Be the first to see the next discovery."
+      }
+    }
+  },
+  "order": [
+    "footer"
+  ]
+}

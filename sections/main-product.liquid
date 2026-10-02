@@ -1,0 +1,340 @@
+{%- comment -%}
+  Product page. Every field comes from the Shopify product or its
+  metafields; nothing is invented, and empty tabs are not shown.
+  The brand shown is the Brand metafield or the Vendor field; vendors listed
+  in Theme settings → Product brands (e.g. the store name) are treated as
+  unbranded, so a supplier product is never labelled with the store's name.
+
+  Optional metafields (Settings → Custom data → Products):
+    custom.brand               single line text  (the product's brand; overrides Vendor)
+    custom.short_description   single line text
+    custom.features            multi-line text   (one feature per line)
+    custom.specifications      multi-line text   (one "Label: value" per line)
+    custom.whats_included      multi-line text   (one item per line)
+    custom.material            single line text
+    custom.dimensions          single line text
+    custom.weight              single line text
+    custom.care                multi-line text
+    custom.shipping_note       multi-line text
+    custom.product_badge       single line text
+    custom.coming_soon         true/false
+    custom.lifestyle_images    list of files (images)
+{%- endcomment -%}
+{%- liquid
+  assign current_variant = product.selected_or_first_available_variant
+  assign retailer = settings.brand_name | default: shop.name
+-%}
+{%- capture product_brand -%}{% render 'brand-name', product: product %}{%- endcapture -%}
+<section class="section section--tight" data-product-section aria-label="{{ product.title | escape }}">
+  {% render 'product-json', product: product %}
+  <div class="page-width">
+    {% render 'breadcrumbs' %}
+    <div class="product">
+      <div class="product__media-col">
+        {% render 'product-media-gallery', product: product, priority: true, section_id: section.id %}
+      </div>
+
+      <div class="product__info">
+        {%- for block in section.blocks -%}
+          {%- case block.type -%}
+            {%- when '@app' -%}
+              {% render block %}
+
+            {%- when 'badge' -%}
+              {%- capture badge -%}{% render 'product-badge', product: product, class: 'badge--soft' %}{%- endcapture -%}
+              {%- if badge != blank -%}<div {{ block.shopify_attributes }}>{{ badge }}</div>{%- endif -%}
+
+            {%- when 'type' -%}
+              {%- if product.type != blank -%}<p class="product__vendor" {{ block.shopify_attributes }}>{{ product.type | escape }}</p>{%- endif -%}
+
+            {%- when 'brand' -%}
+              {%- if product_brand != blank -%}
+                <p class="product__vendor" {{ block.shopify_attributes }}>
+                  {%- assign vendor_down = product.vendor | downcase | escape -%}
+                  {%- assign brand_down = product_brand | downcase -%}
+                  {%- if block.settings.link and vendor_down == brand_down -%}
+                    <a href="{{ product.vendor | url_for_vendor }}">{{ product_brand }}</a>
+                  {%- else -%}
+                    {{ product_brand }}
+                  {%- endif -%}
+                </p>
+              {%- elsif block.settings.fallback_type and product.type != blank -%}
+                <p class="product__vendor" {{ block.shopify_attributes }}>{{ product.type | escape }}</p>
+              {%- endif -%}
+
+            {%- when 'rating' -%}
+              {%- capture stars -%}{% render 'rating', product: product %}{%- endcapture -%}
+              {%- if stars != blank -%}<div {{ block.shopify_attributes }}>{{ stars }}</div>{%- endif -%}
+
+            {%- when 'brand_info' -%}
+              <dl class="brand-info" {{ block.shopify_attributes }}>
+                <div>
+                  <dt>{{ 'products.product.brand' | t }}</dt>
+                  <dd>{%- if product_brand != blank -%}{{ product_brand }}{%- else -%}{{ 'products.product.unbranded' | t }}{%- endif -%}</dd>
+                </div>
+                {%- if settings.show_sold_by -%}
+                  <div>
+                    <dt>{{ 'products.product.sold_by_label' | t }}</dt>
+                    <dd>{{ retailer | escape }}</dd>
+                  </div>
+                {%- endif -%}
+              </dl>
+
+            {%- when 'title' -%}
+              <h1 class="product__title" {{ block.shopify_attributes }}>{{ product.title | escape }}</h1>
+
+            {%- when 'price' -%}
+              <div {{ block.shopify_attributes }}>{% render 'price', product: product, variant: current_variant, size: 'lg' %}</div>
+
+            {%- when 'short_description' -%}
+              {%- if product.metafields.custom.short_description != blank -%}
+                <p class="product__short" {{ block.shopify_attributes }}>{{ product.metafields.custom.short_description.value | escape }}</p>
+              {%- endif -%}
+
+            {%- when 'description' -%}
+              {%- if product.description != blank -%}
+                <div class="rte" {{ block.shopify_attributes }}>{{ product.description }}</div>
+              {%- endif -%}
+
+            {%- when 'buy_buttons' -%}
+              <div {{ block.shopify_attributes }}>
+                <hr class="product__divider">
+                {% render 'product-form', product: product, section_id: section.id, show_buy_now: block.settings.show_dynamic_checkout %}
+              </div>
+
+            {%- when 'note' -%}
+              {%- liquid
+                assign note_link = ''
+                if block.settings.link_to == 'shipping' and shop.shipping_policy.body != blank
+                  assign note_link = shop.shipping_policy.url
+                elsif block.settings.link_to == 'returns' and shop.refund_policy.body != blank
+                  assign note_link = shop.refund_policy.url
+                endif
+              -%}
+              {%- if block.settings.text != blank -%}
+                <p class="product__note" {{ block.shopify_attributes }}>
+                  {% render 'icon', name: block.settings.icon %}
+                  <span>{{ block.settings.text | escape }}{% if note_link != blank %} <a href="{{ note_link }}">{{ block.settings.link_label | escape }}</a>{% endif %}</span>
+                </p>
+              {%- endif -%}
+
+            {%- when 'collapsible' -%}
+              {%- capture tab_content -%}
+                {%- case block.settings.source -%}
+                  {%- when 'description' -%}
+                    {{ product.description }}
+                  {%- when 'features' -%}
+                    {%- assign lines = product.metafields.custom.features.value | newline_to_br | split: '<br />' -%}
+                    {%- capture items -%}{%- for line in lines -%}{%- assign l = line | strip -%}{%- if l != blank -%}<li>{{ l | escape }}</li>{%- endif -%}{%- endfor -%}{%- endcapture -%}
+                    {%- if items != blank -%}<ul>{{ items }}</ul>{%- endif -%}
+                  {%- when 'whats_included' -%}
+                    {%- assign lines = product.metafields.custom.whats_included.value | newline_to_br | split: '<br />' -%}
+                    {%- capture items -%}{%- for line in lines -%}{%- assign l = line | strip -%}{%- if l != blank -%}<li>{{ l | escape }}</li>{%- endif -%}{%- endfor -%}{%- endcapture -%}
+                    {%- if items != blank -%}<ul>{{ items }}</ul>{%- endif -%}
+                  {%- when 'details' -%}
+                    {%- liquid
+                      assign rows = ''
+                      if product_brand != blank and block.settings.show_brand_row
+                        assign rows = rows | append: 'Brand::' | append: product_brand | append: '||'
+                      endif
+                      if product.metafields.custom.material != blank
+                        assign rows = rows | append: 'Material::' | append: product.metafields.custom.material.value | append: '||'
+                      endif
+                      if product.metafields.custom.dimensions != blank
+                        assign rows = rows | append: 'Dimensions::' | append: product.metafields.custom.dimensions.value | append: '||'
+                      endif
+                      if product.metafields.custom.weight != blank
+                        assign rows = rows | append: 'Weight::' | append: product.metafields.custom.weight.value | append: '||'
+                      endif
+                      assign spec_lines = product.metafields.custom.specifications.value | newline_to_br | split: '<br />'
+                      for line in spec_lines
+                        assign l = line | strip
+                        if l contains ':'
+                          assign label = l | split: ':' | first | strip
+                          assign value = l | remove_first: label | remove_first: ':' | strip
+                          assign rows = rows | append: label | append: '::' | append: value | append: '||'
+                        endif
+                      endfor
+                    -%}
+                    {%- if rows != blank -%}
+                      <dl class="spec-list">
+                        {%- assign row_list = rows | split: '||' -%}
+                        {%- for row in row_list -%}
+                          {%- assign parts = row | split: '::' -%}
+                          {%- if parts[0] != blank -%}<div><dt>{{ parts[0] | escape }}</dt><dd>{{ parts[1] | escape }}</dd></div>{%- endif -%}
+                        {%- endfor -%}
+                      </dl>
+                    {%- endif -%}
+                    {%- if product.metafields.custom.care != blank -%}
+                      <p style="margin-top: 1.25rem;">{{ product.metafields.custom.care.value | escape | newline_to_br }}</p>
+                    {%- endif -%}
+                  {%- when 'care' -%}
+                    {%- if product.metafields.custom.care != blank -%}
+                      <p>{{ product.metafields.custom.care.value | escape | newline_to_br }}</p>
+                    {%- endif -%}
+                  {%- when 'shipping' -%}
+                    {%- if product.metafields.custom.shipping_note != blank -%}
+                      <p>{{ product.metafields.custom.shipping_note.value | escape | newline_to_br }}</p>
+                    {%- else -%}
+                      <p>{{ 'products.product.shipping_fallback' | t }}</p>
+                    {%- endif -%}
+                    {%- if shop.shipping_policy.body != blank -%}<p><a class="link" href="{{ shop.shipping_policy.url }}">{{ shop.shipping_policy.title | escape }}</a></p>{%- endif -%}
+                  {%- when 'returns' -%}
+                    {%- if shop.refund_policy.body != blank -%}
+                      <p>{{ shop.refund_policy.body | strip_html | truncatewords: 40 }}</p>
+                      <p><a class="link" href="{{ shop.refund_policy.url }}">{{ shop.refund_policy.title | escape }}</a></p>
+                    {%- endif -%}
+                  {%- when 'page' -%}
+                    {{ block.settings.page.content }}
+                  {%- else -%}
+                    {{ block.settings.content }}
+                {%- endcase -%}
+              {%- endcapture -%}
+              {%- if tab_content != blank -%}
+                <div class="accordion" {{ block.shopify_attributes }}>
+                  <details {% if block.settings.open %}open{% endif %}>
+                    <summary>
+                      <h2 class="accordion__heading">{{ block.settings.heading | escape }}</h2>
+                      <span class="accordion__icon" aria-hidden="true"></span>
+                    </summary>
+                    <div class="accordion__content rte">{{ tab_content }}</div>
+                  </details>
+                </div>
+              {%- endif -%}
+          {%- endcase -%}
+        {%- endfor -%}
+      </div>
+    </div>
+
+    {%- assign lifestyle = product.metafields.custom.lifestyle_images.value -%}
+    {%- if lifestyle.size > 0 -%}
+      <ul class="grid mt-lg" role="list" style="--cols-desktop: 2; --cols-tablet: 2;">
+        {%- for img in lifestyle limit: 4 -%}
+          <li><div class="media media--portrait reveal-image reveal">{% render 'responsive-image', image: img, sizes: '(min-width: 750px) 50vw, 100vw' %}</div></li>
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+  </div>
+
+  {%- comment -%} Sticky Add to Cart on phones (hidden while pre-launch / coming soon / sold out). {%- endcomment -%}
+  {%- liquid
+    assign coming_soon = false
+    if product.metafields.custom.coming_soon.value == true or product.tags contains 'coming-soon'
+      assign coming_soon = true
+    endif
+  -%}
+  {%- if settings.prelaunch_mode == false and coming_soon == false and product.available and section.settings.sticky_atc -%}
+    <div class="sticky-atc" data-sticky-atc data-immediate="true" aria-hidden="true" inert>
+      <div class="sticky-atc__inner">
+        <span class="sticky-atc__media media" aria-hidden="true">
+          {%- if product.featured_media -%}{{ product.featured_media | image_url: width: 120 | image_tag: loading: 'lazy', alt: '', widths: '60, 120' }}{%- endif -%}
+        </span>
+        <div class="sticky-atc__info">
+          <p class="sticky-atc__title">{{ product.title | escape }}</p>
+          {% render 'price', product: product, variant: current_variant %}
+        </div>
+        <button type="button" class="btn btn--primary" data-sticky-atc-submit>{{ 'products.product.add_to_cart' | t }}</button>
+      </div>
+    </div>
+  {%- endif -%}
+</section>
+
+{% render 'structured-data-product', product: product %}
+
+{% schema %}
+{
+  "name": "Product information",
+  "class": "section-main-product",
+  "settings": [
+    { "type": "checkbox", "id": "sticky_atc", "label": "Sticky add to cart on phones", "default": true }
+  ],
+  "blocks": [
+    { "type": "@app" },
+    { "type": "badge", "name": "Badge", "limit": 1, "settings": [] },
+    { "type": "type", "name": "Product type", "limit": 1, "settings": [] },
+    {
+      "type": "brand",
+      "name": "Brand",
+      "limit": 1,
+      "settings": [
+        { "type": "paragraph", "content": "Shows the product's brand (Brand metafield or Vendor). Nothing is shown for unbranded products." },
+        { "type": "checkbox", "id": "link", "label": "Link to the brand's products", "default": true },
+        { "type": "checkbox", "id": "fallback_type", "label": "Show product type when there is no brand", "default": true }
+      ]
+    },
+    { "type": "rating", "name": "Star rating", "limit": 1, "settings": [{ "type": "paragraph", "content": "Appears only when a review app has added genuine ratings." }] },
+    { "type": "brand_info", "name": "Brand & retailer", "limit": 1, "settings": [{ "type": "paragraph", "content": "Brand (or Unbranded) and \"Sold by\" the store." }] },
+    { "type": "title", "name": "Title", "limit": 1, "settings": [] },
+    { "type": "price", "name": "Price", "limit": 1, "settings": [] },
+    { "type": "short_description", "name": "Short description", "limit": 1, "settings": [] },
+    { "type": "description", "name": "Description", "limit": 1, "settings": [] },
+    {
+      "type": "buy_buttons",
+      "name": "Buy buttons",
+      "limit": 1,
+      "settings": [
+        { "type": "checkbox", "id": "show_dynamic_checkout", "label": "Show dynamic checkout button (Buy it now / Shop Pay)", "default": true }
+      ]
+    },
+    {
+      "type": "note",
+      "name": "Note",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Text", "default": "Shipping options and costs are shown at checkout." },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "box", "label": "Parcel" },
+            { "value": "check", "label": "Check" },
+            { "value": "circle", "label": "Circle" }
+          ],
+          "default": "box"
+        },
+        {
+          "type": "select",
+          "id": "link_to",
+          "label": "Link to",
+          "options": [
+            { "value": "none", "label": "Nothing" },
+            { "value": "shipping", "label": "Shipping policy" },
+            { "value": "returns", "label": "Return policy" }
+          ],
+          "default": "shipping"
+        },
+        { "type": "text", "id": "link_label", "label": "Link label", "default": "Shipping policy" }
+      ]
+    },
+    {
+      "type": "collapsible",
+      "name": "Collapsible tab",
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Details" },
+        { "type": "checkbox", "id": "show_brand_row", "label": "Include brand in Specifications", "default": false },
+        { "type": "paragraph", "content": "Tabs without content (for example, no specification metafields yet) are hidden automatically." },
+        {
+          "type": "select",
+          "id": "source",
+          "label": "Content",
+          "options": [
+            { "value": "description", "label": "Product description" },
+            { "value": "details", "label": "Specifications (metafields)" },
+            { "value": "features", "label": "Features (custom.features)" },
+            { "value": "whats_included", "label": "What's included (custom.whats_included)" },
+            { "value": "care", "label": "Care (metafield)" },
+            { "value": "shipping", "label": "Shipping (metafield + policy)" },
+            { "value": "returns", "label": "Returns (refund policy)" },
+            { "value": "page", "label": "A page" },
+            { "value": "custom", "label": "Custom text" }
+          ],
+          "default": "details"
+        },
+        { "type": "page", "id": "page", "label": "Page" },
+        { "type": "richtext", "id": "content", "label": "Custom text" },
+        { "type": "checkbox", "id": "open", "label": "Open by default", "default": false }
+      ]
+    }
+  ]
+}
+{% endschema %}

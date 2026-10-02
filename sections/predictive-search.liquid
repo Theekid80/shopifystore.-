@@ -1,0 +1,48 @@
+{%- comment -%}
+  Rendered by Shopify's Predictive Search API (/search/suggest?section_id=predictive-search).
+{%- endcomment -%}
+<div class="predictive" data-predictive-content>
+  {%- if predictive_search.performed -%}
+    {%- assign products = predictive_search.resources.products -%}
+    {%- assign queries = predictive_search.resources.queries -%}
+    {%- if products.size > 0 or queries.size > 0 -%}
+      {%- if queries.size > 0 -%}
+        <div>
+          <h2 class="eyebrow muted">{{ 'general.search.suggestions' | t }}</h2>
+          <ul class="predictive__queries" role="list" style="margin-top: 1rem;">
+            {%- for query in queries limit: 4 -%}
+              <li><a href="{{ query.url }}">{{ query.styled_text }}</a></li>
+            {%- endfor -%}
+          </ul>
+        </div>
+      {%- endif -%}
+      {%- if products.size > 0 -%}
+        <div>
+          <h2 class="eyebrow muted">{{ 'general.search.products' | t }}</h2>
+          <ul class="predictive__list" role="list" style="margin-top: 1.25rem;">
+            {%- for product in products limit: 8 -%}
+              <li>
+                <a href="{{ product.url }}" class="predictive__item">
+                  <span class="media media--portrait media--zoom">
+                    {%- if product.featured_media -%}
+                      {{ product.featured_media | image_url: width: 480 | image_tag: loading: 'lazy', widths: '240, 360, 480', sizes: '(min-width: 750px) 22vw, 45vw', alt: product.featured_media.alt | default: product.title }}
+                    {%- endif -%}
+                  </span>
+                  <span class="predictive__title">{{ product.title | escape }}</span>
+                  {% render 'price', product: product, show_from: true %}
+                </a>
+              </li>
+            {%- endfor -%}
+          </ul>
+        </div>
+      {%- endif -%}
+      <p class="predictive__footer">
+        <a class="link-line" href="{{ routes.search_url }}?q={{ predictive_search.terms | url_encode }}&options%5Bprefix%5D=last">
+          {{- 'general.search.view_all' | t: terms: predictive_search.terms -}}
+        </a>
+      </p>
+    {%- else -%}
+      <p class="predictive__empty">{{ 'general.search.no_results' | t: terms: predictive_search.terms }}</p>
+    {%- endif -%}
+  {%- endif -%}
+</div>

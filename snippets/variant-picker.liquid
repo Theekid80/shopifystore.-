@@ -1,0 +1,132 @@
+{%- comment -%}
+  Variant picker driven by the product's real options (Color, Size, …).
+
+  - Every comparison uses the value's name as text, so it works whether
+    Shopify hands the value over as a string or as a product_option_value.
+  - Labels read cleanly ('option-label': "White W159" → White, "2PC" → Set of 2);
+    the submitted value is always Shopify's own.
+  - Colours render as swatches ('swatch-color') with the colour name for
+    screen readers and in the legend, so colour is never the only cue.
+    Colour values that carry more than a colour (e.g. "Pink / USB"), or
+    that name no known colour, render as labelled pills with a colour dot.
+  - A value is greyed out only when Shopify has no variant with that value
+    available for sale (variant.available, which honours "continue selling
+    when out of stock").
+  - Unavailable pill values carry a visible "Out of stock" note.
+  - An option with one value, or fully decided by the others (e.g. a "Size" that is always
+    "New" for one colour and "n/a" for the rest) is hidden; theme.js keeps
+    it in step so the right variant is always submitted.
+  theme.js keeps the form's variant id, price, availability and image in sync.
+{%- endcomment -%}
+{%- assign current = product.selected_or_first_available_variant -%}
+<div class="variant-picker-wrap" data-variant-picker>
+  {%- for option in product.options_with_values -%}
+    {%- liquid
+      assign opt = option.name | downcase
+      assign is_color = false
+      if opt == 'color' or opt == 'colour'
+        assign is_color = true
+      endif
+      assign idx = option.position | minus: 1
+      assign selected_name = current.options[idx] | append: ''
+
+      # Derived option: every combination of the other options maps to one value of this option.
+      assign derived = false
+      if idx > 0 and product.options.size > 1 and option.values.size > 1
+        assign derived = true
+        assign seen = '|'
+        for v in product.variants
+          assign key = ''
+          for o in v.options
+            if forloop.index0 != idx
+              assign key = key | append: o | append: '¦'
+            endif
+          endfor
+          assign pair = key | append: '=>' | append: v.options[idx]
+          assign key_marker = '|' | append: key | append: '=>'
+          if seen contains key_marker
+            assign pair_marker = '|' | append: pair | append: '|'
+            unless seen contains pair_marker
+              assign derived = false
+              break
+            endunless
+          else
+            assign seen = seen | append: pair | append: '|'
+          endif
+        endfor
+      endif
+
+      # An option with a single value (e.g. a "Size" every variant shares) has nothing to choose.
+      if product.options.size > 1 and option.values.size == 1
+        assign derived = true
+      endif
+
+      # Colour display: plain swatches only when every value is a single known colour.
+      assign labelled = false
+      if is_color
+        for value in option.values
+          assign vname = value.name | default: value | append: ''
+          capture vlabel
+            render 'option-label', value: vname
+          endcapture
+          capture vcolor
+            render 'swatch-color', value: vname, swatch: value.swatch
+          endcapture
+          assign vwords = vlabel | split: ' '
+          if vcolor == blank or vwords.size > 1
+            assign labelled = true
+            break
+          endif
+        endfor
+      endif
+    -%}
+    {%- capture selected_label -%}{% render 'option-label', value: selected_name %}{%- endcapture -%}
+    <fieldset class="variant-picker" data-option-index="{{ idx }}"{% if derived %} hidden data-derived{% endif %}>
+      <legend class="variant-picker__legend">
+        <span class="eyebrow muted">{{ option.name | escape }}</span>
+        <span class="variant-picker__selected" data-selected-value>{{ selected_label | strip | escape }}</span>
+      </legend>
+      <div class="variant-picker__values">
+        {%- for value in option.values -%}
+          {%- liquid
+            assign vname = value.name | default: value | append: ''
+            assign input_id = section_id | append: '-' | append: option.position | append: '-' | append: forloop.index
+            assign value_available = false
+            for v in product.variants
+              assign v_opt = v.options[idx] | append: ''
+              if v.available and v_opt == vname
+                assign value_available = true
+                break
+              endif
+            endfor
+          -%}
+          {%- capture label -%}{% render 'option-label', value: vname %}{%- endcapture -%}
+          {%- assign label = label | strip -%}
+          {%- if is_color -%}
+            {%- capture swatch -%}{% render 'swatch-color', value: vname, swatch: value.swatch %}{%- endcapture -%}
+            {%- assign swatch = swatch | strip -%}
+          {%- endif -%}
+          <label class="{% if is_color and labelled == false %}variant-swatch{% elsif is_color %}variant-pill variant-pill--dot{% else %}variant-pill{% endif %}" for="{{ input_id }}"{% if is_color and labelled == false %} title="{{ label | escape }}"{% endif %}>
+            <input
+              type="radio"
+              id="{{ input_id }}"
+              name="{{ section_id }}-{{ option.name | handle }}"
+              value="{{ vname | escape }}"
+              data-label="{{ label | escape }}"
+              {% if vname == selected_name %}checked{% endif %}
+              {% unless value_available %}class="is-unavailable" aria-describedby="{{ section_id }}-unavailable"{% endunless %}
+            >
+            {%- if is_color and labelled == false -%}
+              <span style="--swatch: {{ swatch }};"><span class="visually-hidden">{{ label | escape }}</span></span>
+            {%- elsif is_color -%}
+              <span>{% if swatch != blank %}<i style="--swatch: {{ swatch }};" aria-hidden="true"></i>{% endif %}{{ label | escape }}{% unless value_available %}<small class="variant-pill__note">{{ 'products.product.sold_out' | t }}</small>{% endunless %}</span>
+            {%- else -%}
+              <span>{{ label | escape }}{% unless value_available %}<small class="variant-pill__note">{{ 'products.product.sold_out' | t }}</small>{% endunless %}</span>
+            {%- endif -%}
+          </label>
+        {%- endfor -%}
+      </div>
+    </fieldset>
+  {%- endfor -%}
+  <p id="{{ section_id }}-unavailable" class="visually-hidden">{{ 'products.product.sold_out' | t }}</p>
+</div>

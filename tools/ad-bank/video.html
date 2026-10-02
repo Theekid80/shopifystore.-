@@ -1,0 +1,156 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<!-- WEDRA ad-bank video. render.mjs calls setup(scenes) then setT(seconds) per frame. -->
+<style>
+@font-face { font-family: "Cormorant Garamond"; src: url(../../assets/cormorant-garamond-latin-500-normal.woff2); font-weight: 500; }
+@font-face { font-family: Manrope; src: url(../../assets/manrope-latin-400-normal.woff2); font-weight: 400; }
+@font-face { font-family: Manrope; src: url(../../assets/manrope-latin-500-normal.woff2); font-weight: 500; }
+@font-face { font-family: Manrope; src: url(../../assets/manrope-latin-600-normal.woff2); font-weight: 600; }
+:root { --ivory: #F7F5F0; --stone: #EDEAE3; --ink: #111; --muted: #67645E; --charcoal: #161615; --u: 1vmin; }
+* { box-sizing: border-box; margin: 0; }
+html, body { width: 100vw; height: 100vh; overflow: hidden; background: var(--charcoal); font-family: Manrope, sans-serif; -webkit-font-smoothing: antialiased; }
+.scene { position: absolute; inset: 0; overflow: hidden; opacity: 0; }
+.bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.ivory { background: var(--ivory); } .stone { background: var(--stone); } .dark { background: var(--charcoal); color: #fff; }
+.product { position: absolute; left: 50%; top: 46%; transform: translate(-50%, -50%); height: var(--h, 62%); mix-blend-mode: multiply; filter: brightness(1.05) contrast(1.04); }
+.pair { position: absolute; left: 0; right: 0; top: 12%; height: 62%; display: flex; justify-content: center; align-items: flex-end; gap: 2%; background: inherit; }
+.stone .pair { background: var(--stone); } .ivory .pair { background: var(--ivory); }
+.pair img { height: 100%; max-width: 48%; object-fit: contain; mix-blend-mode: multiply; filter: brightness(1.05) contrast(1.04); }
+.pair img + img { height: 88%; }
+/* Native caption: phone-style text on a soft box. */
+.cap { position: absolute; left: 8%; right: 8%; text-align: center; font-weight: 600; font-size: calc(var(--u) * 6.1); line-height: 1.34; color: #111; }
+.cap span { white-space: pre-line; background: rgba(255,255,255,.94); padding: .12em .42em; border-radius: .28em; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+.cap.dark span { background: rgba(17,17,17,.82); color: #fff; }
+.cap.top { top: 13%; } .cap.mid { top: 40%; } .cap.low { bottom: 15%; }
+/* Editorial caption: serif on a gradient. */
+.ed { position: absolute; left: 8%; right: 8%; bottom: 11%; color: #fff; }
+.ed .display { font-family: "Cormorant Garamond", serif; font-weight: 500; font-size: calc(var(--u) * 8.6); line-height: 1.02; letter-spacing: -.015em; text-shadow: 0 1px 18px rgba(0,0,0,.25); }
+.ed .eyebrow, .eyebrow { font-weight: 500; letter-spacing: .3em; text-transform: uppercase; font-size: calc(var(--u) * 2.1); }
+.ed .eyebrow { margin-bottom: calc(var(--u) * 2.4); opacity: .85; }
+.shade::after, .scene:has(> .wm):not(.ivory):not(.stone)::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(12,12,12,.66), rgba(12,12,12,0) 50%), linear-gradient(to bottom, rgba(12,12,12,.32), rgba(12,12,12,0) 14%); pointer-events: none; }
+.label { position: absolute; left: 8%; right: 8%; bottom: 10%; text-align: center; color: var(--ink); }
+.label .display { font-family: "Cormorant Garamond", serif; font-weight: 500; font-size: calc(var(--u) * 7.4); line-height: 1.04; margin-top: calc(var(--u) * 2); }
+.label .eyebrow { color: var(--muted); }
+.card { display: flex; align-items: center; justify-content: center; text-align: center; padding: 0 9%; }
+.card p { font-family: "Cormorant Garamond", serif; font-weight: 500; font-size: calc(var(--u) * 9.2); line-height: 1.04; }
+.end { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 0 8%; }
+.wordmark { font-weight: 500; letter-spacing: .5em; padding-left: .5em; font-size: calc(var(--u) * 5.2); }
+.end .display { font-family: "Cormorant Garamond", serif; font-weight: 500; font-size: calc(var(--u) * 7); margin-top: calc(var(--u) * 6); }
+.cta { margin-top: calc(var(--u) * 7); padding: calc(var(--u) * 2.4) calc(var(--u) * 5); background: var(--ivory); color: var(--ink); font-weight: 600; letter-spacing: .24em; text-transform: uppercase; font-size: calc(var(--u) * 2.4); }
+.end .eyebrow { margin-top: calc(var(--u) * 5); opacity: .6; }
+.wm { position: absolute; top: 5.5%; left: 0; right: 0; text-align: center; font-weight: 500; letter-spacing: .5em; padding-left: .5em; font-size: calc(var(--u) * 2.4); color: #fff; text-shadow: 0 1px 10px rgba(0,0,0,.3); }
+.ivory .wm, .stone .wm { color: var(--ink); text-shadow: none; }
+.display, .card p { white-space: pre-line; }
+.caps .display { text-transform: uppercase; letter-spacing: .02em; }
+.ed, .cap, .label { z-index: 1; } .wm { z-index: 2; }
+/* Layouts. tall = 9:16 with TikTok / Reels / Stories safe zones
+   (keep text out of the top 12 %, bottom 26 % and right 14 %);
+   feed = 4:5 and 1:1; wide = 1.91:1 and 16:9. */
+.tall .product { top: 38%; height: min(var(--h, 40%), 40%); }
+.tall .pair { top: 17%; height: 35%; }
+.tall .label { bottom: 27%; right: 12%; left: 12%; }
+.tall .ed { bottom: 28%; right: 14%; left: 6%; }
+.tall .cap { left: 12%; right: 12%; } .tall .cap.top { top: 14%; } .tall .cap.low { bottom: 29%; }
+.tall .wm { top: 12.5%; }
+.tall .end { padding-bottom: 14%; padding-right: 12%; padding-left: 6%; }
+.feed .product { top: 40%; height: min(var(--h, 54%), 54%); }
+.feed .pair { top: 11%; height: 50%; }
+.feed .label { bottom: 7%; }
+.feed .cap.top { top: 9%; } .feed .cap.low { bottom: 10%; }
+.feed .wm { top: 4.5%; }
+.wide .product { left: 30%; top: 50%; height: min(var(--h, 84%), 84%); }
+.wide .pair { top: 8%; height: 84%; left: 0; right: 42%; }
+.wide .label { left: 56%; right: 5%; bottom: auto; top: 30%; text-align: left; }
+.wide .ed { right: 42%; left: 5%; bottom: 12%; }
+.wide .cap { left: 20%; right: 20%; }
+.wide .end .display { margin-top: calc(var(--u) * 4); }
+.tall .scene:has(> .cap.top) .product { top: 54%; height: 42%; }
+.feed .scene:has(> .cap.top) .product { top: 60%; height: 56%; }
+.wide .scene:has(> .cap.top) .product { top: 60%; height: 70%; left: 50%; }
+.shade::after { background: linear-gradient(to top, rgba(12,12,12,.74) 0%, rgba(12,12,12,.5) 30%, rgba(12,12,12,0) 56%) !important; }
+.tall .shade::after { background: linear-gradient(to top, rgba(12,12,12,.8) 0%, rgba(12,12,12,.64) 36%, rgba(12,12,12,0) 62%), linear-gradient(to bottom, rgba(12,12,12,.32), rgba(12,12,12,0) 16%) !important; }
+.ed .display { text-shadow: 0 2px 22px rgba(0,0,0,.45); }
+</style>
+</head>
+<body>
+<div id="stage"></div>
+<script>
+const $ = (s, r = document) => r.querySelector(s);
+const ease = (t) => (t <= 0 ? 0 : t >= 1 ? 1 : 1 - Math.pow(1 - t, 3));
+const clamp = (t) => Math.min(1, Math.max(0, t));
+let scenes = [], XF = 0.3;
+
+function el(tag, cls, text) { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+function caption(text, pos, dark) { const c = el("p", `cap ${pos || "top"}${dark ? " dark" : ""}`); const s = el("span", "", text); c.append(s); return c; }
+
+window.setup = (cfg) => {
+  XF = cfg.crossfade ?? 0.3;
+  document.body.className = cfg.layout || "tall";
+  const stage = $("#stage");
+  let t = 0;
+  scenes = cfg.scenes.map((sc) => {
+    const node = el("section", "scene" + (sc.caps ? " caps" : ""));
+    const k = sc.kind;
+    if (k === "caption" || k === "editorial") {
+      const img = el("img", "bg"); img.src = sc.image; img.style.objectPosition = sc.pos || "50% 50%"; node.append(img);
+      if (k === "editorial") { node.classList.add("shade"); const ed = el("div", "ed"); if (sc.eyebrow) ed.append(el("p", "eyebrow", sc.eyebrow)); ed.append(el("p", "display", sc.text)); node.append(ed); }
+      else if (sc.text) node.append(caption(sc.text, sc.at, sc.dark));
+      if (sc.mark) node.append(el("p", "wm", "WEDRA"));
+    } else if (k === "studio" || k === "pair") {
+      node.classList.add(sc.tone || "ivory");
+      if (k === "studio") { const img = el("img", "product"); img.src = sc.image; if (sc.height) img.style.setProperty("--h", sc.height); if (sc.top) img.style.top = sc.top; node.append(img); }
+      else { const p = el("div", "pair"); for (const s of sc.images) { const i = el("img"); i.src = s; p.append(i); } node.append(p); }
+      if (sc.text && sc.style === "caption") node.append(caption(sc.text, sc.at || "top"));
+      else if (sc.text || sc.eyebrow) { const l = el("div", "label"); if (sc.eyebrow) l.append(el("p", "eyebrow", sc.eyebrow)); if (sc.text) l.append(el("p", "display", sc.text)); node.append(l); }
+      if (sc.mark) node.append(el("p", "wm", "WEDRA"));
+    } else if (k === "card") {
+      node.classList.add(sc.tone || "dark", "card"); node.append(el("p", "", sc.text));
+    } else if (k === "end") {
+      node.classList.add("dark", "end");
+      node.append(el("p", "wordmark", "WEDRA"), el("p", "display", sc.line || "Products worth discovering."));
+      if (sc.cta) node.append(el("p", "cta", sc.cta));
+      if (sc.label) node.append(el("p", "eyebrow", sc.label));
+    }
+    stage.append(node);
+    const s = { ...sc, node, a: t, b: t + sc.dur, text: node.querySelector(".cap, .ed, .label, .card p, .end > *:not(.wordmark)") ? [...node.querySelectorAll(".cap, .ed, .label, .card p, .end .display, .end .cta, .end .eyebrow")] : [] };
+    t += sc.dur;
+    return s;
+  });
+  return t;
+};
+
+window.setT = (t) => {
+  scenes.forEach((s, i) => {
+    const first = i === 0, last = i === scenes.length - 1;
+    let o = 0;
+    if (t >= s.a - (first ? 0 : XF / 2) && t <= s.b + (last ? 1 : XF / 2)) {
+      const fin = first ? 1 : clamp((t - (s.a - XF / 2)) / Math.max(XF, 0.001));
+      const fout = last ? 1 : clamp((s.b + XF / 2 - t) / Math.max(XF, 0.001));
+      o = Math.min(fin, fout);
+    }
+    s.node.style.opacity = o;
+    const p = clamp((t - s.a) / s.dur);
+    const img = s.node.querySelector(".bg, .product, .pair");
+    if (img) {
+      const [z0, z1] = s.zoom || [1.04, 1.12];
+      const z = z0 + (z1 - z0) * p;
+      img.style.transform = img.classList.contains("product") ? `translate(-50%, -50%) scale(${z})` : `scale(${z})`;
+      // Optional slow pan across a photo: pan: ["30% 50%", "70% 50%"].
+      if (s.pan && img.classList.contains("bg")) {
+        const [a, b] = s.pan.map((v) => v.split(" ").map(parseFloat));
+        img.style.objectPosition = `${a[0] + (b[0] - a[0]) * p}% ${a[1] + (b[1] - a[1]) * p}%`;
+        img.style.transformOrigin = img.style.objectPosition;
+      }
+    }
+    s.text.forEach((e, j) => {
+      const d = (s.textDelay ?? 0.12) + j * 0.18;
+      const q = ease((t - s.a - d) / 0.35);
+      e.style.opacity = q; e.style.transform = `translateY(${(1 - q) * 2.4}vmin)`;
+    });
+  });
+};
+</script>
+</body>
+</html>

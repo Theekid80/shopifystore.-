@@ -1,0 +1,45 @@
+{%- comment -%} Breadcrumbs with BreadcrumbList structured data. {%- endcomment -%}
+{%- liquid
+  assign crumb_collection = collection
+  if request.page_type == 'product' and crumb_collection == blank
+    assign crumb_collection = product.collections.first
+  endif
+-%}
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <ol>
+    <li><a href="{{ routes.root_url }}">{{ 'general.home' | t }}</a></li>
+    {%- if request.page_type == 'product' -%}
+      {%- if crumb_collection -%}
+        <li><a href="{{ crumb_collection.url }}">{{ crumb_collection.title | escape }}</a></li>
+      {%- else -%}
+        <li><a href="{{ routes.all_products_collection_url }}">{{ 'general.shop' | t }}</a></li>
+      {%- endif -%}
+      <li aria-current="page">{{ product.title | escape }}</li>
+    {%- elsif request.page_type == 'collection' -%}
+      <li aria-current="page">{{ collection.title | escape }}</li>
+    {%- elsif request.page_type == 'page' -%}
+      <li aria-current="page">{{ page.title | escape }}</li>
+    {%- endif -%}
+  </ol>
+</nav>
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": {{ 'general.home' | t | json }}, "item": {{ request.origin | append: routes.root_url | json }} }
+      {%- if request.page_type == 'product' -%}
+        {%- if crumb_collection -%}
+          ,{ "@type": "ListItem", "position": 2, "name": {{ crumb_collection.title | json }}, "item": {{ request.origin | append: crumb_collection.url | json }} }
+          ,{ "@type": "ListItem", "position": 3, "name": {{ product.title | json }} }
+        {%- else -%}
+          ,{ "@type": "ListItem", "position": 2, "name": {{ product.title | json }} }
+        {%- endif -%}
+      {%- elsif request.page_type == 'collection' -%}
+        ,{ "@type": "ListItem", "position": 2, "name": {{ collection.title | json }} }
+      {%- elsif request.page_type == 'page' -%}
+        ,{ "@type": "ListItem", "position": 2, "name": {{ page.title | json }} }
+      {%- endif -%}
+    ]
+  }
+</script>

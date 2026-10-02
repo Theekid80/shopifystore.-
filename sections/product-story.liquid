@@ -1,0 +1,71 @@
+{%- comment -%}
+  Everyday use: how a discovery fits into daily life, told with one of the
+  product's own photos. Text comes from the product's "Everyday use"
+  metafield (custom.everyday), so each product carries its own story.
+  Product: the one picked here, else the current product, else the
+  store's first live product. Hidden when there is no story text.
+{%- endcomment -%}
+{%- liquid
+  assign product = section.settings.product | default: product
+  if product == blank
+    assign product = collections.all.products.first
+  endif
+  assign story = product.metafields.custom.everyday.value
+  assign media_index = section.settings.media_position | minus: 1
+  assign story_media = product.media[media_index] | default: product.featured_media
+-%}
+{%- if product != blank and story != blank -%}
+  <section class="section {{ section.settings.color_scheme }}" aria-labelledby="Story-{{ section.id }}">
+    <div class="page-width">
+      <div class="split split--{{ section.settings.layout }}">
+        <div class="split__media">
+          <div class="media media--portrait reveal-image reveal">
+            {% render 'responsive-image', image: story_media.preview_image, sizes: '(min-width: 990px) 58vw, 100vw', placeholder: 'lifestyle-1' %}
+          </div>
+        </div>
+        <div class="split__text reveal" style="--delay: 150ms;">
+          {%- if section.settings.eyebrow != blank -%}<p class="eyebrow muted">{{ section.settings.eyebrow | escape }}</p>{%- endif -%}
+          <h2 id="Story-{{ section.id }}" class="h-headline">{{ section.settings.heading | escape }}</h2>
+          <div class="rte">
+            {%- assign paras = story | newline_to_br | split: '<br />' -%}
+            {%- for para in paras -%}{%- assign t = para | strip -%}{%- if t != blank -%}<p>{{ t | escape }}</p>{%- endif -%}{%- endfor -%}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{%- elsif request.design_mode -%}
+  <section class="section"><div class="page-width"><p class="editor-hint">Everyday use: add text to the product's "Everyday use" metafield (custom.everyday). The section stays hidden until then.</p></div></section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Everyday use",
+  "class": "section-product-story",
+  "settings": [
+    { "type": "product", "id": "product", "label": "Product", "info": "Optional. Defaults to the current product, or the store's first live product." },
+    { "type": "paragraph", "content": "Text comes from the product's Everyday use metafield (custom.everyday). Describe real use cases only, with no health or performance promises." },
+    { "type": "range", "id": "media_position", "label": "Product image to show", "min": 1, "max": 12, "step": 1, "default": 3, "info": "Position in the product's media. Falls back to the first image." },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Everyday use" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Where it fits." },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "options": [{ "value": "default", "label": "Image left" }, { "value": "reverse", "label": "Image right" }],
+      "default": "default"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Background",
+      "options": [
+        { "value": "bg-base", "label": "Warm white" },
+        { "value": "bg-surface", "label": "Stone" }
+      ],
+      "default": "bg-base"
+    }
+  ],
+  "presets": [{ "name": "Everyday use" }]
+}
+{% endschema %}

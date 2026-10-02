@@ -1,0 +1,19 @@
+{%- comment -%}
+  Static section rendered from layout/theme.liquid. It's a section (not a
+  snippet) so theme.js can re-render it via the Section Rendering API.
+{%- endcomment -%}
+<dialog id="CartDrawer" class="drawer" aria-label="{{ 'cart.title' | t }}">
+  <div class="drawer__overlay" data-drawer-close></div>
+  {% render 'cart-drawer', upsell_collection: section.settings.upsell_collection, upsell_limit: section.settings.upsell_limit %}
+</dialog>
+
+{% schema %}
+{
+  "name": "Cart drawer",
+  "settings": [
+    { "type": "header", "content": "Suggestions" },
+    { "type": "collection", "id": "upsell_collection", "label": "Suggest products from", "info": "Optional. Shows up to the chosen number of single-variant products that aren't already in the bag." },
+    { "type": "range", "id": "upsell_limit", "label": "Suggestions", "min": 1, "max": 3, "step": 1, "default": 2 }
+  ]
+}
+{% endschema %}

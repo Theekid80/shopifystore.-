@@ -1,0 +1,27 @@
+{%- comment -%} Theme block: button link. {%- endcomment -%}
+{%- if block.settings.label != blank -%}
+  <a href="{{ block.settings.link | default: routes.all_products_collection_url }}" class="btn btn--{{ block.settings.style }}" {{ block.shopify_attributes }}>
+    {{ block.settings.label | escape }} {% render 'icon', name: 'arrow', class: 'icon-arrow' %}
+  </a>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Button",
+  "settings": [
+    { "type": "text", "id": "label", "label": "Label", "default": "Shop the collection" },
+    { "type": "url", "id": "link", "label": "Link" },
+    {
+      "type": "select",
+      "id": "style",
+      "label": "Style",
+      "options": [
+        { "value": "primary", "label": "Solid" },
+        { "value": "secondary", "label": "Outline" }
+      ],
+      "default": "primary"
+    }
+  ],
+  "presets": [{ "name": "Button" }]
+}
+{% endschema %}

@@ -1,0 +1,16 @@
+{
+  "current": "Default",
+  "presets": {
+    "Default": {
+      "brand_name": "WEDRA",
+      "brand_tagline": "Products worth discovering.",
+      "prelaunch_mode": false,
+      "use_brand_fonts": true,
+      "cart_type": "drawer",
+      "color_accent": "#6F7A63",
+      "unbranded_vendors": "My Store, Wedra.co, WEDRA, Unbranded, Generic, No brand, Default, Zendrop",
+      "seo_home_title": "WEDRA | Products worth discovering",
+      "seo_description": "WEDRA finds useful, well-made everyday products worth discovering, from a portable blender to small kitchen finds. Curated for better everyday living."
+    }
+  }
+}

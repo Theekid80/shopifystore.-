@@ -1,0 +1,20 @@
+{%- comment -%}
+  One quiet badge per product, from real data only:
+    1. "Coming soon" — metafield custom.coming_soon = true, or tag "coming-soon"
+    2. "Sold out"    — Shopify inventory says nothing is available
+    3. custom.product_badge metafield text (e.g. "Most complete")
+  Never invents urgency or social proof.
+{%- endcomment -%}
+{%- liquid
+  assign coming_soon = false
+  if product.metafields.custom.coming_soon.value == true or product.tags contains 'coming-soon'
+    assign coming_soon = true
+  endif
+-%}
+{%- if coming_soon -%}
+  <span class="badge">{{ 'general.coming_soon' | t }}</span>
+{%- elsif product.available == false and settings.prelaunch_mode == false -%}
+  <span class="badge">{{ 'products.product.sold_out' | t }}</span>
+{%- elsif product.metafields.custom.product_badge != blank -%}
+  <span class="badge {{ class }}">{{ product.metafields.custom.product_badge.value | escape }}</span>
+{%- endif -%}

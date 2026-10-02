@@ -1,0 +1,107 @@
+{
+  "sections": {
+    "intro": {
+      "type": "statement",
+      "settings": {
+        "index": "",
+        "eyebrow": "About WEDRA",
+        "heading": "We find the products worth discovering.",
+        "heading_tag": "h1",
+        "heading_size": "display",
+        "text": "WEDRA is a curation brand for wellness and everyday living. We search through a lot of products, filter out the noise, and feature the few that make daily life easier, calmer or more enjoyable.",
+        "layout": "split",
+        "color_scheme": "bg-base"
+      }
+    },
+    "finder": {
+      "type": "statement",
+      "settings": {
+        "index": "01",
+        "eyebrow": "Finder, not maker",
+        "heading": "We choose. Others make.",
+        "heading_tag": "h2",
+        "heading_size": "headline",
+        "text": "WEDRA doesn't manufacture the products we feature, and we don't put our name on things we didn't make. What we add is the selection, and an honest presentation: real photos, confirmed specifications and a clear price.",
+        "layout": "split",
+        "color_scheme": "bg-surface"
+      }
+    },
+    "principles": {
+      "type": "principles",
+      "blocks": {
+        "useful": {
+          "type": "principle",
+          "settings": {
+            "title": "Useful",
+            "text": "A product has to make an everyday routine simpler or better. Novelty alone isn't enough."
+          }
+        },
+        "clear": {
+          "type": "principle",
+          "settings": {
+            "title": "Clear",
+            "text": "You should understand what it does and what you get at a glance. We only publish details we can confirm."
+          }
+        },
+        "fair": {
+          "type": "principle",
+          "settings": {
+            "title": "Fair",
+            "text": "No invented reviews, countdown timers or pressure. Just the product, shown well."
+          }
+        }
+      },
+      "block_order": [
+        "useful",
+        "clear",
+        "fair"
+      ],
+      "settings": {
+        "eyebrow": "How we choose",
+        "heading": "What earns a place.",
+        "anchor": "",
+        "color_scheme": "bg-base"
+      }
+    },
+    "growing": {
+      "type": "statement",
+      "settings": {
+        "index": "02",
+        "eyebrow": "One at a time",
+        "heading": "A few discoveries. More to come.",
+        "heading_tag": "h2",
+        "heading_size": "headline",
+        "text": "We're starting with a single featured product and adding the next only when we find one worth showing you.",
+        "link_label": "See the current discovery",
+        "link": "/collections/all",
+        "layout": "split",
+        "color_scheme": "color-dark"
+      }
+    },
+    "content": {
+      "type": "main-page",
+      "settings": {
+        "show_title": false,
+        "show_breadcrumbs": false
+      }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "eyebrow": "The next discovery",
+        "heading": "Be the first to see what we find next.",
+        "text": "An occasional email when there is something worth showing you. Nothing more.",
+        "anchor": "newsletter",
+        "color_scheme": "bg-surface"
+      }
+    }
+  },
+  "order": [
+    "intro",
+    "finder",
+    "principles",
+    "growing",
+    "content",
+    "newsletter"
+  ]
+}

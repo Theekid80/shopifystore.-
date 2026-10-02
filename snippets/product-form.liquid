@@ -1,0 +1,69 @@
+{%- comment -%}
+  Buy box form: variant picker, quantity, Add to Cart, and Shopify's
+  dynamic checkout button (Buy it now / Shop Pay / Apple Pay / Google Pay —
+  whatever is enabled in Settings → Payments).
+
+  Pre-launch mode, "coming soon" products (metafield custom.coming_soon or
+  tag "coming-soon") and sold-out products show a notify-me sign-up
+  instead of a purchase button. Nothing here ever takes payment; checkout
+  is always Shopify's.
+
+  Params: product, section_id, show_buy_now (default true), show_quantity (default true)
+{%- endcomment -%}
+{%- liquid
+  assign coming_soon = false
+  if product.metafields.custom.coming_soon.value == true or product.tags contains 'coming-soon'
+    assign coming_soon = true
+  endif
+  if show_buy_now == nil
+    assign show_buy_now = true
+  endif
+  if show_quantity == nil
+    assign show_quantity = true
+  endif
+  assign current_variant = product.selected_or_first_available_variant
+  assign form_id = 'ProductForm-' | append: section_id
+-%}
+
+{%- if settings.prelaunch_mode or coming_soon -%}
+  <div class="prelaunch-note stack-sm" data-main-buy>
+    <p class="eyebrow">{{ settings.prelaunch_button_label | default: 'Coming soon' }}</p>
+    <p>{{ settings.prelaunch_message }}</p>
+    {% render 'notify-form', product: product %}
+  </div>
+{%- else -%}
+  <div class="product-form" data-main-buy>
+    {%- unless product.has_only_default_variant -%}
+      {% render 'variant-picker', product: product, section_id: section_id %}
+    {%- endunless -%}
+
+    {%- form 'product', product, id: form_id, data-product-form: '', novalidate: 'novalidate' -%}
+      <input type="hidden" name="id" value="{{ current_variant.id }}">
+      <div class="product-form__buttons">
+        <div class="product-form__row">
+          {%- if show_quantity -%}
+          <div class="quantity">
+            <button type="button" class="quantity__button" data-qty-step="-1" aria-label="{{ 'accessibility.decrease_quantity' | t: product: product.title | escape }}" disabled>{% render 'icon', name: 'minus', class: 'icon-arrow' %}</button>
+            <label class="visually-hidden" for="Quantity-{{ section_id }}">{{ 'accessibility.quantity' | t }}</label>
+            <input class="quantity__input" type="number" id="Quantity-{{ section_id }}" name="quantity" value="1" min="1" max="10" inputmode="numeric">
+            <button type="button" class="quantity__button" data-qty-step="1" aria-label="{{ 'accessibility.increase_quantity' | t: product: product.title | escape }}">{% render 'icon', name: 'plus', class: 'icon-arrow' %}</button>
+          </div>
+          {%- endif -%}
+          <button type="submit" name="add" class="btn btn--primary btn--lg" {% unless current_variant.available %}disabled{% endunless %}>
+            <span data-button-label>
+              {%- if current_variant.available -%}{{ 'products.product.add_to_cart' | t }}{%- else -%}{{ 'products.product.sold_out' | t }}{%- endif -%}
+            </span>
+          </button>
+        </div>
+        {%- if show_buy_now -%}
+          {{ form | payment_button }}
+        {%- endif -%}
+      </div>
+      <p class="product-form__error" role="alert" data-form-error hidden></p>
+    {%- endform -%}
+
+    {%- unless product.available -%}
+      {% render 'notify-form', product: product %}
+    {%- endunless -%}
+  </div>
+{%- endif -%}

@@ -1,0 +1,111 @@
+{%- comment -%}
+  "The WEDRA Catalogue": products from a Shopify collection. With no products the
+  section is hidden on the live store (placeholder cards show only in the
+  theme editor, for layout preview). Nothing is invented.
+{%- endcomment -%}
+{%- liquid
+  assign c = section.settings.collection
+  if c == blank
+    assign c = collections[section.settings.collection_handle]
+  endif
+  assign limit = section.settings.limit
+  # On a product page, optionally leave out the product being viewed.
+  assign current_id = 0
+  assign min_count = 1
+  if section.settings.exclude_current and product.id != blank
+    assign current_id = product.id
+    assign min_count = 2
+    assign limit = limit | plus: 1
+  endif
+-%}
+{%- if c.products_count >= min_count or request.design_mode -%}
+<section id="{{ section.settings.anchor }}" class="section {{ section.settings.color_scheme }}" aria-labelledby="FeaturedCollection-{{ section.id }}">
+  <div class="page-width">
+    <div class="section-heading__row">
+      <div class="section-heading reveal">
+        {%- if section.settings.eyebrow != blank -%}<p class="eyebrow muted">{{ section.settings.eyebrow | escape }}</p>{%- endif -%}
+        <h2 id="FeaturedCollection-{{ section.id }}" class="h-headline">{{ section.settings.heading | default: c.title | escape }}</h2>
+        {%- if section.settings.text != blank -%}<p class="lede">{{ section.settings.text | escape }}</p>{%- endif -%}
+      </div>
+      {%- if c.products_count > 0 and section.settings.view_all_label != blank -%}
+        <a href="{{ c.url }}" class="link-line reveal">{{ section.settings.view_all_label | escape }}</a>
+      {%- endif -%}
+    </div>
+
+    {%- if c.products_count >= min_count -%}
+      {%- liquid
+        assign carousel = false
+        assign shown = c.products_count
+        if current_id != 0
+          assign shown = shown | minus: 1
+        endif
+        if section.settings.desktop_layout == 'carousel' and shown > section.settings.columns
+          assign carousel = true
+        endif
+      -%}
+      {%- if carousel -%}
+        <div class="slider-nav" data-slider-nav hidden>
+          <button type="button" class="slider-nav__btn" data-slider-prev aria-label="Previous products"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3 5 8l5 5" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></button>
+          <button type="button" class="slider-nav__btn" data-slider-next aria-label="Next products"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="m6 3 5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></button>
+        </div>
+      {%- endif -%}
+      <ul class="slider-mobile{% if carousel %} slider-all{% endif %} mt-lg" role="list" style="--cols-desktop: {{ section.settings.columns }};"{% if carousel %} data-slider{% endif %}>
+        {%- for product in c.products limit: limit -%}
+          {%- if product.id == current_id -%}{%- continue -%}{%- endif -%}
+          <li class="reveal" style="--delay: {{ forloop.index0 | modulo: 4 | times: 90 }}ms;">
+            {% render 'product-card', product: product, section: section %}
+          </li>
+        {%- endfor -%}
+      </ul>
+    {%- else -%}
+      <p class="editor-hint mt-lg">Products appear here automatically once this collection has products (pick a collection in this section). The section is hidden on the live store until then.</p>
+      <ul class="slider-mobile mt-md" role="list" style="--cols-desktop: {{ section.settings.columns }};">
+        {%- for i in (1..section.settings.columns) -%}
+          <li>{% render 'product-card', placeholder: true, index: i %}</li>
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+  </div>
+</section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Featured collection",
+  "class": "section-featured-collection",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Curated" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "The WEDRA Catalogue" },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "Every product WEDRA has found and chosen to feature." },
+    { "type": "collection", "id": "collection", "label": "Collection" },
+    { "type": "text", "id": "collection_handle", "label": "…or collection handle", "default": "all", "info": "\"all\" shows every product. Used only when no collection is picked." },
+    { "type": "range", "id": "limit", "label": "Products to show", "min": 2, "max": 24, "step": 1, "default": 8 },
+    { "type": "range", "id": "columns", "label": "Columns on desktop", "min": 2, "max": 4, "step": 1, "default": 4 },
+    {
+      "type": "select",
+      "id": "desktop_layout",
+      "label": "Desktop layout",
+      "options": [
+        { "value": "grid", "label": "Grid" },
+        { "value": "carousel", "label": "Carousel" }
+      ],
+      "default": "grid",
+      "info": "Carousel scrolls when there are more products than columns."
+    },
+    { "type": "checkbox", "id": "exclude_current", "label": "Leave out the product being viewed", "default": false },
+    { "type": "text", "id": "view_all_label", "label": "View all label", "default": "View all" },
+    { "type": "text", "id": "anchor", "label": "Anchor id", "default": "edit" },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Background",
+      "options": [
+        { "value": "bg-base", "label": "Ivory" },
+        { "value": "bg-surface", "label": "Stone" }
+      ],
+      "default": "bg-base"
+    }
+  ],
+  "presets": [{ "name": "Featured collection" }]
+}
+{% endschema %}

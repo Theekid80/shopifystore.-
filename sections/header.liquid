@@ -1,0 +1,137 @@
+{%- liquid
+  assign brand = settings.brand_name | default: shop.name
+  assign menu = linklists[section.settings.menu]
+  assign overlay = false
+  if section.settings.overlay_on_home and request.page_type == 'index'
+    assign overlay = true
+  endif
+-%}
+
+{%- comment -%}
+  Navigation comes from the Shopify menu picked in the theme editor.
+  Until that menu has links, a fallback is built only from things that
+  exist: Discover (every live product), then the About and Contact pages
+  if they exist. Nothing links to an empty page.
+{%- endcomment -%}
+{%- capture fallback_links -%}
+  {%- if collections.all.products_count > 0 -%}^{{ routes.all_products_collection_url }}|{{ 'general.discover' | t }}{%- endif -%}
+  {%- if pages[section.settings.about_page_handle].url != blank -%}^{{ pages[section.settings.about_page_handle].url }}|{{ 'general.about' | t }}{%- endif -%}
+  {%- if pages[section.settings.contact_page_handle].url != blank -%}^{{ pages[section.settings.contact_page_handle].url }}|{{ 'general.contact' | t }}{%- endif -%}
+{%- endcapture -%}
+{%- assign fallback_links = fallback_links | strip | remove_first: '^' | split: '^' -%}
+
+<header class="header{% if overlay %} header--overlay{% endif %}" data-header {{ section.shopify_attributes }}>
+  <div class="page-width header__inner">
+    <div class="header__start">
+      <button type="button" class="header__icon header__menu-toggle" data-drawer-open="MenuDrawer" aria-controls="MenuDrawer" aria-expanded="false" aria-label="{{ 'general.menu.open' | t }}">
+        {% render 'icon', name: 'menu' %}
+      </button>
+    </div>
+
+    <a href="{{ routes.root_url }}" class="header__logo" aria-label="{{ brand | escape }}">
+      {% render 'logo', context: 'header' %}
+    </a>
+
+    <nav class="header__nav" aria-label="{{ 'general.menu.label' | t }}">
+      <ul class="header__menu" role="list">
+        {%- if menu.links.size > 0 -%}
+          {%- for link in menu.links -%}
+            <li{% if link.links.size > 0 %} class="has-dropdown"{% endif %}>
+              <a href="{{ link.url }}" {% if link.current or link.child_active %}aria-current="page"{% endif %}>{{ link.title | escape }}</a>
+              {%- if link.links.size > 0 -%}
+                <ul class="header__dropdown" role="list">
+                  {%- for child in link.links -%}<li><a href="{{ child.url }}" {% if child.current %}aria-current="page"{% endif %}>{{ child.title | escape }}</a></li>{%- endfor -%}
+                </ul>
+              {%- endif -%}
+            </li>
+          {%- endfor -%}
+        {%- else -%}
+          {%- for item in fallback_links -%}
+            {%- assign parts = item | strip | split: '|' -%}
+            {%- if parts[0] != blank -%}
+              <li><a href="{{ parts[0] }}" {% if request.path == parts[0] %}aria-current="page"{% endif %}>{{ parts[1] }}</a></li>
+            {%- endif -%}
+          {%- endfor -%}
+        {%- endif -%}
+      </ul>
+    </nav>
+
+    <div class="header__icons">
+      <button type="button" class="header__icon" data-drawer-open="SearchModal" aria-controls="SearchModal" aria-expanded="false" aria-label="{{ 'general.search.label' | t }}">
+        {% render 'icon', name: 'search' %}
+      </button>
+      {%- if shop.customer_accounts_enabled -%}
+        <a href="{{ routes.account_url }}" class="header__icon header__icon--desktop" aria-label="{{ 'general.account' | t }}">{% render 'icon', name: 'account' %}</a>
+      {%- endif -%}
+      <a href="{{ routes.cart_url }}" class="header__icon" {% if settings.cart_type == 'drawer' %}data-drawer-open="CartDrawer" aria-controls="CartDrawer" aria-expanded="false"{% endif %} aria-label="{{ 'accessibility.cart_count' | t: count: cart.item_count }}">
+        {% render 'icon', name: 'bag' %}
+        <span class="cart-count" data-cart-count aria-hidden="true">{% if cart.item_count > 0 %}{{ cart.item_count }}{% endif %}</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<dialog id="MenuDrawer" class="drawer drawer--left" aria-label="{{ 'general.menu.label' | t }}">
+  <div class="drawer__overlay" data-drawer-close></div>
+  <div class="drawer__panel">
+    <div class="drawer__header">
+      <a href="{{ routes.root_url }}" aria-label="{{ brand | escape }}">{% render 'logo' %}</a>
+      <button type="button" class="drawer__close" data-drawer-close aria-label="{{ 'general.menu.close' | t }}">{% render 'icon', name: 'close' %}</button>
+    </div>
+    <nav class="menu-drawer__nav" aria-label="{{ 'general.menu.label' | t }}">
+      <ul class="menu-drawer__list" role="list">
+        {%- if menu.links.size > 0 -%}
+          {%- for link in menu.links -%}
+            <li>
+              {%- if link.links.size > 0 -%}
+                <details>
+                  <summary>{{ link.title | escape }}{% render 'icon', name: 'plus', class: 'icon-arrow' %}</summary>
+                  <ul class="menu-drawer__sub" role="list">
+                    <li><a href="{{ link.url }}">{{ 'general.view_all' | t }}</a></li>
+                    {%- for child in link.links -%}<li><a href="{{ child.url }}">{{ child.title | escape }}</a></li>{%- endfor -%}
+                  </ul>
+                </details>
+              {%- else -%}
+                <a href="{{ link.url }}">{{ link.title | escape }}</a>
+              {%- endif -%}
+            </li>
+          {%- endfor -%}
+        {%- else -%}
+          {%- for item in fallback_links -%}
+            {%- assign parts = item | strip | split: '|' -%}
+            {%- if parts[0] != blank -%}<li><a href="{{ parts[0] }}">{{ parts[1] }}</a></li>{%- endif -%}
+          {%- endfor -%}
+        {%- endif -%}
+      </ul>
+      <div class="menu-drawer__utility">
+        <button type="button" data-drawer-open="SearchModal">{% render 'icon', name: 'search' %} {{ 'general.search.label' | t }}</button>
+        {%- if shop.customer_accounts_enabled -%}
+          <a href="{{ routes.account_url }}">{% render 'icon', name: 'account' %} {{ 'general.account' | t }}</a>
+        {%- endif -%}
+      </div>
+    </nav>
+  </div>
+</dialog>
+
+{% schema %}
+{
+  "name": "Header",
+  "class": "section-header",
+  "enabled_on": { "groups": ["header"] },
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menu",
+      "default": "main-menu",
+      "info": "Suggested: Discover, About, Contact. Build it in Online Store → Navigation; nested links become dropdowns. Add category links only once they have products."
+    },
+    { "type": "header", "content": "Fallback menu" },
+    { "type": "paragraph", "content": "Used until the menu above has links: Discover (when products are live), then About and Contact if those pages exist." },
+    { "type": "text", "id": "about_page_handle", "label": "About page handle", "default": "about" },
+    { "type": "text", "id": "contact_page_handle", "label": "Contact page handle", "default": "contact" },
+    { "type": "header", "content": "Appearance" },
+    { "type": "checkbox", "id": "overlay_on_home", "label": "Transparent over the homepage hero", "default": false, "info": "Only for a charcoal hero with a photo. Leave off with the warm white hero so the header stays readable." }
+  ]
+}
+{% endschema %}

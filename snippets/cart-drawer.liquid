@@ -1,0 +1,78 @@
+{%- comment -%}
+  Cart drawer contents (rendered by sections/cart-drawer.liquid so the
+  Section Rendering API can refresh it after /cart/add.js and /cart/change.js).
+  Params: upsell_collection, upsell_limit
+{%- endcomment -%}
+<div class="drawer__panel" data-cart-drawer-content>
+  <div class="drawer__header">
+    <h2 class="eyebrow">{{ 'cart.title' | t }} <span class="muted">(<span data-cart-count-label>{{ cart.item_count }}</span>)</span></h2>
+    <button type="button" class="drawer__close" data-drawer-close aria-label="{{ 'accessibility.close' | t }}">{% render 'icon', name: 'close' %}</button>
+  </div>
+
+  {%- if cart.item_count == 0 -%}
+    <div class="cart-empty">
+      <p class="h-title">{{ 'cart.empty' | t }}</p>
+      <p class="muted" style="max-width: 18rem;">{{ 'cart.empty_text' | t }}</p>
+      <a href="{{ routes.all_products_collection_url }}" class="btn btn--primary" style="margin-top: 1rem;">{{ 'general.continue_shopping' | t }}</a>
+    </div>
+  {%- else -%}
+    {% render 'free-shipping-bar' %}
+    <div class="drawer__body">
+      <ul class="cart-items" role="list" aria-label="{{ 'cart.title' | t }}">
+        {%- for item in cart.items -%}
+          {% render 'cart-line', item: item, index: forloop.index %}
+        {%- endfor -%}
+      </ul>
+
+      {%- if upsell_collection != blank and settings.prelaunch_mode == false -%}
+        {%- assign in_cart = cart.items | map: 'product_id' -%}
+        {%- capture upsell_items -%}
+          {%- assign shown = 0 -%}
+          {%- for p in upsell_collection.products -%}
+            {%- if in_cart contains p.id -%}{%- continue -%}{%- endif -%}
+            {%- if shown < upsell_limit and p.available and p.has_only_default_variant -%}
+              {%- assign shown = shown | plus: 1 -%}
+              <li class="cart-upsell__item">
+                <a href="{{ p.url }}" class="media" tabindex="-1" aria-hidden="true">
+                  {%- if p.featured_media -%}{{ p.featured_media | image_url: width: 160 | image_tag: loading: 'lazy', alt: '', widths: '80, 160', sizes: '64px' }}{%- endif -%}
+                </a>
+                <div class="cart-upsell__body">
+                  <a href="{{ p.url }}">{{ p.title | escape }}</a>
+                  <div class="muted">{% render 'price', product: p %}</div>
+                </div>
+                {%- assign upsell_form = 'Upsell-' | append: p.id -%}
+                {%- form 'product', p, id: upsell_form, data-product-form: '' -%}
+                  <input type="hidden" name="id" value="{{ p.selected_or_first_available_variant.id }}">
+                  <input type="hidden" name="quantity" value="1">
+                  <button type="submit" class="link-line" aria-label="{{ 'products.product.add_to_cart' | t }}: {{ p.title | escape }}">{{ 'products.product.quick_add' | t }}</button>
+                  <p class="product-form__error xsmall" role="alert" data-form-error hidden></p>
+                {%- endform -%}
+              </li>
+            {%- endif -%}
+          {%- endfor -%}
+        {%- endcapture -%}
+        {%- if upsell_items != blank -%}
+          <div class="cart-upsell">
+            <h3 class="eyebrow muted">{{ 'cart.you_may_like' | t }}</h3>
+            <ul class="cart-upsell__list" role="list">{{ upsell_items }}</ul>
+          </div>
+        {%- endif -%}
+      {%- endif -%}
+    </div>
+    <div class="drawer__footer">
+      <p class="product-form__error" role="alert" data-cart-error hidden></p>
+      {%- for discount in cart.cart_level_discount_applications -%}
+        <div class="cart-summary__row small"><span>{{ discount.title | escape }}</span><span>−{{ discount.total_allocated_amount | money }}</span></div>
+      {%- endfor -%}
+      <div class="cart-summary__row">
+        <span class="eyebrow">{{ 'cart.subtotal' | t }}</span>
+        <span class="cart-summary__total">{{ cart.total_price | money_with_currency }}</span>
+      </div>
+      <form action="{{ routes.cart_url }}" method="post" style="margin-top: 1.25rem; display:grid; gap:.625rem;">
+        <button type="submit" name="checkout" class="btn btn--primary btn--lg btn--block">{{ 'cart.checkout' | t }}</button>
+        <a href="{{ routes.cart_url }}" class="btn btn--secondary btn--block">{{ 'cart.view_cart' | t }}</a>
+      </form>
+      {%- if settings.cart_checkout_note != blank -%}<p class="cart-note-text" style="margin-top: 1rem;">{{ settings.cart_checkout_note | escape }}</p>{%- endif -%}
+    </div>
+  {%- endif -%}
+</div>

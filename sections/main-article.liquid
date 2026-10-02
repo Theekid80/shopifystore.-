@@ -1,0 +1,28 @@
+<article class="page-width section section--tight">
+  <div class="article">
+    <p class="article-card__meta"><a href="{{ blog.url }}">{{ blog.title | escape }}</a> · {{ article.published_at | time_tag: format: 'date' }}</p>
+    <h1 class="h-display" style="margin-top: 1.5rem;">{{ article.title | escape }}</h1>
+    {%- if article.image -%}
+      <div class="article__media media media--landscape">{% render 'responsive-image', image: article.image, sizes: '(min-width: 750px) 46rem, 100vw', priority: true %}</div>
+    {%- endif -%}
+    <div class="rte" style="font-size: 1.0625rem;">{{ article.content }}</div>
+    <p style="margin-top: 4rem;"><a class="link-line" href="{{ blog.url }}">{{ 'general.back_to_journal' | t }}</a></p>
+  </div>
+</article>
+
+{%- if article.image -%}{%- assign article_image = article.image | image_url: width: 1200 | prepend: 'https:' -%}{%- endif -%}
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": {{ article.title | json }},
+    "datePublished": {{ article.published_at | date: '%Y-%m-%dT%H:%M:%SZ' | json }},
+    {%- if article_image -%}"image": [{{ article_image | json }}],{%- endif -%}
+    "author": { "@type": "Organization", "name": {{ settings.brand_name | default: shop.name | json }} },
+    "mainEntityOfPage": {{ request.origin | append: article.url | json }}
+  }
+</script>
+
+{% schema %}
+{ "name": "Article", "class": "section-main-article", "settings": [] }
+{% endschema %}

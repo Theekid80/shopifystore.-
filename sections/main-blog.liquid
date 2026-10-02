@@ -1,0 +1,31 @@
+{%- comment -%} Blog index (e.g. a WEDRA journal). Articles come from Online Store → Blog posts. {%- endcomment -%}
+<div class="page-width section section--tight">
+  <header class="collection-hero" style="padding-top: 0;">
+    <div class="collection-hero__inner">
+      <h1 class="h-display">{{ blog.title | escape }}</h1>
+    </div>
+  </header>
+  {%- paginate blog.articles by 12 -%}
+    {%- if blog.articles.size > 0 -%}
+      <ul class="grid" role="list" style="--cols-desktop: 3;">
+        {%- for article in blog.articles -%}
+          <li class="article-card reveal">
+            <a href="{{ article.url }}" class="media media--landscape media--zoom" tabindex="-1" aria-hidden="true">
+              {%- if article.image -%}{% render 'responsive-image', image: article.image, alt: '', sizes: '(min-width: 990px) 33vw, 100vw' %}{%- endif -%}
+            </a>
+            <p class="article-card__meta">{{ article.published_at | time_tag: format: 'date' }}</p>
+            <h2 class="h-subtitle"><a href="{{ article.url }}">{{ article.title | escape }}</a></h2>
+            {%- if article.excerpt_or_content != blank -%}<p class="muted small">{{ article.excerpt_or_content | strip_html | truncatewords: 26 }}</p>{%- endif -%}
+          </li>
+        {%- endfor -%}
+      </ul>
+      {%- if paginate.pages > 1 -%}{% render 'pagination', paginate: paginate %}{%- endif -%}
+    {%- else -%}
+      <p class="empty-state lede">{{ 'collections.empty_title' | t }}</p>
+    {%- endif -%}
+  {%- endpaginate -%}
+</div>
+
+{% schema %}
+{ "name": "Blog", "class": "section-main-blog", "settings": [] }
+{% endschema %}

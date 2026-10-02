@@ -1,0 +1,31 @@
+{%- comment -%}
+  Search overlay. Results come from Shopify's Predictive Search API as you type
+  (sections/predictive-search.liquid); Enter goes to the full search page.
+{%- endcomment -%}
+<dialog id="SearchModal" class="drawer drawer--top search-modal" aria-label="{{ 'general.search.label' | t }}">
+  <div class="drawer__overlay" data-drawer-close></div>
+  <div class="drawer__panel">
+    <div class="page-width">
+      <form action="{{ routes.search_url }}" method="get" role="search" class="search-modal__form" data-predictive-search data-url="{{ routes.predictive_search_url }}">
+        <label class="visually-hidden" for="SearchModalInput">{{ 'general.search.label' | t }}</label>
+        <input
+          id="SearchModalInput"
+          class="search-modal__input"
+          type="search"
+          name="q"
+          placeholder="{{ 'general.search.placeholder' | t }}"
+          autocomplete="off"
+          role="combobox"
+          aria-expanded="false"
+          aria-controls="PredictiveResults"
+          aria-autocomplete="list"
+          autofocus
+        >
+        <input type="hidden" name="options[prefix]" value="last">
+        <button type="submit" class="header__icon" aria-label="{{ 'general.search.submit' | t }}">{% render 'icon', name: 'arrow' %}</button>
+        <button type="button" class="drawer__close" data-drawer-close aria-label="{{ 'general.search.close' | t }}">{% render 'icon', name: 'close' %}</button>
+      </form>
+      <div id="PredictiveResults" class="search-modal__results" data-predictive-results aria-live="polite"></div>
+    </div>
+  </div>
+</dialog>

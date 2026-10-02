@@ -1,0 +1,23 @@
+{%- comment -%}
+  Outputs "true" when a vendor value is a real brand, nothing otherwise.
+  Vendors listed in Theme settings → Product brands (store name,
+  "Unbranded", …) are not brands.
+  Usage: {%- capture ok -%}{% render 'vendor-is-brand', vendor: v %}{%- endcapture -%}
+{%- endcomment -%}
+{%- liquid
+  assign v = vendor | strip | downcase
+  assign is_brand = true
+  if v == blank or v == 'unbranded'
+    assign is_brand = false
+  else
+    assign excluded = settings.unbranded_vendors | downcase | split: ','
+    for entry in excluded
+      assign entry_clean = entry | strip
+      if entry_clean == v
+        assign is_brand = false
+        break
+      endif
+    endfor
+  endif
+-%}
+{%- if is_brand -%}true{%- endif -%}

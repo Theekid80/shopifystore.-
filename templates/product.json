@@ -1,0 +1,217 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "badge": {
+          "type": "badge",
+          "settings": {}
+        },
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "rating": {
+          "type": "rating",
+          "settings": {}
+        },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
+        "short": {
+          "type": "short_description",
+          "settings": {}
+        },
+        "buy": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": true
+          }
+        },
+        "note": {
+          "type": "note",
+          "settings": {
+            "text": "Shipping options and costs are shown at checkout.",
+            "icon": "box",
+            "link_to": "shipping",
+            "link_label": "Shipping policy"
+          }
+        },
+        "details": {
+          "type": "collapsible",
+          "settings": {
+            "heading": "Specifications",
+            "source": "details",
+            "show_brand_row": false,
+            "open": true
+          }
+        },
+        "included": {
+          "type": "collapsible",
+          "settings": {
+            "heading": "What's included",
+            "source": "whats_included",
+            "open": false
+          }
+        },
+        "description": {
+          "type": "collapsible",
+          "settings": {
+            "heading": "Product details",
+            "source": "description",
+            "open": false
+          }
+        },
+        "features": {
+          "type": "collapsible",
+          "settings": {
+            "heading": "Features",
+            "source": "features",
+            "open": false
+          }
+        },
+        "shipping": {
+          "type": "collapsible",
+          "settings": {
+            "heading": "Shipping",
+            "source": "shipping",
+            "open": false
+          }
+        },
+        "returns": {
+          "type": "collapsible",
+          "settings": {
+            "heading": "Returns",
+            "source": "returns",
+            "open": false
+          }
+        }
+      },
+      "block_order": [
+        "badge",
+        "title",
+        "rating",
+        "price",
+        "short",
+        "buy",
+        "note",
+        "details",
+        "included",
+        "description",
+        "features",
+        "shipping",
+        "returns"
+      ],
+      "settings": {
+        "sticky_atc": true
+      }
+    },
+    "story": {
+      "type": "product-story",
+      "settings": {
+        "media_position": 3,
+        "eyebrow": "Everyday use",
+        "heading": "Where it fits.",
+        "layout": "default",
+        "color_scheme": "bg-surface"
+      }
+    },
+    "video": {
+      "type": "featured-video",
+      "settings": {
+        "autoplay": true,
+        "eyebrow": "In use",
+        "heading": "",
+        "text": "",
+        "show_price": false,
+        "link_label": "",
+        "layout": "even",
+        "color_scheme": "bg-base"
+      }
+    },
+    "reviews": {
+      "type": "product-reviews",
+      "settings": {}
+    },
+    "faq": {
+      "type": "faq",
+      "blocks": {
+        "make": {
+          "type": "question",
+          "settings": {
+            "question": "Who makes this product?",
+            "answer": "<p>WEDRA doesn't manufacture the products it features. We found and selected this one, and every order placed here is sold, shipped and supported by WEDRA.</p>"
+          }
+        },
+        "shipping": {
+          "type": "question",
+          "settings": {
+            "question": "How much does shipping cost?",
+            "answer": "<p>Shipping options and costs for your address are shown at checkout, before you pay.</p>"
+          }
+        },
+        "track": {
+          "type": "question",
+          "settings": {
+            "question": "How can I track my order?",
+            "answer": "<p>When your order ships you'll receive a shipping confirmation email, including tracking details when they're available.</p>"
+          }
+        },
+        "returns": {
+          "type": "question",
+          "settings": {
+            "question": "What is your return policy?",
+            "answer": "<p>Our return policy is published on the <a href=\"/policies/refund-policy\">Returns</a> page.</p>"
+          }
+        },
+        "contact": {
+          "type": "question",
+          "settings": {
+            "question": "I have a question about this product.",
+            "answer": "<p>Write to us through the <a href=\"/pages/contact\">contact page</a> and we'll get back to you.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "make",
+        "shipping",
+        "track",
+        "returns",
+        "contact"
+      ],
+      "settings": {
+        "eyebrow": "FAQ",
+        "heading": "Before you order.",
+        "heading_tag": "h2",
+        "open_first": false,
+        "anchor": "faq",
+        "color_scheme": "bg-surface"
+      }
+    },
+    "discoveries": {
+      "type": "featured-collection",
+      "settings": {
+        "eyebrow": "Keep discovering",
+        "heading": "More discoveries",
+        "text": "Everything else WEDRA has found. Swipe through them all.",
+        "collection_handle": "all",
+        "limit": 24,
+        "columns": 3,
+        "desktop_layout": "carousel",
+        "exclude_current": true,
+        "view_all_label": "View all",
+        "anchor": "more-discoveries",
+        "color_scheme": "bg-base"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "story",
+    "video",
+    "reviews",
+    "faq",
+    "discoveries"
+  ]
+}

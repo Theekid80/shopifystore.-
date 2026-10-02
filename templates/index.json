@@ -1,0 +1,289 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero-carousel",
+      "settings": {
+        "color_scheme": "light",
+        "limit": 12,
+        "interval": 1.7,
+        "overlay": 0,
+        "height": "full",
+        "eyebrow": "Curated for better everyday living",
+        "heading": "Products worth discovering.",
+        "subheading": "WEDRA finds useful, well-made products for wellness and everyday living, and shows you only the ones worth your attention.",
+        "button_1_label": "Explore the discoveries",
+        "button_1_link": "/collections/all",
+        "button_2_label": "How we choose",
+        "button_2_link": "#why-wedra"
+      },
+      "blocks": {
+        "slide_1": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/wedra-d01-slide-1.jpg",
+            "caption": "",
+            "link": "/products/portable-electric-juicer-blender"
+          }
+        },
+        "slide_2": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/wedra-d01-slide-2.jpg",
+            "caption": "",
+            "link": "/products/portable-electric-juicer-blender"
+          }
+        },
+        "slide_3": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/wedra-d01-slide-3.jpg",
+            "caption": "",
+            "link": "/products/portable-electric-juicer-blender"
+          }
+        },
+        "slide_oil": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/wedra-oil-slide-4x5.jpg",
+            "caption": "",
+            "link": "/products/versatile-oil-sprayer"
+          }
+        },
+        "slide_spoon": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/wedra-spoon-slide-4x5.jpg",
+            "caption": "",
+            "link": "/products/digital-measuring-spoon"
+          }
+        },
+        "slide_scrubber": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/wedra-scrubber-slide-4x5.jpg",
+            "caption": "",
+            "link": "/products/cordless-electric-spin-scrubber-for-kitchen-cleaning"
+          }
+        },
+        "slide_espresso": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/wedra-espresso-slide-4x5.jpg",
+            "caption": "",
+            "link": "/products/portable-espresso-machine"
+          }
+        }
+      },
+      "block_order": [
+        "slide_1",
+        "slide_espresso",
+        "slide_oil",
+        "slide_spoon",
+        "slide_2",
+        "slide_scrubber",
+        "slide_3"
+      ]
+    },
+    "discovery": {
+      "type": "featured-product",
+      "settings": {
+        "eyebrow": "WEDRA Discovery #01",
+        "heading": "",
+        "text": "<p>A compact way to bring your everyday blends wherever your routine takes you. We selected it because it keeps a simple habit simple: a single-serve cup, a rechargeable base and nothing extra to set up.</p>",
+        "show_detail": true,
+        "show_buy": false,
+        "link_label": "Discover the product",
+        "layout": "reverse",
+        "color_scheme": "bg-surface",
+        "product": "portable-electric-juicer-blender"
+      }
+    },
+    "why": {
+      "type": "principles",
+      "blocks": {
+        "search": {
+          "type": "principle",
+          "settings": {
+            "title": "We search",
+            "text": "We look across a wide range of products for the ones that make everyday life easier, calmer or more enjoyable."
+          }
+        },
+        "filter": {
+          "type": "principle",
+          "settings": {
+            "title": "We filter",
+            "text": "Most don't make it. A product earns a place only if it is genuinely useful and easy to understand."
+          }
+        },
+        "discover": {
+          "type": "principle",
+          "settings": {
+            "title": "You discover",
+            "text": "We present each one clearly, with real specifications, real photos and a fair price, and nothing invented."
+          }
+        }
+      },
+      "block_order": [
+        "search",
+        "filter",
+        "discover"
+      ],
+      "settings": {
+        "eyebrow": "Why WEDRA",
+        "heading": "We search. We filter. You discover.",
+        "color_scheme": "bg-surface",
+        "anchor": "why-wedra"
+      }
+    },
+    "video": {
+      "type": "featured-video",
+      "settings": {
+        "autoplay": true,
+        "eyebrow": "Featured discovery",
+        "heading": "",
+        "text": "",
+        "show_price": true,
+        "link_label": "Discover the product",
+        "layout": "even",
+        "color_scheme": "bg-base",
+        "product": "portable-espresso-machine"
+      }
+    },
+    "philosophy": {
+      "type": "statement",
+      "settings": {
+        "index": "",
+        "eyebrow": "Keep discovering",
+        "heading": "A few discoveries. More to come.",
+        "heading_size": "headline",
+        "heading_tag": "h2",
+        "text": "WEDRA is an evolving collection. Each new product is chosen with the same care, and added only when it is worth showing you.",
+        "link_label": "Explore all discoveries",
+        "link": "/collections/all",
+        "layout": "split",
+        "color_scheme": "color-dark"
+      }
+    },
+    "faq": {
+      "type": "faq",
+      "blocks": {
+        "make": {
+          "type": "question",
+          "settings": {
+            "question": "Does WEDRA make these products?",
+            "answer": "<p>No. WEDRA finds and selects products made by others and presents them honestly. We don't put our name on things we didn't make.</p>"
+          }
+        },
+        "choose": {
+          "type": "question",
+          "settings": {
+            "question": "How do you choose what to feature?",
+            "answer": "<p>We look for products that are useful in everyday life, easy to understand and fairly priced. We only publish specifications we can confirm.</p>"
+          }
+        },
+        "shipping": {
+          "type": "question",
+          "settings": {
+            "question": "How much does shipping cost?",
+            "answer": "<p>Shipping options and costs for your address are shown at checkout, before you pay.</p>"
+          }
+        },
+        "returns": {
+          "type": "question",
+          "settings": {
+            "question": "What is your return policy?",
+            "answer": "<p>Our return policy is published on the <a href=\"/policies/refund-policy\">Returns</a> page.</p>"
+          }
+        },
+        "contact": {
+          "type": "question",
+          "settings": {
+            "question": "How do I contact you?",
+            "answer": "<p>Write to us through the <a href=\"/pages/contact\">contact page</a>.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "make",
+        "choose",
+        "shipping",
+        "returns",
+        "contact"
+      ],
+      "settings": {
+        "eyebrow": "FAQ",
+        "heading": "Questions, answered.",
+        "heading_tag": "h2",
+        "open_first": true,
+        "anchor": "faq",
+        "color_scheme": "bg-surface"
+      }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "eyebrow": "The next discovery",
+        "heading": "Be the first to see what we find next.",
+        "text": "An occasional email when there is something worth showing you. Nothing more.",
+        "anchor": "newsletter",
+        "color_scheme": "bg-base"
+      }
+    },
+    "discoveries": {
+      "type": "featured-collection",
+      "settings": {
+        "eyebrow": "The discoveries",
+        "heading": "Everything we have found so far.",
+        "text": "Each one chosen for everyday living.",
+        "collection_handle": "all",
+        "limit": 24,
+        "columns": 4,
+        "desktop_layout": "carousel",
+        "view_all_label": "View all",
+        "anchor": "discoveries",
+        "color_scheme": "bg-base"
+      }
+    },
+    "brand": {
+      "type": "statement",
+      "settings": {
+        "index": "",
+        "eyebrow": "The idea",
+        "heading": "Useful things, found for you.",
+        "heading_size": "headline",
+        "heading_tag": "h2",
+        "text": "We look through a lot of products so you don’t have to, and show you only the useful ones: clearly explained, honestly photographed and fairly priced.",
+        "link_label": "How we choose",
+        "link": "#why-wedra",
+        "layout": "split",
+        "color_scheme": "bg-base"
+      }
+    },
+    "spotlight_2": {
+      "type": "featured-product",
+      "settings": {
+        "product": "versatile-oil-sprayer",
+        "eyebrow": "WEDRA Discovery #02",
+        "heading": "",
+        "text": "<p>One glass bottle by the stove that sprays a fine mist or pours, so the pan, the salad and the air-fryer basket all get just what they need.</p>",
+        "show_detail": true,
+        "show_buy": false,
+        "link_label": "Discover the product",
+        "layout": "default",
+        "color_scheme": "bg-base"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "brand",
+    "discoveries",
+    "discovery",
+    "spotlight_2",
+    "why",
+    "video",
+    "philosophy",
+    "faq",
+    "newsletter"
+  ]
+}

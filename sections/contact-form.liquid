@@ -1,0 +1,36 @@
+{%- comment -%} Contact form — Shopify's native contact form (emails the store's contact address). {%- endcomment -%}
+<div class="page-width page-width--narrow section section--tight" style="padding-top:0;">
+  {%- form 'contact', id: 'ContactForm' -%}
+    {%- if form.posted_successfully? -%}
+      <p class="prelaunch-note" role="status">{{ 'templates.contact.success' | t }}</p>
+    {%- else -%}
+      {%- if form.errors -%}<p class="form-message form-message--error" role="alert">{{ form.errors | default_errors }}</p>{%- endif -%}
+      <div class="form-grid">
+        <div class="form-grid form-grid--2">
+          <div class="form-field">
+            <label for="ContactName">{{ 'templates.contact.name' | t }}</label>
+            <input id="ContactName" type="text" name="contact[name]" autocomplete="name" value="{{ form.name }}">
+          </div>
+          <div class="form-field">
+            <label for="ContactEmail">{{ 'templates.contact.email' | t }}</label>
+            <input id="ContactEmail" type="email" name="contact[email]" autocomplete="email" required value="{{ form.email }}">
+          </div>
+        </div>
+        <div class="form-field">
+          <label for="ContactBody">{{ 'templates.contact.message' | t }}</label>
+          <textarea id="ContactBody" name="contact[body]" required>{{ form.body }}</textarea>
+        </div>
+        <div><button type="submit" class="btn btn--primary btn--lg">{{ 'templates.contact.send' | t }}</button></div>
+      </div>
+    {%- endif -%}
+  {%- endform -%}
+</div>
+
+{% schema %}
+{
+  "name": "Contact form",
+  "class": "section-contact-form",
+  "settings": [],
+  "presets": [{ "name": "Contact form" }]
+}
+{% endschema %}

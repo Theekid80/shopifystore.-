@@ -1,0 +1,79 @@
+{
+  "sections": {
+    "faq": {
+      "type": "faq",
+      "blocks": {
+        "q1": {
+          "type": "question",
+          "settings": {
+            "question": "How do I place an order?",
+            "answer": "<p>Add the product to your bag and check out. Checkout is handled securely by Shopify, and you'll receive an order confirmation by email.</p>"
+          }
+        },
+        "q2": {
+          "type": "question",
+          "settings": {
+            "question": "Which payment methods do you accept?",
+            "answer": "<p>Every payment method available for your order is shown at checkout.</p>"
+          }
+        },
+        "q3": {
+          "type": "question",
+          "settings": {
+            "question": "How much does shipping cost?",
+            "answer": "<p>Shipping options and costs for your address are calculated and shown at checkout, before you pay.</p>"
+          }
+        },
+        "q4": {
+          "type": "question",
+          "settings": {
+            "question": "How can I track my order?",
+            "answer": "<p>When your order ships you'll receive a shipping confirmation email, including tracking details when they're available.</p>"
+          }
+        },
+        "q5": {
+          "type": "question",
+          "settings": {
+            "question": "What is your return policy?",
+            "answer": "<p>Our return policy is published on the <a href=\"/policies/refund-policy\">Returns</a> page.</p>"
+          }
+        },
+        "q6": {
+          "type": "question",
+          "settings": {
+            "question": "Can I change or cancel my order?",
+            "answer": "<p>Contact us as soon as possible through the <a href=\"/pages/contact\">contact page</a> and include your order number.</p>"
+          }
+        },
+        "q0": {
+          "type": "question",
+          "settings": {
+            "question": "Does WEDRA make the products it features?",
+            "answer": "<p>No. WEDRA finds and selects products made by others and presents them honestly. We don't put our name on things we didn't make. Every order placed here is sold, shipped and supported by WEDRA.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "q0",
+        "q1",
+        "q2",
+        "q3",
+        "q4",
+        "q5",
+        "q6"
+      ],
+      "settings": {
+        "eyebrow": "FAQ",
+        "heading": "Questions, answered.",
+        "heading_tag": "h1",
+        "text": "<p>Can't find what you need? <a href=\"/pages/contact\">Contact us</a>.</p>",
+        "open_first": true,
+        "anchor": "faq",
+        "color_scheme": "bg-base"
+      }
+    }
+  },
+  "order": [
+    "faq"
+  ]
+}

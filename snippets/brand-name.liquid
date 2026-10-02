@@ -1,0 +1,16 @@
+{%- comment -%}
+  Outputs a product's brand as plain text, or nothing if it has none.
+  Source: Brand metafield (custom.brand), else the Shopify Vendor field.
+  A vendor listed in Theme settings → Product brands (e.g. the store's own
+  name or "Unbranded") is not a brand, so nothing is output for it.
+  The Brand metafield always wins (use it for genuine WEDRA products).
+  Usage: {%- capture brand -%}{% render 'brand-name', product: product %}{%- endcapture -%}
+{%- endcomment -%}
+{%- assign mf_brand = product.metafields.custom.brand.value | strip -%}
+{%- if mf_brand != blank -%}
+  {%- assign mf_down = mf_brand | downcase -%}
+  {%- unless mf_down == 'unbranded' -%}{{ mf_brand | escape }}{%- endunless -%}
+{%- else -%}
+  {%- capture vendor_ok -%}{% render 'vendor-is-brand', vendor: product.vendor %}{%- endcapture -%}
+  {%- if vendor_ok == 'true' -%}{{ product.vendor | strip | escape }}{%- endif -%}
+{%- endif -%}

@@ -1,0 +1,110 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<!-- WEDRA Discovery film. render.mjs loads this page, calls setup(job, format)
+     and then setT(seconds) once per frame. Fonts come from the theme. -->
+<style>
+@font-face { font-family: "Cormorant Garamond"; src: url(../../assets/cormorant-garamond-latin-500-normal.woff2); font-weight: 500; }
+@font-face { font-family: Manrope; src: url(../../assets/manrope-latin-400-normal.woff2); font-weight: 400; }
+@font-face { font-family: Manrope; src: url(../../assets/manrope-latin-500-normal.woff2); font-weight: 500; }
+:root { --ivory: #F7F5F0; --stone: #EDEAE3; --ink: #111; --muted: #67645E; --charcoal: #161615; --u: 1vmin; }
+* { box-sizing: border-box; margin: 0; }
+html, body { width: 100vw; height: 100vh; overflow: hidden; background: var(--charcoal); font-family: Manrope, sans-serif; -webkit-font-smoothing: antialiased; }
+.scene { position: absolute; inset: 0; opacity: 0; overflow: hidden; }
+.dark { background: var(--charcoal); color: #fff; }
+.light { background: var(--ivory); color: var(--ink); }
+.center { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 0 calc(var(--u) * 9); }
+.display { font-family: "Cormorant Garamond", serif; font-weight: 500; letter-spacing: -.015em; line-height: 1.02; }
+.eyebrow { font-weight: 500; letter-spacing: .3em; text-transform: uppercase; font-size: calc(var(--u) * 2.1); }
+.wordmark { font-weight: 500; letter-spacing: .5em; font-size: calc(var(--u) * 3.6); padding-left: .5em; }
+#hook { font-size: calc(var(--u) * 8.4); max-width: 16ch; }
+.reveal { display: grid; grid-template-rows: 1fr auto; height: 100%; padding: calc(var(--u) * 8); }
+.reveal__media { position: relative; min-height: 0; }
+.reveal__media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
+.reveal__media img.blend { mix-blend-mode: multiply; filter: brightness(1.06) contrast(1.05); clip-path: inset(4px); }
+.reveal__text { padding-top: calc(var(--u) * 4); }
+.reveal__text .eyebrow { color: var(--muted); }
+#name { font-size: calc(var(--u) * 7.4); margin-top: calc(var(--u) * 2.2); }
+.shot { position: absolute; inset: 0; opacity: 0; }
+.shot img { width: 100%; height: 100%; object-fit: cover; transform-origin: 50% 55%; }
+.shot::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(12,12,12,.72), rgba(12,12,12,0) 48%), linear-gradient(to bottom, rgba(12,12,12,.38), rgba(12,12,12,0) 18%); }
+.shot p { text-shadow: 0 1px 12px rgba(0,0,0,.35); position: absolute; left: calc(var(--u) * 8); right: calc(var(--u) * 8); bottom: calc(var(--u) * 9); z-index: 1; color: #fff; font-size: calc(var(--u) * 5.6); }
+.brandbar { position: absolute; top: calc(var(--u) * 6); left: 0; right: 0; z-index: 2; text-align: center; color: #fff; font-size: calc(var(--u) * 2.6); }
+#line { font-size: calc(var(--u) * 7.6); margin-top: calc(var(--u) * 7); }
+#label { color: rgba(255,255,255,.7); margin-top: calc(var(--u) * 6); }
+#url { color: rgba(255,255,255,.7); margin-top: calc(var(--u) * 2.4); letter-spacing: .22em; font-size: calc(var(--u) * 2); }
+</style>
+</head>
+<body>
+  <section class="scene dark center" id="s1"><p class="display" id="hook"></p></section>
+  <section class="scene light" id="s2">
+    <div class="reveal">
+      <div class="reveal__media"><img id="product" alt=""></div>
+      <div class="reveal__text"><p class="eyebrow" id="number"></p><h1 class="display" id="name"></h1></div>
+    </div>
+  </section>
+  <section class="scene dark" id="s3"><p class="wordmark brandbar">WEDRA</p><div id="shots"></div></section>
+  <section class="scene dark center" id="s4">
+    <p class="wordmark" style="font-size: calc(var(--u) * 5.2)">WEDRA</p>
+    <p class="display" id="line"></p>
+    <p class="eyebrow" id="label"></p>
+    <p id="url"></p>
+  </section>
+<script>
+const $ = (id) => document.getElementById(id);
+const ease = (t) => (t <= 0 ? 0 : t >= 1 ? 1 : 1 - Math.pow(1 - t, 3));
+const span = (t, a, b) => Math.min(1, Math.max(0, (t - a) / (b - a)));
+let T = {};
+
+window.setup = (job) => {
+  const d = job.duration || 15;
+  // Scene timings scale with the chosen duration (6–15 s).
+  T = { d, s1: [0, d * 0.16], s2: [d * 0.16, d * 0.43], s3: [d * 0.43, d * 0.78], s4: [d * 0.78, d] };
+  $("hook").textContent = job.hook || "We found something worth showing you.";
+  $("number").textContent = job.discovery || "";
+  $("name").textContent = job.product;
+  $("product").src = job.productImage;
+  if (job.productImageOnWhite !== false) $("product").classList.add("blend");
+  const shots = $("shots"); shots.textContent = "";
+  for (const shot of (job.lifestyle || []).slice(0, 3)) {
+    const el = document.createElement("div"); el.className = "shot";
+    const img = document.createElement("img"); img.src = shot.image; img.alt = ""; img.style.objectPosition = shot.focus || "50% 50%";
+    const p = document.createElement("p"); p.className = "display"; p.textContent = shot.caption || "";
+    el.append(img, p); shots.append(el);
+  }
+  $("line").textContent = job.endLine || "Products worth discovering.";
+  $("label").textContent = job.discovery || "";
+  $("url").textContent = job.url || "";
+  if (!(job.lifestyle || []).length) { T.s2[1] = d * 0.7; T.s3 = [d * 0.7, d * 0.7]; T.s4 = [d * 0.7, d]; }
+};
+
+window.setT = (t) => {
+  const F = 0.35;
+  for (const [id, [a, b]] of Object.entries({ s1: T.s1, s2: T.s2, s3: T.s3, s4: T.s4 })) {
+    let o = 0;
+    if (b > a && t >= a - F && t <= b + F) o = Math.min(1, (t - (a - F)) / F, (b + F - t) / F);
+    if (id === "s1" && t < F) o = 1;
+    if (id === "s4" && t >= a) o = Math.min(1, (t - (a - F)) / F);
+    $(id).style.opacity = Math.max(0, o);
+  }
+  $("hook").style.opacity = ease(span(t, 0.15, 0.9));
+  $("hook").style.transform = `translateY(${(1 - ease(span(t, 0.15, 1.1))) * 3}vmin)`;
+  const [a2, b2] = T.s2;
+  $("product").style.transform = `scale(${1.04 - 0.04 * ease(span(t, a2 - 0.3, b2))})`;
+  document.querySelector(".reveal__text").style.opacity = ease(span(t, a2 + 0.3, a2 + 1.1));
+  const shots = [...document.querySelectorAll(".shot")];
+  const [a3, b3] = T.s3, seg = shots.length ? (b3 - a3) / shots.length : 0;
+  shots.forEach((el, i) => {
+    const s = a3 + i * seg, e = s + seg;
+    const fin = i === 0 ? 1 : span(t, s - 0.2, s + 0.2), fout = i === shots.length - 1 ? 1 : 1 - span(t, e - 0.2, e + 0.2);
+    el.style.opacity = t < s - 0.2 ? 0 : fin * fout;
+    el.querySelector("img").style.transform = `scale(${1.08 - 0.08 * span(t, s - 0.2, e + 0.2)})`;
+    el.querySelector("p").style.opacity = ease(span(t, s + 0.25, s + 0.8));
+  });
+  const [a4] = T.s4;
+  ["line", "label", "url"].forEach((id, i) => { $(id).style.opacity = ease(span(t, a4 + 0.3 + i * 0.25, a4 + 1 + i * 0.25)); });
+};
+</script>
+</body>
+</html>

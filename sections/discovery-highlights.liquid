@@ -1,0 +1,82 @@
+{%- comment -%}
+  Discovery highlights: the product's verified facts as a quiet grid.
+  Reads the product's Specifications metafield (custom.specifications,
+  one "Label: value" per line), so the facts live with the product in
+  Shopify and change when the featured product changes.
+  Product: the one picked here, else the current product, else the
+  store's first live product. Hidden when there is nothing to show.
+{%- endcomment -%}
+{%- liquid
+  assign product = section.settings.product | default: product
+  if product == blank
+    assign product = collections.all.products.first
+  endif
+  assign facts = ''
+  if product != blank
+    assign spec_lines = product.metafields.custom.specifications.value | newline_to_br | split: '<br />'
+    for line in spec_lines
+      assign l = line | strip
+      if l contains ':'
+        assign label = l | split: ':' | first | strip
+        assign value = l | remove_first: label | remove_first: ':' | strip
+        if label != blank and value != blank
+          assign facts = facts | append: label | append: '::' | append: value | append: '||'
+        endif
+      endif
+    endfor
+  endif
+  assign fact_list = facts | split: '||'
+-%}
+{%- if fact_list.size > 0 -%}
+  <section class="section section--tight {{ section.settings.color_scheme }}" aria-labelledby="Highlights-{{ section.id }}">
+    <div class="page-width">
+      <div class="highlights__head reveal">
+        {%- if section.settings.eyebrow != blank -%}<p class="eyebrow muted">{{ section.settings.eyebrow | escape }}</p>{%- endif -%}
+        <h2 id="Highlights-{{ section.id }}" class="h-headline">{{ section.settings.heading | default: product.title | escape }}</h2>
+      </div>
+      <dl class="highlights" role="list">
+        {%- for fact in fact_list limit: section.settings.limit -%}
+          {%- assign parts = fact | split: '::' -%}
+          {%- if parts[0] != blank -%}
+            <div class="highlights__item reveal" role="listitem" style="--delay: {{ forloop.index0 | times: 60 }}ms;">
+              <dt>{{ parts[0] | escape }}</dt>
+              <dd>{{ parts[1] | escape }}</dd>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </dl>
+      {%- if section.settings.link_label != blank -%}
+        <p class="highlights__link reveal"><a class="link-line" href="{{ product.url }}">{{ section.settings.link_label | escape }}</a></p>
+      {%- endif -%}
+    </div>
+  </section>
+{%- elsif request.design_mode -%}
+  <section class="section"><div class="page-width"><p class="editor-hint">Discovery highlights: add a Specifications metafield (custom.specifications, one "Label: value" per line) to the product. The section stays hidden until then.</p></div></section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Discovery highlights",
+  "class": "section-discovery-highlights",
+  "settings": [
+    { "type": "product", "id": "product", "label": "Product", "info": "Optional. Defaults to the current product, or the store's first live product." },
+    { "type": "paragraph", "content": "Facts come from the product's Specifications metafield (custom.specifications), one \"Label: value\" per line. Only add facts you have verified." },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "The details" },
+    { "type": "text", "id": "heading", "label": "Heading", "info": "Defaults to the product name." },
+    { "type": "range", "id": "limit", "label": "Facts shown", "min": 2, "max": 12, "step": 1, "default": 8 },
+    { "type": "text", "id": "link_label", "label": "Link label", "default": "See the full product" },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Background",
+      "options": [
+        { "value": "bg-base", "label": "Warm white" },
+        { "value": "bg-surface", "label": "Stone" },
+        { "value": "color-dark", "label": "Charcoal" }
+      ],
+      "default": "bg-base"
+    }
+  ],
+  "presets": [{ "name": "Discovery highlights" }]
+}
+{% endschema %}

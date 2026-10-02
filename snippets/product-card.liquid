@@ -1,0 +1,152 @@
+{%- comment -%}
+  Product card — all data comes from the Shopify product.
+
+  Params:
+    product      product object
+    placeholder  true → layout placeholder (theme editor only)
+    index        placeholder number
+    sizes        image sizes attribute
+    priority     true for above-the-fold cards
+    quick_add    override settings.card_show_quick_add
+
+  Image (+ second image on hover), brand (or product type when the
+  product has no brand), name, star rating (review app data only), price,
+  color swatches. Quick add appears on hover for single-variant products
+  that can be bought; products with options open their product page.
+{%- endcomment -%}
+{%- liquid
+  assign sizes = sizes | default: '(min-width: 990px) 24vw, (min-width: 750px) 42vw, 74vw'
+  assign ratio = settings.card_image_ratio | default: 'portrait'
+  if quick_add == nil
+    assign quick_add = settings.card_show_quick_add
+  endif
+-%}
+
+{%- if placeholder or product == blank or product.title == blank -%}
+  <article class="card card--placeholder" aria-hidden="true">
+    <div class="media media--{{ ratio }}">{{ 'product-' | append: index | default: 1 | placeholder_svg_tag: 'placeholder-svg' }}</div>
+    <div class="card__info">
+      <p class="card__type">{{ 'general.coming_soon' | t }}</p>
+      <p class="card__title">—</p>
+    </div>
+  </article>
+{%- else -%}
+  {%- liquid
+    assign coming_soon = false
+    if product.metafields.custom.coming_soon.value == true or product.tags contains 'coming-soon'
+      assign coming_soon = true
+    endif
+    assign can_quick_add = false
+    if quick_add and settings.prelaunch_mode == false and coming_soon == false and product.available and product.has_only_default_variant
+      assign can_quick_add = true
+    endif
+    assign color_option = nil
+    for option in product.options_with_values
+      assign opt = option.name | downcase
+      if opt == 'color' or opt == 'colour'
+        assign color_option = option
+      endif
+    endfor
+    assign form_id = 'QuickAdd-' | append: section.id | append: '-' | append: product.id
+  -%}
+  <article class="card" data-product-id="{{ product.id }}">
+    <div style="position: relative;">
+      <div class="card__media" aria-hidden="true">
+        <div class="media media--{{ ratio }} media--zoom">
+          {%- if product.featured_media -%}
+            {%- render 'responsive-image', image: product.featured_media.preview_image, alt: '', sizes: sizes, priority: priority, widths: '360, 540, 720, 900, 1080, 1296' -%}
+            {%- if settings.card_show_secondary_image and product.media[1] -%}
+              {%- render 'responsive-image', image: product.media[1].preview_image, alt: '', sizes: sizes, widths: '360, 540, 720, 900, 1080, 1296' -%}
+            {%- endif -%}
+          {%- else -%}
+            {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+          {%- endif -%}
+        </div>
+      </div>
+      <div class="card__badges">{% render 'product-badge', product: product %}</div>
+      {%- if can_quick_add -%}
+        <div class="card__quick-add">
+          <button type="submit" form="{{ form_id }}" class="btn" aria-label="{{ 'products.product.add_to_cart' | t }}: {{ product.title | escape }}">
+            <span data-button-label>{{ 'products.product.add_to_cart' | t }}</span>
+          </button>
+        </div>
+      {%- endif -%}
+    </div>
+
+    <div class="card__info">
+      {%- capture card_brand -%}{% render 'brand-name', product: product %}{%- endcapture -%}
+      {%- if settings.card_show_brand and card_brand != blank -%}
+        <p class="card__type card__brand">{{ card_brand }}</p>
+      {%- elsif settings.card_show_type and product.type != blank -%}
+        <p class="card__type">{{ product.type | escape }}</p>
+      {%- endif -%}
+      <h3 class="card__title"><a href="{{ product.url }}">{{ product.title | escape }}</a></h3>
+      {% render 'rating', product: product, show_count: false %}
+      <div class="card__price">{% render 'price', product: product, show_from: true %}</div>
+      {%- if settings.card_show_swatches and color_option and color_option.values.size > 1 -%}
+        {%- liquid
+          # One dot per distinct colour ("Pink / USB" and "Pink / Magnetic" are one pink).
+          assign dots = ''
+          assign names = ''
+          for value in color_option.values
+            assign vname = value.name | default: value | append: ''
+            capture c
+              render 'swatch-color', value: vname, swatch: value.swatch
+            endcapture
+            assign c = c | strip
+            if c == blank
+              continue
+            endif
+            assign marker = '|' | append: c | append: '|'
+            assign seen = '|' | append: dots | append: '|'
+            if seen contains marker
+              continue
+            endif
+            capture n
+              render 'option-label', value: vname
+            endcapture
+            assign n = n | split: ' · ' | first | strip
+            if dots == ''
+              assign dots = c
+              assign names = n
+            else
+              assign dots = dots | append: '|' | append: c
+              assign names = names | append: '|' | append: n
+            endif
+          endfor
+          assign dot_list = dots | split: '|'
+          assign name_list = names | split: '|'
+        -%}
+        {%- if dot_list.size > 1 -%}
+          <div class="card__footer">
+            <p class="visually-hidden">{{ color_option.name | escape }}: {{ name_list | join: ', ' | escape }}</p>
+            <ul class="swatches" role="list" aria-hidden="true">
+              {%- for c in dot_list limit: 6 -%}
+                <li class="swatch" style="--swatch: {{ c }};" title="{{ name_list[forloop.index0] | escape }}"></li>
+              {%- endfor -%}
+            </ul>
+          </div>
+        {%- endif -%}
+      {%- endif -%}
+      {%- if color_option == nil and product.has_only_default_variant == false -%}
+        {%- assign first_option = product.options_with_values | first -%}
+        {%- if first_option.values.size > 1 -%}
+          <p class="card__options xsmall muted">
+            {%- for value in first_option.values limit: 4 -%}
+              {%- assign vname = value.name | default: value | append: '' -%}
+              {%- render 'option-label', value: vname -%}{%- unless forloop.last %} · {% endunless -%}
+            {%- endfor -%}
+          </p>
+        {%- endif -%}
+      {%- endif -%}
+      <p class="product-form__error xsmall" role="alert" data-form-error hidden></p>
+    </div>
+
+    {%- if can_quick_add -%}
+      {%- form 'product', product, id: form_id, data-product-form: '', class: 'visually-hidden', novalidate: 'novalidate' -%}
+        <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+        <input type="hidden" name="quantity" value="1">
+      {%- endform -%}
+    {%- endif -%}
+  </article>
+{%- endif -%}

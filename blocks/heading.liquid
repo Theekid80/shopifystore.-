@@ -1,0 +1,28 @@
+{%- comment -%} Theme block: serif heading. {%- endcomment -%}
+{%- case block.settings.size -%}
+  {%- when 'display' -%}{%- assign cls = 'h-display' -%}
+  {%- when 'title' -%}{%- assign cls = 'h-title' -%}
+  {%- else -%}{%- assign cls = 'h-headline' -%}
+{%- endcase -%}
+<h2 class="{{ cls }}" {{ block.shopify_attributes }}>{{ block.settings.text | escape }}</h2>
+
+{% schema %}
+{
+  "name": "Heading",
+  "settings": [
+    { "type": "text", "id": "text", "label": "Text", "default": "Worth discovering." },
+    {
+      "type": "select",
+      "id": "size",
+      "label": "Size",
+      "options": [
+        { "value": "display", "label": "Display" },
+        { "value": "headline", "label": "Headline" },
+        { "value": "title", "label": "Title" }
+      ],
+      "default": "headline"
+    }
+  ],
+  "presets": [{ "name": "Heading" }]
+}
+{% endschema %}

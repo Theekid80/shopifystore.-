@@ -1,0 +1,41 @@
+{%- comment -%} One cart line (drawer + cart page). Uses the real Shopify cart. {%- endcomment -%}
+<li class="cart-item" data-cart-item>
+  <a href="{{ item.url }}" class="cart-item__media media" tabindex="-1" aria-hidden="true">
+    {%- if item.image -%}
+      {{ item.image | image_url: width: 240 | image_tag: loading: 'lazy', alt: '', widths: '120, 240' }}
+    {%- else -%}
+      {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+    {%- endif -%}
+  </a>
+  <div class="cart-item__details">
+    <div class="cart-item__top">
+      <div>
+        {%- capture line_brand -%}{% render 'brand-name', product: item.product %}{%- endcapture -%}
+        {%- if line_brand != blank -%}<p class="card__type">{{ line_brand }}</p>{%- endif -%}
+        <a href="{{ item.url }}" class="cart-item__title">{{ item.product.title | escape }}</a>
+        <p class="cart-item__meta">
+          {%- unless item.product.has_only_default_variant -%}{{ item.variant.title | escape }} · {% endunless -%}
+          {{ item.final_price | money }}
+        </p>
+        {%- for property in item.properties -%}
+          {%- assign first_char = property.first | slice: 0 -%}
+          {%- if property.last != blank and first_char != '_' -%}
+            <p class="cart-item__meta">{{ property.first | escape }}: {{ property.last | escape }}</p>
+          {%- endif -%}
+        {%- endfor -%}
+        {%- for discount in item.line_level_discount_allocations -%}
+          <p class="cart-item__meta">{{ discount.discount_application.title | escape }} (−{{ discount.amount | money }})</p>
+        {%- endfor -%}
+      </div>
+      <p class="small">{{ item.final_line_price | money }}</p>
+    </div>
+    <div class="cart-item__bottom">
+      <div class="quantity quantity--sm">
+        <button type="button" class="quantity__button" data-cart-line-change data-line="{{ index }}" data-quantity="{{ item.quantity | minus: 1 }}" aria-label="{{ 'accessibility.decrease_quantity' | t: product: item.product.title | escape }}">{% render 'icon', name: 'minus', class: 'icon-arrow' %}</button>
+        <span class="quantity__input" aria-live="polite" style="display:inline-block;">{{ item.quantity }}</span>
+        <button type="button" class="quantity__button" data-cart-line-change data-line="{{ index }}" data-quantity="{{ item.quantity | plus: 1 }}" aria-label="{{ 'accessibility.increase_quantity' | t: product: item.product.title | escape }}">{% render 'icon', name: 'plus', class: 'icon-arrow' %}</button>
+      </div>
+      <a href="{{ item.url_to_remove }}" class="cart-item__remove" data-cart-line-change data-line="{{ index }}" data-quantity="0" aria-label="{{ 'cart.remove' | t: product: item.product.title | escape }}">{{ 'cart.remove_label' | t }}</a>
+    </div>
+  </div>
+</li>

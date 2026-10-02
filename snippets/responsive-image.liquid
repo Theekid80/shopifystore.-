@@ -1,0 +1,32 @@
+{%- comment -%}
+  Responsive image from Shopify's CDN with srcset.
+
+  Params:
+    image     Shopify image object (image_picker, product media)
+    alt       optional alt override ("" for decorative)
+    sizes     sizes attribute (default 100vw)
+    widths    comma list of widths
+    class     class on <img>
+    priority  true → eager + fetchpriority=high (above-the-fold only)
+    placeholder  placeholder_svg_tag name shown when no image (default: none)
+{%- endcomment -%}
+{%- liquid
+  assign sizes = sizes | default: '100vw'
+  assign widths = widths | default: '360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048, 2400'
+-%}
+{%- if image != blank -%}
+  {%- liquid
+    if alt != nil
+      assign img_alt = alt
+    else
+      assign img_alt = image.alt
+    endif
+  -%}
+  {%- if priority -%}
+    {{ image | image_url: width: 2400 | image_tag: widths: widths, sizes: sizes, loading: 'eager', fetchpriority: 'high', class: class, alt: img_alt }}
+  {%- else -%}
+    {{ image | image_url: width: 2400 | image_tag: widths: widths, sizes: sizes, loading: 'lazy', class: class, alt: img_alt }}
+  {%- endif -%}
+{%- elsif placeholder != blank -%}
+  {{ placeholder | placeholder_svg_tag: 'placeholder-svg' }}
+{%- endif -%}

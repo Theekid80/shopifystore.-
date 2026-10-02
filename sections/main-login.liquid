@@ -1,0 +1,37 @@
+<div class="page-width page-width--narrow section section--tight">
+  <h1 class="h-headline">{{ 'customer.login' | t }}</h1>
+  <div class="mt-lg">
+  {%- form 'customer_login', novalidate: 'novalidate', class: 'form-grid' -%}
+    {%- if form.errors -%}<p class="form-message form-message--error" role="alert">{{ form.errors | default_errors }}</p>{%- endif -%}
+    <div class="form-field">
+      <label for="CustomerEmail">{{ 'customer.email' | t }}</label>
+      <input id="CustomerEmail" type="email" name="customer[email]" autocomplete="email" required>
+    </div>
+    <div class="form-field">
+      <label for="CustomerPassword">{{ 'customer.password' | t }}</label>
+      <input id="CustomerPassword" type="password" name="customer[password]" autocomplete="current-password" required>
+    </div>
+    <div class="btn-row">
+      <button type="submit" class="btn btn--primary btn--lg">{{ 'customer.login' | t }}</button>
+      <a href="{{ routes.account_register_url }}" class="btn btn--secondary btn--lg">{{ 'customer.register' | t }}</a>
+    </div>
+  {%- endform -%}
+  </div>
+  <details class="mt-lg">
+    <summary class="link small" style="cursor:pointer;">{{ 'customer.forgot_password' | t }}</summary>
+    <p class="small muted" style="margin:1rem 0;">{{ 'customer.reset_password_text' | t }}</p>
+    {%- form 'recover_customer_password', class: 'form-grid' -%}
+    {%- if form.errors -%}<p class="form-message form-message--error" role="alert">{{ form.errors | default_errors }}</p>{%- endif -%}
+      {%- if form.posted_successfully? -%}<p class="form-message" role="status">{{ 'general.newsletter.success' | t }}</p>{%- endif -%}
+    <div class="form-field">
+      <label for="RecoverEmail">{{ 'customer.email' | t }}</label>
+      <input id="RecoverEmail" type="email" name="email" autocomplete="email" required>
+    </div>
+      <div><button type="submit" class="btn btn--secondary">{{ 'customer.submit' | t }}</button></div>
+    {%- endform -%}
+  </details>
+</div>
+
+{% schema %}
+{"name": "Customer login", "class": "section-main-login", "settings": []}
+{% endschema %}

@@ -1,0 +1,27 @@
+{%- comment -%}
+  Brand logo: uploaded logo image(s) or the typographic wordmark.
+  Params:
+    context   'header' (swaps to the inverse logo over the hero), 'dark' (always inverse), or blank
+{%- endcomment -%}
+{%- liquid
+  assign brand = settings.brand_name | default: shop.name
+  assign has_inverse = false
+  if settings.logo_inverse != blank
+    assign has_inverse = true
+  endif
+-%}
+{%- if settings.logo != blank or settings.logo_inverse != blank -%}
+  {%- if context == 'dark' and has_inverse -%}
+    {{ settings.logo_inverse | image_url: width: 480 | image_tag: class: 'header__logo-img', alt: brand, widths: '160, 240, 320, 480', sizes: '240px', loading: 'lazy' }}
+  {%- elsif settings.logo != blank -%}
+    {%- capture logo_class -%}header__logo-img{% if context == 'header' and has_inverse %} header__logo-img--has-inverse{% endif %}{%- endcapture -%}
+    {{ settings.logo | image_url: width: 480 | image_tag: class: logo_class, alt: brand, widths: '160, 240, 320, 480', sizes: '240px', loading: 'eager' }}
+    {%- if context == 'header' and has_inverse -%}
+      {{ settings.logo_inverse | image_url: width: 480 | image_tag: class: 'header__logo-img header__logo-img--inverse', alt: brand, widths: '160, 240, 320, 480', sizes: '240px', loading: 'eager' }}
+    {%- endif -%}
+  {%- else -%}
+    <span class="wordmark">{{ brand | escape }}</span>
+  {%- endif -%}
+{%- else -%}
+  <span class="wordmark">{{ brand | escape }}</span>
+{%- endif -%}
