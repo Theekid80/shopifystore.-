@@ -12,10 +12,10 @@ People who film TikTok / Reels / YouTube Shorts on their phone — beginner crea
 | 1 | AI face-tracking phone stand (360°, no app, gesture/remote) | Hero — the demo is the ad | Amazon generics ~$20–40 (camrola, Crienten) |
 | 2 | Wireless clip-on mics, 2-pack (USB-C + Lightning receivers) | Sound — the #1 beginner upgrade | SYNCO 2-pack from $15.99 (Walmart); DJI Mic Mini $59.99 (Best Buy) |
 | 3 | Magnetic (MagSafe) selfie fill light | Light | Walmart $9–25; Ulanzi $20–23 |
-| 4 | Phone teleprompter with remote | Script — creator-specific, less commodity | not checked |
+| 4 | 3-in-1 foldable magnetic charging station (phone, watch, earbuds) | Keep the kit charged; broad gift appeal | generics $15–35 (Walmart Merkury $14.99); Anker MagGo $33.99 (Best Buy) |
 | 5 | Magnetic selfie monitor screen (film with the back camera and see yourself) | Novelty, strong demo | Walmart ~$25 |
 
-Backup for any slot: 3-in-1 foldable magnetic charging station (generics $15–35; Anker MagGo $33.99) — broad gift appeal but weak fit with the niche.
+Backup for any slot: phone teleprompter with remote (swapped out by the founder on 2026-10-20). Note: the charging station is the weakest fit with the creator niche and the most crowded with brands (Anker).
 
 ## Bundles (to raise order value above single Amazon items)
 - Starter Kit = 1 + 2 + 3 (stand, mics, light)
@@ -28,5 +28,5 @@ Every one of these sells as a cheap generic on Amazon/Walmart. On their own, the
 1. Product cost and US shipping estimate
 2. Supplier — prefer **Zendrop Fulfillment (China)** for all five so bundles can ship as one parcel
 3. Delivery time
-4. Exact contents (e.g. mics: which receivers, how many transmitters; stand: remote included; teleprompter: phone/tablet size, remote)
+4. Exact contents (e.g. mics: which receivers, how many transmitters; stand: remote included; charging station: Qi2/MagSafe magnetic or not, wattage, wall adapter included)
 5. Battery: built-in lithium battery yes/no (affects shipping)
