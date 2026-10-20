@@ -43,3 +43,12 @@ Same assumptions as above (5% refund allowance).
 | Whiskey stones, 6 | $28.04 | from ~$15 | $29.99 | $-0.60 |
 
 Verdict: none are usable as ad-driven products. These US listings cost about what Amazon charges at retail, so there is no room for a markup. Keep the China listings for 1–3 and publish a ~Dec 10 order-by date. The US smoker kit is at most a late-December fallback at a near-zero margin.
+
+## Bundle shipping (founder's check with Zendrop, 2026-10-20)
+
+Zendrop can combine items into one parcel only when they come from the same supplier, are ordered together to the same address, and fit within its package limits. Even then, it can split them. Different suppliers mean separate parcels and separate tracking numbers.
+
+- Products 1–3 (glass, smoker, stones) all come from Zendrop Fulfillment (China), so a bundle of them can ship as one parcel.
+- Rule for slots 4–5: pick only Zendrop Fulfillment (China) listings, so they can join the same parcel.
+- Store copy must not promise "one box". Say instead: "usually ships together; may arrive in separate packages".
+- Still open: whether a combined parcel costs less to ship than the separate per-item estimates, and whether Zendrop supports a gift note or insert.

@@ -35,7 +35,7 @@ The board will fund it with conditions, mainly that the collection gets narrower
 ## Conditions checklist (the rest of the pack tests these)
 
 - [ ] **Zendrop numbers for each product kept:** unit cost, shipping cost, US warehouse stock, delivery time and the last safe order date for Christmas. *(Founder checks Zendrop → /founder-cfo)*
-- [ ] **Bundle shipping:** can Zendrop ship a bundle as one parcel, ideally with a gift note or insert? If not, drop the "gift box" idea instead of faking it. *(Zendrop → /founder-ops)*
+- [x] **Bundle shipping:** yes, conditionally: same supplier (Zendrop Fulfillment, China) for products 1–3, but it can still be split (see zendrop-costs.md). Original condition: can Zendrop ship a bundle as one parcel, ideally with a gift note or insert? If not, drop the "gift box" idea instead of faking it. *(Zendrop → /founder-ops)*
 - [ ] **A dated "order by X, arrives by Christmas" cutoff** on the store. *(/founder-ops, /founder-launch)*
 - [ ] **Narrow to one moment, hosting, led by #1.** Drop or hold the hoodie (#5) and diffuser (#4) unless the buyer panel shows they help bundle sales. *(/founder-consumer)*
 - [ ] **Lead with the bundle as the offer**, not five separate products. Name it, and add bonuses that cost almost nothing to deliver, such as a printable gift card or hosting guide. *(/founder-offer)*
