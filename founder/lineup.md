@@ -1,24 +1,32 @@
-# WEDRA launch lineup — "The Cozy Night In" (hosting edit)
+# New direction — tech niche, rebrand (2026-10-20)
 
-Revised 2026-10-20 after the board review (founder/board.md): one moment — an evening hosting friends with drinks — led by the spinning whiskey glass.
-Reference prices are from public listings found on 2026-10-20 and are rough; Zendrop costs are NOT checked yet.
+Founder decision: start over with a rebrand and a tech store of 5 new products. The founder will get Zendrop pricing first, then run all 11 founder skills (board → competitors → consumer → pricing → offer → cfo → marketing → brand → ops → launch → plan). Brand name comes from /founder-brand. Earlier ideas are archived in founder/archive/.
 
-| # | Product | Role | What competitors charge (seen 2026-10-20) | WEDRA target |
-|---|---|---|---|---|
-| 1 | Spinning whiskey glass (pair) + ice ball mold | Hero gift | AliExpress ~$9/glass; Mizuro 2-glass set $90 | $39–49 |
-| 2 | Cocktail smoker top + torch + wood chips (no glasses) | Show-stopper add-on for #1 | Amazon full kits incl. 2 glasses + ice molds $36–48 (list $59.99) | $29–35 |
-| 3 | Whiskey stones gift box (stones, slate coasters, tongs, wooden box; no glasses) | Gift add-on | Full sets incl. 2 glasses $38–55 (Cana Wine, HomeWetBar, Rocks); stones-only boxes from ~$15 | $24–29 |
-| 4 | Wine glass charcuterie toppers, set of 4 | Hosting add-on for wine drinkers | Walmart ~$15 (4 pcs); "Host at Home" branded set $25; Etsy engraved $50–72 | $19–24 |
-| 5 | Candle warmer lamp (timer + dimmer) | Sets the scene | Amazon mostly $17–22, range $13–36 | $24–29 |
+## Niche: phone-first creators
+People who film TikTok / Reels / YouTube Shorts on their phone — beginner creators, small-business owners filming their own products, and gift buyers shopping for them. The channel WEDRA advertises on (TikTok, Instagram) is where this buyer already lives, and every product's demo is itself content.
 
-## Bundles (where the margin is)
-- **Old Fashioned Set** = 1 + 2 — head-to-head with the $48 Amazon smoker kit, so it must look and feel better (spinning glass, gift note, arrives-by date).
-- **Host Set** = 1 + 3 + 4 — the hero gift offer.
-- **Night In Box** = all five.
+## The 5 products (prices are public listings seen 2026-10-20, rough)
 
-## Open checks (from the board's conditions)
-- Zendrop cost, shipping, US warehouse stock and delivery time for each product.
-- Can Zendrop ship a bundle as one parcel (with a gift note)? If not, drop the gift-box idea.
-- Torch: butane can't ship; confirm the torch ships empty and Zendrop allows it.
-- Glass (#1) breakage: order samples; price a free-replacement guarantee.
-- Products 4 and 5 sell cheaply on Amazon; on their own they are add-ons, not ad-driven products.
+| # | Product | Role | Competitor prices seen |
+|---|---|---|---|
+| 1 | AI face-tracking phone stand (360°, no app, gesture/remote) | Hero — the demo is the ad | Amazon generics ~$20–40 (camrola, Crienten) |
+| 2 | Wireless clip-on mics, 2-pack (USB-C + Lightning receivers) | Sound — the #1 beginner upgrade | SYNCO 2-pack from $15.99 (Walmart); DJI Mic Mini $59.99 (Best Buy) |
+| 3 | Magnetic (MagSafe) selfie fill light | Light | Walmart $9–25; Ulanzi $20–23 |
+| 4 | Phone teleprompter with remote | Script — creator-specific, less commodity | not checked |
+| 5 | Magnetic selfie monitor screen (film with the back camera and see yourself) | Novelty, strong demo | Walmart ~$25 |
+
+Backup for any slot: 3-in-1 foldable magnetic charging station (generics $15–35; Anker MagGo $33.99) — broad gift appeal but weak fit with the niche.
+
+## Bundles (to raise order value above single Amazon items)
+- Starter Kit = 1 + 2 + 3 (stand, mics, light)
+- Pro Kit = all five
+
+## The known risk going in
+Every one of these sells as a cheap generic on Amazon/Walmart. On their own, they are the espresso-machine trap; the bundle and the creator focus have to carry the margin. The CFO and consumer panel will test this.
+
+## What the founder collects from Zendrop, per product
+1. Product cost and US shipping estimate
+2. Supplier — prefer **Zendrop Fulfillment (China)** for all five so bundles can ship as one parcel
+3. Delivery time
+4. Exact contents (e.g. mics: which receivers, how many transmitters; stand: remote included; teleprompter: phone/tablet size, remote)
+5. Battery: built-in lithium battery yes/no (affects shipping)
