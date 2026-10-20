@@ -1,39 +1,50 @@
-# Board summary: WEDRA Mini Sticker Printer Starter Kit
+# Board summary: WEDRA "The Cozy Night In"
 
-Meeting date: 2026-10-20. Memos are in `founder/board/` (offers.md, monopoly.md, product.md).
+Meeting date: 2026-10-20. Memos are in `founder/board/` (offers.md, monopoly.md, product.md). The earlier sticker-printer review is in `founder/archive/sticker-printer/`.
 
 ## The vote
 
-**1 fund if, 2 pass.** Average score **3.0 / 10** (Offers 4 · Monopoly 2 · Product 3).
+**2 fund if, 1 pass.** Average score **3.7 / 10** (Offers 4 · Monopoly 3 · Product 4). That is up from 3.0 for the sticker printer.
 
-As pitched, the board does not fund this. The Offers lens would fund a narrower version, but only if strict conditions are met.
+The board will fund it with conditions, mainly that the collection gets narrower.
+
+## Which products are strong and weak, by each member
+
+| Product | Offers | Monopoly | Product |
+|---|---|---|---|
+| #1 Spinning whiskey glass + ice ball set | **Strongest** | **Strongest** | **Strongest** |
+| #2 Wine glass charcuterie toppers | Supports Host Set | Copycat risk (named a top product by a blog this month) | Supports Host Set |
+| #3 Candle warmer lamp | — | — | Keep only if it fits the hosting story |
+| #4 Flame-effect diffuser | Consider cutting | **Weakest** | Second weakest |
+| #5 Wearable blanket hoodie | **Weakest** | **Weakest** | **Weakest** |
 
 ## Risks more than one member raised
 
-1. **It is the espresso machine again (all three).** Memoking, Phomemo, NIIMBOT, cudinham and PRT already sell near-identical printers on Amazon for about $25–43. cudinham already sells one with 10 rolls, the same bundle. A $35–60 kit from a new store with no reviews, slower delivery and no Amazon-style returns puts WEDRA in the trap the founder said to avoid.
-2. **A gift that arrives late is worthless (all three).** Zendrop's US stock, unit cost, shipping cost and delivery time are unknown, and the window is 5–8 weeks. If delivery before Christmas can't be promised, the product fails at its one job.
-3. **Refills may not come back to WEDRA (all three).** If the printer takes standard thermal rolls, repeat buyers will go to Amazon. Whether it does is unknown.
-4. **No number exists for what it costs to win a customer, or for the margin (Offers, Monopoly).** If the ad cost per sale is more than the profit on one kit, every sale loses money.
+1. **A gift that arrives late or in pieces has failed (all three).** Zendrop's US stock, delivery times and whether it can ship a bundle as one parcel are unknown. A "Night In" box made of five items could arrive as several plain parcels on different days.
+2. **Every product is a commodity on its own (all three).** All five are standard catalog items any store can list, and several sell on Amazon at or below WEDRA's target prices. This is the espresso-machine lesson again.
+3. **Glass, electrical goods and one-size clothing (Offers, Product).** Breakage, quality and return rates are unknown, so there's no way yet to say which guarantee the business can afford.
+4. **What it costs to win a customer is unknown (Offers, Monopoly).** All rival dropshippers advertise the same products on TikTok and Meta in the most expensive ad weeks of the year.
+5. **It's two moments, not one (Product, Monopoly).** "Hosting guests" (#1, #2) and "cozy alone" (#3, #4, #5) are different stories for different buyers.
 
 ## Where the members disagree
 
-- **Offers (FUND IF)** sees a market that is real and easy to reach: gift buyers with money, all on TikTok and Instagram. It thinks a strong enough bundle plus a delivery guarantee can win on value instead of price.
-- **Monopoly (PASS)** thinks no bundle fixes the core problem. Anyone can list the same product, nothing is proprietary, and the holiday window is short. At best it's a holiday test, not a lasting business.
-- **Product (PASS)** says WEDRA owns none of the experience. Zendrop packs and delivers it, and the printer maker's app handles setup. The moments that decide whether the gift works happen in other companies' hands, so WEDRA can't fix them.
+- **Offers (FUND IF)** thinks a well-presented gift box with a guarantee can be the offer, even if each item alone is a commodity.
+- **Product (FUND IF)** wants it cut down to one moment, hosting, led by the whiskey glass. It would rather drop the gift box than fake it.
+- **Monopoly (PASS)** thinks a theme and bundle names are easy to copy. It would reconsider only for a branded whiskey-gift line with packaging and content rivals don't have.
 
 ## Conditions checklist (the rest of the pack tests these)
 
-- [ ] **Zendrop numbers:** unit cost, shipping cost, US warehouse stock and the guaranteed delivery time, so WEDRA can publish an "order by" date before Christmas. *(Zendrop quote → /founder-cfo. If this fails, every member votes PASS.)*
-- [ ] **Delivery guarantee the business can pay for:** "arrives by Dec 24 or your money back", plus a 30-day replacement. *(/founder-cfo)*
-- [ ] **A bundle Amazon listings don't have:** for example, an exclusive WEDRA sticker and template library for journals, planners and labels, gift-ready packaging WEDRA has checked itself, a printed quick-start card and a first-refill code. It should be named as one offer. *(/founder-offer)*
-- [ ] **Something proprietary**, or at least hard to copy: exclusive designs or content tied to the refills. *(/founder-offer, /founder-competitors)*
-- [ ] **Refill lock-in checked:** standard roll size or one tied to this printer, and whether people already buy refills from Amazon. *(/founder-competitors)*
-- [ ] **Target narrowed to one audience:** kids and teens as a gift, or adult planner and journal fans, not both. *(/founder-consumer)*
-- [ ] **Buyers prefer the kit to Amazon at the chosen price**, and we know which part of the bundle changes their answer. *(/founder-consumer, /founder-pricing)*
-- [ ] **Positive margin per kit** after unit cost, shipping, the guarantee and an estimated ad cost per sale. *(/founder-cfo)*
-- [ ] **Sample tested end to end:** unboxing, app, account, Bluetooth pairing and first print, timed, with no step that blocks setup. Also check the app works for a 10-year-old and for a parent. *(Order a Zendrop sample, ~1–2 weeks)*
-- [ ] **Urgency only from real shipping cutoffs and real stock.** No fake countdowns. *(/founder-marketing)*
+- [ ] **Zendrop numbers for each product kept:** unit cost, shipping cost, US warehouse stock, delivery time and the last safe order date for Christmas. *(Founder checks Zendrop → /founder-cfo)*
+- [ ] **Bundle shipping:** can Zendrop ship a bundle as one parcel, ideally with a gift note or insert? If not, drop the "gift box" idea instead of faking it. *(Zendrop → /founder-ops)*
+- [ ] **A dated "order by X, arrives by Christmas" cutoff** on the store. *(/founder-ops, /founder-launch)*
+- [ ] **Narrow to one moment, hosting, led by #1.** Drop or hold the hoodie (#5) and diffuser (#4) unless the buyer panel shows they help bundle sales. *(/founder-consumer)*
+- [ ] **Lead with the bundle as the offer**, not five separate products. Name it, and add bonuses that cost almost nothing to deliver, such as a printable gift card or hosting guide. *(/founder-offer)*
+- [ ] **A costed guarantee:** free replacement for breakage plus a remedy for late delivery. *(/founder-cfo)*
+- [ ] **At least one part of the experience WEDRA controls:** a branded insert or gift note, a clear arrival promise, and a written policy for broken glass. *(/founder-ops, /founder-brand)*
+- [ ] **Samples ordered to the founder's own address** to check packaging, quality and breakage. *(~1–2 weeks)*
+- [ ] **Margin that holds up** after unit cost, shipping, breakage, returns and a realistic ad cost per sale. *(/founder-cfo)*
+- [ ] **Competitor check:** real prices and what customers complain about, for each product kept and for rival gift sets. *(/founder-competitors)*
 
 ## The strongest version the board can see
 
-This is not what was pitched. **Don't sell a sticker printer. Sell a content product that comes with a printer.** Pick one niche WEDRA can own, such as planner and journal fans on TikTok, or kids' "sticker studio" gifts, but not both. Pair a printer Zendrop has confirmed (US stock, delivery before Christmas) with a WEDRA-exclusive sticker and template library that grows every month, and only WEDRA has it. That library is what buyers come back for, instead of generic paper rolls they can get anywhere. Run it this holiday as a cheap, capped test: a sample first, a published "order by" date and a delivery guarantee. Treat any profit as a bonus and the buyer data as the main result. Even then, the Monopoly lens would call it a holiday test, not a lasting business, until the library proves people return for it.
+This differs from the pitch. **Make WEDRA the at-home hosting store and lead with the whiskey glass.** Keep five products if you want five, but make all five fit one moment: an evening hosting friends with drinks. Keep the spinning whiskey glass + ice ball set (#1) and the charcuterie toppers (#2). Keep the candle warmer (#3) only if it shows up as part of setting the scene. Replace the hoodie and the diffuser with hosting and home-bar items, for example from the backup "Home Bar" list (a cocktail smoker kit, whiskey stones). Sell the "Host Set" as the hero offer, with a branded gift note, a clear "arrives by" date and a breakage guarantee. Do all of this only after Zendrop confirms US stock and delivery and the samples hold up. Even then, the Monopoly lens sees a holiday test, not a lasting business, until WEDRA has packaging and content of its own.

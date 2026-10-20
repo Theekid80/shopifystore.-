@@ -1,27 +1,28 @@
 # Product lens
-Score: 3 | Vote: PASS
+Score: 4/10 | Vote: FUND IF
 
 ## What is strong
-- The core moment is easy to picture: a kid or teen unwraps a box, pairs a phone and a sticker comes out in under a minute. Few gift products let you describe the payoff in one sentence.
-- "Starter kit" is the right instinct. It bundles the printer and paper so the gift works on day one, and it sets up refills as the repeat purchase.
-- It fits a clear use (journaling, planners, labeling, crafts) and a clear occasion (holiday gifting) better than the dropped espresso machine did.
+- **There is a theme.** "The Cozy Night In" gives one audience, one story and one season, which is a step up from selling one commodity item. The Product lens starts from a moment, and there is a clear one here: a winter evening at home with guests.
+- **The spinning whiskey glass + ice ball set (#1) is the strongest product under this lens.** It fits in one sentence ("the gift for the person who wants nothing"), and the first five minutes with it are easy to picture: you unbox it, freeze the ice ball, pour, spin. It is the only item in the set that clearly has a moment the business can show in a video.
+- **The Host Set (#1 + #2) is the most focused offer.** Two items, one occasion (hosting a drink), one buyer.
 
 ## What would kill it (the top 3, most dangerous first)
-1. **WEDRA owns almost none of the experience.** Zendrop owns the product, the box, the packing and the delivery. The printer maker owns the companion app. The most important minutes (unboxing, download the app, make an account, pair over Bluetooth, first print) all happen inside other companies' systems. Each handoff is a seam where the gift can fail on Christmas morning, and WEDRA cannot fix any of them. Whether the "gift box" is a real gift box or a generic carton is unknown until a sample arrives.
-2. **Nothing about the product is WEDRA's.** The brief lists Memoking, Phomemo, NIIMBOT, cudinham and PRT on Amazon at roughly $25–43, some already bundled with 10 rolls or 600 stickers. A $35–60 kit of a near-identical device puts WEDRA back in the espresso-machine trap the founder named: something shoppers can find cheaper with one search. Being a "curated Discovery" is a claim; the product has to back it up, and nothing here does yet.
-3. **A late gift is a broken product.** There are 5–8 weeks to launch, including Zendrop shipping time. US warehouse stock and delivery times are unknown. A printer that turns up on December 28th fails the one job it was bought for. That also hurts the refill business, which needs a happy first owner.
+1. **WEDRA does not own the experience.** Zendrop dropships, so the business controls none of the packaging, the inserts, the unboxing or the delivery date. A "Night In" gift box made of five SKUs that may come from different suppliers could arrive as several plain parcels on different days, which breaks the gift-box story. Delivery dates and whether items can ship together are unknown (Zendrop, /founder-ops). A gift that arrives after Christmas, or in pieces, has failed. That is the lesson from the dropped sticker printer.
+2. **No focus: five products that do not belong to one experience.** A glass, wine-glass toppers, a candle warmer, a diffuser and a blanket hoodie are two different moments: hosting guests and being cozy alone. The lens asks what to cut. The Cozy Set (#3 + #4 + #5) is three commodity items sold on Amazon at or below the target prices (estimates, not verified; check with /founder-competitors). That puts the business back in the espresso-machine trap.
+3. **Quality WEDRA cannot see or control.** #1 is glass (breakage rate unknown), #5 is one size (fit complaints and returns unknown), and #3 and #4 are electrical goods with unknown build quality. Under this lens, corners cut where the customer cannot look show up where they can: in a broken glass, a cheap-feeling plug, a hoodie that does not fit. Return and breakage rates are open questions for /founder-ops and /founder-cfo.
+
+**Weakest product:** the blanket hoodie (#5). It is a one-size commodity with no tie to the hosting moment and an obvious cheaper Amazon alternative. The diffuser (#4) is a close second.
 
 ## The questions I would ask the founder
-- In one sentence: why buy this kit from wedra.co and not the same printer on Amazon? If the answer is not about the product or the experience, what is it?
-- Have you held a sample, unboxed it and gone from box to first sticker? How many minutes did it take, which app was it, did it ask for an account, and what was confusing?
-- Which app runs the printer, and does it work well for a 10-year-old and for a parent setting it up? (Answered by a hands-on sample test plus app-store reviews; /founder-competitors can collect the public complaints about these printers and apps.)
-- Are refills a standard roll size anyone can buy cheaply, or tied to this device? If they are standard, the repeat purchase goes to Amazon. (/founder-competitors)
-- Does Zendrop stock this printer in a US warehouse, and what are the unit cost, shipping cost and delivery time? (/founder-cfo, using Zendrop's quote)
-- What would you cut? One printer, one bundle, one price, one audience: kids/teens gift or adult planner fan, not both.
-- Do buyers in the target groups pay more for the kit than for the bare printer, and which of them? (/founder-consumer)
+- What is the one thing, in one sentence? Is WEDRA the hosting store or the cozy-alone store?
+- Describe the box arriving at the door. How many parcels, from where, on what day, in what packaging? Can Zendrop ship a bundle as one branded package?
+- Have you held each product? Would you give the glass and the hoodie as a gift yourself?
+- If you could launch only two products before Christmas, which two and why?
+- Where are the hand-offs (ad → store → Zendrop → carrier → customer service), and who answers when a glass arrives broken on December 20?
+- What can a buyer get from WEDRA that they cannot get from the same item on Amazon? A ready-to-give gift, a card, a guarantee to arrive by a set date?
 
 ## If FUND IF: the conditions
-Not applicable. The vote is PASS. These would change it:
-- WEDRA owns something real in the experience it can stand behind, for example a better curated bundle (sticker designs, a printed quick-start card, gift-ready packaging it has checked itself) that a buyer can see on the page and feel in the box, not only a lower or higher price.
-- A sample has been ordered and tested end to end, from opening the box to the first print, with no blocking step.
-- Zendrop confirms US stock and delivery that reliably arrives before Christmas, with costs fed into /founder-cfo.
+1. **Cut to one experience.** Launch the hosting story led by the whiskey glass (Host Set: #1 + #2). Drop the hoodie and the diffuser, or hold them for after the test. The candle warmer stays only if it fits the hosting story.
+2. **Prove the delivery before selling the gift.** Zendrop must confirm US warehouse stock, delivery time and whether bundles ship together for each item kept, with a delivery cut-off date shown on the store. Order samples to your own address and check the unboxing, packaging and breakage yourself.
+3. **Own at least one touchpoint you control.** For example a branded insert or gift note, clear "arrives by" promises, and a written policy for broken glass. If Zendrop cannot support any of this, the gift-box idea should be dropped, not faked.
+4. **Numbers before launch.** Unit and shipping costs, bundle prices and margin after breakage and returns (/founder-cfo), real competitor prices for the kept items (/founder-competitors), and buyer interest in the Host Set vs the Cozy Set (/founder-consumer).

@@ -1,12 +1,18 @@
-# WEDRA — Mini Sticker Printer Starter Kit
+# WEDRA — The Cozy Night In
 
-- What it is: A Bluetooth pocket thermal sticker printer sold as a holiday "starter kit" (printer + about 10 rolls of thermal sticker paper + gift box), with paper refill rolls as the repeat purchase.
-- Who it is for: Holiday gift buyers in the US — parents buying for kids and teens, and teens / young adults into journaling, scrapbooking, planners, labeling and crafts. (Working target; not yet confirmed by the founder or by any buyer data.)
-- What it sells, at what price: The starter kit at a target price of about $35–60; refill paper rolls as add-on and repeat orders (refill price not set yet).
-- Where and how: Online only, on wedra.co (US Shopify store, brand line "Products worth discovering"). Customers found through TikTok and Instagram (organic and paid; Meta Ads connected). Dropshipped and fulfilled by Zendrop.
+- What it is: A curated 5-product "Cozy Night In" collection for holiday hosting and cozy evenings at home, sold singly and as bundles:
+  1. Spinning whiskey glass + ice ball mold set (hero gift)
+  2. Wine glass charcuterie toppers, set of 4–6 (hosting add-on)
+  3. Candle warmer lamp (cozy decor)
+  4. Flame-effect aroma diffuser (cozy decor)
+  5. Wearable blanket hoodie, one size (cold-weather gift)
+  Bundles: "Host Set" (1 + 2), "Cozy Set" (3 + 4 + 5), "Night In" gift box (all five).
+- Who it is for: US adults buying holiday gifts and getting their homes ready for hosting and winter evenings. (Working target; not confirmed by the founder or by buyer data.)
+- What it sells, at what price (targets, not tested): whiskey set $39–49 · charcuterie toppers $24–29 · candle warmer lamp $39–45 · flame diffuser $35–39 · blanket hoodie $39–49. Bundle prices not set.
+- Where and how: Online only on wedra.co (US Shopify store, brand line "Products worth discovering"). Customers found through TikTok and Instagram (organic and paid; Meta Ads connected). Dropshipped and fulfilled by Zendrop.
 - Budget and constraints:
   - Launch window: before Black Friday / Christmas 2026 (today is 2026-10-20), so about 5–8 weeks.
-  - Zendrop stays the fulfillment provider (owner decision: keep until exit of the business).
-  - Store currently has zero products, zero orders, zero customers.
+  - Zendrop stays the fulfillment provider (owner decision).
+  - Store has zero products, zero orders, zero customers.
   - Test budget: not stated by the founder.
-  - Product cost, shipping cost and Zendrop availability for this printer: not checked yet.
+  - Zendrop unit cost, shipping cost and US stock for each product: not checked yet.

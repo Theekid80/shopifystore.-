@@ -1,19 +1,31 @@
-# Board brief — WEDRA Mini Sticker Printer Starter Kit
+# Board brief — WEDRA "The Cozy Night In" collection
 
 This brief stands on its own: the board has not seen any other conversation.
 
 ## The idea (from founder/idea.md)
 
-- What it is: A Bluetooth pocket thermal sticker printer sold as a holiday "starter kit" (printer + about 10 rolls of thermal sticker paper + gift box), with paper refill rolls as the repeat purchase.
-- Who it is for: Holiday gift buyers in the US — parents buying for kids and teens, and teens / young adults into journaling, scrapbooking, planners, labeling and crafts. Working target only; not confirmed by any buyer data.
-- Price: starter kit at about $35–60; refill rolls as add-ons (refill price not set).
-- Where and how: online only on wedra.co, a US Shopify store whose brand line is "Products worth discovering" (it presents each product as a curated "Discovery"). Traffic from TikTok and Instagram, organic and paid (Meta Ads account connected). Dropshipped and fulfilled by Zendrop.
+A US online store, WEDRA (wedra.co, Shopify, brand line "Products worth discovering"), launches with a curated five-product collection called "The Cozy Night In", aimed at holiday hosting and cozy winter evenings. Products are sold singly and as bundles.
+
+| # | Product | Role | Target price | Price references found (rough, not verified) |
+|---|---|---|---|---|
+| 1 | Spinning whiskey glass + ice ball mold set | Hero gift ("for the person who wants nothing") | $39–49 | AliExpress about $9 per glass (new-shopper offer); a branded two-glass set (Mizuro) sells for $90 |
+| 2 | Wine glass charcuterie toppers, set of 4–6 | Hosting add-on | $24–29 | not checked; a dropshipping blog (AutoDS) named it its best overall product for October 2026 |
+| 3 | Candle warmer lamp | Cozy decor | $39–45 | Amazon roughly $25–40 (estimate, not verified) |
+| 4 | Flame-effect aroma diffuser | Cozy decor | $35–39 | Amazon roughly $25–35 (estimate, not verified) |
+| 5 | Wearable blanket hoodie, one size | Cold-weather gift | $39–49 | Amazon generics roughly $25–50 (estimate, not verified) |
+
+Bundles: "Host Set" (1 + 2), "Cozy Set" (3 + 4 + 5), "Night In" gift box (all five). Bundle prices not set.
+
+- Customer: US adults buying holiday gifts and getting their homes ready for hosting and winter evenings. Working target only; no buyer data.
+- Channels: TikTok and Instagram, organic and paid (a Meta Ads account is connected).
+- Fulfillment: dropshipped by Zendrop (must stay Zendrop; owner decision).
 
 ## Context a stranger needs
 
-- The business is WEDRA, a one-person US dropshipping store. It currently has zero products, zero orders and zero customers.
-- Its last product, a portable espresso machine, was dropped. It was priced at $130.59 + $15.15 shipping while near-identical machines sold for about $34 (Walmart) to $68 (AliExpress) and branded ones for about $100–130 with free returns on Amazon. The founder's lesson: WEDRA cannot win selling something shoppers can find much cheaper on Amazon or TikTok Shop.
-- Competitors already on Amazon (prices seen in a search on 2026-10-20, not verified in detail): mini thermal sticker/label printers from Memoking (T02, sold with 600 stickers), Phomemo, NIIMBOT (D110 label maker, an Amazon best seller in portable thermal printers), cudinham (X6, sold with 10 rolls) and PRT; one listing showed $42.74; the range seen was roughly $25–43.
-- Launch window: before Black Friday / Christmas 2026. Today is 2026-10-20, so roughly 5–8 weeks, including Zendrop shipping time.
-- Fulfillment: Zendrop must stay the fulfillment provider (owner decision).
-- Unknown so far: Zendrop unit cost and shipping cost for this printer, whether Zendrop stocks it in a US warehouse, delivery times, the test budget, refill pricing, customer acquisition cost, return rate. None of these numbers exist yet.
+- WEDRA is a one-person US dropshipping store with zero products, orders and customers today.
+- Two earlier ideas were dropped:
+  - A portable espresso machine priced at $130.59 + $15.15 shipping while similar machines sold for about $34–68, and branded ones for about $100–130 with free Amazon returns. Lesson: WEDRA cannot win selling something shoppers find much cheaper on Amazon or TikTok Shop.
+  - A mini sticker printer kit. An earlier board voted 1 fund-if, 2 pass (average 3.0/10): a commodity sold on Amazon at $25–43, nothing proprietary, WEDRA owns none of the experience, and a gift that arrives after Christmas has failed. That board's suggestion was to own a niche and sell something more than a single commodity item.
+- The founder chose a themed collection so that one audience, one story and bundles could raise order value; whether that works is untested.
+- Launch window: before Black Friday / Christmas 2026. Today is 2026-10-20, so roughly 5–8 weeks including Zendrop shipping time.
+- Unknown so far: Zendrop unit cost, shipping cost, US warehouse stock and delivery time for each product; test budget; bundle prices; customer acquisition cost; return and breakage rates (product 1 is glass). None of these numbers exist yet.
