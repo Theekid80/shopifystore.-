@@ -30,3 +30,16 @@ Assumptions: free shipping to the customer; card fees 2.5% + $0.30; refund/break
 - Keep 1, 2, 3 (subject to the caveats).
 - Drop 4 (this listing) and 5 (this listing): no profit at a believable price.
 - Christmas: with ~8-day delivery from China plus peak-season slack, the order-by date is about Dec 10 (to confirm with Zendrop).
+
+## US-warehouse alternatives (founder's check, 2026-10-20)
+
+Same assumptions as above (5% refund allowance).
+
+| Product | Landed | Amazon price seen | Test price | Profit before ads |
+|---|---|---|---|---|
+| Smoker kit (torch, chips, gift box) | $42.12 | $36–48 | $54.99 | $8.45 |
+| Candle warmer (timer, dimmer) | $39.74 | $17–22 | $29.99 | $-12.30 |
+| Charcuterie toppers, 10 pc | $33.89 | ~$15 for 4 | $39.99 | $2.80 |
+| Whiskey stones, 6 | $28.04 | from ~$15 | $29.99 | $-0.60 |
+
+Verdict: none are usable as ad-driven products. These US listings cost about what Amazon charges at retail, so there is no room for a markup. Keep the China listings for 1–3 and publish a ~Dec 10 order-by date. The US smoker kit is at most a late-December fallback at a near-zero margin.
